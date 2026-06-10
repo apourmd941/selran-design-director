@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: bold-distinctive
+  use: success / completion moment
+  variables: var(fg), var(bg), var(accent)
+  notes: oversized display "YES." as the entire illustration; accent bar underscore; signature italic
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Yes — completed">
+  <style>
+    .bd-bg { fill: var(--bg, #F5F0E8); }
+    .bd-fg-fill { fill: var(--fg, #0A0A0B); }
+    .bd-accent-fill { fill: var(--accent, #C72500); }
+    .bd-display { font-family: "PP Editorial New", "Fraunces", "Tiempos Headline", Georgia, serif; font-weight: 900; }
+    .bd-meta { font-family: "General Sans", "Söhne", "Inter", ui-sans-serif, sans-serif; font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; fill: var(--fg, #0A0A0B); }
+    .bd-rule { stroke: var(--fg, #0A0A0B); stroke-width: 1; fill: none; vector-effect: non-scaling-stroke; }
+  </style>
+
+  <rect class="bd-bg" width="400" height="400"/>
+
+  <!-- top-left metadata -->
+  <line class="bd-rule" x1="30" y1="58" x2="160" y2="58"/>
+  <text x="30" y="48" class="bd-meta">Status · Complete</text>
+
+  <!-- tiny rotated accent tag (the wildcard) -->
+  <g transform="translate(330 80) rotate(10)">
+    <rect class="bd-accent-fill" x="-44" y="-12" width="88" height="24"/>
+    <text x="0" y="4" text-anchor="middle" class="bd-meta" fill="var(--bg, #F5F0E8)">Approved</text>
+  </g>
+
+  <!-- huge display YES — italic -->
+  <text x="200" y="260"
+        text-anchor="middle"
+        class="bd-display"
+        font-style="italic"
+        font-size="220"
+        letter-spacing="-10"
+        fill="var(--fg, #0A0A0B)">Yes.</text>
+
+  <!-- accent underline bar (thick graphic element) -->
+  <rect class="bd-accent-fill" x="78" y="270" width="244" height="18"/>
+
+  <!-- supporting display second line -->
+  <text x="200" y="340"
+        text-anchor="middle"
+        class="bd-display"
+        font-size="40"
+        letter-spacing="-1"
+        fill="var(--fg, #0A0A0B)">That's the one.</text>
+
+  <!-- bottom rule -->
+  <line class="bd-rule" x1="60" y1="378" x2="340" y2="378"/>
+</svg>

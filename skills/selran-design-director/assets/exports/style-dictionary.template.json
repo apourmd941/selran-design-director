@@ -1,0 +1,79 @@
+{
+  "_meta": {
+    "project": "{{PROJECT_NAME}}",
+    "description": "Style Dictionary source — feed to style-dictionary to build platform-specific artifacts.",
+    "notes": "Keys here mirror design-system.md. Use a style-dictionary config to transform into CSS, iOS Swift, Android XML, or JS."
+  },
+  "color": {
+    "bg": {
+      "primary":   { "value": "{{color.bg_primary}}" },
+      "secondary": { "value": "{{color.bg_secondary}}" },
+      "tertiary":  { "value": "{{color.bg_tertiary}}" }
+    },
+    "fg": {
+      "primary":   { "value": "{{color.fg_primary}}" },
+      "secondary": { "value": "{{color.fg_secondary}}" },
+      "muted":     { "value": "{{color.fg_muted}}" }
+    },
+    "accent": {
+      "default": { "value": "{{color.accent}}" },
+      "hover":   { "value": "{{color.accent_hover}}" }
+    },
+    "border": {
+      "default": { "value": "{{color.border}}" },
+      "strong":  { "value": "{{color.border_strong}}" }
+    },
+    "success": { "value": "{{color.success}}" },
+    "warning": { "value": "{{color.warning}}" },
+    "danger":  { "value": "{{color.danger}}" }
+  },
+  "font": {
+    "family": {
+      "display": { "value": "{{type.display}}" },
+      "body":    { "value": "{{type.body}}" },
+      "mono":    { "value": "{{type.mono}}" }
+    },
+    "size": {
+      "xs":      { "value": "{{type.scale.xs}}px" },
+      "sm":      { "value": "{{type.scale.sm}}px" },
+      "base":    { "value": "{{type.scale.base}}px" },
+      "lg":      { "value": "{{type.scale.lg}}px" },
+      "xl":      { "value": "{{type.scale.xl}}px" },
+      "xxl":     { "value": "{{type.scale.xxl}}px" },
+      "display": { "value": "{{type.scale.display}}px" }
+    },
+    "leading": {
+      "body":    { "value": "{{type.leading.body}}" },
+      "ui":      { "value": "{{type.leading.ui}}" },
+      "display": { "value": "{{type.leading.display}}" }
+    }
+  },
+  "size": {
+    "spacing": {
+      "base": { "value": "{{spacing.base_unit}}px" },
+      "1":    { "value": "{{spacing.base_unit}}px" },
+      "2":    { "value": "8px" },
+      "3":    { "value": "12px" },
+      "4":    { "value": "16px" },
+      "6":    { "value": "24px" },
+      "8":    { "value": "32px" }
+    },
+    "radius": {
+      "sm":   { "value": "{{spacing.radius.sm}}px" },
+      "md":   { "value": "{{spacing.radius.md}}px" },
+      "lg":   { "value": "{{spacing.radius.lg}}px" },
+      "full": { "value": "{{spacing.radius.full}}px" }
+    }
+  },
+  "motion": {
+    "duration": {
+      "fast": { "value": "{{motion.duration_fast}}ms" },
+      "base": { "value": "{{motion.duration_base}}ms" },
+      "slow": { "value": "{{motion.duration_slow}}ms" }
+    },
+    "easing": {
+      "out":      { "value": "{{motion.easing}}" },
+      "dramatic": { "value": "{{motion.easing_dramatic}}" }
+    }
+  }
+}

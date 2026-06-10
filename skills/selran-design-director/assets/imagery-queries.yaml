@@ -1,0 +1,421 @@
+# Imagery Query Pack
+#
+# Curated Unsplash/Pexels search strings per aesthetic direction.
+# Consumers (the skill at build time) should:
+#   - Pick one query per use-case (random or first — first is more reproducible)
+#   - Prefer specific over generic queries
+#   - Fall back to asking the user if no category fits the artifact
+#
+# Each direction has:
+#   photography.<use_case>: 3-6 search strings that actually return on-brand images
+#   illustration: 2-4 style keywords for illustration search/generation
+#   notes: one-line "avoid" guidance
+#
+# Use-cases are consistent across directions where possible, but some directions
+# swap in direction-specific categories (e.g., brutalist has "street_raw" instead
+# of "team_portrait").
+
+technical-minimal:
+  photography:
+    hero:
+      - "swiss modernist architecture grid minimal"
+      - "architectural photography concrete geometry overcast"
+      - "macro abstract industrial detail neutral background"
+      - "clean studio still life monochrome"
+      - "Apple product photography white seamless"
+    product_context:
+      - "laptop on concrete desk overhead neutral"
+      - "close-up hardware macro studio light"
+      - "minimal workspace matte surface"
+      - "keyboard macro shallow depth neutral"
+      - "circuit board macro abstract"
+    team_portrait:
+      - "editorial headshot neutral gray backdrop"
+      - "portrait studio softbox muted"
+      - "founder portrait minimal wall background"
+      - "candid professional portrait natural window light"
+    texture_abstract:
+      - "paper texture seamless white"
+      - "brushed aluminum surface macro"
+      - "concrete wall grayscale"
+      - "grid pattern architectural detail"
+      - "fog minimalist landscape fine art"
+  illustration:
+    - "isometric line diagram monochrome"
+    - "hairline geometric technical drawing"
+    - "minimal vector schematic single-weight"
+    - "wireframe axonometric illustration"
+  ai_prompts:
+    hero:
+      - "brutalist concrete stairwell shot from below, single geometric form against overcast sky, Swiss modernist composition, matte neutral palette of bone white and graphite, shot on Hasselblad 80mm, diffuse overcast lighting, sharp focus edge-to-edge, architectural photography --ar 16:9 --no text, --no logos, --no lens flare"
+      - "close-up of a matte anodized aluminum device on seamless white cyclorama, perfectly even softbox lighting, Apple-campaign aesthetic, cool neutral grays, shot on Phase One 100mm macro, hyper-sharp product photography --ar 4:3 --no reflections, --no props, --no gradients"
+      - "minimalist still life of three identical matte cylinders on paper surface, top-down view, Dieter Rams industrial-design sensibility, cool gray and ivory palette, diffuse north-window light, medium format 80mm --ar 1:1 --no text, --no hands"
+      - "empty modernist interior, single concrete column, polished floor reflecting flat overcast sky, Swiss grid composition, muted neutrals, 35mm architectural lens, tripod long exposure --ar 3:2 --no people, --no clutter"
+    product_context:
+      - "laptop and single notebook on matte concrete desk, overhead flat-lay, even overcast daylight, neutral gray palette, shot on 50mm at f/8, Stripe-documentation aesthetic --ar 4:3 --no warm tones, --no lifestyle props"
+      - "macro detail of mechanical keyboard keys, single hard-edge shadow, studio softbox, desaturated near-neutral palette, Sigma 105mm macro --ar 16:9 --no color casts, --no logos"
+      - "precision caliper measuring a metal component on white seamless, technical-catalog framing, cool LED lighting, Phase One 120mm macro --ar 3:2 --no hands visible, --no text"
+    team_portrait:
+      - "editorial headshot of a designer against seamless light gray backdrop, Rembrandt lighting softened, restrained expression, muted neutral wardrobe, medium format 80mm, shallow but not shallow DOF --ar 4:5 --no teeth smile, --no colored backdrop"
+      - "environmental portrait of an engineer at a spotless concrete workbench, north-facing window light, neutral palette, Leica 50mm at f/4, considered pose --ar 4:5 --no golden hour, --no props"
+      - "three-quarter portrait on matte paper backdrop, single large softbox, desaturated skin tones, 85mm portrait lens, editorial-magazine calm --ar 4:5 --no laughter, --no casual crossed arms pose"
+    texture_abstract:
+      - "seamless fine paper texture, raking overcast light, cool off-white, macro 100mm, fiber detail visible --ar 1:1 --no color tint, --no marks"
+      - "brushed aluminum surface filling frame, even diffuse light, cool gray metallic, macro lens --ar 16:9 --no reflections of objects, --no logos"
+      - "poured concrete wall, subtle aggregate visible, flat overcast illumination, neutral gray, 50mm at f/8 --ar 3:2 --no graffiti, --no text"
+      - "dense fog over minimalist landscape, single horizon line, monochrome neutral, medium format long exposure --ar 16:9 --no figures, --no saturation"
+  notes: "Avoid warm filters, people smiling at camera, golden hour, anything with a 'lifestyle vibe', cluttered backgrounds, lens flare."
+
+editorial:
+  photography:
+    hero:
+      - "kinfolk magazine still life natural light"
+      - "interior design muted palette window light"
+      - "the gentlewoman magazine portrait"
+      - "cereal magazine travel photography muted"
+      - "cinestill 50 film photography architecture"
+      - "new yorker portrait desaturated"
+    product_context:
+      - "object on linen tabletop natural light editorial"
+      - "book open on wood desk overhead muted"
+      - "ceramic still life soft shadow film"
+      - "everyday object studio film grain"
+    team_portrait:
+      - "editorial portrait film grain 50mm muted"
+      - "environmental portrait writer at desk natural light"
+      - "black and white portrait medium format film"
+      - "magazine profile portrait window light"
+      - "kinfolk style portrait soft neutral"
+    texture_abstract:
+      - "linen texture natural fibers macro"
+      - "marble surface soft shadow"
+      - "cream paper fold shadow minimal"
+      - "plaster wall texture warm neutral"
+  illustration:
+    - "single-line ink drawing monochrome"
+    - "architectural line illustration editorial"
+    - "new yorker spot illustration"
+    - "minimal two-color serif book cover"
+  ai_prompts:
+    hero:
+      - "still life of an open hardback book and a ceramic cup on a linen tablecloth, soft window light from the left, Kinfolk-magazine aesthetic, muted cream and inkwell palette, shot on Portra 400 35mm, shallow asymmetric composition --ar 3:2 --no text, --no logos, --no saturation"
+      - "environmental editorial portrait of a novelist at a desk stacked with paper, late-afternoon window light, desaturated warm neutrals, shot on Pentax 67 with 105mm, The New Yorker profile sensibility, asymmetric framing with negative space --ar 4:5 --no direct gaze, --no teeth smile"
+      - "interior of a minimalist Scandinavian room, single linen curtain catching light, muted cream palette with one oxblood accent chair, CineStill 50 color, large format 4x5, considered composition --ar 3:2 --no clutter, --no modern tech"
+      - "overhead still life of pears, ceramic bowl, and a single stem of rosemary on raw wood, diffuse north light, The Gentlewoman magazine mood, Kodak Ektar 100, medium format --ar 1:1 --no branding"
+    product_context:
+      - "single ceramic vessel on a travertine side table, soft window light, shadow falling across the foreground, Portra 400 grain, muted warm neutrals --ar 4:5 --no props, --no text"
+      - "open notebook with fountain pen on a linen runner, late morning sunlight diffused, 50mm at f/2.8 on film, editorial calm --ar 3:2 --no hands, --no digital screens"
+      - "perfume bottle on a marble ledge, natural side light, desaturated palette, Hasselblad 80mm on film, negative space dominates --ar 4:5 --no reflections of photographer"
+    team_portrait:
+      - "black-and-white medium format portrait of a founder, window light on the left, gentle serious expression, muted monochrome with film grain, Mamiya 80mm --ar 4:5 --no grin, --no crossed arms"
+      - "environmental portrait of a ceramicist in their studio, 50mm on Portra 400, golden-hour-adjacent but restrained, subject not looking at camera, asymmetric --ar 4:5 --no action-shot blur, --no saturation"
+      - "formal editorial headshot on cream canvas backdrop, single softbox high-left, muted wardrobe, shot on CineStill 50, New Yorker-profile framing --ar 4:5 --no studio lighting flatness, --no white background"
+    texture_abstract:
+      - "linen weave filling frame, raking afternoon sun, warm cream tones, macro 100mm on film --ar 1:1 --no text"
+      - "folded cream paper with soft directional shadow, 50mm at f/5.6, Kodak Portra 160 --ar 1:1 --no marks, --no text"
+      - "veined marble surface, soft north light, desaturated neutrals, medium format --ar 3:2 --no reflections"
+      - "smooth plaster wall in warm neutral, subtle tonal shift from light to shadow, Portra 400 --ar 16:9 --no graffiti, --no text"
+  notes: "Avoid saturated colors, centered stock-smile portraits, tech workspace cliches, HDR, shallow bokeh overuse."
+
+dark-premium:
+  photography:
+    hero:
+      - "chiaroscuro product photography dark background"
+      - "luxury watch studio low-key lighting"
+      - "night cityscape cinematic long exposure"
+      - "moody interior design dark oak low light"
+      - "arthouse film still dark atmospheric"
+      - "car detail studio rim light black background"
+    product_context:
+      - "leather texture close-up warm rim light"
+      - "whiskey glass dark bar cinematic"
+      - "brushed metal macro low-key"
+      - "stone surface dramatic single light"
+      - "fountain pen dark desk single spotlight"
+    team_portrait:
+      - "low-key portrait rembrandt lighting"
+      - "dark studio portrait single softbox"
+      - "executive portrait moody backdrop"
+      - "cinematic portrait warm highlight shadow"
+    texture_abstract:
+      - "dark marble vein macro"
+      - "black leather grain texture"
+      - "smoke against black background"
+      - "velvet texture macro low light"
+      - "obsidian surface reflection"
+  illustration:
+    - "etched engraving fine line dark"
+    - "metallic foil embossed minimal"
+    - "muted single-accent line work noir"
+    - "art deco linework gold on black"
+  ai_prompts:
+    hero:
+      - "luxury watch on black velvet, single warm rim light from the right, rich obsidian palette with a single gold specular highlight, shot on Phase One XT 120mm macro, chiaroscuro composition, cinematic still --ar 16:9 --no flat lighting, --no background props"
+      - "moody interior of a dark oak library at night, single lamp pool of amber light, near-black negative space, shot on Arri Alexa cinema look, 35mm anamorphic --ar 21:9 --no people facing camera, --no bright windows"
+      - "abstract smoke against black void, single cool blue rim light, deep jewel-tone accent, Phase One 80mm macro at f/8, arthouse poster aesthetic --ar 3:2 --no text, --no logos"
+      - "vintage sports car detail in a dark studio, warm rim light on the curve of the fender, black negative space, 85mm at f/4 --ar 16:9 --no environment, --no reflections of studio"
+      - "cinematic night cityscape, wet pavement reflecting distant amber streetlights, long exposure, Kodak 500T look, deep teal-and-amber grade --ar 21:9 --no visible text, --no crowds"
+    product_context:
+      - "glass of aged whiskey on dark walnut bar, warm practical light from out of frame, shallow DOF, Portra 800 pushed --ar 4:5 --no people, --no branding on glass"
+      - "fountain pen resting on a dark leather blotter, single warm overhead spot, rich obsidian and tobacco palette, macro 100mm --ar 3:2 --no text on pen, --no bright fill"
+      - "brushed titanium watch case macro, one sliver of warm highlight, otherwise in shadow, Phase One 120mm --ar 1:1 --no color casts, --no logos"
+    team_portrait:
+      - "Rembrandt-lit executive portrait against black velvet backdrop, single softbox high-left, muted warm skin tones, Hasselblad 110mm, deliberate serious expression --ar 4:5 --no teeth smile, --no bright backdrop"
+      - "low-key cinematic portrait, subject emerging from shadow, warm rim light only, 85mm at f/1.8, moody arthouse still --ar 4:5 --no flat lighting, --no props"
+      - "dark-studio founder portrait, single-light chiaroscuro, charcoal wardrobe against charcoal backdrop, 80mm medium format, restrained composure --ar 4:5 --no smile, --no color casts"
+    texture_abstract:
+      - "black marble with subtle white veining, single raking warm light, obsidian palette, macro 100mm --ar 16:9 --no text, --no reflections of objects"
+      - "tight grain of black full-aniline leather, directional warm light catching texture, macro 100mm --ar 1:1 --no stitching visible, --no logos"
+      - "smoke swirl against pure black, single cool rim light, long exposure, medium format --ar 3:2 --no text, --no hands"
+      - "deep blue velvet macro, single directional low light, rich indigo tones, 100mm macro --ar 1:1 --no fibers obvious lint"
+  notes: "Avoid flat-lay overhead shots, bright even lighting, pastel palettes, cluttered backgrounds, anything sunny."
+
+warm-approachable:
+  photography:
+    hero:
+      - "golden hour candid lifestyle film"
+      - "boutique hotel interior warm natural light"
+      - "local coffee shop morning sunlight"
+      - "kinfolk warm home interior linen"
+      - "35mm portra 400 lifestyle"
+      - "farmers market candid warm film"
+    product_context:
+      - "ceramic mug on wooden table morning light"
+      - "hands holding object natural warm"
+      - "breakfast flat lay warm linen"
+      - "product in sunlit windowsill"
+      - "artisan workshop wooden tools"
+    hands_at_work:
+      - "hands kneading dough warm kitchen"
+      - "potter hands on wheel studio natural light"
+      - "hands writing in notebook morning coffee"
+      - "carpenter hands wood workshop warm"
+      - "florist hands arranging flowers soft light"
+    team_portrait:
+      - "candid team conversation warm office natural light"
+      - "small business owner portrait environmental warm"
+      - "documentary portrait film grain golden hour"
+      - "candid laughter real moment 35mm"
+    texture_abstract:
+      - "linen weave macro warm cream"
+      - "terracotta tile warm shadow"
+      - "wood grain oak warm tone"
+      - "raw canvas texture beige"
+  illustration:
+    - "hand-drawn line warm earth palette"
+    - "imperfect gouache illustration warm"
+    - "organic brushstroke folk illustration"
+    - "loose ink and watercolor natural"
+  ai_prompts:
+    hero:
+      - "candid documentary moment of two friends at a farmers market stall, late afternoon golden-hour light, Kodak Portra 400 film grain, warm terracotta and cream palette, shot on 35mm at f/2.8, genuine unposed interaction --ar 3:2 --no teeth-smile at camera, --no stock-photo poses"
+      - "boutique hotel interior with linen curtains and terracotta floor, warm sunlight streaming in low, imperfect styling, Contax G2 with 35mm, Portra 800 --ar 16:9 --no people, --no branding"
+      - "small coffee shop interior, morning sunlight hitting a wooden counter, real customer in middle distance slightly out of focus, 35mm Portra 400, warm cream and caramel tones --ar 3:2 --no posed action, --no cool tones"
+      - "honest environmental moment in a sunlit kitchen, hands in motion, warm wood and cream palette, Leica M6 on Portra 400 --ar 4:5 --no staging, --no perfect framing"
+    product_context:
+      - "ceramic mug of coffee on a worn wooden table, single window of warm morning light, handwritten notebook nearby, Portra 400 on 35mm --ar 4:5 --no branding, --no perfect composition"
+      - "artisan tool on a linen cloth in a sunlit workshop, warm side light, dust in the air, CineStill 800T at daytime --ar 3:2 --no hands posing, --no logos"
+      - "product on a windowsill with overgrown houseplant, late afternoon light, warm cream palette, 50mm on Portra 160 --ar 4:5 --no staging cleanliness"
+    hands_at_work:
+      - "hands kneading bread dough on a flour-dusted wooden counter, warm kitchen light, imperfect framing cropping wrists, 35mm Portra 400, real flour on real apron --ar 4:5 --no face visible, --no staged cleanliness"
+      - "potter's hands shaping clay on a wheel, clay-smudged fingers, single warm window light, Contax T2 on film, documentary framing --ar 4:5 --no smile, --no clean apron"
+      - "hands writing in a leather notebook beside a cup of coffee, morning sun raking across the page, 50mm on Portra 400 --ar 3:2 --no typed text visible, --no perfect handwriting"
+      - "florist's hands arranging stems into a ceramic vase, soft afternoon side light, warm cream-and-sage palette, 35mm film --ar 4:5 --no face, --no staged perfection"
+      - "carpenter hands sanding a wooden joint, dust motes in warm late-day light, CineStill 800T daylight, documentary 35mm --ar 3:2 --no logo tools, --no gloves"
+    team_portrait:
+      - "candid small-team conversation around a wooden table in a warm loft, natural window light, shot on Portra 400 35mm, real laughter mid-moment --ar 3:2 --no direct-to-camera gazes, --no stock-pose arrangement"
+      - "environmental portrait of a small-business owner in their shop, late-afternoon sun, 50mm at f/2.8 on Portra 400, warm palette, subject glancing off-camera --ar 4:5 --no posed arms crossed, --no white backdrop"
+      - "documentary portrait of a nonprofit worker in a community garden, golden hour, 35mm film grain, warm honest expression --ar 4:5 --no stock smile, --no overprocessed skin"
+    texture_abstract:
+      - "raw linen weave in warm cream, late sunlight raking across fibers, macro 100mm on film --ar 1:1 --no text"
+      - "weathered terracotta tile with warm afternoon shadow, medium format, earthy palette --ar 3:2 --no logos"
+      - "oak grain of a worn butcher block, warm side light, Portra 160, macro --ar 16:9 --no stains obvious"
+      - "raw canvas texture, single directional warm light, beige palette, 100mm macro film --ar 1:1 --no paint, --no marks"
+  notes: "Avoid posed 'diverse team' stock, laughing-at-laptop shots, cool blue grades, clinical studio lighting, anything staged-looking."
+
+vibrant-playful:
+  photography:
+    hero:
+      - "pop-art lifestyle bold color block"
+      - "colorful minimalist still life saturated"
+      - "motion blur dance bright color"
+      - "diverse crowd music festival warm"
+      - "playful product photography bold backdrop"
+      - "fujifilm 400h bright candid"
+    product_context:
+      - "product on bright color paper backdrop"
+      - "colorful flat lay pop saturated"
+      - "bold color gradient backdrop product"
+      - "pastel pink studio still life"
+      - "playful prop styling color block"
+    team_portrait:
+      - "candid diverse group laughing natural"
+      - "colorful office portrait bright backdrop"
+      - "portrait on saturated color wall"
+      - "editorial portrait bold color seamless"
+    motion_energy:
+      - "confetti celebration bright color motion"
+      - "skateboarder action shot sun"
+      - "runner motion blur bright wall"
+      - "dancer mid-jump studio color backdrop"
+    texture_abstract:
+      - "risograph print texture bright duotone"
+      - "bold color gradient abstract"
+      - "paper cut color block abstract"
+      - "neon sign bokeh night"
+  illustration:
+    - "flat vector rounded friendly multi-color"
+    - "mailchimp style illustration warm palette"
+    - "playful character illustration flat shapes"
+    - "colorful geometric vector illustration"
+  ai_prompts:
+    hero:
+      - "pop-art still life of three objects on a saturated coral-pink paper backdrop, hard studio shadow, coordinated palette of coral, tangerine, butter-yellow, Fuji Pro 400H look, medium format 80mm --ar 3:2 --no text, --no logos, --no gradients"
+      - "candid moment of three friends mid-laughter in front of a cobalt blue wall, sun-hit outdoor, Fuji 400H grain, saturated but coordinated palette of blue, coral, cream --ar 3:2 --no stock poses, --no generic handshake"
+      - "risograph-textured still life of playful props on bright chartreuse backdrop, bold duotone feel, coordinated hue set, medium format flash --ar 1:1 --no muted tones, --no grayscale"
+      - "product shot on layered color paper backdrop (coral + butter + sage), hard flash shadow, Fujifilm GFX 110mm, saturated pop-brand aesthetic --ar 4:5 --no white background, --no gradients"
+      - "colorful celebratory moment with confetti frozen mid-air, warm interior light, 35mm Fuji 400H, multi-hue palette harmonized --ar 3:2 --no text, --no corporate venue"
+    product_context:
+      - "product centered on a bold color-blocked paper backdrop (two flat fields meeting at the horizon), hard studio shadow, saturated palette --ar 4:5 --no gradients, --no white seamless"
+      - "playful prop arrangement (fruit + object) on sun-yellow paper, single hard flash, coordinated warm palette, Fuji 400H --ar 1:1 --no logos"
+      - "overhead flat-lay on a coral backdrop with carefully chosen multi-color props, coordinated palette of 4 hues, even studio lighting --ar 1:1 --no muted tones"
+    team_portrait:
+      - "candid group portrait of three people mid-laugh against a saturated teal wall, Fuji 400H 35mm, warm coordinated palette --ar 3:2 --no stock-agency poses, --no forced smile"
+      - "editorial portrait on a bold butter-yellow paper backdrop, single large softbox, subject in coral wardrobe, 85mm medium format --ar 4:5 --no muted palette, --no grayscale"
+      - "environmental portrait of a creator in a colorful studio, coordinated palette around them, natural daylight, Fuji 400H --ar 4:5 --no cluttered generic office"
+    motion_energy:
+      - "dancer mid-jump against a saturated magenta cyclorama, frozen by studio strobe, coordinated palette of magenta, tangerine, cream, Phase One 80mm --ar 4:5 --no motion blur, --no text"
+      - "skateboarder mid-trick in urban plaza, low afternoon sun, Fuji 400H 35mm, saturated palette, decisive moment --ar 3:2 --no blurry faces, --no brand logos"
+      - "runner in motion blur against a bright coral wall, 35mm Fuji 400H daylight, energetic composition --ar 16:9 --no muted tones"
+      - "confetti cannon firing across a sunlit rooftop celebration, Fuji 400H, saturated coordinated palette --ar 3:2 --no corporate banners"
+    texture_abstract:
+      - "risograph-style print texture, bright coral + butter duotone, slight misregistration, scanned at 600dpi --ar 1:1 --no text, --no logos"
+      - "paper-cut layered shapes in a coordinated palette of four hues, hard studio shadow, overhead flat-lay --ar 1:1 --no gradients"
+      - "colorful confetti scattered on a flat coral backdrop, overhead, Fuji 400H medium format --ar 16:9 --no text"
+      - "neon sign bokeh against night, warm magenta-and-amber tones, 50mm at f/1.4 --ar 16:9 --no readable text, --no brand names"
+  notes: "Avoid cool/desaturated grades, serious portraits, clinical lighting, grayscale anything, isolated-on-white product shots."
+
+brutalist:
+  photography:
+    hero:
+      - "brutalist architecture concrete high contrast black white"
+      - "zine photography direct flash 35mm grain"
+      - "xerox photocopy aesthetic high contrast"
+      - "construction site raw documentary"
+      - "industrial infrastructure black white film"
+      - "protest poster photography punk zine"
+    product_context:
+      - "object direct flash harsh shadow"
+      - "found object documentary raw"
+      - "industrial part workbench high contrast"
+      - "photocopied product image halftone"
+    street_raw:
+      - "street photography direct flash night"
+      - "graffiti wall documentary 35mm"
+      - "back alley industrial grain"
+      - "urban decay high contrast black white"
+    team_portrait:
+      - "direct flash portrait awkward framing"
+      - "juergen teller style portrait raw"
+      - "photobooth portrait high contrast"
+      - "wolfgang tillmans style candid"
+    texture_abstract:
+      - "concrete wall grain macro"
+      - "halftone newsprint texture"
+      - "photocopy degraded texture"
+      - "rusted metal industrial macro"
+      - "torn paper edge black white"
+  illustration:
+    - "ascii art monospace"
+    - "raw pixelated low-resolution black"
+    - "photocopy halftone zine illustration"
+    - "hand-drawn marker on paper scanned"
+  ai_prompts:
+    hero:
+      - "harsh direct-flash photograph of a concrete brutalist stairwell at night, pure black shadows, blown-out highlights, 28mm point-and-shoot aesthetic, Kodak TMAX 3200 grain, high-contrast black-and-white --ar 3:2 --no retouching, --no tasteful grade"
+      - "photocopied photograph of a protest poster, heavy halftone, torn paper edges, black-and-white only, zine aesthetic, scanned at 300dpi with visible print artifacts --ar 4:5 --no color, --no clean text"
+      - "construction-site documentary frame, rebar and pour-formwork against overcast sky, high-contrast B&W, 35mm on HP5+ pushed to 1600, unforgiving framing --ar 3:2 --no golden hour, --no polish"
+      - "xerox-degraded still life of industrial objects, heavy halftone screen, pure black and paper white, third-generation photocopy artifact --ar 1:1 --no gradients, --no color"
+      - "direct-flash interior frame of a rehearsal space at night, harsh shadows, Juergen Teller amateur sensibility, Portra 800 pushed --ar 3:2 --no staging, --no smile"
+    product_context:
+      - "direct-flash harsh-shadow still life of an industrial object on a concrete floor, Tri-X 400 pushed, 28mm point-and-shoot --ar 1:1 --no color grading, --no softbox"
+      - "photocopied product image with halftone screen and visible xerox streaks, pure B&W --ar 4:5 --no text readable, --no color"
+      - "found-object documentary on a workbench, harsh overhead fluorescent, high contrast, HP5+ 1600 --ar 3:2 --no retouching"
+    street_raw:
+      - "direct-flash night-street photograph, figure mid-stride, blown-out highlights, deep black shadow, 28mm point-and-shoot, Tri-X pushed to 3200 --ar 3:2 --no composition rules, --no color"
+      - "graffitied alley wall, overcast daylight, grain-heavy 35mm HP5+, raw framing with foreground clutter --ar 3:2 --no brand logos, --no polish"
+      - "urban decay doorway, direct flash at night, Juergen Teller aesthetic, B&W grain --ar 4:5 --no tasteful crop"
+      - "back-alley industrial scene, overcast, blown B&W, 35mm film --ar 16:9 --no color grade"
+    team_portrait:
+      - "direct-flash portrait of a person against a white institutional wall, harsh shadow, Juergen Teller amateur framing, awkward stance, 28mm point-and-shoot, color film --ar 4:5 --no flattering lighting, --no studio backdrop"
+      - "photobooth-strip-style portrait, harsh flash, high-contrast B&W, subject mid-blink --ar 3:4 --no retouching, --no glamour"
+      - "Wolfgang Tillmans-style candid portrait, natural overcast, imperfect composition, 35mm on Portra 160 without correction --ar 4:5 --no posed smile"
+      - "harsh-flash portrait in a domestic kitchen, shadow on wall behind subject, amateur-zine aesthetic --ar 4:5 --no ring light, --no soft shadows"
+    texture_abstract:
+      - "raw concrete wall with aggregate visible, harsh direct flash, pure B&W high contrast, macro 35mm --ar 1:1 --no text, --no color"
+      - "heavy halftone newsprint texture scanned from a zine page, pure black ink on newsprint yellow, 600dpi scan with paper fibers visible --ar 1:1 --no clean typography"
+      - "third-generation photocopy abstract, heavy degradation, toner streaks, pure B&W --ar 16:9 --no clean grid"
+      - "rusted metal industrial surface, harsh overhead fluorescent, macro 100mm, high-contrast B&W --ar 1:1 --no color"
+      - "torn paper edge against black background, direct flash, high contrast --ar 16:9 --no clean edges"
+  notes: "Avoid polish of any kind - no studio lighting, no retouching, no tasteful color grades, no magazine-perfect compositions."
+
+bold-distinctive:
+  photography:
+    hero:
+      - "fashion editorial oversized cropped dramatic"
+      - "magazine cover photography single subject bold"
+      - "high-contrast studio portrait hard shadow"
+      - "dazed magazine style bold crop"
+      - "duotone portrait graphic"
+      - "large format cinematic single subject"
+    product_context:
+      - "product close-up dramatic cropping"
+      - "oversized product on color seamless"
+      - "hard shadow studio product graphic"
+      - "single subject bold duotone"
+    team_portrait:
+      - "bold editorial portrait hard light"
+      - "high contrast fashion portrait crop"
+      - "graphic portrait color seamless backdrop"
+      - "duotone treatment portrait"
+    graphic_still:
+      - "geometric still life bold color"
+      - "oversized type and object composition"
+      - "minimalist bold graphic composition"
+      - "single object color gel studio"
+    texture_abstract:
+      - "duotone gradient abstract"
+      - "bold geometric color field"
+      - "risograph print bold two color"
+      - "oversized typographic texture"
+  illustration:
+    - "print poster duotone bold"
+    - "oversized flat color vector high contrast"
+    - "swiss poster illustration bold"
+    - "risograph two-color expressive"
+  ai_prompts:
+    hero:
+      - "single oversized face cropped aggressively at the forehead and chin, duotone treatment in hot red and cream, hard studio shadow, Dazed magazine cover sensibility, medium format 80mm, flat poster feel --ar 4:5 --no gradients, --no soft light"
+      - "monumental object (single shoe, single bottle) filling frame against a flat acid-yellow backdrop, hard shadow slicing the composition, studio strobe, bold duotone --ar 3:4 --no props, --no text"
+      - "high-contrast portrait crop showing only eyes and above, large-format 4x5 on color negative, rich saturated single accent color against cream, magazine cover framing --ar 1:1 --no smile, --no centered framing"
+      - "fashion editorial shot cropped to show only a shoulder and a draping fabric, hard single-light shadow, duotone feel, medium format --ar 4:5 --no muted tones"
+      - "graphic still life of a single object on a bold blue color field, hard shadow, oversized subject, medium format --ar 3:4 --no fine detail clutter"
+    product_context:
+      - "single product oversized on an acid-green seamless, dramatic cropping, hard studio flash, medium format 80mm --ar 4:5 --no props, --no gradients"
+      - "duotone treatment of product close-up, hot-red-and-cream two-color, hard shadow, bold poster framing --ar 1:1 --no fine detail"
+      - "product sliced by hard shadow diagonal, bold color seamless behind, studio strobe, Phase One 80mm --ar 4:5 --no soft light"
+    team_portrait:
+      - "bold editorial portrait with hard key light from a single source, subject oversized and cropped, single saturated accent backdrop, 85mm medium format --ar 4:5 --no soft diffusion, --no centered tasteful crop"
+      - "duotone-treated portrait (hot pink and ink), hard shadow, subject looking directly into the lens, poster framing --ar 4:5 --no gradient, --no neutral palette"
+      - "high-contrast fashion portrait on a color-gel-lit backdrop (cyan or magenta), hard shadow, medium format --ar 4:5 --no natural light"
+    graphic_still:
+      - "oversized typographic element overlapping a single object on a bold color field, hard studio shadow, Swiss-poster-adjacent composition, 80mm medium format --ar 3:4 --no readable brand text, --no fine detail"
+      - "single geometric object lit with colored gels (magenta key, cyan fill), flat-poster feel, studio strobe, Phase One --ar 1:1 --no gradients"
+      - "minimalist bold graphic composition of 2 objects arranged asymmetrically on a saturated field, hard shadow, oversized scale --ar 4:5 --no clutter"
+      - "sculptural single object lit from below, color-gel bath, dramatic crop --ar 4:5 --no studio props visible"
+    texture_abstract:
+      - "duotone gradient abstract in two saturated hues (hot red to cream), flat poster feel, risograph-adjacent --ar 16:9 --no noise"
+      - "bold geometric color field split diagonally into two saturated hues, hard seam --ar 1:1 --no gradient fade"
+      - "risograph print texture, bold two-color with misregistration, scanned 600dpi --ar 1:1 --no text"
+      - "oversized typographic form filling frame, bold duotone, hard-shadow studio light --ar 3:4 --no readable word"
+  notes: "Avoid soft lighting, centered tasteful framing, restrained compositions, muted palettes, anything that whispers instead of announces."

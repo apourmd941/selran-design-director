@@ -1,0 +1,319 @@
+<style>
+  .c-dp-review {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    font-family: inherit;
+    color: var(--fg);
+  }
+  .c-dp-review__head {
+    margin-bottom: 32px;
+    text-align: left;
+  }
+  .c-dp-review__eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+    margin-bottom: 14px;
+  }
+  .c-dp-review__eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px color-mix(in oklab, var(--accent) 80%, transparent);
+  }
+  .c-dp-review__title {
+    font-size: clamp(26px, 3.2vw, 34px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+  .c-dp-review__title em { font-style: normal; color: var(--accent); }
+  .c-dp-review__sub {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--fg-muted);
+    margin: 0;
+  }
+
+  .c-dp-review__section {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .c-dp-review__section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-dp-review__section-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+    margin: 0;
+  }
+  .c-dp-review__edit {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-review__edit:hover {
+    background: color-mix(in oklab, var(--accent) 8%, transparent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .c-dp-review__edit:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  .c-dp-review__dl {
+    margin: 0;
+    padding: 8px 0;
+  }
+  .c-dp-review__row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 20px;
+    padding: 12px 22px;
+  }
+  .c-dp-review__row + .c-dp-review__row {
+    border-top: 1px solid var(--border);
+  }
+  .c-dp-review__key {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+    margin: 2px 0 0;
+    align-self: start;
+  }
+  .c-dp-review__val {
+    font-size: 14px;
+    letter-spacing: -0.005em;
+    color: var(--fg);
+    margin: 0;
+    font-weight: 500;
+    min-width: 0;
+    word-break: break-word;
+  }
+  .c-dp-review__val--mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  .c-dp-review__val--accent { color: var(--accent); }
+  .c-dp-review__val-note {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--fg-muted);
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .c-dp-review__total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+  .c-dp-review__total-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+  }
+  .c-dp-review__total-val {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  .c-dp-review__consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 18px;
+    margin: 20px 0 28px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .c-dp-review__consent input {
+    margin-top: 2px;
+    width: 16px; height: 16px;
+    accent-color: var(--accent);
+  }
+  .c-dp-review__consent label {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    letter-spacing: -0.005em;
+  }
+  .c-dp-review__consent a { color: var(--accent); text-decoration: none; }
+  .c-dp-review__consent a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .c-dp-review__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: 24px;
+  }
+  .c-dp-review__btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px;
+    font-size: 14px; font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: inherit;
+    transition: transform 220ms cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 220ms cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-review__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    box-shadow: 0 0 24px -6px color-mix(in oklab, var(--accent) 50%, transparent);
+  }
+  .c-dp-review__btn--primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 30px -8px color-mix(in oklab, var(--accent) 60%, transparent);
+  }
+  .c-dp-review__btn--primary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+  .c-dp-review__btn--ghost {
+    background: transparent;
+    color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-dp-review__btn--ghost:hover { background: var(--bg-2); border-color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .c-dp-review { padding: 32px 16px 56px; }
+    .c-dp-review__row { grid-template-columns: 1fr; gap: 4px; padding: 14px 18px; }
+    .c-dp-review__section-head { padding: 14px 18px; }
+    .c-dp-review__total { padding: 16px 18px; }
+    .c-dp-review__total-val { font-size: 20px; }
+  }
+</style>
+
+<section class="c-dp-review" aria-labelledby="dp-review-title">
+  <header class="c-dp-review__head">
+    <div class="c-dp-review__eyebrow">
+      <span class="dot" aria-hidden="true"></span>
+      <span>STEP 04 OF 04 &middot; CONFIRM</span>
+    </div>
+    <h1 id="dp-review-title" class="c-dp-review__title">Review &amp; <em>confirm</em></h1>
+    <p class="c-dp-review__sub">Everything on this page is what we'll commit to the ledger. You can edit any section before signing.</p>
+  </header>
+
+  <section class="c-dp-review__section" aria-labelledby="dp-rv-1">
+    <div class="c-dp-review__section-head">
+      <h2 id="dp-rv-1" class="c-dp-review__section-label">Identity</h2>
+      <a class="c-dp-review__edit" href="#step-1">Edit
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M6 1.5l2.5 2.5M2 9l4.5-4.5L9 7 4.5 11.5H2V9z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <dl class="c-dp-review__dl">
+      <div class="c-dp-review__row">
+        <dt class="c-dp-review__key">Entity</dt>
+        <dd class="c-dp-review__val">Meridian Capital Partners, LLC</dd>
+      </div>
+      <div class="c-dp-review__row">
+        <dt class="c-dp-review__key">Jurisdiction</dt>
+        <dd class="c-dp-review__val">Delaware, United States</dd>
+      </div>
+      <div class="c-dp-review__row">
+        <dt class="c-dp-review__key">Primary signer</dt>
+        <dd class="c-dp-review__val">A. Pourmohammadi<span class="c-dp-review__val-note">operator@meridian.capital &middot; Verified via hardware key</span></dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="c-dp-review__section" aria-labelledby="dp-rv-2">
+    <div class="c-dp-review__section-head">
+      <h2 id="dp-rv-2" class="c-dp-review__section-label">Custody</h2>
+      <a class="c-dp-review__edit" href="#step-2">Edit</a>
+    </div>
+    <dl class="c-dp-review__dl">
+      <div class="c-dp-review__row">
+        <dt class="c-dp-review__key">Custodian</dt>
+        <dd class="c-dp-review__val">Anchorage Digital Bank<span class="c-dp-review__val-note">OCC-chartered, qualified custodian</span></dd>
+      </div>
+      <div class="c-dp-review__row">
+        <dt class="c-dp-review__key">Account</dt>
+        <dd class="c-dp-review__val c-dp-review__val--mono">ANCH-MC-04208-PRIV</dd>
+      </div>
+      <div class="c-dp-review__row">
+        <dt class="c-dp-review__key">Insurance cap</dt>
+        <dd class="c-dp-review__val c-dp-review__val--mono">$320,000,000</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="c-dp-review__section" aria-labelledby="dp-rv-3">
+    <div class="c-dp-review__section-head">
+      <h2 id="dp-rv-3" class="c-dp-review__section-label">Allocations</h2>
+      <a class="c-dp-review__edit" href="#step-3">Edit</a>
+    </div>
+    <dl class="c-dp-review__dl">
+      <div class="c-dp-review__row">
+        <dt class="c-dp-review__key">Reserve-A (60%)</dt>
+        <dd class="c-dp-review__val c-dp-review__val--mono">$1,440,000.00</dd>
+      </div>
+      <div class="c-dp-review__row">
+        <dt class="c-dp-review__key">Yield-B (30%)</dt>
+        <dd class="c-dp-review__val c-dp-review__val--mono">$720,000.00</dd>
+      </div>
+      <div class="c-dp-review__row">
+        <dt class="c-dp-review__key">Opportunistic (10%)</dt>
+        <dd class="c-dp-review__val c-dp-review__val--mono">$240,000.00</dd>
+      </div>
+    </dl>
+    <div class="c-dp-review__total">
+      <span class="c-dp-review__total-label">Total committed</span>
+      <span class="c-dp-review__total-val">$2,400,000.00</span>
+    </div>
+  </section>
+
+  <div class="c-dp-review__consent">
+    <input id="dp-review-consent" type="checkbox" required>
+    <label for="dp-review-consent">
+      I confirm these details match the instruction on file and authorize the transfer per the <a href="#terms">operating agreement</a>. This signature is binding.
+    </label>
+  </div>
+
+  <div class="c-dp-review__actions">
+    <a class="c-dp-review__btn c-dp-review__btn--ghost" href="#back">&larr; Back</a>
+    <button class="c-dp-review__btn c-dp-review__btn--primary" type="submit">Sign &amp; commit &rarr;</button>
+  </div>
+</section>

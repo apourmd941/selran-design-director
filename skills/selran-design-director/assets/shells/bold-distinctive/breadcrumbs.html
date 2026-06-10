@@ -1,0 +1,93 @@
+<style>
+  .c-bd-crumbs {
+    padding: 16px 0;
+    font-family: inherit;
+    color: var(--fg);
+  }
+  .c-bd-crumbs__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .c-bd-crumbs__item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .c-bd-crumbs__link {
+    color: var(--fg-muted);
+    text-decoration: none;
+    padding: 2px 0;
+    position: relative;
+    transition: color 220ms ease;
+  }
+  .c-bd-crumbs__link:hover {
+    color: var(--fg);
+  }
+  .c-bd-crumbs__link:hover::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -2px;
+    height: 3px;
+    background: var(--accent);
+  }
+  .c-bd-crumbs__link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .c-bd-crumbs__sep {
+    color: var(--fg-muted);
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 16px;
+    line-height: 1;
+    user-select: none;
+  }
+  .c-bd-crumbs__current {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+  }
+  .c-bd-crumbs__ellipsis {
+    display: none;
+    color: var(--fg-muted);
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-crumbs__item--hide-mobile { display: none; }
+    .c-bd-crumbs__ellipsis { display: inline-flex; }
+  }
+</style>
+
+<nav class="c-bd-crumbs" aria-label="Breadcrumb">
+  <ol class="c-bd-crumbs__list">
+    <li class="c-bd-crumbs__item">
+      <a class="c-bd-crumbs__link" href="#">{Brand}</a>
+    </li>
+    <li class="c-bd-crumbs__item c-bd-crumbs__item--hide-mobile">
+      <span class="c-bd-crumbs__sep" aria-hidden="true">/</span>
+      <a class="c-bd-crumbs__link" href="#">Archive</a>
+    </li>
+    <li class="c-bd-crumbs__item c-bd-crumbs__ellipsis" aria-hidden="true">
+      <span class="c-bd-crumbs__sep">/</span>
+      <span class="c-bd-crumbs__link">&hellip;</span>
+    </li>
+    <li class="c-bd-crumbs__item c-bd-crumbs__item--hide-mobile">
+      <span class="c-bd-crumbs__sep" aria-hidden="true">/</span>
+      <a class="c-bd-crumbs__link" href="#">Issue 07 &middot; Spring 2026</a>
+    </li>
+    <li class="c-bd-crumbs__item">
+      <span class="c-bd-crumbs__sep" aria-hidden="true">/</span>
+      <span class="c-bd-crumbs__current" aria-current="page">The internet is fine</span>
+    </li>
+  </ol>
+</nav>

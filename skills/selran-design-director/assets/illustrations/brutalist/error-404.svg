@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: brutalist
+  use: 404 page-not-found
+  variables: var(fg), var(bg), var(accent)
+  notes: huge mono 404, halftone background block, registration-offset duplicate, file-metadata footer
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="404 not found">
+  <style>
+    .br-fg-fill  { fill: var(--fg, #000000); }
+    .br-accent-fill { fill: var(--accent, #B84400); }
+    .br-mono     { font-family: "Space Mono", "JetBrains Mono", "Courier New", ui-monospace, monospace; }
+  </style>
+
+  <defs>
+    <pattern id="br4-halftone" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.3" fill="var(--fg, #000000)"/>
+    </pattern>
+  </defs>
+
+  <!-- halftone background block -->
+  <rect x="0" y="30" width="400" height="300" fill="url(#br4-halftone)"/>
+
+  <!-- accent registration-offset block behind the numeral -->
+  <rect x="26" y="84" width="348" height="200" class="br-accent-fill"/>
+  <rect x="34" y="76" width="348" height="200" fill="none" stroke="var(--fg, #000000)" stroke-width="3" vector-effect="non-scaling-stroke"/>
+
+  <!-- huge mono 404, black, offset -->
+  <text x="200" y="260"
+        text-anchor="middle"
+        class="br-mono"
+        font-size="220"
+        font-weight="700"
+        letter-spacing="-14"
+        fill="var(--fg, #000000)">404</text>
+
+  <!-- top strip mono metadata -->
+  <rect class="br-fg-fill" x="0" y="0" width="400" height="28"/>
+  <text x="12" y="19" class="br-mono" font-size="11" letter-spacing="0.15em" fill="var(--bg, #FFFFFF)">STATUS/404</text>
+  <text x="388" y="19" text-anchor="end" class="br-mono" font-size="11" letter-spacing="0.15em" fill="var(--bg, #FFFFFF)">NOT&#160;FOUND</text>
+
+  <!-- bottom metadata (no frame) -->
+  <text x="12" y="356" class="br-mono" font-size="11" letter-spacing="0.15em" fill="var(--fg, #000000)">THE PAGE YOU REQUESTED</text>
+  <text x="12" y="372" class="br-mono" font-size="11" letter-spacing="0.15em" fill="var(--fg, #000000)">DOES NOT EXIST ON THIS SERVER.</text>
+  <text x="12" y="388" class="br-mono" font-size="11" letter-spacing="0.15em" fill="var(--accent, #B84400)">&gt; RETURN TO INDEX.</text>
+
+  <!-- bottom rule -->
+  <rect class="br-fg-fill" x="0" y="394" width="400" height="6"/>
+</svg>

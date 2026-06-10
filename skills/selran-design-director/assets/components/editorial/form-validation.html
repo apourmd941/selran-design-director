@@ -1,0 +1,175 @@
+<style>
+  .c-ed-validate {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 56px 40px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    font-family: inherit;
+  }
+  .c-ed-validate__byline {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    padding-bottom: 14px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-validate__title {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 36px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 8px;
+  }
+  .c-ed-validate__title em { font-style: italic; color: var(--accent); }
+  .c-ed-validate__lead {
+    font-size: 15px; line-height: 1.65;
+    color: var(--fg-muted); font-style: italic;
+    margin: 0 0 36px;
+    max-width: 52ch;
+  }
+  .c-ed-validate__field {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-validate__label {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-bottom: 8px;
+  }
+  .c-ed-validate__input-wrap { position: relative; }
+  .c-ed-validate__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 0;
+    font-size: 19px;
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    color: var(--fg);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    outline: none;
+    border-radius: 0;
+    transition: border-color 250ms ease-out;
+  }
+  .c-ed-validate__input::placeholder { color: var(--fg-muted); font-style: italic; }
+  .c-ed-validate__input:focus-visible {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 5px;
+  }
+  .c-ed-validate__field[data-state="valid"] .c-ed-validate__input { border-bottom-color: var(--semantic-success, #3a6b3a); }
+  .c-ed-validate__field[data-state="invalid"] .c-ed-validate__input { border-bottom-color: var(--semantic-error, #8b2a2a); }
+  .c-ed-validate__field[data-state="disabled"] .c-ed-validate__input {
+    color: var(--fg-muted);
+    cursor: not-allowed;
+    border-bottom-style: dashed;
+    font-style: italic;
+  }
+  .c-ed-validate__msg {
+    display: none;
+    margin-top: 8px;
+    font-size: 14px;
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-style: italic;
+  }
+  .c-ed-validate__field[data-state="valid"] .c-ed-validate__msg--ok {
+    display: flex; align-items: baseline; gap: 8px;
+    color: var(--semantic-success, #3a6b3a);
+  }
+  .c-ed-validate__field[data-state="invalid"] .c-ed-validate__msg--err {
+    display: flex; align-items: baseline; gap: 8px;
+    color: var(--semantic-error, #8b2a2a);
+  }
+  .c-ed-validate__field[data-state="disabled"] .c-ed-validate__msg--note {
+    display: block;
+    color: var(--fg-muted);
+  }
+  .c-ed-validate__msg .marker {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    font-style: normal;
+  }
+  .c-ed-validate__actions {
+    padding-top: 16px;
+    display: flex; justify-content: flex-end;
+  }
+  .c-ed-validate__btn {
+    padding: 14px 28px;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    background: var(--fg); color: var(--bg);
+    border: 0; border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 250ms ease-out;
+  }
+  .c-ed-validate__btn:hover:not(:disabled) { background: var(--accent); }
+  .c-ed-validate__btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .c-ed-validate__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  @media (max-width: 900px) {
+    .c-ed-validate { padding: 40px 24px; border: 0; }
+    .c-ed-validate__title { font-size: 28px; }
+  }
+</style>
+
+<form class="c-ed-validate" novalidate>
+  <div class="c-ed-validate__byline">Correspondence · Reader Profile</div>
+  <h2 class="c-ed-validate__title">A few <em>small particulars.</em></h2>
+  <p class="c-ed-validate__lead">Four lines, four stations — the newsroom way of showing what a field can be.</p>
+
+  <div class="c-ed-validate__field" data-state="default">
+    <label class="c-ed-validate__label" for="ed-v-penname">Pen name</label>
+    <div class="c-ed-validate__input-wrap">
+      <input class="c-ed-validate__input" id="ed-v-penname" name="penname" type="text" placeholder="As it should appear on the masthead">
+    </div>
+  </div>
+
+  <div class="c-ed-validate__field" data-state="valid">
+    <label class="c-ed-validate__label" for="ed-v-city">City of residence</label>
+    <div class="c-ed-validate__input-wrap">
+      <input class="c-ed-validate__input" id="ed-v-city" name="city" type="text" value="Brooklyn, NY" aria-describedby="ed-v-city-ok">
+    </div>
+    <div class="c-ed-validate__msg c-ed-validate__msg--ok" id="ed-v-city-ok">
+      <span class="marker">Verified —</span> <span>noted for mailing.</span>
+    </div>
+  </div>
+
+  <div class="c-ed-validate__field" data-state="invalid">
+    <label class="c-ed-validate__label" for="ed-v-email">Correspondence email</label>
+    <div class="c-ed-validate__input-wrap">
+      <input class="c-ed-validate__input" id="ed-v-email" name="email" type="email" value="iris.park(at)inbox" aria-invalid="true" aria-describedby="ed-v-email-err">
+    </div>
+    <div class="c-ed-validate__msg c-ed-validate__msg--err" id="ed-v-email-err">
+      <span class="marker">Error —</span> <span>a proper address, please (name@domain).</span>
+    </div>
+  </div>
+
+  <div class="c-ed-validate__field" data-state="disabled">
+    <label class="c-ed-validate__label" for="ed-v-member">Member number</label>
+    <div class="c-ed-validate__input-wrap">
+      <input class="c-ed-validate__input" id="ed-v-member" name="member" type="text" value="No. 00214" disabled>
+    </div>
+    <div class="c-ed-validate__msg c-ed-validate__msg--note">Assigned at the foundry — not editable.</div>
+  </div>
+
+  <div class="c-ed-validate__actions">
+    <button class="c-ed-validate__btn" type="submit" disabled>Send to the editor</button>
+  </div>
+</form>

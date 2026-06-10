@@ -1,0 +1,195 @@
+<style>
+  .c-dp-login {
+    position: relative;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 44px 36px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    font-family: inherit;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .c-dp-login::before {
+    content: '';
+    position: absolute;
+    inset: auto -20% -40% -20%;
+    height: 60%;
+    background: radial-gradient(
+      60% 60% at 50% 100%,
+      color-mix(in oklab, var(--accent) 24%, transparent) 0%,
+      transparent 72%
+    );
+    z-index: -1;
+    pointer-events: none;
+  }
+  .c-dp-login__eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg);
+    margin-bottom: 20px;
+  }
+  .c-dp-login__eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px color-mix(in oklab, var(--accent) 80%, transparent);
+  }
+  .c-dp-login__eyebrow .mono {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--fg-muted);
+  }
+  .c-dp-login__headline {
+    font-size: 26px; letter-spacing: -0.015em;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 8px;
+  }
+  .c-dp-login__headline em { font-style: normal; color: var(--accent); }
+  .c-dp-login__sub {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    margin: 0 0 28px;
+  }
+  .c-dp-login__field { margin-bottom: 16px; }
+  .c-dp-login__label {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-bottom: 8px;
+  }
+  .c-dp-login__row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .c-dp-login__forgot {
+    font-size: 12px; color: var(--accent);
+    text-decoration: none;
+  }
+  .c-dp-login__forgot:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .c-dp-login__input {
+    width: 100%; box-sizing: border-box;
+    padding: 12px 14px;
+    font-size: 14px; font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-top-color: color-mix(in oklab, var(--fg) 20%, var(--border));
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 300ms cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-login__input::placeholder { color: var(--fg-muted); }
+  .c-dp-login__input:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent),
+                0 0 22px -2px color-mix(in oklab, var(--accent) 50%, transparent);
+  }
+  .c-dp-login__btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; box-sizing: border-box;
+    padding: 12px 20px;
+    font-size: 14px; font-weight: 500;
+    font-family: inherit;
+    background: var(--accent);
+    color: var(--bg);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: transform 300ms cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-login__btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 30px -8px color-mix(in oklab, var(--accent) 60%, transparent);
+  }
+  .c-dp-login__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg-2), 0 0 0 4px var(--accent);
+  }
+  .c-dp-login__divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 24px 0 16px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--fg-muted);
+  }
+  .c-dp-login__divider::before,
+  .c-dp-login__divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .c-dp-login__oauth { display: flex; flex-direction: column; gap: 8px; }
+  .c-dp-login__oauth-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 11px 16px;
+    font-size: 14px; font-weight: 500;
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 300ms cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 300ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-login__oauth-btn:hover { border-color: var(--accent); background: var(--bg-3, var(--bg-2)); }
+  .c-dp-login__oauth-btn:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .c-dp-login__oauth-btn svg { width: 16px; height: 16px; }
+  .c-dp-login__foot {
+    margin-top: 24px; text-align: center;
+    font-size: 13px; color: var(--fg-muted);
+  }
+  .c-dp-login__foot a { color: var(--accent); text-decoration: none; }
+  .c-dp-login__foot a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 900px) {
+    .c-dp-login { max-width: none; padding: 36px 24px; border-radius: 0; border-left: 0; border-right: 0; }
+  }
+</style>
+
+<form class="c-dp-login" novalidate>
+  <div class="c-dp-login__eyebrow">
+    <span class="dot" aria-hidden="true"></span>
+    <span class="mono">{BRAND} · Secure sign-in</span>
+  </div>
+  <h1 class="c-dp-login__headline">Welcome <em>back.</em></h1>
+  <p class="c-dp-login__sub">Continue to your ledger. Sessions expire after 30 minutes of inactivity.</p>
+
+  <div class="c-dp-login__field">
+    <label class="c-dp-login__label" for="dp-email">Email</label>
+    <input class="c-dp-login__input" id="dp-email" name="email" type="email" autocomplete="email" placeholder="operator@company.com" required>
+  </div>
+
+  <div class="c-dp-login__field">
+    <div class="c-dp-login__row">
+      <label class="c-dp-login__label" for="dp-password">Password</label>
+      <a class="c-dp-login__forgot" href="#forgot">Forgot?</a>
+    </div>
+    <input class="c-dp-login__input" id="dp-password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+  </div>
+
+  <button class="c-dp-login__btn" type="submit">Continue →</button>
+
+  <div class="c-dp-login__divider">or continue with</div>
+
+  <div class="c-dp-login__oauth">
+    <a class="c-dp-login__oauth-btn" href="#google">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.35 11.1H12v3.8h5.35c-.23 1.23-1.44 3.6-5.35 3.6-3.22 0-5.85-2.67-5.85-5.95S8.78 6.6 12 6.6c1.83 0 3.06.78 3.77 1.45l2.57-2.48C16.7 4.1 14.55 3.2 12 3.2 7.06 3.2 3 7.25 3 12.2s4.06 9 9 9c5.2 0 8.65-3.65 8.65-8.8 0-.6-.06-1.05-.15-1.5z"/></svg>
+      Google
+    </a>
+    <a class="c-dp-login__oauth-btn" href="#github">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.7.11 2.5.33 1.9-1.29 2.74-1.02 2.74-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.33 4.69-4.56 4.94.36.31.68.91.68 1.85l-.01 2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+      GitHub
+    </a>
+  </div>
+
+  <p class="c-dp-login__foot">Don't have access? <a href="#request">Request an invite</a></p>
+</form>

@@ -1,0 +1,247 @@
+<style>
+  .c-bd-review {
+    max-width: 880px;
+    margin: 0 auto;
+    background: var(--bg);
+    border: 2px solid var(--fg);
+    font-family: inherit;
+    color: var(--fg);
+  }
+  .c-bd-review__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 40px;
+    border-bottom: 2px solid var(--fg);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .c-bd-review__meta-current { color: var(--accent); }
+
+  .c-bd-review__head {
+    padding: 48px 40px 40px;
+    border-bottom: 2px solid var(--fg);
+  }
+  .c-bd-review__eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    display: block;
+    margin-bottom: 16px;
+  }
+  .c-bd-review__title {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(40px, 5.5vw, 72px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+    margin: 0 0 16px;
+  }
+  .c-bd-review__title em { font-style: italic; color: var(--accent); }
+  .c-bd-review__sub {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0;
+    max-width: 54ch;
+  }
+
+  .c-bd-review__section {
+    padding: 36px 40px;
+    border-bottom: 2px solid var(--fg);
+  }
+  .c-bd-review__section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .c-bd-review__section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: 0;
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .c-bd-review__section-num {
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 0.9;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+  }
+  .c-bd-review__section-label {
+    font-size: clamp(22px, 2.6vw, 30px);
+    font-style: italic;
+    color: var(--fg);
+    line-height: 1.1;
+  }
+  .c-bd-review__edit {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--fg);
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--accent);
+    transition: color 220ms ease;
+  }
+  .c-bd-review__edit:hover { color: var(--accent); }
+  .c-bd-review__edit:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .c-bd-review__dl {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 14px 28px;
+    margin: 0;
+  }
+  .c-bd-review__dl dt {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--fg-muted);
+    line-height: 1.5;
+  }
+  .c-bd-review__dl dd {
+    margin: 0;
+    font-size: 16px;
+    color: var(--fg);
+    line-height: 1.5;
+  }
+
+  .c-bd-review__actions {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0;
+  }
+  .c-bd-review__btn {
+    appearance: none;
+    padding: 26px 28px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    border: 0;
+    cursor: pointer;
+    transition: background-color 220ms cubic-bezier(0.2, 0, 0, 1),
+                color 220ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-bd-review__btn--ghost {
+    background: var(--bg);
+    color: var(--fg);
+    border-right: 2px solid var(--fg);
+  }
+  .c-bd-review__btn--ghost:hover { background: var(--fg); color: var(--bg); }
+  .c-bd-review__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .c-bd-review__btn--primary:hover { background: var(--fg); }
+  .c-bd-review__btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -4px;
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-review__meta { padding: 12px 20px; }
+    .c-bd-review__head { padding: 32px 20px 28px; }
+    .c-bd-review__section { padding: 28px 20px; }
+    .c-bd-review__section-num { font-size: 44px; }
+    .c-bd-review__section-label { font-size: 20px; }
+    .c-bd-review__dl { grid-template-columns: 1fr; gap: 4px 0; }
+    .c-bd-review__dl dd { margin-bottom: 14px; }
+    .c-bd-review__actions { grid-template-columns: 1fr; }
+    .c-bd-review__btn--ghost { border-right: 0; border-bottom: 2px solid var(--fg); }
+  }
+</style>
+
+<form class="c-bd-review" novalidate>
+  <div class="c-bd-review__meta">
+    <span>Subscribe &middot; {Brand}</span>
+    <span><span class="c-bd-review__meta-current">Step 04 of 04</span> &middot; Review &amp; confirm</span>
+  </div>
+
+  <header class="c-bd-review__head">
+    <span class="c-bd-review__eyebrow">Before we send it in</span>
+    <h2 class="c-bd-review__title">Read it <em>once more.</em></h2>
+    <p class="c-bd-review__sub">
+      Everything below is what we'll file for issue 07. Edit any section to adjust &mdash; we'll bring you back here when you're done.
+    </p>
+  </header>
+
+  <section class="c-bd-review__section">
+    <header class="c-bd-review__section-head">
+      <h3 class="c-bd-review__section-title">
+        <span class="c-bd-review__section-num">01.</span>
+        <span class="c-bd-review__section-label">Account</span>
+      </h3>
+      <button class="c-bd-review__edit" type="button">Edit account</button>
+    </header>
+    <dl class="c-bd-review__dl">
+      <dt>Pen name</dt>
+      <dd>Amara Wole</dd>
+      <dt>Contact email</dt>
+      <dd>a.wole@{brand}.co</dd>
+      <dt>Byline city</dt>
+      <dd>Brooklyn, NY</dd>
+    </dl>
+  </section>
+
+  <section class="c-bd-review__section">
+    <header class="c-bd-review__section-head">
+      <h3 class="c-bd-review__section-title">
+        <span class="c-bd-review__section-num">02.</span>
+        <span class="c-bd-review__section-label">Workspace</span>
+      </h3>
+      <button class="c-bd-review__edit" type="button">Edit workspace</button>
+    </header>
+    <dl class="c-bd-review__dl">
+      <dt>Name</dt>
+      <dd>The Desk &mdash; Editorial</dd>
+      <dt>Plan</dt>
+      <dd>Annual print &amp; archive</dd>
+      <dt>Teammates</dt>
+      <dd>Iris Park, Jun Okafor, Lena Varga</dd>
+    </dl>
+  </section>
+
+  <section class="c-bd-review__section">
+    <header class="c-bd-review__section-head">
+      <h3 class="c-bd-review__section-title">
+        <span class="c-bd-review__section-num">03.</span>
+        <span class="c-bd-review__section-label">Delivery</span>
+      </h3>
+      <button class="c-bd-review__edit" type="button">Edit delivery</button>
+    </header>
+    <dl class="c-bd-review__dl">
+      <dt>Mailing address</dt>
+      <dd>142 Pacific St, Brooklyn, NY 11201</dd>
+      <dt>Frequency</dt>
+      <dd>Quarterly &mdash; four issues a year</dd>
+      <dt>First issue</dt>
+      <dd>No. 07 &middot; ships April 28</dd>
+    </dl>
+  </section>
+
+  <div class="c-bd-review__actions">
+    <button class="c-bd-review__btn c-bd-review__btn--ghost" type="button">&larr; Back</button>
+    <button class="c-bd-review__btn c-bd-review__btn--primary" type="submit">Submit &amp; send to the press &rarr;</button>
+  </div>
+</form>

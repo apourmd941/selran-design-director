@@ -1,0 +1,299 @@
+<style>
+  .c-vp-review {
+    --ease: cubic-bezier(0.34, 1.1, 0.64, 1);
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 44px 40px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 0 30px 60px -24px rgba(0,0,0,0.12);
+    font-family: inherit;
+    color: var(--fg);
+  }
+  .c-vp-review__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    border-radius: 9999px;
+    background: color-mix(in oklab, var(--p5, var(--accent)) 16%, var(--bg));
+    color: var(--p5, var(--accent));
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .c-vp-review__eyebrow::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 9999px;
+    background: currentColor;
+  }
+  .c-vp-review__title {
+    font-size: 28px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: var(--fg);
+    margin: 0 0 6px;
+  }
+  .c-vp-review__lead {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    margin: 0 0 24px;
+  }
+
+  .c-vp-review__sections {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .c-vp-review__section {
+    padding: 18px 20px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+  .c-vp-review__section[data-cat="1"] { --cat: var(--p1, var(--accent)); }
+  .c-vp-review__section[data-cat="2"] { --cat: var(--p2, var(--accent)); }
+  .c-vp-review__section[data-cat="3"] { --cat: var(--p3, var(--accent)); }
+  .c-vp-review__section[data-cat="4"] { --cat: var(--p4, var(--accent)); }
+
+  .c-vp-review__section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .c-vp-review__section-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cat, var(--accent));
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .c-vp-review__section-title::before {
+    content: "";
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    background: var(--cat, var(--accent));
+  }
+  .c-vp-review__edit {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--cat, var(--accent));
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    transition: background-color 220ms var(--ease);
+  }
+  .c-vp-review__edit:hover {
+    background: color-mix(in oklab, var(--cat, var(--accent)) 14%, var(--bg));
+  }
+  .c-vp-review__edit:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--cat, var(--accent));
+  }
+  .c-vp-review__edit svg { width: 11px; height: 11px; }
+
+  .c-vp-review__dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 20px;
+    row-gap: 6px;
+  }
+  .c-vp-review__dl dt {
+    font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    padding-top: 3px;
+  }
+  .c-vp-review__dl dd {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg);
+    line-height: 1.45;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .c-vp-review__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    background: color-mix(in oklab, var(--cat, var(--accent)) 18%, var(--bg));
+    color: var(--cat, var(--accent));
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .c-vp-review__chip-dot {
+    width: 8px; height: 8px;
+    border-radius: 9999px;
+    background: currentColor;
+  }
+
+  .c-vp-review__agree {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: var(--bg-2);
+    border: 1px dashed color-mix(in oklab, var(--accent) 24%, var(--border));
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--fg-muted);
+  }
+  .c-vp-review__agree input {
+    accent-color: var(--accent);
+    margin-top: 2px;
+  }
+  .c-vp-review__agree a { color: var(--accent); font-weight: 500; text-decoration: none; }
+  .c-vp-review__agree a:hover { text-decoration: underline; }
+
+  .c-vp-review__actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .c-vp-review__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 280ms var(--ease),
+                background-color 280ms var(--ease),
+                box-shadow 280ms var(--ease);
+  }
+  .c-vp-review__btn--ghost {
+    background: var(--bg);
+    color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-vp-review__btn--ghost:hover { background: var(--bg-2); transform: translateY(-1px); }
+  .c-vp-review__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    font-family: inherit;
+  }
+  .c-vp-review__btn--primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 14px 30px color-mix(in oklab, var(--accent) 40%, transparent);
+  }
+  .c-vp-review__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+  .c-vp-review__btn svg { width: 13px; height: 13px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-vp-review__btn, .c-vp-review__edit { transition: none; }
+  }
+
+  @media (max-width: 900px) {
+    .c-vp-review {
+      max-width: none;
+      box-shadow: none;
+      padding: 32px 20px;
+      border-left: 0;
+      border-right: 0;
+      border-radius: 0;
+    }
+    .c-vp-review__dl { grid-template-columns: 1fr; row-gap: 10px; }
+    .c-vp-review__dl dt { padding-top: 0; }
+    .c-vp-review__actions { flex-direction: column-reverse; }
+    .c-vp-review__btn { width: 100%; justify-content: center; }
+  }
+</style>
+
+<section class="c-vp-review" aria-labelledby="c-vp-review-title">
+  <span class="c-vp-review__eyebrow">Almost there &middot; Review</span>
+  <h1 class="c-vp-review__title" id="c-vp-review-title">One last look before we spin it up.</h1>
+  <p class="c-vp-review__lead">Here&rsquo;s everything you told us. Tweak anything that doesn&rsquo;t feel right &mdash; we&rsquo;ll bring you back to this screen.</p>
+
+  <div class="c-vp-review__sections">
+    <div class="c-vp-review__section" data-cat="1">
+      <div class="c-vp-review__section-head">
+        <h2 class="c-vp-review__section-title">Your account</h2>
+        <a class="c-vp-review__edit" href="#step-1">
+          <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 8.5L7.5 3l1.5 1.5L3.5 10H2v-1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          Edit
+        </a>
+      </div>
+      <dl class="c-vp-review__dl">
+        <dt>Name</dt><dd>Jules Okafor</dd>
+        <dt>Email</dt><dd>jules@thirddraft.studio</dd>
+      </dl>
+    </div>
+
+    <div class="c-vp-review__section" data-cat="2">
+      <div class="c-vp-review__section-head">
+        <h2 class="c-vp-review__section-title">Workspace vibe</h2>
+        <a class="c-vp-review__edit" href="#step-2">
+          <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 8.5L7.5 3l1.5 1.5L3.5 10H2v-1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          Edit
+        </a>
+      </div>
+      <dl class="c-vp-review__dl">
+        <dt>Name</dt><dd>Third Draft Studio</dd>
+        <dt>Size</dt><dd>2&ndash;10 people</dd>
+        <dt>Accent</dt><dd><span class="c-vp-review__chip"><span class="c-vp-review__chip-dot"></span>Cobalt</span></dd>
+      </dl>
+    </div>
+
+    <div class="c-vp-review__section" data-cat="3">
+      <div class="c-vp-review__section-head">
+        <h2 class="c-vp-review__section-title">Invites</h2>
+        <a class="c-vp-review__edit" href="#step-3">
+          <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 8.5L7.5 3l1.5 1.5L3.5 10H2v-1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          Edit
+        </a>
+      </div>
+      <dl class="c-vp-review__dl">
+        <dt>Teammates</dt>
+        <dd>
+          <span class="c-vp-review__chip">sam@studio.com</span>
+          <span class="c-vp-review__chip">nia@studio.com</span>
+          <span class="c-vp-review__chip">ari@studio.com</span>
+        </dd>
+        <dt>Default role</dt><dd>Editor</dd>
+      </dl>
+    </div>
+  </div>
+
+  <label class="c-vp-review__agree">
+    <input type="checkbox" checked>
+    <span>I&rsquo;ve read the <a href="#">Studio terms</a> and agree to keep things kind and credited.</span>
+  </label>
+
+  <div class="c-vp-review__actions">
+    <button class="c-vp-review__btn c-vp-review__btn--ghost" type="button">&larr; Back</button>
+    <button class="c-vp-review__btn c-vp-review__btn--primary" type="button">
+      Create workspace
+      <svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</section>

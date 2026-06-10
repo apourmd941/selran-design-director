@@ -1,0 +1,132 @@
+<style>
+  .c-vp-spin {
+    --ease: cubic-bezier(0.34, 1.1, 0.64, 1);
+    --spin-size: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 16px;
+    font-family: inherit;
+    color: var(--fg);
+  }
+  .c-vp-spin--full {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: color-mix(in oklab, var(--bg) 88%, transparent);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    flex-direction: column;
+    gap: 22px;
+    padding: 48px;
+  }
+  .c-vp-spin--inline {
+    display: inline-flex;
+    --spin-size: 18px;
+    gap: 10px;
+    padding: 0;
+    font-size: 14px;
+    color: var(--fg-muted);
+  }
+
+  .c-vp-spin__ring {
+    width: var(--spin-size);
+    height: var(--spin-size);
+    position: relative;
+    flex: 0 0 auto;
+  }
+  .c-vp-spin__pulse {
+    position: absolute;
+    inset: -8px;
+    border-radius: 9999px;
+    background: radial-gradient(closest-side, color-mix(in oklab, var(--accent) 18%, transparent), transparent 75%);
+    animation: c-vp-spin-pulse 2s ease-in-out infinite;
+  }
+  .c-vp-spin--inline .c-vp-spin__pulse { display: none; }
+
+  .c-vp-spin__svg {
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    animation: c-vp-spin-rot 1.1s linear infinite;
+  }
+  .c-vp-spin__track {
+    fill: none;
+    stroke: var(--border);
+    stroke-width: 3;
+  }
+  .c-vp-spin__head {
+    fill: none;
+    stroke: url(#c-vp-spin-grad);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 60 140;
+  }
+
+  .c-vp-spin__label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--fg);
+    letter-spacing: -0.005em;
+  }
+  .c-vp-spin__sub {
+    font-size: 13px;
+    color: var(--fg-muted);
+  }
+  .c-vp-spin--full .c-vp-spin__meta {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .c-vp-spin--inline .c-vp-spin__sub { display: none; }
+
+  @keyframes c-vp-spin-rot {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes c-vp-spin-pulse {
+    0%, 100% { opacity: 0.4; transform: scale(0.92); }
+    50%      { opacity: 1;   transform: scale(1.08); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-vp-spin__svg { animation: none; }
+    .c-vp-spin__pulse { animation: none; opacity: 0.5; }
+    .c-vp-spin__head { stroke-dasharray: 200; }
+  }
+</style>
+
+<div class="c-vp-spin c-vp-spin--full" role="status" aria-live="polite">
+  <div class="c-vp-spin__ring" aria-hidden="true">
+    <span class="c-vp-spin__pulse"></span>
+    <svg class="c-vp-spin__svg" viewBox="0 0 52 52">
+      <defs>
+        <linearGradient id="c-vp-spin-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%"  stop-color="var(--p1, currentColor)"/>
+          <stop offset="25%" stop-color="var(--p2, currentColor)"/>
+          <stop offset="50%" stop-color="var(--p3, currentColor)"/>
+          <stop offset="75%" stop-color="var(--p4, currentColor)"/>
+          <stop offset="100%" stop-color="var(--p5, currentColor)"/>
+        </linearGradient>
+      </defs>
+      <circle class="c-vp-spin__track" cx="26" cy="26" r="20"/>
+      <circle class="c-vp-spin__head"  cx="26" cy="26" r="20"/>
+    </svg>
+  </div>
+  <div class="c-vp-spin__meta">
+    <span class="c-vp-spin__label">One sec&hellip;</span>
+    <span class="c-vp-spin__sub">Pulling your canvases together.</span>
+  </div>
+</div>
+
+<!-- Inline variant, drop into buttons, rows, toolbars -->
+<p class="c-vp-spin c-vp-spin--inline" role="status" aria-live="polite">
+  <span class="c-vp-spin__ring" aria-hidden="true">
+    <svg class="c-vp-spin__svg" viewBox="0 0 52 52">
+      <circle class="c-vp-spin__track" cx="26" cy="26" r="20"/>
+      <circle class="c-vp-spin__head" cx="26" cy="26" r="20" stroke="var(--accent)" stroke-dasharray="60 140" stroke-linecap="round" fill="none" stroke-width="5"/>
+    </svg>
+  </span>
+  <span class="c-vp-spin__label">Saving&hellip;</span>
+</p>

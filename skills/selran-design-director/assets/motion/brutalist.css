@@ -1,0 +1,160 @@
+/* ==========================================================================
+   Motion: Brutalist / Raw
+   Prefix: .m-br-*
+   Feel: none. Hard cuts. Instant state changes. Linear or no curve.
+   Signature gesture: hard snap via step-end — no easing, no duration, no mercy.
+   ========================================================================== */
+
+:root {
+  /* Even when host sets --motion-duration, brutalist overrides to instant.
+     Expose the vars so consumers can still read them, but hardcode to 0. */
+  --m-br-duration-fast:     0ms;
+  --m-br-duration-base:     0ms;
+  --m-br-duration-slow:     0ms;
+  --m-br-easing:            steps(1, end);
+  --m-br-easing-linear:     linear;   /* only used when a genuine loading state demands motion */
+}
+
+/* ---------- Transitions --------------------------------------------------- */
+/* No transitions. State changes are instantaneous. Period.
+   We still declare the classes so drop-in usage matches other directions. */
+
+.m-br-btn {
+  transition: none;
+}
+/* Hover inversion — the brutalist signature interaction.
+   Background and foreground swap instantly. No fade. */
+.m-br-btn:hover,
+.m-br-btn:focus-visible {
+  background: var(--color-fg-primary, #000);
+  color:      var(--color-bg-primary, #fff);
+}
+.m-br-btn:active {
+  background: var(--color-accent, #B84400);
+  color:      var(--color-bg-primary, #fff);
+}
+
+.m-br-card    { transition: none; }
+.m-br-card:hover {
+  border-color: var(--color-accent, #B84400);
+}
+
+/* Link — plain HTML default aesthetic. Underline always on. Inversion on hover. */
+.m-br-link {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: none;
+}
+.m-br-link:hover,
+.m-br-link:focus-visible {
+  background: var(--color-fg-primary, #000);
+  color:      var(--color-bg-primary, #fff);
+}
+
+.m-br-input {
+  transition: none;
+}
+.m-br-input:focus-visible {
+  outline: 2px solid var(--color-fg-primary, #000);
+  outline-offset: 0;
+  /* Inversion of selection state — flat, no glow. */
+  background: var(--color-bg-secondary, #F0F0F0);
+}
+
+/* ---------- Entrance "animations" ---------------------------------------- */
+/* Items appear. No fade. If anything "enters", it steps in via step-end. */
+
+@keyframes m-br-appear {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.m-br-enter-fade-up {
+  /* step-end means opacity stays 0, then snaps to 1 at the end of the duration */
+  animation: m-br-appear 1ms step-end both;
+}
+
+/* Stagger — same, but with deliberately stepped delays so content reveals
+   in sequence without actually easing anything. Like a monospace terminal. */
+.m-br-stagger > * { animation: m-br-appear 1ms step-end both; }
+.m-br-stagger > *:nth-child(1) { animation-delay:   0ms; }
+.m-br-stagger > *:nth-child(2) { animation-delay:  60ms; }
+.m-br-stagger > *:nth-child(3) { animation-delay: 120ms; }
+.m-br-stagger > *:nth-child(4) { animation-delay: 180ms; }
+.m-br-stagger > *:nth-child(5) { animation-delay: 240ms; }
+.m-br-stagger > *:nth-child(6) { animation-delay: 300ms; }
+
+/* ---------- Micro-interactions ------------------------------------------- */
+/* Press state: instant inversion, no scale. Brutalist doesn't squish. */
+
+.m-br-press { transition: none; }
+.m-br-press:active {
+  background: var(--color-fg-primary, #000);
+  color:      var(--color-bg-primary, #fff);
+}
+
+/* Tap scale: intentionally absent. Left as an alias for press so drop-in works. */
+.m-br-tap-scale { transition: none; }
+.m-br-tap-scale:active {
+  background: var(--color-fg-primary, #000);
+  color:      var(--color-bg-primary, #fff);
+}
+
+/* Icon spin — only allowed for loading states. Stepped, not smooth. */
+@keyframes m-br-spin-step {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(90deg); }
+  50%  { transform: rotate(180deg); }
+  75%  { transform: rotate(270deg); }
+  100% { transform: rotate(360deg); }
+}
+.m-br-icon-spin {
+  animation: m-br-spin-step 800ms steps(8, end) infinite;
+}
+
+/* ---------- Signature gesture: hard snap --------------------------------- */
+/* Toggles, reveals, and modal appearances snap in with step-end.
+   No fade, no slide, no apology. */
+
+@keyframes m-br-snap-in {
+  from { opacity: 0; transform: translate(0, 0); }
+  to   { opacity: 1; transform: translate(0, 0); }
+}
+
+.m-br-snap {
+  animation: m-br-snap-in 1ms step-end both;
+}
+
+/* Hard caret blink for text UI — pure on/off, no fade */
+@keyframes m-br-blink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.m-br-caret {
+  animation: m-br-blink 1000ms steps(1, end) infinite;
+}
+
+/* Hover inversion utility — apply anywhere you want the bg/fg swap on hover */
+.m-br-invert-hover { transition: none; }
+.m-br-invert-hover:hover,
+.m-br-invert-hover:focus-visible {
+  background: var(--color-fg-primary, #000);
+  color:      var(--color-bg-primary, #fff);
+}
+
+/* ---------- Reduced motion ----------------------------------------------- */
+/* Brutalist already has no motion to reduce. The only looping animations
+   are the icon spin (loading indicator) and caret blink. Disable both. */
+
+@media (prefers-reduced-motion: reduce) {
+  .m-br-icon-spin,
+  .m-br-caret {
+    animation: none !important;
+  }
+  .m-br-enter-fade-up,
+  .m-br-stagger > *,
+  .m-br-snap {
+    animation-delay: 0ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

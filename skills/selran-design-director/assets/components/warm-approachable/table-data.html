@@ -1,0 +1,149 @@
+<style>
+  .c-wa-table {
+    background: var(--bg);
+    border-radius: var(--radius-lg, 24px);
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(61, 40, 23, 0.06);
+    font-size: 15px;
+  }
+  .c-wa-table__row {
+    display: grid;
+    grid-template-columns: 1.4fr 2fr 1fr 1fr 60px;
+    padding: 18px 28px;
+    align-items: center;
+    gap: 16px;
+  }
+  .c-wa-table__row + .c-wa-table__row {
+    border-top: 1px solid var(--border);
+  }
+  .c-wa-table__row--head {
+    background: var(--bg-2);
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--fg-muted);
+    letter-spacing: 0.01em;
+  }
+  .c-wa-table__row--body:hover {
+    background: var(--bg-2);
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-table__maker {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-size: 17px;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .c-wa-table__maker small {
+    display: block;
+    font-family: inherit;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--fg-muted);
+    margin-top: 2px;
+  }
+  .c-wa-table__piece {
+    color: var(--fg);
+    line-height: 1.4;
+  }
+  .c-wa-table__tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    background: var(--bg-2);
+    color: var(--fg-muted);
+    font-size: 13px;
+    font-style: italic;
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+  }
+  .c-wa-table__tag--ready {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .c-wa-table__num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .c-wa-table__sort {
+    display: inline-flex; align-items: center; gap: 4px;
+    cursor: pointer;
+    color: inherit;
+  }
+  .c-wa-table__sort::after {
+    content: '↓';
+    color: var(--accent);
+    font-size: 13px;
+  }
+  .c-wa-table__arrow {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--bg-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fg-muted);
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-table__row--body:hover .c-wa-table__arrow {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  @media (max-width: 900px) {
+    .c-wa-table__row {
+      grid-template-columns: 1.5fr 1fr 60px;
+      padding: 14px 18px;
+      font-size: 14px;
+    }
+    .c-wa-table__row > :nth-child(2),
+    .c-wa-table__row > :nth-child(4) { display: none; }
+  }
+</style>
+
+<div class="c-wa-table" role="table" aria-label="Spring collection by maker">
+  <div class="c-wa-table__row c-wa-table__row--head">
+    <div><span class="c-wa-table__sort">Maker</span></div>
+    <div>Piece</div>
+    <div>Status</div>
+    <div style="text-align:right;"><span class="c-wa-table__sort">Price</span></div>
+    <div></div>
+  </div>
+  <div class="c-wa-table__row c-wa-table__row--body">
+    <div class="c-wa-table__maker">Casa da Serra<small>Lisbon, Portugal</small></div>
+    <div class="c-wa-table__piece">Hand-thrown teapot, ember glaze</div>
+    <div><span class="c-wa-table__tag c-wa-table__tag--ready">Ready to ship</span></div>
+    <div class="c-wa-table__num">$128</div>
+    <div style="text-align:right;"><span class="c-wa-table__arrow">&rarr;</span></div>
+  </div>
+  <div class="c-wa-table__row c-wa-table__row--body">
+    <div class="c-wa-table__maker">Taller de Oaxaca<small>Teotitlán del Valle, MX</small></div>
+    <div class="c-wa-table__piece">Hand-loomed linen throw, 140cm</div>
+    <div><span class="c-wa-table__tag c-wa-table__tag--ready">Ready to ship</span></div>
+    <div class="c-wa-table__num">$240</div>
+    <div style="text-align:right;"><span class="c-wa-table__arrow">&rarr;</span></div>
+  </div>
+  <div class="c-wa-table__row c-wa-table__row--body">
+    <div class="c-wa-table__maker">Kita Tea House<small>Uji, Japan</small></div>
+    <div class="c-wa-table__piece">First-flush sencha, 80g tin</div>
+    <div><span class="c-wa-table__tag">Made to order</span></div>
+    <div class="c-wa-table__num">$36</div>
+    <div style="text-align:right;"><span class="c-wa-table__arrow">&rarr;</span></div>
+  </div>
+  <div class="c-wa-table__row c-wa-table__row--body">
+    <div class="c-wa-table__maker">Hildur &amp; Co.<small>Reykjavík, Iceland</small></div>
+    <div class="c-wa-table__piece">Beeswax candle set, cedar + fir</div>
+    <div><span class="c-wa-table__tag c-wa-table__tag--ready">Ready to ship</span></div>
+    <div class="c-wa-table__num">$48</div>
+    <div style="text-align:right;"><span class="c-wa-table__arrow">&rarr;</span></div>
+  </div>
+  <div class="c-wa-table__row c-wa-table__row--body">
+    <div class="c-wa-table__maker">Atelier Veuve<small>Lyon, France</small></div>
+    <div class="c-wa-table__piece">Oak cutting board, end-grain</div>
+    <div><span class="c-wa-table__tag">Made to order</span></div>
+    <div class="c-wa-table__num">$180</div>
+    <div style="text-align:right;"><span class="c-wa-table__arrow">&rarr;</span></div>
+  </div>
+</div>

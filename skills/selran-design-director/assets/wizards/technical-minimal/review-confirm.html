@@ -1,0 +1,220 @@
+<style>
+  .c-tm-review {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+  .c-tm-review__head { margin-bottom: 28px; }
+  .c-tm-review__eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+    margin-bottom: 8px;
+  }
+  .c-tm-review__title {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+  .c-tm-review__sub {
+    font-size: 14px;
+    color: var(--fg-muted);
+    margin: 0;
+  }
+  .c-tm-review__section { margin-bottom: 24px; }
+  .c-tm-review__section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .c-tm-review__section-title {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg);
+    margin: 0;
+    font-weight: 500;
+  }
+  .c-tm-review__edit {
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 4px 6px;
+    border-radius: 4px;
+    margin: -4px -6px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-review__edit:hover { background: var(--bg-2); }
+  .c-tm-review__edit:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+  .c-tm-review__dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: minmax(140px, 1fr) 2fr;
+    column-gap: 24px;
+  }
+  .c-tm-review__dl > dt,
+  .c-tm-review__dl > dd {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    margin: 0;
+  }
+  .c-tm-review__dl > dt {
+    color: var(--fg-muted);
+    font-weight: 400;
+  }
+  .c-tm-review__dl > dd {
+    color: var(--fg);
+    font-weight: 500;
+    word-wrap: break-word;
+    font-variant-numeric: tabular-nums;
+  }
+  .c-tm-review__dl > dt:last-of-type,
+  .c-tm-review__dl > dd:last-of-type {
+    border-bottom: none;
+  }
+  .c-tm-review__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    color: var(--fg-muted);
+    margin-right: 4px;
+  }
+  .c-tm-review__actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .c-tm-review__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                filter 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-review__btn--ghost {
+    background: var(--bg);
+    color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-tm-review__btn--ghost:hover { background: var(--bg-2); }
+  .c-tm-review__btn--primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .c-tm-review__btn--primary:hover { filter: brightness(0.92); }
+  .c-tm-review__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .c-tm-review { max-width: none; border: none; padding: 28px 20px; border-radius: 0; }
+    .c-tm-review__dl { grid-template-columns: 1fr; column-gap: 0; }
+    .c-tm-review__dl > dt { padding-bottom: 2px; border-bottom: none; color: var(--fg-muted); }
+    .c-tm-review__dl > dd { padding-top: 0; padding-bottom: 12px; }
+  }
+</style>
+
+<section class="c-tm-review" aria-labelledby="c-tm-review-title">
+  <header class="c-tm-review__head">
+    <div class="c-tm-review__eyebrow">Step 04 / 04 · Review</div>
+    <h1 id="c-tm-review-title" class="c-tm-review__title">Confirm your setup.</h1>
+    <p class="c-tm-review__sub">Review your entries before we create your {Brand} workspace.</p>
+  </header>
+
+  <div class="c-tm-review__section">
+    <div class="c-tm-review__section-head">
+      <h2 class="c-tm-review__section-title">Account</h2>
+      <button class="c-tm-review__edit" type="button" aria-label="Edit account details">Edit</button>
+    </div>
+    <dl class="c-tm-review__dl">
+      <dt>Full name</dt>
+      <dd>Alex Chen</dd>
+      <dt>Work email</dt>
+      <dd>alex@meridian.co</dd>
+      <dt>Role</dt>
+      <dd>Controller</dd>
+    </dl>
+  </div>
+
+  <div class="c-tm-review__section">
+    <div class="c-tm-review__section-head">
+      <h2 class="c-tm-review__section-title">Workspace</h2>
+      <button class="c-tm-review__edit" type="button" aria-label="Edit workspace details">Edit</button>
+    </div>
+    <dl class="c-tm-review__dl">
+      <dt>Company</dt>
+      <dd>Meridian Capital</dd>
+      <dt>Base currency</dt>
+      <dd>USD</dd>
+      <dt>Fiscal start</dt>
+      <dd>January 1</dd>
+      <dt>Region</dt>
+      <dd>North America · us-east-1</dd>
+    </dl>
+  </div>
+
+  <div class="c-tm-review__section">
+    <div class="c-tm-review__section-head">
+      <h2 class="c-tm-review__section-title">Team</h2>
+      <button class="c-tm-review__edit" type="button" aria-label="Edit team invites">Edit</button>
+    </div>
+    <dl class="c-tm-review__dl">
+      <dt>Invites</dt>
+      <dd>
+        <span class="c-tm-review__chip">sofia@meridian.co</span>
+        <span class="c-tm-review__chip">mark@meridian.co</span>
+        <span class="c-tm-review__chip">priya@meridian.co</span>
+      </dd>
+      <dt>Default role</dt>
+      <dd>Member</dd>
+      <dt>Notifications</dt>
+      <dd>Weekly close summary</dd>
+    </dl>
+  </div>
+
+  <div class="c-tm-review__actions">
+    <button class="c-tm-review__btn c-tm-review__btn--ghost" type="button">← Back</button>
+    <button class="c-tm-review__btn c-tm-review__btn--primary" type="submit">Create account</button>
+  </div>
+</section>

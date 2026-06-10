@@ -1,0 +1,157 @@
+<style>
+  .c-br-skel {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', monospace);
+    color: var(--fg);
+  }
+  .c-br-skel__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px 0;
+    border-top: 2px solid var(--border, var(--fg));
+    border-bottom: 2px solid var(--border, var(--fg));
+    margin-bottom: 20px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+  }
+  .c-br-skel__meta span.blink { color: var(--accent); animation: c-br-skel-blink 1s steps(1) infinite; }
+  .c-br-skel__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 2px solid var(--border, var(--fg));
+  }
+  .c-br-skel__card {
+    padding: 20px;
+    border-right: 2px solid var(--border, var(--fg));
+    border-bottom: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+  }
+  .c-br-skel__card:nth-child(3n) { border-right: none; }
+  .c-br-skel__card:nth-last-child(-n+3) { border-bottom: none; }
+  .c-br-skel__label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .c-br-skel__bar {
+    height: 12px;
+    background: var(--fg);
+    animation: c-br-skel-flash 0.9s steps(1) infinite;
+  }
+  .c-br-skel__bar + .c-br-skel__bar { margin-top: 6px; }
+  .c-br-skel__bar--title { height: 16px; width: 70%; margin-bottom: 12px; }
+  .c-br-skel__bar--long  { width: 100%; }
+  .c-br-skel__bar--mid   { width: 80%; }
+  .c-br-skel__bar--short { width: 45%; }
+  .c-br-skel__row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border, var(--fg));
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fg-muted);
+  }
+  .c-br-skel__bits {
+    width: 64px; height: 14px;
+    background: var(--accent);
+    animation: c-br-skel-flash 0.9s steps(1) infinite;
+  }
+
+  .c-br-skel__card:nth-child(2) .c-br-skel__bar,
+  .c-br-skel__card:nth-child(2) .c-br-skel__bits { animation-delay: 150ms; }
+  .c-br-skel__card:nth-child(3) .c-br-skel__bar,
+  .c-br-skel__card:nth-child(3) .c-br-skel__bits { animation-delay: 300ms; }
+  .c-br-skel__card:nth-child(4) .c-br-skel__bar,
+  .c-br-skel__card:nth-child(4) .c-br-skel__bits { animation-delay: 450ms; }
+  .c-br-skel__card:nth-child(5) .c-br-skel__bar,
+  .c-br-skel__card:nth-child(5) .c-br-skel__bits { animation-delay: 600ms; }
+  .c-br-skel__card:nth-child(6) .c-br-skel__bar,
+  .c-br-skel__card:nth-child(6) .c-br-skel__bits { animation-delay: 750ms; }
+
+  @keyframes c-br-skel-flash {
+    0%, 49%   { opacity: 1; }
+    50%, 100% { opacity: 0.3; }
+  }
+  @keyframes c-br-skel-blink {
+    0%, 49%   { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  @media (max-width: 900px) {
+    .c-br-skel__grid { grid-template-columns: 1fr; }
+    .c-br-skel__card { border-right: none !important; }
+    .c-br-skel__card:not(:last-child) { border-bottom: 2px solid var(--border, var(--fg)) !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-br-skel__bar,
+    .c-br-skel__bits,
+    .c-br-skel__meta span.blink { animation: none; opacity: 0.8; }
+  }
+</style>
+
+<section class="c-br-skel" aria-busy="true" aria-label="Loading catalog">
+  <div class="c-br-skel__meta">
+    <span>// catalog // loading&hellip; <span class="blink">_</span></span>
+    <span>buffer: 6 / 6</span>
+    <span>last ping: 2026-04-20 08:14 UTC</span>
+  </div>
+  <div class="c-br-skel__grid">
+    <div class="c-br-skel__card">
+      <div class="c-br-skel__label"><span>// cat#</span><span>loading</span></div>
+      <div class="c-br-skel__bar c-br-skel__bar--title"></div>
+      <div class="c-br-skel__bar c-br-skel__bar--long"></div>
+      <div class="c-br-skel__bar c-br-skel__bar--mid"></div>
+      <div class="c-br-skel__row"><span>//</span><div class="c-br-skel__bits"></div></div>
+    </div>
+    <div class="c-br-skel__card">
+      <div class="c-br-skel__label"><span>// cat#</span><span>loading</span></div>
+      <div class="c-br-skel__bar c-br-skel__bar--title"></div>
+      <div class="c-br-skel__bar c-br-skel__bar--long"></div>
+      <div class="c-br-skel__bar c-br-skel__bar--short"></div>
+      <div class="c-br-skel__row"><span>//</span><div class="c-br-skel__bits"></div></div>
+    </div>
+    <div class="c-br-skel__card">
+      <div class="c-br-skel__label"><span>// cat#</span><span>loading</span></div>
+      <div class="c-br-skel__bar c-br-skel__bar--title"></div>
+      <div class="c-br-skel__bar c-br-skel__bar--mid"></div>
+      <div class="c-br-skel__bar c-br-skel__bar--long"></div>
+      <div class="c-br-skel__row"><span>//</span><div class="c-br-skel__bits"></div></div>
+    </div>
+    <div class="c-br-skel__card">
+      <div class="c-br-skel__label"><span>// cat#</span><span>loading</span></div>
+      <div class="c-br-skel__bar c-br-skel__bar--title"></div>
+      <div class="c-br-skel__bar c-br-skel__bar--long"></div>
+      <div class="c-br-skel__bar c-br-skel__bar--mid"></div>
+      <div class="c-br-skel__row"><span>//</span><div class="c-br-skel__bits"></div></div>
+    </div>
+    <div class="c-br-skel__card">
+      <div class="c-br-skel__label"><span>// cat#</span><span>loading</span></div>
+      <div class="c-br-skel__bar c-br-skel__bar--title"></div>
+      <div class="c-br-skel__bar c-br-skel__bar--short"></div>
+      <div class="c-br-skel__bar c-br-skel__bar--long"></div>
+      <div class="c-br-skel__row"><span>//</span><div class="c-br-skel__bits"></div></div>
+    </div>
+    <div class="c-br-skel__card">
+      <div class="c-br-skel__label"><span>// cat#</span><span>loading</span></div>
+      <div class="c-br-skel__bar c-br-skel__bar--title"></div>
+      <div class="c-br-skel__bar c-br-skel__bar--mid"></div>
+      <div class="c-br-skel__bar c-br-skel__bar--short"></div>
+      <div class="c-br-skel__row"><span>//</span><div class="c-br-skel__bits"></div></div>
+    </div>
+  </div>
+</section>

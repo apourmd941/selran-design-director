@@ -1,0 +1,99 @@
+<style>
+  .c-ed-empty {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 120px 40px;
+    text-align: left;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-empty__byline {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-empty__icon {
+    display: block;
+    margin-bottom: 28px;
+    color: var(--accent);
+  }
+  .c-ed-empty__headline {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: clamp(30px, 3.4vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 20px;
+  }
+  .c-ed-empty__headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .c-ed-empty__body {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--fg);
+    margin: 0 0 32px;
+    max-width: 54ch;
+  }
+  .c-ed-empty__body::first-letter {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 52px;
+    float: left;
+    line-height: 0.9;
+    padding: 4px 8px 0 0;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .c-ed-empty__actions {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .c-ed-empty__link {
+    font-size: 15px;
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 500;
+  }
+  .c-ed-empty__link--muted {
+    color: var(--fg-muted);
+    text-decoration: none;
+    font-style: italic;
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+  }
+  .c-ed-empty__link--muted:hover { color: var(--fg); }
+
+  @media (max-width: 900px) {
+    .c-ed-empty { padding: 80px 24px; }
+  }
+</style>
+
+<article class="c-ed-empty">
+  <div class="c-ed-empty__byline">
+    <span>Your library &middot; Issue No. 01</span>
+  </div>
+  <svg class="c-ed-empty__icon" width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+    <path d="M8 10v22l12-4 12 4V10" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+    <path d="M20 32V10" stroke="currentColor" stroke-width="1.25"/>
+    <path d="M8 10h24" stroke="currentColor" stroke-width="1.25"/>
+  </svg>
+  <h2 class="c-ed-empty__headline">
+    A shelf, for now, <em>unfilled.</em>
+  </h2>
+  <p class="c-ed-empty__body">You haven't saved any essays yet. When you do, they will appear here &mdash; organized by issue, annotated at the margin, and easy to return to when the idea comes back around.</p>
+  <div class="c-ed-empty__actions">
+    <a href="#" class="c-ed-empty__link">Browse the current issue &rarr;</a>
+    <a href="#" class="c-ed-empty__link c-ed-empty__link--muted">or wander the archive</a>
+  </div>
+</article>

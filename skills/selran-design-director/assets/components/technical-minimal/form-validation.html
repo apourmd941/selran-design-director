@@ -1,0 +1,168 @@
+<style>
+  .c-tm-validate {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-family: inherit;
+  }
+  .c-tm-validate__eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+    margin-bottom: 6px;
+  }
+  .c-tm-validate__title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin: 0 0 4px;
+  }
+  .c-tm-validate__sub {
+    font-size: 14px;
+    color: var(--fg-muted);
+    margin: 0 0 28px;
+  }
+  .c-tm-validate__field { margin-bottom: 16px; }
+  .c-tm-validate__label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 6px;
+  }
+  .c-tm-validate__input-wrap {
+    position: relative;
+  }
+  .c-tm-validate__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 36px 10px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                box-shadow 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-validate__input:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent) 30%, transparent);
+  }
+  .c-tm-validate__field[data-state="valid"] .c-tm-validate__input {
+    border-color: var(--semantic-success, #16a34a);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--semantic-success, #16a34a) 20%, transparent);
+  }
+  .c-tm-validate__field[data-state="invalid"] .c-tm-validate__input {
+    border-color: var(--semantic-error, #dc2626);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--semantic-error, #dc2626) 20%, transparent);
+  }
+  .c-tm-validate__field[data-state="disabled"] .c-tm-validate__input {
+    background: var(--bg-2);
+    color: var(--fg-muted);
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+  .c-tm-validate__icon {
+    position: absolute;
+    right: 10px; top: 50%;
+    transform: translateY(-50%);
+    width: 16px; height: 16px;
+    display: none;
+    pointer-events: none;
+  }
+  .c-tm-validate__field[data-state="valid"] .c-tm-validate__icon--valid { display: block; color: var(--semantic-success, #16a34a); }
+  .c-tm-validate__field[data-state="invalid"] .c-tm-validate__icon--invalid { display: block; color: var(--semantic-error, #dc2626); }
+  .c-tm-validate__msg {
+    display: none;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 6px;
+  }
+  .c-tm-validate__field[data-state="invalid"] .c-tm-validate__msg--error {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--semantic-error, #dc2626);
+  }
+  .c-tm-validate__field[data-state="valid"] .c-tm-validate__msg--ok {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--semantic-success, #16a34a);
+  }
+  .c-tm-validate__actions {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: flex-end; gap: 12px;
+  }
+  .c-tm-validate__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 10px 18px;
+    font-size: 14px; font-weight: 500;
+    font-family: inherit;
+    background: var(--accent); color: #fff;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .c-tm-validate__btn:hover { filter: brightness(0.92); }
+  .c-tm-validate__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+  .c-tm-validate__btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  @media (max-width: 900px) {
+    .c-tm-validate { max-width: none; border: none; padding: 32px 20px; border-radius: 0; }
+  }
+</style>
+
+<form class="c-tm-validate" novalidate>
+  <div class="c-tm-validate__eyebrow">Account / Profile</div>
+  <h1 class="c-tm-validate__title">Edit workspace</h1>
+  <p class="c-tm-validate__sub">Four fields, five states — for reference.</p>
+
+  <div class="c-tm-validate__field" data-state="default">
+    <label class="c-tm-validate__label" for="tm-v-workspace">Workspace name</label>
+    <div class="c-tm-validate__input-wrap">
+      <input class="c-tm-validate__input" id="tm-v-workspace" name="workspace" type="text" placeholder="Meridian">
+    </div>
+  </div>
+
+  <div class="c-tm-validate__field" data-state="valid">
+    <label class="c-tm-validate__label" for="tm-v-slug">URL slug</label>
+    <div class="c-tm-validate__input-wrap">
+      <input class="c-tm-validate__input" id="tm-v-slug" name="slug" type="text" value="meridian-capital" aria-describedby="tm-v-slug-ok">
+      <svg class="c-tm-validate__icon c-tm-validate__icon--valid" viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 8.5l3.2 3L13 5"/></svg>
+    </div>
+    <div class="c-tm-validate__msg c-tm-validate__msg--ok" id="tm-v-slug-ok">✓ Available</div>
+  </div>
+
+  <div class="c-tm-validate__field" data-state="invalid">
+    <label class="c-tm-validate__label" for="tm-v-email">Notification email</label>
+    <div class="c-tm-validate__input-wrap">
+      <input class="c-tm-validate__input" id="tm-v-email" name="email" type="email" value="ops@meridian" aria-invalid="true" aria-describedby="tm-v-email-err">
+      <svg class="c-tm-validate__icon c-tm-validate__icon--invalid" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4v5M8 11v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </div>
+    <div class="c-tm-validate__msg c-tm-validate__msg--error" id="tm-v-email-err">! Enter a full domain (e.g. ops@meridian.com)</div>
+  </div>
+
+  <div class="c-tm-validate__field" data-state="disabled">
+    <label class="c-tm-validate__label" for="tm-v-plan">Billing plan</label>
+    <div class="c-tm-validate__input-wrap">
+      <input class="c-tm-validate__input" id="tm-v-plan" name="plan" type="text" value="Operator · $49/mo" disabled>
+    </div>
+  </div>
+
+  <div class="c-tm-validate__actions">
+    <button class="c-tm-validate__btn" type="submit" disabled>Save changes</button>
+  </div>
+</form>

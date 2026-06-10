@@ -1,0 +1,248 @@
+# Language expansion factors relative to English, and per-direction overflow strategy.
+#
+# Used at build time to size buttons, labels, nav items, table headers so they don't
+# break when translated. The max expansion across declared locales drives the
+# `i18n.max_expansion` value in design-system.md.
+
+# ═══════════════════════════════════════════════════════════════
+# Expansion factors (vs. English)
+# ═══════════════════════════════════════════════════════════════
+# Source: W3C i18n articles, IBM translation data, real-world observation.
+# "typical" = mean length over translated UI strings
+# "worst_case" = 95th percentile; use this for sizing decisions
+
+expansion:
+  english:
+    typical: 1.0
+    worst_case: 1.0
+    notes: "baseline"
+
+  # Germanic (longest in Western)
+  german:
+    typical: 1.3
+    worst_case: 1.6
+    notes: "Compound nouns ('Geschwindigkeitsbegrenzung'); verbs at clause end can force line breaks"
+
+  # Uralic (agglutinative — very long)
+  finnish:
+    typical: 1.4
+    worst_case: 1.8
+    notes: "Agglutinative; 'taloissammeko' = 'in our houses?'"
+
+  hungarian:
+    typical: 1.3
+    worst_case: 1.7
+    notes: "Agglutinative like Finnish but slightly shorter"
+
+  # Romance
+  spanish:
+    typical: 1.2
+    worst_case: 1.4
+    notes: "Verb constructions; article+noun agreements"
+
+  portuguese:
+    typical: 1.3
+    worst_case: 1.5
+    notes: "Verb constructions; slightly longer than Spanish"
+
+  french:
+    typical: 1.2
+    worst_case: 1.45
+    notes: "Prepositions, verb agreements"
+
+  italian:
+    typical: 1.15
+    worst_case: 1.35
+    notes: "Slightly shorter than Spanish"
+
+  romanian:
+    typical: 1.2
+    worst_case: 1.4
+
+  # Slavic (wide, with Cyrillic width cost)
+  russian:
+    typical: 1.2
+    worst_case: 1.4
+    notes: "Cyrillic runs wider than Latin even at same character count"
+
+  polish:
+    typical: 1.3
+    worst_case: 1.5
+    notes: "Consonant clusters; case endings"
+
+  czech:
+    typical: 1.25
+    worst_case: 1.4
+
+  ukrainian:
+    typical: 1.2
+    worst_case: 1.4
+
+  # Semitic
+  arabic:
+    typical: 1.1
+    worst_case: 1.25
+    notes: "Connected script; diacritics optional. Fewer discrete glyphs than Latin"
+
+  hebrew:
+    typical: 0.9
+    worst_case: 1.1
+    notes: "Often shorter than English; dense script"
+
+  # CJK (shorter than English)
+  chinese_simplified:
+    typical: 0.7
+    worst_case: 0.9
+    notes: "Ideographic; one character often replaces a whole English word"
+
+  chinese_traditional:
+    typical: 0.75
+    worst_case: 0.9
+
+  japanese:
+    typical: 0.7
+    worst_case: 1.0
+    notes: "Mixed kanji/kana; can expand when katakana loanwords or formal expressions are used"
+
+  korean:
+    typical: 0.9
+    worst_case: 1.1
+    notes: "Hangul; between CJK and Latin in density"
+
+  # South/SE Asian
+  hindi:
+    typical: 1.0
+    worst_case: 1.2
+    notes: "Devanagari; matras increase vertical space, not horizontal"
+
+  thai:
+    typical: 0.9
+    worst_case: 1.1
+    notes: "No word spacing; vertical extenders (upper/lower marks)"
+
+  vietnamese:
+    typical: 1.1
+    worst_case: 1.3
+    notes: "Tone marks add diacritics; doesn't expand horizontally much"
+
+  # Turkic
+  turkish:
+    typical: 1.3
+    worst_case: 1.5
+    notes: "Agglutinative; vowel harmony produces long words"
+
+# ═══════════════════════════════════════════════════════════════
+# Overflow strategy per direction
+# ═══════════════════════════════════════════════════════════════
+# When translated text overflows its container, each direction has
+# a preferred response. Pick per direction and apply consistently.
+
+overflow_strategy:
+  technical-minimal:
+    primary: "truncate"
+    rationale: "Dense UI favors clipping over reflow. Ellipsis + tooltip on hover/tap reveals full text."
+    rules:
+      - "Truncate with ellipsis after 1 line on tight labels (nav, tags, badges)"
+      - "Allow wrap to 2 lines on buttons and list items"
+      - "Never truncate error messages, required field labels, CTAs"
+      - "Use `title` attribute on truncated text for desktop hover tooltip"
+
+  editorial:
+    primary: "wrap"
+    rationale: "Editorial tolerates 2-line buttons and headlines. Rhythm matters more than density."
+    rules:
+      - "Wrap headlines freely; adjust leading to keep rhythm"
+      - "Wrap button labels to 2 lines; never truncate"
+      - "Allow body text to break at natural word boundaries"
+
+  bold-distinctive:
+    primary: "resize"
+    rationale: "Big type is the whole point. If a headline overflows, downshift one scale step."
+    rules:
+      - "Headlines: if at display (56+), drop to xxl (40). Never below xxl."
+      - "Buttons: wrap to 2 lines; don't shrink type"
+      - "Stats: keep numerals at display-size even if label wraps"
+
+  dark-premium:
+    primary: "truncate"
+    rationale: "Luxury reads as restraint; avoid visual noise from wrapping."
+    rules:
+      - "Truncate tight labels; tooltip on hover"
+      - "Allow 2-line wrap on hero headlines only"
+      - "Button labels stay single-line; shorten the string before wrapping"
+
+  warm-approachable:
+    primary: "wrap"
+    rationale: "Conversational UI tolerates longer, friendlier text. 2-3 line labels read fine."
+    rules:
+      - "Wrap all labels and CTAs naturally"
+      - "Use softer leading (1.5–1.6) to keep multi-line buttons readable"
+      - "Accept slightly larger containers to avoid truncation"
+
+  vibrant-playful:
+    primary: "wrap"
+    rationale: "Playful layouts tolerate reflow; motion can soften the transition."
+    rules:
+      - "Wrap freely"
+      - "Animate reflow on locale switch (if multi-locale UI)"
+      - "Keep micro-type (badges, chips) truncated — don't let them dominate"
+
+  brutalist:
+    primary: "overflow"
+    rationale: "Brutalism tolerates overflow as a feature. Let text break the grid."
+    rules:
+      - "Allow overflow to break container bounds intentionally"
+      - "Don't truncate — wrap or overflow"
+      - "Embrace asymmetry caused by different lengths"
+
+# ═══════════════════════════════════════════════════════════════
+# Component-specific sizing guidance
+# ═══════════════════════════════════════════════════════════════
+# Given max_expansion: N, components should size for:
+
+sizing:
+  button:
+    rule: "padding-inline: <base>; width: auto"
+    min_width: "max-content"
+    max_width: "100% (fill container in mobile CTAs)"
+    height: "auto (let it wrap) — don't set fixed height when expansion > 1.2"
+    notes: "Never fix a button width. 'Save' → 'Speichern' breaks fixed-width buttons."
+
+  nav_item:
+    rule: "let nav reflow; switch to hamburger when total-width > viewport"
+    alternative: "allow 2-line wrap in horizontal nav (editorial/warm)"
+
+  table_header:
+    rule: "min-width per column: auto for text cols; fixed for numeric cols"
+    tight_header_fix: "rotate header text 90deg (brutalist/editorial only); use icons + tooltip (technical-minimal)"
+
+  form_label:
+    rule: "always above input (never inline) when expansion > 1.2"
+    wrap: "to 2 lines max"
+
+  tab:
+    rule: "horizontal scroll if total-width > container (mobile default)"
+    desktop: "allow wrap to second row or collapse to dropdown"
+
+  card_title:
+    rule: "wrap to 3 lines max; ellipsis after"
+    min_height: "2em (keeps cards aligned when titles vary)"
+
+  toast:
+    rule: "max-width: 400px; wrap; no truncation"
+
+  dialog_title:
+    rule: "no truncation; wrap to 2-3 lines"
+
+  badge:
+    rule: "truncate at 2-3 chars for count badges; wrap to 2 lines for text badges"
+
+# ═══════════════════════════════════════════════════════════════
+# Testing
+# ═══════════════════════════════════════════════════════════════
+# Before shipping a multi-locale build, render key screens in:
+#   - Finnish (or worst-case expansion language you support)
+#   - German (common expansion tester)
+#   - Arabic (RTL + moderate expansion)
+#   - Japanese (compression — screens that looked full in English may feel empty)
+#   - One tone-rich language (Vietnamese or Thai) to verify diacritic rendering

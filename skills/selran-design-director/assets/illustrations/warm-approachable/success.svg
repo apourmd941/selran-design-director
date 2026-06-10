@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: warm-approachable
+  use: success / completion moment
+  variables: var(fg), var(bg), var(accent)
+  notes: a hand-drawn circle enclosing a gentle checkmark; small sprig of leaves; warm and kind
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Done">
+  <style>
+    .wa-stroke { stroke: var(--fg, #2D1B0F); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+    .wa-thin   { stroke: var(--fg, #2D1B0F); fill: none; stroke-width: 1.5; stroke-linecap: round; opacity: .5; vector-effect: non-scaling-stroke; }
+    .wa-accent-stroke { stroke: var(--accent, #B04A2C); fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+    .wa-accent-soft   { fill: var(--accent, #B04A2C); opacity: .2; }
+    .wa-sage-soft     { fill: #A8B88A; opacity: .7; }
+    .wa-blush-soft    { fill: #E8B39A; opacity: .6; }
+    .wa-serif-it      { font-family: "Fraunces", "Crimson Pro", Georgia, serif; font-style: italic; fill: var(--fg, #2D1B0F); opacity: .75; }
+  </style>
+
+  <!-- soft blush halo -->
+  <circle cx="200" cy="195" r="135" class="wa-blush-soft" opacity=".4"/>
+
+  <!-- hand-drawn circle (slightly imperfect — warm signature) -->
+  <path class="wa-stroke" fill="var(--bg, #FAF3E7)"
+        d="M 200 85
+           C 264 83 316 132 318 196
+           C 320 258 268 310 202 310
+           C 138 310 88 260 86 198
+           C 84 136 134 87 200 85 Z"/>
+
+  <!-- inner accent ring, soft fill -->
+  <circle cx="200" cy="195" r="90" class="wa-accent-soft"/>
+
+  <!-- gentle checkmark, accent stroke, rounded -->
+  <path class="wa-accent-stroke" d="M 146 200 L 188 232 L 258 162"/>
+
+  <!-- small sage sprig bottom-left -->
+  <g transform="translate(120 290) rotate(-30)">
+    <path class="wa-thin" stroke-width="1.75" d="M 0 0 C 14 -14 36 -18 56 -16"/>
+    <ellipse cx="16" cy="-10" rx="8" ry="4" class="wa-sage-soft" transform="rotate(-30 16 -10)"/>
+    <ellipse cx="38" cy="-16" rx="8" ry="4" class="wa-sage-soft" transform="rotate(-20 38 -16)"/>
+  </g>
+
+  <!-- small sage sprig top-right -->
+  <g transform="translate(286 108) rotate(30)">
+    <path class="wa-thin" stroke-width="1.75" d="M 0 0 C -14 14 -36 18 -56 16"/>
+    <ellipse cx="-16" cy="10" rx="8" ry="4" class="wa-sage-soft" transform="rotate(30 -16 10)"/>
+    <ellipse cx="-38" cy="16" rx="8" ry="4" class="wa-sage-soft" transform="rotate(20 -38 16)"/>
+  </g>
+
+  <text x="200" y="358" text-anchor="middle" font-size="20" class="wa-serif-it">all set.</text>
+</svg>

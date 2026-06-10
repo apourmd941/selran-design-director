@@ -1,0 +1,130 @@
+<style>
+  .c-br-steps {
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', ui-monospace, monospace);
+    color: var(--fg);
+    background: var(--bg);
+    border: 2px solid var(--border, var(--fg));
+    padding: 14px 16px;
+    max-width: 720px;
+    box-sizing: border-box;
+  }
+  .c-br-steps__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border, var(--fg));
+    margin-bottom: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+  }
+  .c-br-steps__head strong {
+    color: var(--fg);
+    font-weight: 700;
+  }
+  .c-br-steps__bar {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 22px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--fg);
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+  }
+  .c-br-steps__block {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.2em;
+    text-align: center;
+  }
+  .c-br-steps__bracket {
+    color: var(--fg);
+    font-weight: 700;
+  }
+  .c-br-steps__block[data-state="done"]::before { content: "\25A0"; color: var(--fg); }
+  .c-br-steps__block[data-state="current"]::before { content: "\25A3"; color: var(--accent); }
+  .c-br-steps__block[data-state="todo"]::before { content: "\25A1"; color: var(--fg-muted); }
+
+  .c-br-steps__labels {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 8px;
+  }
+  .c-br-steps__label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+    padding: 4px 0;
+    border-top: 2px solid var(--border, var(--fg));
+  }
+  .c-br-steps__label[aria-current="step"] {
+    color: var(--fg);
+    border-top-color: var(--accent);
+  }
+  .c-br-steps__label[data-state="done"] { color: var(--fg); }
+  .c-br-steps__label[data-state="done"]::before { content: "[\2713] "; }
+  .c-br-steps__label[data-state="current"]::before { content: "[&rarr;] "; }
+  .c-br-steps__label[data-state="todo"]::before { content: "[ ] "; }
+
+  .c-br-steps__foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 2px dashed var(--border, var(--fg));
+    font-size: 11px;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  @media (max-width: 900px) {
+    .c-br-steps__labels { grid-auto-flow: row; grid-auto-columns: auto; gap: 2px; }
+    .c-br-steps__label { border-top: 0; border-left: 2px solid var(--border, var(--fg)); padding: 4px 8px; }
+    .c-br-steps__label[aria-current="step"] { border-left-color: var(--accent); }
+    .c-br-steps__bar { font-size: 18px; }
+  }
+</style>
+
+<section class="c-br-steps" aria-label="Wizard progress">
+  <div class="c-br-steps__head">
+    <span>// INTAKE / PROGRESS</span>
+    <span>STEP <strong>3</strong> / 4</span>
+  </div>
+
+  <ol class="c-br-steps__bar" role="list" aria-label="Step progress">
+    <li class="c-br-steps__bracket" aria-hidden="true">[</li>
+    <li class="c-br-steps__block" data-state="done" aria-label="Step 1 complete"></li>
+    <li class="c-br-steps__block" data-state="done" aria-label="Step 2 complete"></li>
+    <li class="c-br-steps__block" data-state="current" aria-label="Step 3 current"></li>
+    <li class="c-br-steps__block" data-state="todo" aria-label="Step 4 pending"></li>
+    <li class="c-br-steps__bracket" aria-hidden="true">]</li>
+  </ol>
+
+  <ol class="c-br-steps__labels" role="list">
+    <li class="c-br-steps__label" data-state="done">01 &middot; BASICS</li>
+    <li class="c-br-steps__label" data-state="done">02 &middot; PRESSING</li>
+    <li class="c-br-steps__label" data-state="current" aria-current="step">03 &middot; SHIP</li>
+    <li class="c-br-steps__label" data-state="todo">04 &middot; REVIEW</li>
+  </ol>
+
+  <div class="c-br-steps__foot">
+    <span>// ETA: ~90 SECONDS</span>
+    <span>DRAFT SAVED 00:12 AGO</span>
+  </div>
+</section>

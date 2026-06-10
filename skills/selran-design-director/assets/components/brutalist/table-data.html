@@ -1,0 +1,178 @@
+<style>
+  .c-br-table {
+    border: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', monospace);
+    font-size: 13px;
+    background: var(--bg);
+  }
+  .c-br-table__caption {
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--border, var(--fg));
+    background: var(--bg-2);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg);
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .c-br-table__row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 100px 110px 60px;
+    padding: 12px 16px;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 2px solid var(--border, var(--fg));
+  }
+  .c-br-table__row:last-child { border-bottom: none; }
+  .c-br-table__row--head {
+    background: var(--fg);
+    color: var(--bg);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+  }
+  .c-br-table__sort {
+    cursor: pointer;
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    color: inherit;
+  }
+  .c-br-table__sort::after {
+    content: '[v]';
+    color: var(--accent);
+  }
+  .c-br-table__row--body:nth-child(even) { background: var(--bg-2); }
+  .c-br-table__row--body:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .c-br-table__id {
+    color: var(--fg-muted);
+    font-weight: 700;
+  }
+  .c-br-table__row--body:hover .c-br-table__id { color: var(--bg); }
+  .c-br-table__title {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--fg);
+    letter-spacing: 0.02em;
+  }
+  .c-br-table__row--body:hover .c-br-table__title { color: var(--bg); }
+  .c-br-table__artist { color: var(--fg); }
+  .c-br-table__row--body:hover .c-br-table__artist { color: var(--bg); }
+  .c-br-table__status {
+    display: inline-block;
+    padding: 2px 8px;
+    border: 2px solid currentColor;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+  }
+  .c-br-table__status--sold { color: var(--accent); }
+  .c-br-table__status--left { color: var(--fg); }
+  .c-br-table__status--pre { color: var(--fg-muted); }
+  .c-br-table__row--body:hover .c-br-table__status { color: var(--bg); }
+  .c-br-table__price {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: var(--fg);
+  }
+  .c-br-table__row--body:hover .c-br-table__price { color: var(--bg); }
+  .c-br-table__btn {
+    padding: 6px 10px;
+    border: 2px solid var(--fg);
+    background: var(--bg);
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    font-weight: 700;
+    text-align: center;
+  }
+  .c-br-table__row--body:hover .c-br-table__btn {
+    background: var(--bg);
+    color: var(--accent);
+    border-color: var(--bg);
+  }
+
+  @media (max-width: 900px) {
+    .c-br-table__row {
+      grid-template-columns: 60px 1fr 80px 60px;
+      font-size: 12px;
+    }
+    .c-br-table__row > :nth-child(3),
+    .c-br-table__row > :nth-child(4) { display: none; }
+  }
+</style>
+
+<div class="c-br-table" role="table" aria-label="{Brand} catalog">
+  <div class="c-br-table__caption">
+    <span>{Brand} // catalog.txt // 142 entries // 4.2kb</span>
+    <span>last updated 2026-04-20</span>
+  </div>
+  <div class="c-br-table__row c-br-table__row--head">
+    <div><span class="c-br-table__sort">Cat#</span></div>
+    <div>Title</div>
+    <div>Artist</div>
+    <div>Status</div>
+    <div style="text-align:right;"><span class="c-br-table__sort">Price</span></div>
+    <div></div>
+  </div>
+  <div class="c-br-table__row c-br-table__row--body">
+    <div class="c-br-table__id">PE-142</div>
+    <div class="c-br-table__title">Low Terrain</div>
+    <div class="c-br-table__artist">Mira Halász</div>
+    <div><span class="c-br-table__status c-br-table__status--pre">Pre-order</span></div>
+    <div class="c-br-table__price">$26.00</div>
+    <div style="text-align:right;"><a href="#" class="c-br-table__btn">Buy →</a></div>
+  </div>
+  <div class="c-br-table__row c-br-table__row--body">
+    <div class="c-br-table__id">PE-141</div>
+    <div class="c-br-table__title">Every Room Is a Room</div>
+    <div class="c-br-table__artist">Fen Chorus</div>
+    <div><span class="c-br-table__status c-br-table__status--sold">Sold out</span></div>
+    <div class="c-br-table__price">$12.00</div>
+    <div style="text-align:right;"><a href="#" class="c-br-table__btn">Notify →</a></div>
+  </div>
+  <div class="c-br-table__row c-br-table__row--body">
+    <div class="c-br-table__id">PE-140</div>
+    <div class="c-br-table__title">Grid Weather</div>
+    <div class="c-br-table__artist">Oleg P.</div>
+    <div><span class="c-br-table__status c-br-table__status--left">41 left</span></div>
+    <div class="c-br-table__price">$14.00</div>
+    <div style="text-align:right;"><a href="#" class="c-br-table__btn">Buy →</a></div>
+  </div>
+  <div class="c-br-table__row c-br-table__row--body">
+    <div class="c-br-table__id">PE-139</div>
+    <div class="c-br-table__title">Four Sisters</div>
+    <div class="c-br-table__artist">Hale &amp; the Yard</div>
+    <div><span class="c-br-table__status c-br-table__status--left">132 left</span></div>
+    <div class="c-br-table__price">$22.00</div>
+    <div style="text-align:right;"><a href="#" class="c-br-table__btn">Buy →</a></div>
+  </div>
+  <div class="c-br-table__row c-br-table__row--body">
+    <div class="c-br-table__id">PE-138</div>
+    <div class="c-br-table__title">Copper Year</div>
+    <div class="c-br-table__artist">Junie Veda</div>
+    <div><span class="c-br-table__status c-br-table__status--sold">Sold out</span></div>
+    <div class="c-br-table__price">$18.00</div>
+    <div style="text-align:right;"><a href="#" class="c-br-table__btn">Notify →</a></div>
+  </div>
+  <div class="c-br-table__row c-br-table__row--body">
+    <div class="c-br-table__id">PE-137</div>
+    <div class="c-br-table__title">Small Utility</div>
+    <div class="c-br-table__artist">Theo Arak</div>
+    <div><span class="c-br-table__status c-br-table__status--left">8 left</span></div>
+    <div class="c-br-table__price">$26.00</div>
+    <div style="text-align:right;"><a href="#" class="c-br-table__btn">Buy →</a></div>
+  </div>
+</div>

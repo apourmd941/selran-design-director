@@ -1,0 +1,146 @@
+/* Dark-Premium — chart utilities
+ * Tonal stepping from accent #D4AF37 (warm gold). Luminous hero line
+ * with soft glow, spacious framing, few series.
+ */
+
+.dv-dp-root {
+  /* Series — gold ramp with muted deep-tone context */
+  --chart-series-1: #D4AF37;   /* accent (hero) */
+  --chart-series-2: #E8C96B;   /* accent lightened */
+  --chart-series-3: #8A7020;   /* accent darkened */
+  --chart-series-4: #F2DE9E;   /* accent soft */
+  --chart-series-5: #71717A;   /* neutral anchor */
+  --chart-series-6: #A1A1AA;   /* neutral light */
+  --chart-series-7: #4A3A10;   /* accent near-black */
+  --chart-series-8: #52525B;   /* neutral deep */
+
+  --chart-axis-color: #A1A1AA;
+  --chart-gridline: rgba(39, 39, 42, 0.6);
+  --chart-tick-color: #71717A;
+  --chart-bg: #0A0A0B;
+  --chart-bg-lifted: #151517;
+  --chart-fg: #F4F4F5;
+  --chart-border: #27272A;
+  --chart-border-strong: #3F3F46;
+  --chart-glow: 0 0 24px rgba(212, 175, 55, 0.35);
+
+  background: var(--chart-bg);
+  color: var(--chart-fg);
+  font-family: "Söhne", "Inter", system-ui, sans-serif;
+}
+
+/* Hero series gets a glow */
+.dv-dp-series-hero {
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+}
+
+/* Title / subtitle */
+.dv-dp-title {
+  font-family: "Tiempos Headline", "Canela", serif;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--chart-fg);
+  margin: 0 0 6px 0;
+}
+.dv-dp-subtitle {
+  font-family: "Söhne", "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--chart-tick-color);
+  margin: 0 0 28px 0;
+}
+
+/* Axis */
+.dv-dp-axis {
+  stroke: var(--chart-border);
+  stroke-width: 1;
+  fill: none;
+}
+.dv-dp-gridline {
+  stroke: var(--chart-gridline);
+  stroke-width: 1;
+  fill: none;
+}
+.dv-dp-tick {
+  fill: var(--chart-tick-color);
+  font-family: "Söhne", "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+.dv-dp-axis-label {
+  fill: var(--chart-axis-color);
+  font-family: "Söhne", "Inter", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Legend */
+.dv-dp-legend {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  font-family: "Söhne", "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--chart-axis-color);
+  padding: 8px 0 16px 0;
+}
+.dv-dp-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.dv-dp-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--chart-bg-lifted);
+  display: inline-block;
+}
+
+/* Tooltip — lifted surface, thin border, deep shadow */
+.dv-dp-tooltip {
+  background: var(--chart-bg-lifted);
+  border: 1px solid var(--chart-border-strong);
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-family: "Söhne", "Inter", sans-serif;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--chart-fg);
+  box-shadow: 0 0 0 1px var(--chart-border), 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+.dv-dp-tooltip-label {
+  color: var(--chart-tick-color);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.dv-dp-tooltip-value {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Annotation */
+.dv-dp-annotation {
+  font-family: "Söhne", "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  fill: var(--chart-axis-color);
+  letter-spacing: 0.04em;
+}
+.dv-dp-annotation-line {
+  stroke: var(--chart-border-strong);
+  stroke-width: 1;
+  fill: none;
+}

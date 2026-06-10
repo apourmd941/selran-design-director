@@ -1,0 +1,149 @@
+{
+  "$description": "{{meta.project}} — Figma Variables JSON (modern schema, used by Figma's Variables REST API and the built-in Variables panel). Distinct from the older Tokens Studio plugin format in figma-tokens.template.json. Color values in this file MUST be emitted as {r,g,b,a} floats in 0..1. The emit script (see references/token-export.md) converts hex strings to float RGBA before writing. Placeholders like {{color.accent}} stay as plain hex in the template; the emitter applies the hex→rgba transform when writing figma-variables.json.",
+  "collections": [
+    {
+      "name": "{{meta.project}}",
+      "modes": [
+        { "name": "Light", "modeId": "light" },
+        { "name": "Dark",  "modeId": "dark"  }
+      ],
+      "variables": [
+        {
+          "name": "color/bg/primary",
+          "type": "COLOR",
+          "valuesByMode": {
+            "light": "{{color.bg_primary}}",
+            "dark":  "{{color.dark.bg_primary}}"
+          }
+        },
+        {
+          "name": "color/bg/secondary",
+          "type": "COLOR",
+          "valuesByMode": {
+            "light": "{{color.bg_secondary}}",
+            "dark":  "{{color.dark.bg_secondary}}"
+          }
+        },
+        {
+          "name": "color/bg/tertiary",
+          "type": "COLOR",
+          "valuesByMode": {
+            "light": "{{color.bg_tertiary}}",
+            "dark":  "{{color.dark.bg_tertiary}}"
+          }
+        },
+        {
+          "name": "color/fg/primary",
+          "type": "COLOR",
+          "valuesByMode": {
+            "light": "{{color.fg_primary}}",
+            "dark":  "{{color.dark.fg_primary}}"
+          }
+        },
+        {
+          "name": "color/fg/secondary",
+          "type": "COLOR",
+          "valuesByMode": {
+            "light": "{{color.fg_secondary}}",
+            "dark":  "{{color.dark.fg_secondary}}"
+          }
+        },
+        {
+          "name": "color/fg/muted",
+          "type": "COLOR",
+          "valuesByMode": {
+            "light": "{{color.fg_muted}}",
+            "dark":  "{{color.dark.fg_muted}}"
+          }
+        },
+        {
+          "name": "color/accent/default",
+          "type": "COLOR",
+          "valuesByMode": {
+            "light": "{{color.accent}}",
+            "dark":  "{{color.dark.accent}}"
+          }
+        },
+        {
+          "name": "color/accent/hover",
+          "type": "COLOR",
+          "valuesByMode": {
+            "light": "{{color.accent_hover}}",
+            "dark":  "{{color.dark.accent_hover}}"
+          }
+        },
+        {
+          "name": "color/border/default",
+          "type": "COLOR",
+          "valuesByMode": {
+            "light": "{{color.border}}",
+            "dark":  "{{color.dark.border}}"
+          }
+        },
+        {
+          "name": "color/border/strong",
+          "type": "COLOR",
+          "valuesByMode": {
+            "light": "{{color.border_strong}}",
+            "dark":  "{{color.dark.border_strong}}"
+          }
+        },
+        {
+          "name": "color/semantic/success",
+          "type": "COLOR",
+          "valuesByMode": {
+            "light": "{{color.success}}",
+            "dark":  "{{color.success}}"
+          }
+        },
+        {
+          "name": "color/semantic/warning",
+          "type": "COLOR",
+          "valuesByMode": {
+            "light": "{{color.warning}}",
+            "dark":  "{{color.warning}}"
+          }
+        },
+        {
+          "name": "color/semantic/danger",
+          "type": "COLOR",
+          "valuesByMode": {
+            "light": "{{color.danger}}",
+            "dark":  "{{color.danger}}"
+          }
+        },
+
+        {
+          "name": "type/family/display",
+          "type": "STRING",
+          "valuesByMode": { "light": "{{type.display}}", "dark": "{{type.display}}" }
+        },
+        {
+          "name": "type/family/body",
+          "type": "STRING",
+          "valuesByMode": { "light": "{{type.body}}", "dark": "{{type.body}}" }
+        },
+        {
+          "name": "type/family/mono",
+          "type": "STRING",
+          "valuesByMode": { "light": "{{type.mono}}", "dark": "{{type.mono}}" }
+        },
+
+        { "name": "type/scale/xs",      "type": "FLOAT", "valuesByMode": { "light": {{type.scale.xs}},      "dark": {{type.scale.xs}} } },
+        { "name": "type/scale/sm",      "type": "FLOAT", "valuesByMode": { "light": {{type.scale.sm}},      "dark": {{type.scale.sm}} } },
+        { "name": "type/scale/base",    "type": "FLOAT", "valuesByMode": { "light": {{type.scale.base}},    "dark": {{type.scale.base}} } },
+        { "name": "type/scale/lg",      "type": "FLOAT", "valuesByMode": { "light": {{type.scale.lg}},      "dark": {{type.scale.lg}} } },
+        { "name": "type/scale/xl",      "type": "FLOAT", "valuesByMode": { "light": {{type.scale.xl}},      "dark": {{type.scale.xl}} } },
+        { "name": "type/scale/xxl",     "type": "FLOAT", "valuesByMode": { "light": {{type.scale.xxl}},     "dark": {{type.scale.xxl}} } },
+        { "name": "type/scale/display", "type": "FLOAT", "valuesByMode": { "light": {{type.scale.display}}, "dark": {{type.scale.display}} } },
+
+        { "name": "spacing/base", "type": "FLOAT", "valuesByMode": { "light": {{spacing.base_unit}}, "dark": {{spacing.base_unit}} } },
+
+        { "name": "radius/sm",   "type": "FLOAT", "valuesByMode": { "light": {{spacing.radius.sm}},   "dark": {{spacing.radius.sm}} } },
+        { "name": "radius/md",   "type": "FLOAT", "valuesByMode": { "light": {{spacing.radius.md}},   "dark": {{spacing.radius.md}} } },
+        { "name": "radius/lg",   "type": "FLOAT", "valuesByMode": { "light": {{spacing.radius.lg}},   "dark": {{spacing.radius.lg}} } },
+        { "name": "radius/full", "type": "FLOAT", "valuesByMode": { "light": {{spacing.radius.full}}, "dark": {{spacing.radius.full}} } }
+      ]
+    }
+  ]
+}

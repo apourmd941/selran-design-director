@@ -1,0 +1,176 @@
+<style>
+  .c-bd-hero-split {
+    padding: 80px 0 96px;
+    border-bottom: 2px solid var(--fg);
+  }
+  .c-bd-hero-split__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .c-bd-hero-split__rule {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-top: 2px solid var(--fg);
+    border-bottom: 2px solid var(--fg);
+    margin-bottom: 48px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 500;
+    color: var(--fg);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .c-bd-hero-split__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .c-bd-hero-split__headline {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(44px, 6vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 32px;
+  }
+  .c-bd-hero-split__headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .c-bd-hero-split__lead {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--fg-secondary, var(--fg));
+    margin-bottom: 32px;
+    max-width: 48ch;
+  }
+  .c-bd-hero-split__cta {
+    display: flex; gap: 14px; flex-wrap: wrap;
+  }
+  .c-bd-hero-split__btn {
+    padding: 16px 26px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    border: 2px solid var(--fg);
+  }
+  .c-bd-hero-split__btn--primary { background: var(--fg); color: var(--bg); }
+  .c-bd-hero-split__btn--primary:hover { background: var(--accent); border-color: var(--accent); }
+  .c-bd-hero-split__btn--ghost { background: transparent; color: var(--fg); }
+  .c-bd-hero-split__btn--ghost:hover { background: var(--fg); color: var(--bg); }
+
+  .c-bd-hero-split__panel {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 56px 48px;
+    position: relative;
+  }
+  .c-bd-hero-split__mark {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 120px;
+    line-height: 0.9;
+    font-weight: 500;
+    font-style: italic;
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    opacity: 0.22;
+  }
+  .c-bd-hero-split__panel-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 24px;
+    position: relative;
+    padding-bottom: 12px;
+  }
+  .c-bd-hero-split__panel-label::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 36px; height: 2px;
+    background: var(--bg);
+  }
+  .c-bd-hero-split__panel-title {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(32px, 3.6vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .c-bd-hero-split__panel-excerpt {
+    font-size: 16px;
+    line-height: 1.55;
+    margin-bottom: 28px;
+    max-width: 42ch;
+    opacity: 0.95;
+  }
+  .c-bd-hero-split__panel-byline {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding-top: 16px;
+    border-top: 2px solid var(--bg);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-hero-split { padding: 56px 0 72px; }
+    .c-bd-hero-split__inner { padding: 0 24px; }
+    .c-bd-hero-split__grid { grid-template-columns: 1fr; gap: 48px; }
+    .c-bd-hero-split__panel { padding: 40px 28px; }
+    .c-bd-hero-split__mark { font-size: 80px; }
+  }
+</style>
+
+<section class="c-bd-hero-split">
+  <div class="c-bd-hero-split__inner">
+    <div class="c-bd-hero-split__rule">
+      <span>Feature</span>
+      <span>Essay · 6,400 words · 28 min read</span>
+      <span>April 2026</span>
+    </div>
+    <div class="c-bd-hero-split__grid">
+      <div>
+        <h1 class="c-bd-hero-split__headline">
+          What we <em>lost</em> when the feed learned to read us back.
+        </h1>
+        <p class="c-bd-hero-split__lead">
+          For fifteen years the scroll promised infinite relevance. {Brand} contributor Iris Park spent a year off the feed &mdash; and came back with a cover essay about attention, agency, and the quiet cost of optimization.
+        </p>
+        <div class="c-bd-hero-split__cta">
+          <a href="#" class="c-bd-hero-split__btn c-bd-hero-split__btn--primary">Read the essay</a>
+          <a href="#" class="c-bd-hero-split__btn c-bd-hero-split__btn--ghost">Listen to the reading</a>
+        </div>
+      </div>
+      <aside class="c-bd-hero-split__panel">
+        <span class="c-bd-hero-split__mark">“</span>
+        <div class="c-bd-hero-split__panel-label">Cover story · excerpt</div>
+        <h2 class="c-bd-hero-split__panel-title">
+          The algorithm did not make us less attentive. It made us less ourselves.
+        </h2>
+        <p class="c-bd-hero-split__panel-excerpt">
+          I thought I left the feed to find better writing. I left, as it turned out, to find anything that wasn't trying to predict me.
+        </p>
+        <div class="c-bd-hero-split__panel-byline">
+          <span>By Iris Park</span>
+          <span>Essay 01 / 32</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

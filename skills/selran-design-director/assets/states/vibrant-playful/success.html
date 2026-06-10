@@ -1,0 +1,214 @@
+<style>
+  .c-vp-ok {
+    --ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 32px;
+    text-align: center;
+    background: var(--bg);
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+  .c-vp-ok__stage {
+    position: relative;
+    width: 168px; height: 168px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .c-vp-ok__burst {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background:
+      radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--p5, var(--accent)) 50%, transparent) 0%, transparent 60%);
+    animation: c-vp-ok-burst 480ms var(--ease) both;
+  }
+  .c-vp-ok__disc {
+    position: relative;
+    width: 108px; height: 108px;
+    border-radius: 9999px;
+    background: var(--p5, var(--accent));
+    color: var(--bg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 18px 40px -10px color-mix(in oklab, var(--p5, var(--accent)) 60%, transparent);
+    animation: c-vp-ok-pop 420ms var(--ease) both;
+  }
+  .c-vp-ok__disc svg {
+    width: 52px; height: 52px;
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: c-vp-ok-draw 360ms 180ms cubic-bezier(0.6, 0, 0.3, 1) both;
+  }
+
+  .c-vp-ok__confetti {
+    position: absolute;
+    inset: -20px;
+    pointer-events: none;
+  }
+  .c-vp-ok__confetti span {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    opacity: 0;
+    animation: c-vp-ok-conf 500ms var(--ease) forwards;
+  }
+  .c-vp-ok__confetti span:nth-child(1) { background: var(--p1, var(--accent)); --tx: -70px; --ty: -80px; animation-delay: 60ms; }
+  .c-vp-ok__confetti span:nth-child(2) { background: var(--p2, var(--accent)); --tx:  80px; --ty: -60px; animation-delay: 100ms; border-radius: 9999px; }
+  .c-vp-ok__confetti span:nth-child(3) { background: var(--p3, var(--accent)); --tx: -90px; --ty:  40px; animation-delay: 140ms; }
+  .c-vp-ok__confetti span:nth-child(4) { background: var(--p4, var(--accent)); --tx:  90px; --ty:  70px; animation-delay: 80ms; border-radius: 9999px; }
+  .c-vp-ok__confetti span:nth-child(5) { background: var(--p5, var(--accent)); --tx:   0;   --ty: -100px; animation-delay: 180ms; }
+  .c-vp-ok__confetti span:nth-child(6) { background: var(--p2, var(--accent)); --tx: -50px; --ty:  80px; animation-delay: 160ms; border-radius: 9999px; }
+
+  .c-vp-ok__headline {
+    font-size: clamp(32px, 4.2vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: var(--fg);
+    margin: 0 0 12px;
+  }
+  .c-vp-ok__headline em {
+    font-style: normal;
+    background: linear-gradient(120deg, var(--p5, var(--accent)) 0%, var(--p2, var(--accent)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .c-vp-ok__body {
+    max-width: 48ch;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    margin: 0 auto 32px;
+  }
+  .c-vp-ok__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace);
+    font-size: 12px;
+    color: var(--fg-muted);
+    margin-bottom: 24px;
+  }
+  .c-vp-ok__meta::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 9999px;
+    background: var(--p5, var(--accent));
+  }
+  .c-vp-ok__cta {
+    display: inline-flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .c-vp-ok__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 26px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: inherit;
+    border-radius: 14px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 280ms var(--ease),
+                box-shadow 280ms var(--ease);
+  }
+  .c-vp-ok__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .c-vp-ok__btn--primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 14px 30px color-mix(in oklab, var(--accent) 40%, transparent);
+  }
+  .c-vp-ok__btn--ghost {
+    background: var(--bg);
+    color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-vp-ok__btn--ghost:hover { background: var(--bg-2); }
+  .c-vp-ok__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+
+  @keyframes c-vp-ok-burst {
+    0%   { transform: scale(0.6); opacity: 0; }
+    60%  { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+  }
+  @keyframes c-vp-ok-pop {
+    0%   { transform: scale(0.6); opacity: 0; }
+    60%  { transform: scale(1.08); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes c-vp-ok-draw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes c-vp-ok-conf {
+    0%   { opacity: 0; transform: translate(-50%, -50%) translate(0, 0) rotate(0); }
+    30%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(120deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-vp-ok__burst,
+    .c-vp-ok__disc,
+    .c-vp-ok__disc svg,
+    .c-vp-ok__confetti span { animation: none; }
+    .c-vp-ok__confetti { display: none; }
+    .c-vp-ok__disc svg { stroke-dashoffset: 0; }
+  }
+
+  @media (max-width: 900px) {
+    .c-vp-ok { padding: 48px 24px; }
+    .c-vp-ok__stage { width: 140px; height: 140px; }
+    .c-vp-ok__disc { width: 88px; height: 88px; }
+    .c-vp-ok__disc svg { width: 42px; height: 42px; }
+  }
+</style>
+
+<section class="c-vp-ok" role="status" aria-live="polite">
+  <div class="c-vp-ok__stage" aria-hidden="true">
+    <span class="c-vp-ok__burst"></span>
+    <span class="c-vp-ok__confetti">
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+    </span>
+    <span class="c-vp-ok__disc">
+      <svg viewBox="0 0 52 52" fill="none">
+        <path d="M14 27l8 8 16-18" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </div>
+
+  <span class="c-vp-ok__meta">Canvas published</span>
+  <h1 class="c-vp-ok__headline">You did it! <em>Spring campaign</em> is live.</h1>
+  <p class="c-vp-ok__body">Your team already got a ping &mdash; comments can land on the canvas right from their inbox. Share the link anywhere you like.</p>
+
+  <div class="c-vp-ok__cta">
+    <a href="#" class="c-vp-ok__btn c-vp-ok__btn--primary">
+      Copy share link
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="#" class="c-vp-ok__btn c-vp-ok__btn--ghost">Back to drafts</a>
+  </div>
+</section>

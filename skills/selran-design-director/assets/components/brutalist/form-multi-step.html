@@ -1,0 +1,204 @@
+<style>
+  .c-br-mstep {
+    max-width: 620px;
+    margin: 0 auto;
+    background: var(--bg);
+    border: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', monospace);
+    color: var(--fg);
+  }
+  .c-br-mstep__head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 14px 20px;
+    border-bottom: 2px solid var(--border, var(--fg));
+    background: var(--fg);
+    color: var(--bg);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .c-br-mstep__progress {
+    display: flex;
+    border-bottom: 2px solid var(--border, var(--fg));
+  }
+  .c-br-mstep__progress span {
+    flex: 1;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-right: 2px solid var(--border, var(--fg));
+    color: var(--fg-muted);
+    text-align: left;
+  }
+  .c-br-mstep__progress span:last-child { border-right: 0; }
+  .c-br-mstep__progress span[data-state="done"] {
+    color: var(--fg);
+    background: var(--bg-2);
+  }
+  .c-br-mstep__progress span[data-state="active"] {
+    color: var(--bg);
+    background: var(--accent);
+  }
+  .c-br-mstep__progress span b { font-weight: 700; }
+  .c-br-mstep__body { padding: 26px 20px 20px; }
+  .c-br-mstep__title {
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0 0 6px;
+  }
+  .c-br-mstep__lead {
+    font-size: 13px;
+    color: var(--fg-muted);
+    margin: 0 0 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .c-br-mstep__step[hidden] { display: none; }
+  .c-br-mstep__field { margin-bottom: 16px; }
+  .c-br-mstep__label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+  }
+  .c-br-mstep__input,
+  .c-br-mstep__select {
+    width: 100%; box-sizing: border-box;
+    padding: 11px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 2px solid var(--border, var(--fg));
+    border-radius: 0;
+    outline: none;
+  }
+  .c-br-mstep__input:focus-visible,
+  .c-br-mstep__select:focus-visible {
+    outline: 4px solid var(--accent);
+  }
+  .c-br-mstep__checks {
+    display: grid; gap: 0;
+    border: 2px solid var(--border, var(--fg));
+  }
+  .c-br-mstep__check {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 12px;
+    font-size: 13px;
+    border-bottom: 2px solid var(--border, var(--fg));
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+  }
+  .c-br-mstep__check:last-child { border-bottom: 0; }
+  .c-br-mstep__check:hover { background: var(--accent); color: var(--bg); }
+  .c-br-mstep__check input { accent-color: var(--fg); }
+  .c-br-mstep__actions {
+    display: flex;
+    border-top: 2px solid var(--border, var(--fg));
+  }
+  .c-br-mstep__btn {
+    flex: 1;
+    padding: 16px 20px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: var(--bg);
+    color: var(--fg);
+    border: 0;
+    border-right: 2px solid var(--border, var(--fg));
+    cursor: pointer;
+  }
+  .c-br-mstep__btn:last-child { border-right: 0; }
+  .c-br-mstep__btn:hover:not(:disabled) { background: var(--fg); color: var(--bg); }
+  .c-br-mstep__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .c-br-mstep__btn--primary:hover:not(:disabled) { background: var(--fg); color: var(--accent); }
+  .c-br-mstep__btn:focus-visible {
+    outline: 4px solid var(--accent);
+    outline-offset: -4px;
+  }
+  .c-br-mstep__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  @media (max-width: 900px) {
+    .c-br-mstep { border-left: 0; border-right: 0; }
+    .c-br-mstep__progress { flex-direction: column; }
+    .c-br-mstep__progress span { border-right: 0; border-bottom: 2px solid var(--border, var(--fg)); }
+    .c-br-mstep__progress span:last-child { border-bottom: 0; }
+  }
+</style>
+
+<form class="c-br-mstep" novalidate aria-label="Mail order signup, step 2 of 3">
+  <div class="c-br-mstep__head">
+    <span>// FORM.MAILORDER — STEP 02/03</span>
+    <span>{BRAND} · 0.6kb</span>
+  </div>
+
+  <div class="c-br-mstep__progress" aria-hidden="true">
+    <span data-state="done"><b>01</b> / SUBSCRIBER</span>
+    <span data-state="active"><b>02</b> / SHIPMENT</span>
+    <span data-state="pending"><b>03</b> / PAYMENT</span>
+  </div>
+
+  <div class="c-br-mstep__body">
+    <h1 class="c-br-mstep__title">Shipment details</h1>
+    <p class="c-br-mstep__lead">vinyl. zine. cassette. plain brown wrapper.</p>
+
+    <section class="c-br-mstep__step" hidden aria-hidden="true">
+      <div class="c-br-mstep__field">
+        <label class="c-br-mstep__label" for="br-ms-name">[ NAME ]</label>
+        <input class="c-br-mstep__input" id="br-ms-name" name="name" type="text" placeholder="First Last">
+      </div>
+      <div class="c-br-mstep__field">
+        <label class="c-br-mstep__label" for="br-ms-email">[ EMAIL ]</label>
+        <input class="c-br-mstep__input" id="br-ms-email" name="email" type="email" placeholder="name@domain.com">
+      </div>
+    </section>
+
+    <section class="c-br-mstep__step">
+      <div class="c-br-mstep__field">
+        <label class="c-br-mstep__label" for="br-ms-street">[ STREET ]</label>
+        <input class="c-br-mstep__input" id="br-ms-street" name="street" type="text" placeholder="142 Bedford Ave">
+      </div>
+      <div class="c-br-mstep__field">
+        <label class="c-br-mstep__label" for="br-ms-city">[ CITY / ZIP ]</label>
+        <input class="c-br-mstep__input" id="br-ms-city" name="city" type="text" placeholder="Brooklyn, NY 11211">
+      </div>
+      <div class="c-br-mstep__field">
+        <label class="c-br-mstep__label" for="br-ms-country">[ COUNTRY ]</label>
+        <select class="c-br-mstep__select" id="br-ms-country" name="country">
+          <option>UNITED STATES</option>
+          <option>CANADA</option>
+          <option>UNITED KINGDOM</option>
+          <option>ELSEWHERE</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="c-br-mstep__step" hidden aria-hidden="true">
+      <div class="c-br-mstep__field">
+        <label class="c-br-mstep__label">[ FORMAT ]</label>
+        <div class="c-br-mstep__checks">
+          <label class="c-br-mstep__check"><input type="checkbox" checked> 12" VINYL · 300 PRESSED</label>
+          <label class="c-br-mstep__check"><input type="checkbox"> CASSETTE · 100 PRESSED</label>
+          <label class="c-br-mstep__check"><input type="checkbox"> ZINE · 42 PAGES</label>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="c-br-mstep__actions">
+    <button class="c-br-mstep__btn" type="button">← BACK</button>
+    <button class="c-br-mstep__btn c-br-mstep__btn--primary" type="button">NEXT →</button>
+  </div>
+</form>

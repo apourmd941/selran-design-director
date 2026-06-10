@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: dark-premium
+  use: marketing hero, cinematic opener
+  variables: var(fg) (soft white stroke), var(bg) (deep background), var(accent) (muted gold)
+  notes: mostly empty canvas, single precise arc gesture with a gilded accent pinpoint; thin 1px strokes
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-label="Dark premium hero">
+  <style>
+    .dp-bg       { fill: var(--bg, #0A0A0B); }
+    .dp-stroke   { stroke: var(--fg, #F4F4F5); fill: none; stroke-width: 1; opacity: .85; vector-effect: non-scaling-stroke; }
+    .dp-thin     { stroke: var(--fg, #F4F4F5); fill: none; stroke-width: 1; opacity: .25; vector-effect: non-scaling-stroke; }
+    .dp-accent-stroke { stroke: var(--accent, #D4AF37); fill: none; stroke-width: 1.25; vector-effect: non-scaling-stroke; }
+    .dp-accent-fill   { fill: var(--accent, #D4AF37); }
+    .dp-dot      { fill: var(--fg, #F4F4F5); opacity: .4; }
+    .dp-label    { font-family: "Söhne", "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 10px; fill: var(--fg, #F4F4F5); opacity: .5; letter-spacing: .3em; text-transform: uppercase; }
+  </style>
+
+  <defs>
+    <radialGradient id="dp-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="var(--accent, #D4AF37)" stop-opacity=".16"/>
+      <stop offset="60%" stop-color="var(--accent, #D4AF37)" stop-opacity=".04"/>
+      <stop offset="100%" stop-color="var(--accent, #D4AF37)" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect class="dp-bg" width="1200" height="600"/>
+
+  <!-- soft accent glow (used once, per the direction) -->
+  <circle cx="780" cy="300" r="260" fill="url(#dp-glow)"/>
+
+  <!-- single precise arc — the "hero moment" -->
+  <path class="dp-stroke" d="M 420 460 Q 780 60 1060 280" stroke-width="1.2"/>
+  <path class="dp-accent-stroke" d="M 420 460 Q 780 60 1060 280" stroke-dasharray="1 0" opacity=".55"/>
+
+  <!-- pinpoint gilded accent at arc apex -->
+  <circle cx="780" cy="168" r="6" class="dp-accent-fill"/>
+  <circle cx="780" cy="168" r="10" class="dp-accent-stroke" opacity=".55"/>
+  <circle cx="780" cy="168" r="20" class="dp-accent-stroke" opacity=".2"/>
+
+  <!-- start/end terminus marks -->
+  <circle cx="420" cy="460" r="3" class="dp-dot"/>
+  <circle cx="1060" cy="280" r="3" class="dp-dot"/>
+
+  <!-- thin horizontal rule left -->
+  <line class="dp-thin" x1="80" y1="300" x2="340" y2="300"/>
+  <line class="dp-stroke" x1="80" y1="300" x2="140" y2="300"/>
+
+  <!-- metadata top-left -->
+  <text x="80"  y="90"  class="dp-label">Selran · Volume I</text>
+  <!-- metadata bottom-right -->
+  <text x="1120" y="540" text-anchor="end" class="dp-label">MMXXVI · Fine Series</text>
+</svg>

@@ -1,0 +1,96 @@
+<style>
+  .c-vp-stats {
+    padding: 72px 0;
+  }
+  .c-vp-stats__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .c-vp-stats__item {
+    background: var(--bg-2);
+    border-radius: var(--radius-lg, 20px);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 280ms cubic-bezier(0.34, 1.1, 0.64, 1),
+                box-shadow 280ms cubic-bezier(0.34, 1.1, 0.64, 1);
+  }
+  .c-vp-stats__item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--cat, var(--accent));
+  }
+  .c-vp-stats__item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  }
+  .c-vp-stats__item[data-cat="0"] { --cat: var(--p0, var(--accent)); }
+  .c-vp-stats__item[data-cat="1"] { --cat: var(--p1, var(--accent)); }
+  .c-vp-stats__item[data-cat="2"] { --cat: var(--p2, var(--accent)); }
+  .c-vp-stats__item[data-cat="3"] { --cat: var(--p3, var(--accent)); }
+
+  .c-vp-stats__label {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--cat);
+    margin-bottom: 14px;
+  }
+  .c-vp-stats__num {
+    font-size: 40px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 10px;
+  }
+  .c-vp-stats__caption {
+    font-size: 14px;
+    color: var(--fg-muted);
+    line-height: 1.45;
+  }
+  .c-vp-stats__caption strong {
+    color: var(--cat);
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .c-vp-stats__inner { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .c-vp-stats__inner { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="c-vp-stats">
+  <div class="c-vp-stats__inner">
+    <div class="c-vp-stats__item" data-cat="0">
+      <div class="c-vp-stats__label">Creators</div>
+      <div class="c-vp-stats__num">140k</div>
+      <div class="c-vp-stats__caption"><strong>+24%</strong> over last quarter</div>
+    </div>
+    <div class="c-vp-stats__item" data-cat="1">
+      <div class="c-vp-stats__label">Boards shipped</div>
+      <div class="c-vp-stats__num">2.4M</div>
+      <div class="c-vp-stats__caption"><strong>8,200/day</strong> on average</div>
+    </div>
+    <div class="c-vp-stats__item" data-cat="2">
+      <div class="c-vp-stats__label">Teams onboarded</div>
+      <div class="c-vp-stats__num">7,800</div>
+      <div class="c-vp-stats__caption"><strong>38 countries</strong>, 11 time zones</div>
+    </div>
+    <div class="c-vp-stats__item" data-cat="3">
+      <div class="c-vp-stats__label">Rating</div>
+      <div class="c-vp-stats__num">4.9/5</div>
+      <div class="c-vp-stats__caption"><strong>22,410</strong> verified reviews</div>
+    </div>
+  </div>
+</section>

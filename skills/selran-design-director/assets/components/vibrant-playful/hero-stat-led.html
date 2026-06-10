@@ -1,0 +1,149 @@
+<style>
+  .c-vp-hero-stat {
+    padding: 96px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .c-vp-hero-stat::before,
+  .c-vp-hero-stat::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .c-vp-hero-stat::before {
+    width: 320px; height: 320px;
+    background: var(--p1, var(--accent));
+    top: -120px; right: 10%;
+  }
+  .c-vp-hero-stat::after {
+    width: 260px; height: 260px;
+    background: var(--p3, var(--accent));
+    bottom: -100px; left: 5%;
+  }
+  .c-vp-hero-stat__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative; z-index: 1;
+    text-align: center;
+  }
+  .c-vp-hero-stat__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 28px;
+  }
+  .c-vp-hero-stat__chip::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--p4, var(--accent));
+  }
+  .c-vp-hero-stat__bignum {
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 12px;
+    background: linear-gradient(120deg,
+      var(--p0, var(--accent)) 0%,
+      var(--p2, var(--accent)) 45%,
+      var(--p1, var(--accent)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .c-vp-hero-stat__bigcap {
+    font-size: 17px;
+    color: var(--fg-muted);
+    font-weight: 500;
+    margin-bottom: 48px;
+  }
+  .c-vp-hero-stat__headline {
+    font-size: clamp(28px, 3.6vw, 44px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: var(--fg);
+    max-width: 760px;
+    margin: 0 auto 20px;
+  }
+  .c-vp-hero-stat__headline em {
+    font-style: normal;
+    background: linear-gradient(120deg, var(--p0, var(--accent)) 0%, var(--p1, var(--accent)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .c-vp-hero-stat__lead {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    max-width: 620px;
+    margin: 0 auto 40px;
+  }
+  .c-vp-hero-stat__cta {
+    display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+  }
+  .c-vp-hero-stat__btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 24px;
+    font-size: 15px; font-weight: 500;
+    border-radius: var(--radius-md, 12px);
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 280ms cubic-bezier(0.34, 1.1, 0.64, 1),
+                box-shadow 280ms cubic-bezier(0.34, 1.1, 0.64, 1);
+  }
+  .c-vp-hero-stat__btn--primary {
+    background: var(--accent); color: var(--bg);
+  }
+  .c-vp-hero-stat__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+  }
+  .c-vp-hero-stat__btn--ghost {
+    background: var(--bg);
+    color: var(--fg);
+    border-color: var(--border-strong, var(--border));
+  }
+  .c-vp-hero-stat__btn--ghost:hover { background: var(--bg-2); }
+
+  @media (max-width: 900px) {
+    .c-vp-hero-stat { padding: 72px 0; }
+  }
+</style>
+
+<section class="c-vp-hero-stat">
+  <div class="c-vp-hero-stat__inner">
+    <span class="c-vp-hero-stat__chip">New — {Brand} 3.0 is here</span>
+    <div class="c-vp-hero-stat__bignum">2.4M</div>
+    <div class="c-vp-hero-stat__bigcap">illustrations shipped, and counting</div>
+    <h1 class="c-vp-hero-stat__headline">
+      Everything creative teams need, <em>on one canvas.</em>
+    </h1>
+    <p class="c-vp-hero-stat__lead">
+      {Brand} is the collaborative illustration studio for design teams &mdash; sketch, animate, and ship visuals without round-tripping through five tools.
+    </p>
+    <div class="c-vp-hero-stat__cta">
+      <a href="#" class="c-vp-hero-stat__btn c-vp-hero-stat__btn--primary">Start free &rarr;</a>
+      <a href="#" class="c-vp-hero-stat__btn c-vp-hero-stat__btn--ghost">Watch the 90s tour</a>
+    </div>
+  </div>
+</section>

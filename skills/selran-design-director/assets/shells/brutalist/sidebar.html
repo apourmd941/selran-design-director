@@ -1,0 +1,252 @@
+<style>
+  .c-br-sidebar {
+    --sb-w: 260px;
+    --sb-w-collapsed: 56px;
+    width: var(--sb-w);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    border-right: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', ui-monospace, monospace);
+    font-size: 14px;
+    color: var(--fg);
+    box-sizing: border-box;
+  }
+  .c-br-sidebar[data-mode="collapsed"] { width: var(--sb-w-collapsed); }
+  .c-br-sidebar a, .c-br-sidebar button { font-family: inherit; }
+
+  .c-br-sidebar__brand {
+    display: flex; align-items: center; gap: 10px;
+    padding: 18px 16px;
+    height: 60px;
+    box-sizing: border-box;
+    border-bottom: 2px solid var(--border, var(--fg));
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .c-br-sidebar__mark {
+    flex: 0 0 auto;
+    width: 18px; height: 18px;
+    background: var(--fg);
+  }
+  .c-br-sidebar[data-mode="collapsed"] .c-br-sidebar__brand-label { display: none; }
+
+  .c-br-sidebar__nav {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 12px 0;
+  }
+  .c-br-sidebar__section { margin-bottom: 16px; }
+  .c-br-sidebar__section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+    padding: 10px 16px 6px;
+    margin: 0;
+    border-bottom: 2px solid var(--border, var(--fg));
+  }
+  .c-br-sidebar[data-mode="collapsed"] .c-br-sidebar__section-label {
+    font-size: 0; padding: 10px 0 6px;
+    height: 2px; overflow: hidden;
+  }
+  .c-br-sidebar__list { list-style: none; margin: 0; padding: 0; }
+
+  .c-br-sidebar__link {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 16px;
+    min-height: 40px;
+    font-size: 14px;
+    color: var(--fg);
+    text-decoration: none;
+    border-bottom: 2px solid var(--border, var(--fg));
+    box-sizing: border-box;
+    background: var(--bg);
+  }
+  .c-br-sidebar__marker {
+    flex: 0 0 auto;
+    width: 18px;
+    font-weight: 700;
+    color: var(--fg-muted);
+    text-align: left;
+  }
+  .c-br-sidebar__label { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .c-br-sidebar__badge {
+    margin-left: auto;
+    font-size: 11px;
+    padding: 1px 6px;
+    border: 2px solid var(--border, var(--fg));
+    font-variant-numeric: tabular-nums;
+  }
+  .c-br-sidebar__link:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .c-br-sidebar__link:hover .c-br-sidebar__marker { color: var(--bg); }
+  .c-br-sidebar__link:hover .c-br-sidebar__badge { border-color: var(--bg); color: var(--bg); }
+  .c-br-sidebar__link[aria-current="page"] {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .c-br-sidebar__link[aria-current="page"] .c-br-sidebar__marker { color: var(--bg); }
+  .c-br-sidebar__link[aria-current="page"] .c-br-sidebar__badge { border-color: var(--bg); color: var(--bg); }
+  .c-br-sidebar__link:focus-visible {
+    outline: 4px solid var(--accent);
+    outline-offset: -4px;
+  }
+  .c-br-sidebar[data-mode="collapsed"] .c-br-sidebar__label,
+  .c-br-sidebar[data-mode="collapsed"] .c-br-sidebar__badge { display: none; }
+  .c-br-sidebar[data-mode="collapsed"] .c-br-sidebar__link { justify-content: center; padding: 11px 6px; }
+
+  .c-br-sidebar__foot {
+    flex: 0 0 auto;
+    border-top: 2px solid var(--border, var(--fg));
+    padding: 12px;
+  }
+  .c-br-sidebar__collapse {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 10px 12px;
+    width: 100%;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--fg);
+    background: var(--bg);
+    border: 2px solid var(--border, var(--fg));
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+  .c-br-sidebar__collapse:hover { background: var(--fg); color: var(--bg); }
+  .c-br-sidebar__collapse:focus-visible {
+    outline: 4px solid var(--accent);
+    outline-offset: -4px;
+  }
+  .c-br-sidebar__collapse-glyph { font-weight: 700; }
+  .c-br-sidebar[data-mode="collapsed"] .c-br-sidebar__collapse-label { display: none; }
+  .c-br-sidebar[data-mode="collapsed"] .c-br-sidebar__collapse .c-br-sidebar__collapse-glyph::before { content: "[ \25B6 ]"; }
+  .c-br-sidebar:not([data-mode="collapsed"]) .c-br-sidebar__collapse .c-br-sidebar__collapse-glyph::before { content: "[ \25C0 ]"; }
+
+  @media (max-width: 1100px) {
+    .c-br-sidebar { width: var(--sb-w-collapsed); }
+    .c-br-sidebar .c-br-sidebar__brand-label,
+    .c-br-sidebar .c-br-sidebar__label,
+    .c-br-sidebar .c-br-sidebar__badge,
+    .c-br-sidebar .c-br-sidebar__collapse-label { display: none; }
+    .c-br-sidebar .c-br-sidebar__link { justify-content: center; padding: 11px 6px; }
+    .c-br-sidebar .c-br-sidebar__section-label { font-size: 0; padding: 10px 0 6px; height: 2px; overflow: hidden; }
+  }
+  @media (max-width: 900px) {
+    .c-br-sidebar {
+      position: fixed; inset: 0 auto 0 0;
+      width: 280px;
+      z-index: 40;
+      transform: translateX(-100%);
+    }
+    .c-br-sidebar[data-mode="drawer-open"] { transform: translateX(0); }
+    .c-br-sidebar .c-br-sidebar__brand-label,
+    .c-br-sidebar .c-br-sidebar__label,
+    .c-br-sidebar .c-br-sidebar__badge,
+    .c-br-sidebar .c-br-sidebar__collapse-label { display: revert; }
+    .c-br-sidebar .c-br-sidebar__link { justify-content: flex-start; padding: 11px 16px; }
+    .c-br-sidebar .c-br-sidebar__section-label { font-size: 11px; padding: 10px 16px 6px; height: auto; }
+  }
+</style>
+
+<aside class="c-br-sidebar" aria-label="Primary">
+  <a class="c-br-sidebar__brand" href="#">
+    <span class="c-br-sidebar__mark" aria-hidden="true"></span>
+    <span class="c-br-sidebar__brand-label">{BRAND}</span>
+  </a>
+
+  <nav class="c-br-sidebar__nav" aria-label="Main navigation">
+    <div class="c-br-sidebar__section">
+      <p class="c-br-sidebar__section-label">// CATALOG</p>
+      <ul class="c-br-sidebar__list">
+        <li>
+          <a class="c-br-sidebar__link" href="#" aria-current="page">
+            <span class="c-br-sidebar__marker" aria-hidden="true">[&rarr;]</span>
+            <span class="c-br-sidebar__label">Releases</span>
+            <span class="c-br-sidebar__badge">142</span>
+          </a>
+        </li>
+        <li>
+          <a class="c-br-sidebar__link" href="#">
+            <span class="c-br-sidebar__marker" aria-hidden="true">[&rarr;]</span>
+            <span class="c-br-sidebar__label">Artists</span>
+            <span class="c-br-sidebar__badge">38</span>
+          </a>
+        </li>
+        <li>
+          <a class="c-br-sidebar__link" href="#">
+            <span class="c-br-sidebar__marker" aria-hidden="true">[&rarr;]</span>
+            <span class="c-br-sidebar__label">Pressings</span>
+          </a>
+        </li>
+        <li>
+          <a class="c-br-sidebar__link" href="#">
+            <span class="c-br-sidebar__marker" aria-hidden="true">[&rarr;]</span>
+            <span class="c-br-sidebar__label">Mail order</span>
+            <span class="c-br-sidebar__badge">9</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="c-br-sidebar__section">
+      <p class="c-br-sidebar__section-label">// ARCHIVE</p>
+      <ul class="c-br-sidebar__list">
+        <li>
+          <a class="c-br-sidebar__link" href="#">
+            <span class="c-br-sidebar__marker" aria-hidden="true">[&rarr;]</span>
+            <span class="c-br-sidebar__label">Zine issues</span>
+          </a>
+        </li>
+        <li>
+          <a class="c-br-sidebar__link" href="#">
+            <span class="c-br-sidebar__marker" aria-hidden="true">[&rarr;]</span>
+            <span class="c-br-sidebar__label">Show flyers</span>
+          </a>
+        </li>
+        <li>
+          <a class="c-br-sidebar__link" href="#">
+            <span class="c-br-sidebar__marker" aria-hidden="true">[&rarr;]</span>
+            <span class="c-br-sidebar__label">Press clips</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="c-br-sidebar__section">
+      <p class="c-br-sidebar__section-label">// ACCOUNT</p>
+      <ul class="c-br-sidebar__list">
+        <li>
+          <a class="c-br-sidebar__link" href="#">
+            <span class="c-br-sidebar__marker" aria-hidden="true">[&rarr;]</span>
+            <span class="c-br-sidebar__label">Members</span>
+          </a>
+        </li>
+        <li>
+          <a class="c-br-sidebar__link" href="#">
+            <span class="c-br-sidebar__marker" aria-hidden="true">[&rarr;]</span>
+            <span class="c-br-sidebar__label">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="c-br-sidebar__foot">
+    <button class="c-br-sidebar__collapse" type="button" aria-expanded="true" aria-label="Collapse sidebar">
+      <span class="c-br-sidebar__collapse-glyph" aria-hidden="true"></span>
+      <span class="c-br-sidebar__collapse-label">Collapse</span>
+    </button>
+  </div>
+</aside>

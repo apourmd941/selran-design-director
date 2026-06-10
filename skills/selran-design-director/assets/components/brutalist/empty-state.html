@@ -1,0 +1,145 @@
+<style>
+  .c-br-empty {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', monospace);
+    color: var(--fg);
+  }
+  .c-br-empty__box {
+    border: 2px solid var(--border, var(--fg));
+    padding: 32px;
+    background: var(--bg);
+  }
+  .c-br-empty__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border, var(--fg));
+    margin-bottom: 24px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+  }
+  .c-br-empty__ascii {
+    font-size: 13px;
+    line-height: 1.15;
+    white-space: pre;
+    color: var(--fg);
+    padding: 16px;
+    border: 2px solid var(--border, var(--fg));
+    margin-bottom: 24px;
+    background: var(--bg-2);
+    text-align: center;
+    overflow-x: auto;
+  }
+  .c-br-empty__ascii span { color: var(--accent); }
+  .c-br-empty__label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    margin-bottom: 10px;
+  }
+  .c-br-empty__headline {
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+    color: var(--fg);
+    margin: 0 0 14px;
+  }
+  .c-br-empty__headline em {
+    font-style: normal;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 2px 6px;
+  }
+  .c-br-empty__body {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--fg);
+    margin: 0 0 24px;
+  }
+  .c-br-empty__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 20px;
+  }
+  .c-br-empty__btn {
+    padding: 14px 20px;
+    font-family: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 13px;
+    border: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+    color: var(--fg);
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: -2px;
+  }
+  .c-br-empty__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-br-empty__btn--primary:hover {
+    background: var(--fg);
+    color: var(--accent);
+    border-color: var(--fg);
+  }
+  .c-br-empty__btn:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .c-br-empty__foot {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    padding-top: 14px;
+    border-top: 1px dashed var(--border, var(--fg));
+  }
+
+  @media (max-width: 900px) {
+    .c-br-empty { padding: 56px 16px; }
+    .c-br-empty__box { padding: 20px; }
+  }
+</style>
+
+<section class="c-br-empty">
+  <div class="c-br-empty__box">
+    <div class="c-br-empty__meta">
+      <span>// catalog / status</span>
+      <span>rows: 0</span>
+    </div>
+    <pre class="c-br-empty__ascii" aria-hidden="true">
++----------------------+
+|                      |
+|   <span>[ EMPTY CRATE ]</span>    |
+|                      |
+|    0 / 0 records     |
+|                      |
++----------------------+
+</pre>
+    <div class="c-br-empty__label">// releases: 0</div>
+    <h2 class="c-br-empty__headline">
+      NOTHING IN THE <em>CRATE.</em> YET.
+    </h2>
+    <p class="c-br-empty__body">
+      You haven't added any releases. Press the button. Add the record. Ship the thing. We pressed 142 of these, one at a time, and so can you.
+    </p>
+    <div class="c-br-empty__cta">
+      <a href="#" class="c-br-empty__btn c-br-empty__btn--primary">ADD FIRST RELEASE &rarr;</a>
+      <a href="#" class="c-br-empty__btn">READ THE ZINE</a>
+    </div>
+    <div class="c-br-empty__foot">filetype: empty-state / size: 0.0kb / last touched: never</div>
+  </div>
+</section>

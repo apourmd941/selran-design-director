@@ -1,0 +1,139 @@
+<style>
+  .c-hero-split {
+    padding: 120px 0 80px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-hero-split__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .c-hero-split__eyebrow {
+    margin-bottom: 20px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .c-hero-split__eyebrow::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--border);
+  }
+  .c-hero-split .mono { color: var(--fg-muted); }
+  .c-hero-split__headline {
+    font-size: 44px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 20px;
+  }
+  .c-hero-split__headline em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .c-hero-split__lead {
+    font-size: 17px; line-height: 1.55;
+    color: var(--fg-muted);
+    margin-bottom: 32px;
+    max-width: 48ch;
+  }
+  .c-hero-split__cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .c-hero-split__btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 16px;
+    font-size: 14px; font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-hero-split__btn--primary { background: var(--accent); color: #fff; }
+  .c-hero-split__btn--primary:hover { filter: brightness(0.92); }
+  .c-hero-split__btn--ghost {
+    background: transparent; color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-hero-split__btn--ghost:hover { background: var(--bg-2); }
+
+  .c-hero-split__card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 13px;
+  }
+  .c-hero-split__row {
+    display: grid;
+    grid-template-columns: 90px 1fr 120px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .c-hero-split__row:last-child { border-bottom: none; }
+  .c-hero-split__row--head {
+    background: var(--bg-2);
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 11px;
+  }
+  .c-hero-split__amt {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .c-hero-split__amt--pos { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .c-hero-split { padding: 80px 0 60px; }
+    .c-hero-split__inner { grid-template-columns: 1fr; gap: 40px; }
+    .c-hero-split__headline { font-size: 32px; }
+  }
+</style>
+
+<section class="c-hero-split">
+  <div class="c-hero-split__inner">
+    <div>
+      <div class="c-hero-split__eyebrow">
+        <span class="mono">01 · {Brand} ledger</span>
+      </div>
+      <h1 class="c-hero-split__headline">
+        Every dollar <em>posted</em>, categorized, and reconciled the moment it moves.
+      </h1>
+      <p class="c-hero-split__lead">
+        No import jobs. No reconciliation queue. No month-end archaeology. The ledger is the product — not a report you run once a month.
+      </p>
+      <div class="c-hero-split__cta">
+        <a href="#" class="c-hero-split__btn c-hero-split__btn--primary">Open account →</a>
+        <a href="#" class="c-hero-split__btn c-hero-split__btn--ghost">Read the docs</a>
+      </div>
+    </div>
+    <div class="c-hero-split__card" role="table" aria-label="Sample ledger entries">
+      <div class="c-hero-split__row c-hero-split__row--head">
+        <div>Date</div><div>Description</div><div style="text-align:right;">Amount</div>
+      </div>
+      <div class="c-hero-split__row">
+        <div>04 · 18</div><div>Stripe payout</div>
+        <div class="c-hero-split__amt c-hero-split__amt--pos">+128,440.00</div>
+      </div>
+      <div class="c-hero-split__row">
+        <div>04 · 18</div><div>AWS — us-east-1 compute</div>
+        <div class="c-hero-split__amt">−4,821.10</div>
+      </div>
+      <div class="c-hero-split__row">
+        <div>04 · 17</div><div>Gusto — biweekly payroll</div>
+        <div class="c-hero-split__amt">−312,900.00</div>
+      </div>
+      <div class="c-hero-split__row">
+        <div>04 · 16</div><div>Customer — Oak Labs #2047</div>
+        <div class="c-hero-split__amt c-hero-split__amt--pos">+42,000.00</div>
+      </div>
+    </div>
+  </div>
+</section>

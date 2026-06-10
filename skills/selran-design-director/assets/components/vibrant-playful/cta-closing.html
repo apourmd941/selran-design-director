@@ -1,0 +1,144 @@
+<style>
+  .c-vp-cta {
+    padding: 96px 0;
+  }
+  .c-vp-cta__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .c-vp-cta__panel {
+    background: var(--fg);
+    color: var(--bg);
+    border-radius: var(--radius-lg, 20px);
+    padding: 80px 56px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .c-vp-cta__panel::before,
+  .c-vp-cta__panel::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .c-vp-cta__panel::before {
+    width: 280px; height: 280px;
+    top: -100px; left: -80px;
+    background: var(--p0, var(--accent));
+  }
+  .c-vp-cta__panel::after {
+    width: 240px; height: 240px;
+    bottom: -90px; right: -60px;
+    background: var(--p1, var(--accent));
+  }
+  .c-vp-cta__chips {
+    display: inline-flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    position: relative; z-index: 1;
+  }
+  .c-vp-cta__chip {
+    padding: 4px 12px;
+    border-radius: 9999px;
+    background: var(--chip, var(--accent));
+    color: var(--bg);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .c-vp-cta__chip[data-cat="0"] { --chip: var(--p0, var(--accent)); }
+  .c-vp-cta__chip[data-cat="1"] { --chip: var(--p1, var(--accent)); }
+  .c-vp-cta__chip[data-cat="2"] { --chip: var(--p2, var(--accent)); }
+
+  .c-vp-cta__headline {
+    font-size: clamp(36px, 5.4vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    margin-bottom: 18px;
+    position: relative; z-index: 1;
+  }
+  .c-vp-cta__headline em {
+    font-style: normal;
+    background: linear-gradient(120deg, var(--p0, var(--accent)) 0%, var(--p1, var(--accent)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .c-vp-cta__lead {
+    font-size: 18px;
+    line-height: 1.55;
+    max-width: 48ch;
+    margin: 0 auto 36px;
+    opacity: 0.8;
+    position: relative; z-index: 1;
+  }
+  .c-vp-cta__actions {
+    display: inline-flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative; z-index: 1;
+  }
+  .c-vp-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: var(--radius-md, 12px);
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 280ms cubic-bezier(0.34, 1.1, 0.64, 1),
+                box-shadow 280ms cubic-bezier(0.34, 1.1, 0.64, 1);
+  }
+  .c-vp-cta__btn--primary { background: var(--bg); color: var(--fg); }
+  .c-vp-cta__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.24);
+  }
+  .c-vp-cta__btn--ghost {
+    background: transparent;
+    color: var(--bg);
+    border-color: color-mix(in oklab, var(--bg) 40%, transparent);
+  }
+  .c-vp-cta__btn--ghost:hover {
+    background: color-mix(in oklab, var(--bg) 12%, transparent);
+  }
+
+  @media (max-width: 900px) {
+    .c-vp-cta { padding: 72px 0; }
+    .c-vp-cta__panel { padding: 56px 28px; }
+  }
+</style>
+
+<section class="c-vp-cta">
+  <div class="c-vp-cta__inner">
+    <div class="c-vp-cta__panel">
+      <div class="c-vp-cta__chips">
+        <span class="c-vp-cta__chip" data-cat="0">Free forever</span>
+        <span class="c-vp-cta__chip" data-cat="1">No card</span>
+        <span class="c-vp-cta__chip" data-cat="2">10s sign-up</span>
+      </div>
+      <h2 class="c-vp-cta__headline">
+        Open a board. <em>Invite your team.</em> Ship by Friday.
+      </h2>
+      <p class="c-vp-cta__lead">
+        140,000 creators already draft, review, and ship visuals on {Brand}. Your first three boards are on us.
+      </p>
+      <div class="c-vp-cta__actions">
+        <a href="#" class="c-vp-cta__btn c-vp-cta__btn--primary">Start free &rarr;</a>
+        <a href="#" class="c-vp-cta__btn c-vp-cta__btn--ghost">Book a team demo</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,226 @@
+<style>
+  .c-bd-price {
+    padding: 96px 0 120px;
+    border-bottom: 2px solid var(--fg);
+  }
+  .c-bd-price__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .c-bd-price__head {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 48px;
+    align-items: end;
+    padding-bottom: 36px;
+    border-bottom: 2px solid var(--fg);
+    margin-bottom: 48px;
+  }
+  .c-bd-price__marker {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(80px, 12vw, 140px);
+    line-height: 0.9;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--fg);
+  }
+  .c-bd-price__marker em { font-style: italic; color: var(--accent); }
+  .c-bd-price__head-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted, var(--fg-secondary, var(--fg)));
+    margin-bottom: 12px;
+  }
+  .c-bd-price__head h2 {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--fg);
+  }
+  .c-bd-price__head h2 em { font-style: italic; color: var(--accent); }
+
+  .c-bd-price__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 2px solid var(--fg);
+  }
+  .c-bd-price__plan {
+    padding: 48px 36px;
+    border-right: 2px solid var(--fg);
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+  }
+  .c-bd-price__plan:last-child { border-right: none; }
+  .c-bd-price__plan--featured {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .c-bd-price__plan--inverted {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  .c-bd-price__label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 500;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid currentColor;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .c-bd-price__amt {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(64px, 8vw, 96px);
+    line-height: 0.9;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 6px;
+  }
+  .c-bd-price__amt em { font-style: italic; color: var(--accent); }
+  .c-bd-price__plan--featured .c-bd-price__amt em { color: var(--bg); }
+  .c-bd-price__plan--inverted .c-bd-price__amt em { color: var(--accent); }
+  .c-bd-price__unit {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+  .c-bd-price__desc {
+    font-size: 15px;
+    line-height: 1.55;
+    margin-bottom: 28px;
+    opacity: 0.9;
+    min-height: 48px;
+  }
+  .c-bd-price__list {
+    list-style: none;
+    margin: 0 0 32px;
+    padding: 0;
+    flex: 1;
+  }
+  .c-bd-price__list li {
+    padding: 14px 0;
+    font-size: 14px;
+    line-height: 1.4;
+    border-bottom: 1px solid currentColor;
+    display: flex;
+    gap: 12px;
+  }
+  .c-bd-price__list li:last-child { border-bottom: none; }
+  .c-bd-price__list li::before {
+    content: '→';
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+  .c-bd-price__btn {
+    padding: 18px 24px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    border: 2px solid currentColor;
+    color: inherit;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-bd-price__plan:not(.c-bd-price__plan--featured):not(.c-bd-price__plan--inverted) .c-bd-price__btn:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .c-bd-price__plan--featured .c-bd-price__btn {
+    background: var(--bg);
+    color: var(--fg);
+    border-color: var(--bg);
+  }
+  .c-bd-price__plan--featured .c-bd-price__btn:hover {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+  }
+  .c-bd-price__plan--inverted .c-bd-price__btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-price__inner { padding: 0 24px; }
+    .c-bd-price__head { grid-template-columns: 1fr; gap: 24px; }
+    .c-bd-price__grid { grid-template-columns: 1fr; }
+    .c-bd-price__plan {
+      border-right: none;
+      border-bottom: 2px solid var(--fg);
+      padding: 36px 28px;
+    }
+    .c-bd-price__plan:last-child { border-bottom: none; }
+  }
+</style>
+
+<section class="c-bd-price">
+  <div class="c-bd-price__inner">
+    <div class="c-bd-price__head">
+      <div class="c-bd-price__marker">03<em>.</em></div>
+      <div>
+        <div class="c-bd-price__head-label">Subscribe</div>
+        <h2>Three ways to read. <em>Reader-funded,</em> writer-paid.</h2>
+      </div>
+    </div>
+    <div class="c-bd-price__grid">
+      <div class="c-bd-price__plan">
+        <div class="c-bd-price__label"><span>Digital</span><span>01</span></div>
+        <div class="c-bd-price__amt">$6<span class="c-bd-price__unit">/mo</span></div>
+        <p class="c-bd-price__desc">All essays online, forever. Ad-free. Cancel any Tuesday.</p>
+        <ul class="c-bd-price__list">
+          <li>Every essay, every issue</li>
+          <li>Audio readings by the author</li>
+          <li>The editor's Friday note</li>
+          <li>Comments &amp; letters</li>
+        </ul>
+        <a href="#" class="c-bd-price__btn">Subscribe digital →</a>
+      </div>
+      <div class="c-bd-price__plan c-bd-price__plan--featured">
+        <div class="c-bd-price__label"><span>Print + Digital</span><span>02 · Most chosen</span></div>
+        <div class="c-bd-price__amt">$96<span class="c-bd-price__unit">/yr</span></div>
+        <p class="c-bd-price__desc">The quarterly print edition, mailed to you. Plus everything in digital.</p>
+        <ul class="c-bd-price__list">
+          <li>Four print issues a year</li>
+          <li>Full digital access</li>
+          <li>Signed editor's letter, Issue 08</li>
+          <li>Access to the annual reader dinner</li>
+          <li>Two free gift subscriptions</li>
+        </ul>
+        <a href="#" class="c-bd-price__btn">Subscribe to print →</a>
+      </div>
+      <div class="c-bd-price__plan c-bd-price__plan--inverted">
+        <div class="c-bd-price__label"><span>Patron</span><span>03</span></div>
+        <div class="c-bd-price__amt">$240<span class="c-bd-price__unit">/yr</span></div>
+        <p class="c-bd-price__desc">For readers who want the magazine to exist in five years.</p>
+        <ul class="c-bd-price__list">
+          <li>Everything in Print + Digital</li>
+          <li>Name in the colophon (if you want)</li>
+          <li>The Annual, hardcover, signed</li>
+          <li>An invitation to our open editorial calls</li>
+        </ul>
+        <a href="#" class="c-bd-price__btn">Become a patron →</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,211 @@
+<style>
+  .c-vp-mstep {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 44px 40px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg, 20px);
+    box-shadow: 0 20px 40px -20px rgba(0,0,0,0.1);
+    font-family: inherit;
+  }
+  .c-vp-mstep__progress {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .c-vp-mstep__dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--border);
+    transition: transform 280ms cubic-bezier(0.34, 1.1, 0.64, 1),
+                background 280ms cubic-bezier(0.34, 1.1, 0.64, 1);
+  }
+  .c-vp-mstep__dot[data-state="done"][data-cat="0"] { background: var(--p0, var(--accent)); }
+  .c-vp-mstep__dot[data-state="done"][data-cat="1"] { background: var(--p1, var(--accent)); }
+  .c-vp-mstep__dot[data-state="done"][data-cat="2"] { background: var(--p2, var(--accent)); }
+  .c-vp-mstep__dot[data-state="active"][data-cat="0"] { background: var(--p0, var(--accent)); transform: scale(1.4); }
+  .c-vp-mstep__dot[data-state="active"][data-cat="1"] { background: var(--p1, var(--accent)); transform: scale(1.4); }
+  .c-vp-mstep__dot[data-state="active"][data-cat="2"] { background: var(--p2, var(--accent)); transform: scale(1.4); }
+  .c-vp-mstep__label-step {
+    margin-left: auto;
+    font-size: 12px; font-weight: 500;
+    color: var(--fg-muted);
+    letter-spacing: 0.02em;
+  }
+  .c-vp-mstep__label-step strong { color: var(--fg); font-weight: 500; }
+  .c-vp-mstep__title {
+    font-size: 28px; letter-spacing: -0.02em; font-weight: 700;
+    color: var(--fg);
+    margin: 0 0 6px;
+  }
+  .c-vp-mstep__lead {
+    font-size: 15px; color: var(--fg-muted);
+    margin: 0 0 28px;
+  }
+  .c-vp-mstep__step[hidden] { display: none; }
+  .c-vp-mstep__field { margin-bottom: 14px; }
+  .c-vp-mstep__label {
+    display: block;
+    font-size: 13px; font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 6px;
+  }
+  .c-vp-mstep__input,
+  .c-vp-mstep__select {
+    width: 100%; box-sizing: border-box;
+    padding: 12px 14px;
+    font-size: 14px; font-family: inherit; font-weight: 500;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border-strong, var(--border));
+    border-radius: var(--radius-md, 12px);
+    outline: none;
+    transition: border-color 280ms cubic-bezier(0.34, 1.1, 0.64, 1),
+                box-shadow 280ms cubic-bezier(0.34, 1.1, 0.64, 1);
+  }
+  .c-vp-mstep__input:focus-visible,
+  .c-vp-mstep__select:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 24%, transparent);
+  }
+  .c-vp-mstep__swatches {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  .c-vp-mstep__swatch {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    padding: 12px 6px;
+    border: 1px solid var(--border-strong, var(--border));
+    border-radius: var(--radius-md, 12px);
+    background: var(--bg);
+    cursor: pointer;
+    font-size: 11px; font-weight: 500;
+    color: var(--fg-muted);
+    transition: border-color 280ms cubic-bezier(0.34, 1.1, 0.64, 1),
+                transform 280ms cubic-bezier(0.34, 1.1, 0.64, 1);
+  }
+  .c-vp-mstep__swatch:hover { transform: translateY(-1px); }
+  .c-vp-mstep__swatch input { position: absolute; opacity: 0; pointer-events: none; }
+  .c-vp-mstep__swatch-chip {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+  }
+  .c-vp-mstep__swatch[data-cat="0"] .c-vp-mstep__swatch-chip { background: var(--p0, var(--accent)); }
+  .c-vp-mstep__swatch[data-cat="1"] .c-vp-mstep__swatch-chip { background: var(--p1, var(--accent)); }
+  .c-vp-mstep__swatch[data-cat="2"] .c-vp-mstep__swatch-chip { background: var(--p2, var(--accent)); }
+  .c-vp-mstep__swatch[data-cat="3"] .c-vp-mstep__swatch-chip { background: var(--p3, var(--accent)); }
+  .c-vp-mstep__swatch[data-cat="4"] .c-vp-mstep__swatch-chip { background: var(--p4, var(--accent)); }
+  .c-vp-mstep__swatch:has(input:checked),
+  .c-vp-mstep__swatch input:focus-visible ~ .c-vp-mstep__swatch-chip {
+    border-color: var(--accent);
+  }
+  .c-vp-mstep__swatch:has(input:checked) {
+    border-color: var(--fg);
+    color: var(--fg);
+  }
+  .c-vp-mstep__actions {
+    display: flex; justify-content: space-between; gap: 12px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .c-vp-mstep__btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 11px 22px;
+    font-size: 14px; font-weight: 500;
+    font-family: inherit;
+    border-radius: var(--radius-md, 12px);
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 280ms cubic-bezier(0.34, 1.1, 0.64, 1),
+                box-shadow 280ms cubic-bezier(0.34, 1.1, 0.64, 1),
+                background-color 280ms cubic-bezier(0.34, 1.1, 0.64, 1);
+  }
+  .c-vp-mstep__btn--ghost {
+    background: var(--bg); color: var(--fg);
+    border-color: var(--border-strong, var(--border));
+  }
+  .c-vp-mstep__btn--ghost:hover:not(:disabled) {
+    background: var(--bg-2);
+    transform: translateY(-1px);
+  }
+  .c-vp-mstep__btn--primary {
+    background: var(--accent); color: var(--bg);
+  }
+  .c-vp-mstep__btn--primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px color-mix(in oklab, var(--accent) 40%, transparent);
+  }
+  .c-vp-mstep__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent);
+  }
+  .c-vp-mstep__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  @media (max-width: 900px) {
+    .c-vp-mstep { max-width: none; box-shadow: none; padding: 36px 24px; border-radius: 0; border-left: 0; border-right: 0; }
+    .c-vp-mstep__title { font-size: 24px; }
+    .c-vp-mstep__swatches { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+
+<form class="c-vp-mstep" novalidate aria-label="Create your first canvas, step 2 of 3">
+  <div class="c-vp-mstep__progress" aria-hidden="true">
+    <span class="c-vp-mstep__dot" data-state="done" data-cat="0"></span>
+    <span class="c-vp-mstep__dot" data-state="active" data-cat="1"></span>
+    <span class="c-vp-mstep__dot" data-state="pending" data-cat="2"></span>
+    <span class="c-vp-mstep__label-step">Step <strong>2</strong> of 3</span>
+  </div>
+
+  <h1 class="c-vp-mstep__title">Pick a vibe for your workspace</h1>
+  <p class="c-vp-mstep__lead">It colors your canvas, tags, and category pills across {Brand}. Easy to change later.</p>
+
+  <section class="c-vp-mstep__step" hidden aria-hidden="true">
+    <div class="c-vp-mstep__field">
+      <label class="c-vp-mstep__label" for="vp-ms-name">Your name</label>
+      <input class="c-vp-mstep__input" id="vp-ms-name" name="name" type="text" placeholder="Jules Okafor">
+    </div>
+    <div class="c-vp-mstep__field">
+      <label class="c-vp-mstep__label" for="vp-ms-email">Work email</label>
+      <input class="c-vp-mstep__input" id="vp-ms-email" name="email" type="email" placeholder="jules@studio.com">
+    </div>
+  </section>
+
+  <section class="c-vp-mstep__step">
+    <div class="c-vp-mstep__field">
+      <label class="c-vp-mstep__label" for="vp-ms-team">Team name</label>
+      <input class="c-vp-mstep__input" id="vp-ms-team" name="team" type="text" placeholder="Third Draft Studio">
+    </div>
+    <div class="c-vp-mstep__field">
+      <label class="c-vp-mstep__label" for="vp-ms-size">Team size</label>
+      <select class="c-vp-mstep__select" id="vp-ms-size" name="size">
+        <option>Just me</option>
+        <option selected>2–10</option>
+        <option>11–50</option>
+        <option>51+</option>
+      </select>
+    </div>
+    <div class="c-vp-mstep__field">
+      <label class="c-vp-mstep__label">Accent color</label>
+      <div class="c-vp-mstep__swatches" role="radiogroup" aria-label="Accent color">
+        <label class="c-vp-mstep__swatch" data-cat="0"><input type="radio" name="hue" value="0"><span class="c-vp-mstep__swatch-chip"></span>Coral</label>
+        <label class="c-vp-mstep__swatch" data-cat="1"><input type="radio" name="hue" value="1" checked><span class="c-vp-mstep__swatch-chip"></span>Cobalt</label>
+        <label class="c-vp-mstep__swatch" data-cat="2"><input type="radio" name="hue" value="2"><span class="c-vp-mstep__swatch-chip"></span>Lime</label>
+        <label class="c-vp-mstep__swatch" data-cat="3"><input type="radio" name="hue" value="3"><span class="c-vp-mstep__swatch-chip"></span>Plum</label>
+        <label class="c-vp-mstep__swatch" data-cat="4"><input type="radio" name="hue" value="4"><span class="c-vp-mstep__swatch-chip"></span>Amber</label>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-vp-mstep__step" hidden aria-hidden="true">
+    <div class="c-vp-mstep__field">
+      <label class="c-vp-mstep__label" for="vp-ms-invite">Invite teammates (comma separated)</label>
+      <input class="c-vp-mstep__input" id="vp-ms-invite" name="invites" type="text" placeholder="sam@studio.com, nia@studio.com">
+    </div>
+  </section>
+
+  <div class="c-vp-mstep__actions">
+    <button class="c-vp-mstep__btn c-vp-mstep__btn--ghost" type="button">← Back</button>
+    <button class="c-vp-mstep__btn c-vp-mstep__btn--primary" type="button">Continue →</button>
+  </div>
+</form>

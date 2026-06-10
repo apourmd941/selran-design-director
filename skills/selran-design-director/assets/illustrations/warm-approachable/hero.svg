@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: warm-approachable
+  use: marketing hero, cover art
+  variables: var(fg) (warm charcoal), var(bg) (peach cream), var(accent) (terracotta)
+  notes: soft organic shapes with rounded stroke caps; a warm still life (teacup on saucer with steam curl);
+         NO faceless purple Corporate Memphis people; gentle asymmetry; warm pastels via tinted overlays
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-label="Warm still life illustration">
+  <style>
+    .wa-stroke { stroke: var(--fg, #2D1B0F); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+    .wa-thin   { stroke: var(--fg, #2D1B0F); fill: none; stroke-width: 1.5; stroke-linecap: round; opacity: .5; vector-effect: non-scaling-stroke; }
+    .wa-accent-fill   { fill: var(--accent, #B04A2C); }
+    .wa-accent-soft   { fill: var(--accent, #B04A2C); opacity: .25; }
+    .wa-sage-soft     { fill: #A8B88A; opacity: .7; }  /* secondary pastel — desaturated olive/sage */
+    .wa-blush-soft    { fill: #E8B39A; opacity: .6; }  /* tertiary pastel — dusty blush */
+    .wa-serif-it { font-family: "Fraunces", "Crimson Pro", Georgia, serif; font-style: italic; fill: var(--fg, #2D1B0F); }
+  </style>
+
+  <defs>
+    <radialGradient id="wa-sun-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="var(--accent, #B04A2C)" stop-opacity=".28"/>
+      <stop offset="100%" stop-color="var(--accent, #B04A2C)" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- soft sun glow upper-right -->
+  <circle cx="980" cy="180" r="220" fill="url(#wa-sun-glow)"/>
+
+  <!-- background sun disk (terracotta soft) -->
+  <circle cx="980" cy="180" r="80" class="wa-accent-soft"/>
+
+  <!-- rolling hill blobs (sage) behind subject -->
+  <path class="wa-sage-soft" d="M 0 460 Q 180 380 360 440 Q 540 500 720 430 Q 900 360 1200 420 L 1200 600 L 0 600 Z"/>
+  <path class="wa-blush-soft" d="M 0 510 Q 200 470 400 500 Q 620 535 840 490 Q 1020 455 1200 500 L 1200 600 L 0 600 Z"/>
+
+  <!-- central still life: teacup on saucer -->
+  <g transform="translate(600 380)">
+    <!-- saucer ellipse -->
+    <ellipse cx="0" cy="60" rx="150" ry="20" fill="var(--bg, #FAF3E7)" class="wa-stroke"/>
+    <!-- saucer rim (inner) -->
+    <ellipse cx="0" cy="58" rx="120" ry="13" class="wa-thin"/>
+
+    <!-- teacup body (slightly asymmetric — hand-drawn feel) -->
+    <path class="wa-stroke" fill="var(--bg, #FAF3E7)"
+          d="M -88 -40 C -92 10 -80 45 -70 56 L 72 56 C 82 45 93 10 89 -40 Z"/>
+
+    <!-- cup rim -->
+    <ellipse cx="0" cy="-40" rx="88" ry="14" fill="var(--bg, #FAF3E7)" class="wa-stroke"/>
+    <ellipse cx="0" cy="-40" rx="88" ry="14" class="wa-accent-soft"/>
+
+    <!-- cup handle (rounded loop) -->
+    <path class="wa-stroke" d="M 88 -20 C 120 -20 130 -2 130 12 C 130 26 118 40 92 38"/>
+
+    <!-- accent band on cup -->
+    <path class="wa-accent-fill" d="M -82 -10 L 82 -10 L 80 0 L -80 0 Z"/>
+
+    <!-- steam: three gentle curls rising (hand-drawn wobble) -->
+    <path class="wa-thin" stroke-width="2" d="M -40 -52 C -50 -76 -28 -92 -36 -118 C -42 -136 -24 -152 -30 -176"/>
+    <path class="wa-thin" stroke-width="2" d="M  -6 -56 C  12 -80 -14 -100 4 -126 C 18 -146 -4 -160 10 -184"/>
+    <path class="wa-thin" stroke-width="2" d="M  30 -52 C  18 -76 38 -94 30 -118 C 22 -138 40 -152 34 -176"/>
+  </g>
+
+  <!-- small hand-drawn leaf / sprig bottom-left -->
+  <g transform="translate(220 480) rotate(-20)">
+    <path class="wa-stroke" stroke-width="2" d="M 0 0 C 10 -20 30 -28 50 -30"/>
+    <ellipse cx="18" cy="-16" rx="10" ry="5" class="wa-sage-soft" transform="rotate(-30 18 -16)"/>
+    <ellipse cx="36" cy="-24" rx="10" ry="5" class="wa-sage-soft" transform="rotate(-20 36 -24)"/>
+  </g>
+
+  <!-- small italic accent phrase, hand-written feel -->
+  <text x="1100" y="480" text-anchor="end" font-size="22" class="wa-serif-it" opacity=".7">slow mornings.</text>
+  <path class="wa-thin" stroke-width="1.5" d="M 940 488 Q 1020 498 1100 488"/>
+</svg>

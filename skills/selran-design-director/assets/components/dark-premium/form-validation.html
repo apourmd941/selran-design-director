@@ -1,0 +1,187 @@
+<style>
+  .c-dp-validate {
+    position: relative;
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 44px 40px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    font-family: inherit;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .c-dp-validate::before {
+    content: '';
+    position: absolute;
+    inset: -30% -10% auto -10%;
+    height: 50%;
+    background: radial-gradient(
+      50% 50% at 50% 0%,
+      color-mix(in oklab, var(--accent) 14%, transparent) 0%,
+      transparent 72%
+    );
+    z-index: -1;
+    pointer-events: none;
+  }
+  .c-dp-validate__eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg);
+    margin-bottom: 16px;
+  }
+  .c-dp-validate__eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px color-mix(in oklab, var(--accent) 80%, transparent); }
+  .c-dp-validate__eyebrow .mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--fg-muted);
+  }
+  .c-dp-validate__title {
+    font-size: 26px; letter-spacing: -0.015em; font-weight: 500;
+    color: var(--fg); margin: 0 0 8px;
+  }
+  .c-dp-validate__title em { font-style: normal; color: var(--accent); }
+  .c-dp-validate__sub {
+    font-size: 14px; color: var(--fg-muted); margin: 0 0 28px;
+  }
+  .c-dp-validate__field { margin-bottom: 18px; }
+  .c-dp-validate__label {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    font-size: 11px; color: var(--fg-muted);
+    margin-bottom: 8px;
+  }
+  .c-dp-validate__input-wrap { position: relative; }
+  .c-dp-validate__input {
+    width: 100%; box-sizing: border-box;
+    padding: 12px 36px 12px 14px;
+    font-size: 14px; font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-top-color: color-mix(in oklab, var(--fg) 20%, var(--border));
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 300ms cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-validate__input:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent),
+                0 0 22px -2px color-mix(in oklab, var(--accent) 50%, transparent);
+  }
+  .c-dp-validate__field[data-state="valid"] .c-dp-validate__input {
+    border-color: var(--semantic-success, #10B981);
+    box-shadow: 0 0 18px -4px color-mix(in oklab, var(--semantic-success, #10B981) 50%, transparent);
+  }
+  .c-dp-validate__field[data-state="invalid"] .c-dp-validate__input {
+    border-color: var(--semantic-error, #f87171);
+    box-shadow: 0 0 18px -4px color-mix(in oklab, var(--semantic-error, #f87171) 50%, transparent);
+  }
+  .c-dp-validate__field[data-state="disabled"] .c-dp-validate__input {
+    opacity: 0.45; cursor: not-allowed;
+  }
+  .c-dp-validate__icon {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    width: 16px; height: 16px; display: none; pointer-events: none;
+  }
+  .c-dp-validate__field[data-state="valid"] .c-dp-validate__icon--ok { display: block; color: var(--semantic-success, #10B981); }
+  .c-dp-validate__field[data-state="invalid"] .c-dp-validate__icon--err { display: block; color: var(--semantic-error, #f87171); }
+  .c-dp-validate__msg {
+    display: none;
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .c-dp-validate__field[data-state="valid"] .c-dp-validate__msg--ok {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--semantic-success, #10B981);
+  }
+  .c-dp-validate__field[data-state="invalid"] .c-dp-validate__msg--err {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--semantic-error, #f87171);
+  }
+  .c-dp-validate__field[data-state="disabled"] .c-dp-validate__msg--note {
+    display: block;
+    color: var(--fg-muted);
+  }
+  .c-dp-validate__actions {
+    margin-top: 28px; padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: flex-end;
+  }
+  .c-dp-validate__btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px;
+    font-size: 14px; font-weight: 500;
+    font-family: inherit;
+    background: var(--accent); color: var(--bg);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 300ms cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-validate__btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 30px -8px color-mix(in oklab, var(--accent) 60%, transparent);
+  }
+  .c-dp-validate__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg-2), 0 0 0 4px var(--accent);
+  }
+  .c-dp-validate__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  @media (max-width: 900px) {
+    .c-dp-validate { max-width: none; padding: 36px 24px; border-radius: 0; border-left: 0; border-right: 0; }
+  }
+</style>
+
+<form class="c-dp-validate" novalidate>
+  <div class="c-dp-validate__eyebrow">
+    <span class="dot" aria-hidden="true"></span>
+    <span class="mono">{BRAND} · Verification</span>
+  </div>
+  <h2 class="c-dp-validate__title">Confirm <em>the details.</em></h2>
+  <p class="c-dp-validate__sub">Four fields, five states — default, focus, valid, invalid, disabled.</p>
+
+  <div class="c-dp-validate__field" data-state="default">
+    <label class="c-dp-validate__label" for="dp-v-handle">Account handle</label>
+    <div class="c-dp-validate__input-wrap">
+      <input class="c-dp-validate__input" id="dp-v-handle" name="handle" type="text" placeholder="@meridian">
+    </div>
+  </div>
+
+  <div class="c-dp-validate__field" data-state="valid">
+    <label class="c-dp-validate__label" for="dp-v-routing">Routing number</label>
+    <div class="c-dp-validate__input-wrap">
+      <input class="c-dp-validate__input" id="dp-v-routing" name="routing" type="text" value="021000021" aria-describedby="dp-v-routing-ok">
+      <svg class="c-dp-validate__icon c-dp-validate__icon--ok" viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 8.5l3.2 3L13 5"/></svg>
+    </div>
+    <div class="c-dp-validate__msg c-dp-validate__msg--ok" id="dp-v-routing-ok">✓ Verified with JPMorgan Chase</div>
+  </div>
+
+  <div class="c-dp-validate__field" data-state="invalid">
+    <label class="c-dp-validate__label" for="dp-v-tax">Tax ID (EIN)</label>
+    <div class="c-dp-validate__input-wrap">
+      <input class="c-dp-validate__input" id="dp-v-tax" name="tax" type="text" value="12-345678" aria-invalid="true" aria-describedby="dp-v-tax-err">
+      <svg class="c-dp-validate__icon c-dp-validate__icon--err" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4v5M8 11v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </div>
+    <div class="c-dp-validate__msg c-dp-validate__msg--err" id="dp-v-tax-err">! EIN must be 9 digits (XX-XXXXXXX)</div>
+  </div>
+
+  <div class="c-dp-validate__field" data-state="disabled">
+    <label class="c-dp-validate__label" for="dp-v-plan">Clearing tier</label>
+    <div class="c-dp-validate__input-wrap">
+      <input class="c-dp-validate__input" id="dp-v-plan" name="plan" type="text" value="Tier II · Institutional" disabled>
+    </div>
+    <div class="c-dp-validate__msg c-dp-validate__msg--note">Set by compliance — contact your operator to change.</div>
+  </div>
+
+  <div class="c-dp-validate__actions">
+    <button class="c-dp-validate__btn" type="submit" disabled>Submit for review</button>
+  </div>
+</form>

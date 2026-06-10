@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  {{meta.project}} — color tokens
+  Generated from design-system.md. Do not edit by hand.
+
+  Emit instructions:
+    The emitter writes THIS file twice:
+      res/values/colors.xml        ← uses light-mode values ({{color.*}})
+      res/values-night/colors.xml  ← uses dark-mode values ({{color.dark.*}})
+    Both files expose the same token names so Android's day/night resource
+    resolution flips them automatically under Material 3 themes.
+-->
+<resources>
+    <!-- Surfaces -->
+    <color name="bg_primary">{{color.bg_primary}}</color>
+    <color name="bg_secondary">{{color.bg_secondary}}</color>
+    <color name="bg_tertiary">{{color.bg_tertiary}}</color>
+
+    <!-- Foreground (text) -->
+    <color name="fg_primary">{{color.fg_primary}}</color>
+    <color name="fg_secondary">{{color.fg_secondary}}</color>
+    <color name="fg_muted">{{color.fg_muted}}</color>
+
+    <!-- Accent -->
+    <color name="accent">{{color.accent}}</color>
+    <color name="accent_hover">{{color.accent_hover}}</color>
+
+    <!-- Borders -->
+    <color name="border">{{color.border}}</color>
+    <color name="border_strong">{{color.border_strong}}</color>
+
+    <!-- Semantic -->
+    <color name="success">{{color.success}}</color>
+    <color name="warning">{{color.warning}}</color>
+    <color name="danger">{{color.danger}}</color>
+</resources>

@@ -1,0 +1,172 @@
+<style>
+  .c-tm-ok {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 32px;
+    background: var(--bg);
+    font-family: inherit;
+    box-sizing: border-box;
+  }
+  .c-tm-ok__card {
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+  }
+  .c-tm-ok__visual {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 32px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-2);
+    color: var(--accent);
+    position: relative;
+  }
+  .c-tm-ok__visual::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+  .c-tm-ok__label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .c-tm-ok__headline {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+  .c-tm-ok__body {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    margin: 0 auto 28px;
+    max-width: 44ch;
+  }
+  .c-tm-ok__ref {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    margin: 0 auto 28px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--fg);
+  }
+  .c-tm-ok__ref-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+  }
+  .c-tm-ok__ref-sep { color: var(--border); }
+  .c-tm-ok__actions {
+    display: inline-flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .c-tm-ok__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                border-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                filter 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-ok__btn--primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .c-tm-ok__btn--primary:hover { filter: brightness(0.92); }
+  .c-tm-ok__btn--ghost {
+    background: transparent;
+    color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-tm-ok__btn--ghost:hover { background: var(--bg-2); }
+  .c-tm-ok__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+  .c-tm-ok__hint {
+    margin-top: 20px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--fg-muted);
+    letter-spacing: 0.06em;
+  }
+  .c-tm-ok__hint kbd {
+    font: inherit;
+    padding: 2px 6px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg-2);
+    color: var(--fg);
+  }
+
+  @media (max-width: 900px) {
+    .c-tm-ok { padding: 48px 20px; }
+    .c-tm-ok__headline { font-size: 22px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .c-tm-ok__check-path {
+      stroke-dasharray: 16;
+      stroke-dashoffset: 16;
+      animation: c-tm-ok-draw 450ms cubic-bezier(0.2, 0, 0, 1) 100ms forwards;
+    }
+    @keyframes c-tm-ok-draw {
+      to { stroke-dashoffset: 0; }
+    }
+  }
+</style>
+
+<main class="c-tm-ok" role="status">
+  <div class="c-tm-ok__card">
+    <div class="c-tm-ok__visual" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path class="c-tm-ok__check-path" d="M7 14.5l4.5 4.5L21 9" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="c-tm-ok__label">Complete</div>
+    <h1 class="c-tm-ok__headline">Your workspace is ready.</h1>
+    <p class="c-tm-ok__body">We've provisioned Meridian Capital with default ledgers and sent invites to the three members you added.</p>
+    <div class="c-tm-ok__ref">
+      <span class="c-tm-ok__ref-label">Workspace ID</span>
+      <span class="c-tm-ok__ref-sep">·</span>
+      <span>ws_4ad1c2e8b7</span>
+    </div>
+    <div class="c-tm-ok__actions">
+      <a href="#" class="c-tm-ok__btn c-tm-ok__btn--primary">Go to dashboard</a>
+      <a href="#" class="c-tm-ok__btn c-tm-ok__btn--ghost">Do another</a>
+    </div>
+    <div class="c-tm-ok__hint">Or press <kbd>↵</kbd> to continue.</div>
+  </div>
+</main>

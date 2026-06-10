@@ -1,0 +1,97 @@
+<style>
+  .c-bd-stats {
+    border-top: 2px solid var(--fg);
+    border-bottom: 2px solid var(--fg);
+    background: var(--bg);
+  }
+  .c-bd-stats__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .c-bd-stats__item {
+    padding: 48px 32px;
+    border-right: 2px solid var(--fg);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .c-bd-stats__item:last-child { border-right: none; }
+  .c-bd-stats__item--inverted {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .c-bd-stats__item--hot {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .c-bd-stats__label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+  .c-bd-stats__num {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(56px, 6.4vw, 104px);
+    line-height: 0.9;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+  .c-bd-stats__num em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .c-bd-stats__item--hot .c-bd-stats__num em { color: var(--bg); }
+  .c-bd-stats__item--inverted .c-bd-stats__num em { color: var(--accent); }
+  .c-bd-stats__caption {
+    font-size: 13px;
+    line-height: 1.45;
+    opacity: 0.85;
+    margin-top: auto;
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-stats__inner { grid-template-columns: 1fr 1fr; }
+    .c-bd-stats__item {
+      padding: 36px 24px;
+      border-right: 2px solid var(--fg);
+    }
+    .c-bd-stats__item:nth-child(2n) { border-right: none; }
+    .c-bd-stats__item:nth-child(-n+2) { border-bottom: 2px solid var(--fg); }
+  }
+  @media (max-width: 560px) {
+    .c-bd-stats__inner { grid-template-columns: 1fr; }
+    .c-bd-stats__item { border-right: none; border-bottom: 2px solid var(--fg); }
+    .c-bd-stats__item:last-child { border-bottom: none; }
+  }
+</style>
+
+<section class="c-bd-stats">
+  <div class="c-bd-stats__inner">
+    <div class="c-bd-stats__item">
+      <div class="c-bd-stats__label">Issues in print</div>
+      <div class="c-bd-stats__num">07</div>
+      <div class="c-bd-stats__caption">since 2022, one per season, on paper and online</div>
+    </div>
+    <div class="c-bd-stats__item c-bd-stats__item--hot">
+      <div class="c-bd-stats__label">Essays published</div>
+      <div class="c-bd-stats__num">214<em>.</em></div>
+      <div class="c-bd-stats__caption">from 186 writers across 38 countries</div>
+    </div>
+    <div class="c-bd-stats__item">
+      <div class="c-bd-stats__label">Readers, worldwide</div>
+      <div class="c-bd-stats__num">42<em>k</em></div>
+      <div class="c-bd-stats__caption">annual subscribers to the print edition</div>
+    </div>
+    <div class="c-bd-stats__item c-bd-stats__item--inverted">
+      <div class="c-bd-stats__label">Ads run</div>
+      <div class="c-bd-stats__num">0</div>
+      <div class="c-bd-stats__caption">reader-funded, writer-paid, unsponsored</div>
+    </div>
+  </div>
+</section>

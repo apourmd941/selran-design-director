@@ -1,0 +1,227 @@
+<style>
+  .c-dp-tour {
+    position: fixed;
+    max-width: 340px;
+    background: var(--bg-2);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px 14px;
+    font-family: inherit;
+    isolation: isolate;
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--accent) 18%, transparent),
+      0 20px 60px -12px rgba(0, 0, 0, 0.6),
+      0 0 48px -12px color-mix(in oklab, var(--accent) 30%, transparent);
+    animation: c-dp-tour-rise 260ms cubic-bezier(0.19, 1, 0.22, 1);
+    /* Demo positioning — hosts override */
+    top: 120px;
+    left: 280px;
+    z-index: 80;
+  }
+  @keyframes c-dp-tour-rise {
+    from { opacity: 0; transform: translateY(4px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Arrow pointer (attached to the side pointing at target) */
+  .c-dp-tour::before,
+  .c-dp-tour::after {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 32px;
+    width: 16px;
+    height: 16px;
+    transform: rotate(45deg);
+    border-left: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-2);
+    box-shadow: -2px 2px 10px -2px color-mix(in oklab, var(--accent) 30%, transparent);
+  }
+  .c-dp-tour::after {
+    left: -10px;
+    background: transparent;
+    border-left-color: color-mix(in oklab, var(--accent) 18%, transparent);
+    border-bottom-color: color-mix(in oklab, var(--accent) 18%, transparent);
+    box-shadow: none;
+  }
+
+  .c-dp-tour__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .c-dp-tour__step {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+  }
+  .c-dp-tour__step span { color: var(--fg-muted); }
+  .c-dp-tour__close {
+    width: 22px; height: 22px;
+    border-radius: 4px;
+    background: transparent;
+    border: 0;
+    color: var(--fg-muted);
+    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: color 220ms cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-tour__close:hover { color: var(--fg); background: var(--bg); }
+  .c-dp-tour__close:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  .c-dp-tour__title {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+  .c-dp-tour__body {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    margin: 0 0 16px;
+  }
+
+  .c-dp-tour__progress {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .c-dp-tour__pip {
+    width: 18px; height: 2px;
+    border-radius: 2px;
+    background: var(--border);
+    transition: background-color 220ms cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-tour__pip[data-state="done"] { background: color-mix(in oklab, var(--accent) 60%, var(--border)); }
+  .c-dp-tour__pip[data-state="active"] {
+    background: var(--accent);
+    box-shadow: 0 0 10px -1px color-mix(in oklab, var(--accent) 70%, transparent);
+  }
+
+  .c-dp-tour__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .c-dp-tour__skip {
+    font-size: 12px;
+    color: var(--fg-muted);
+    background: transparent;
+    border: 0;
+    padding: 6px 4px;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+    transition: color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-tour__skip:hover { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+  .c-dp-tour__skip:focus-visible {
+    outline: none;
+    color: var(--fg);
+    box-shadow: 0 0 0 1px var(--accent);
+    border-radius: 3px;
+  }
+
+  .c-dp-tour__nav {
+    display: inline-flex;
+    gap: 6px;
+  }
+  .c-dp-tour__btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 220ms cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 220ms cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-tour__btn--ghost {
+    background: transparent;
+    color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-dp-tour__btn--ghost:hover { background: var(--bg); border-color: var(--accent); }
+  .c-dp-tour__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    box-shadow: 0 0 16px -4px color-mix(in oklab, var(--accent) 50%, transparent);
+  }
+  .c-dp-tour__btn--primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px -6px color-mix(in oklab, var(--accent) 60%, transparent);
+  }
+  .c-dp-tour__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--bg-2), 0 0 0 3px var(--accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-dp-tour { animation: none; }
+  }
+  @media (max-width: 900px) {
+    .c-dp-tour {
+      position: fixed;
+      left: 16px; right: 16px; bottom: 16px;
+      top: auto;
+      max-width: none;
+    }
+    .c-dp-tour::before,
+    .c-dp-tour::after { display: none; }
+  }
+</style>
+
+<div class="c-dp-tour"
+     role="dialog"
+     aria-modal="false"
+     aria-labelledby="dp-tour-title"
+     aria-describedby="dp-tour-body"
+     tabindex="-1">
+  <div class="c-dp-tour__head">
+    <span class="c-dp-tour__step"><strong>02</strong> <span>/ 05</span></span>
+    <button class="c-dp-tour__close" type="button" aria-label="Close tour">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <h2 id="dp-tour-title" class="c-dp-tour__title">Your command palette</h2>
+  <p id="dp-tour-body" class="c-dp-tour__body">Press <strong>&#8984;K</strong> anywhere to jump to any vault, run a command, or invite a teammate. This is the fastest way through the product.</p>
+
+  <div class="c-dp-tour__progress" aria-hidden="true">
+    <span class="c-dp-tour__pip" data-state="done"></span>
+    <span class="c-dp-tour__pip" data-state="active"></span>
+    <span class="c-dp-tour__pip" data-state="upcoming"></span>
+    <span class="c-dp-tour__pip" data-state="upcoming"></span>
+    <span class="c-dp-tour__pip" data-state="upcoming"></span>
+  </div>
+
+  <div class="c-dp-tour__actions">
+    <button class="c-dp-tour__skip" type="button">Skip tour</button>
+    <div class="c-dp-tour__nav">
+      <button class="c-dp-tour__btn c-dp-tour__btn--ghost" type="button">&larr; Prev</button>
+      <button class="c-dp-tour__btn c-dp-tour__btn--primary" type="button">Next &rarr;</button>
+    </div>
+  </div>
+</div>

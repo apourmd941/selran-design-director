@@ -1,0 +1,159 @@
+<style>
+  .c-tm-skel {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 32px;
+  }
+  .c-tm-skel__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .c-tm-skel__label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+  }
+  .c-tm-skel__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .c-tm-skel__card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    background: var(--bg);
+  }
+  .c-tm-skel__bar {
+    background: var(--bg-2);
+    border-radius: 4px;
+    height: 12px;
+    animation: c-tm-skel-pulse 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  .c-tm-skel__bar + .c-tm-skel__bar { margin-top: 10px; }
+  .c-tm-skel__bar--title { height: 14px; width: 60%; margin-bottom: 16px; }
+  .c-tm-skel__bar--long  { width: 100%; }
+  .c-tm-skel__bar--mid   { width: 82%; }
+  .c-tm-skel__bar--short { width: 40%; }
+  .c-tm-skel__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+  }
+  .c-tm-skel__num {
+    width: 68px; height: 16px;
+    background: var(--bg-2);
+    border-radius: 4px;
+    animation: c-tm-skel-pulse 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  .c-tm-skel__chip {
+    width: 44px; height: 18px;
+    background: var(--bg-2);
+    border-radius: 4px;
+    animation: c-tm-skel-pulse 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  .c-tm-skel__card:nth-child(2) .c-tm-skel__bar,
+  .c-tm-skel__card:nth-child(2) .c-tm-skel__num,
+  .c-tm-skel__card:nth-child(2) .c-tm-skel__chip { animation-delay: 120ms; }
+  .c-tm-skel__card:nth-child(3) .c-tm-skel__bar,
+  .c-tm-skel__card:nth-child(3) .c-tm-skel__num,
+  .c-tm-skel__card:nth-child(3) .c-tm-skel__chip { animation-delay: 240ms; }
+  .c-tm-skel__card:nth-child(4) .c-tm-skel__bar,
+  .c-tm-skel__card:nth-child(4) .c-tm-skel__num,
+  .c-tm-skel__card:nth-child(4) .c-tm-skel__chip { animation-delay: 360ms; }
+  .c-tm-skel__card:nth-child(5) .c-tm-skel__bar,
+  .c-tm-skel__card:nth-child(5) .c-tm-skel__num,
+  .c-tm-skel__card:nth-child(5) .c-tm-skel__chip { animation-delay: 480ms; }
+  .c-tm-skel__card:nth-child(6) .c-tm-skel__bar,
+  .c-tm-skel__card:nth-child(6) .c-tm-skel__num,
+  .c-tm-skel__card:nth-child(6) .c-tm-skel__chip { animation-delay: 600ms; }
+
+  @keyframes c-tm-skel-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.45; }
+  }
+
+  @media (max-width: 900px) {
+    .c-tm-skel__grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-tm-skel__bar,
+    .c-tm-skel__num,
+    .c-tm-skel__chip { animation: none; opacity: 0.7; }
+  }
+</style>
+
+<section class="c-tm-skel" aria-busy="true" aria-label="Loading ledgers">
+  <div class="c-tm-skel__header">
+    <div class="c-tm-skel__label">Loading ledgers…</div>
+    <div class="c-tm-skel__num" style="width: 120px;"></div>
+  </div>
+  <div class="c-tm-skel__grid">
+    <div class="c-tm-skel__card">
+      <div class="c-tm-skel__bar c-tm-skel__bar--title"></div>
+      <div class="c-tm-skel__bar c-tm-skel__bar--long"></div>
+      <div class="c-tm-skel__bar c-tm-skel__bar--mid"></div>
+      <div class="c-tm-skel__row">
+        <div class="c-tm-skel__num"></div>
+        <div class="c-tm-skel__chip"></div>
+      </div>
+    </div>
+    <div class="c-tm-skel__card">
+      <div class="c-tm-skel__bar c-tm-skel__bar--title"></div>
+      <div class="c-tm-skel__bar c-tm-skel__bar--long"></div>
+      <div class="c-tm-skel__bar c-tm-skel__bar--short"></div>
+      <div class="c-tm-skel__row">
+        <div class="c-tm-skel__num"></div>
+        <div class="c-tm-skel__chip"></div>
+      </div>
+    </div>
+    <div class="c-tm-skel__card">
+      <div class="c-tm-skel__bar c-tm-skel__bar--title"></div>
+      <div class="c-tm-skel__bar c-tm-skel__bar--mid"></div>
+      <div class="c-tm-skel__bar c-tm-skel__bar--long"></div>
+      <div class="c-tm-skel__row">
+        <div class="c-tm-skel__num"></div>
+        <div class="c-tm-skel__chip"></div>
+      </div>
+    </div>
+    <div class="c-tm-skel__card">
+      <div class="c-tm-skel__bar c-tm-skel__bar--title"></div>
+      <div class="c-tm-skel__bar c-tm-skel__bar--long"></div>
+      <div class="c-tm-skel__bar c-tm-skel__bar--mid"></div>
+      <div class="c-tm-skel__row">
+        <div class="c-tm-skel__num"></div>
+        <div class="c-tm-skel__chip"></div>
+      </div>
+    </div>
+    <div class="c-tm-skel__card">
+      <div class="c-tm-skel__bar c-tm-skel__bar--title"></div>
+      <div class="c-tm-skel__bar c-tm-skel__bar--short"></div>
+      <div class="c-tm-skel__bar c-tm-skel__bar--long"></div>
+      <div class="c-tm-skel__row">
+        <div class="c-tm-skel__num"></div>
+        <div class="c-tm-skel__chip"></div>
+      </div>
+    </div>
+    <div class="c-tm-skel__card">
+      <div class="c-tm-skel__bar c-tm-skel__bar--title"></div>
+      <div class="c-tm-skel__bar c-tm-skel__bar--mid"></div>
+      <div class="c-tm-skel__bar c-tm-skel__bar--short"></div>
+      <div class="c-tm-skel__row">
+        <div class="c-tm-skel__num"></div>
+        <div class="c-tm-skel__chip"></div>
+      </div>
+    </div>
+  </div>
+</section>

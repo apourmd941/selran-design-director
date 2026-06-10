@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{PACK_DISPLAY_NAME}} — hero component</title>
+  <!--
+    ═══════════════════════════════════════════════════════════════
+      pack-{{PACK_NAME}} · hero · {{BASE_DIRECTION}}
+      Scaffolded by `selran pack init`. This file is the canonical
+      starter for authors learning the five non-negotiables:
+        1. scoped class prefix   (.pack-{{PACK_NAME}}-hero-*)
+        2. token-driven colors   (var(--token, #fallback))
+        3. :focus-visible        (every interactive element)
+        4. prefers-reduced-motion (every transition)
+        5. humane font stack     (no Inter as first choice)
+
+      Consumes pack tokens (with hex fallbacks so the component
+      renders standalone even without the overlay loaded):
+        --pack-{{PACK_NAME}}-accent
+        --pack-{{PACK_NAME}}-accent-hover
+        --pack-{{PACK_NAME}}-bg
+        --pack-{{PACK_NAME}}-fg
+        --pack-{{PACK_NAME}}-border
+        --pack-{{PACK_NAME}}-muted
+
+      Scope:  .pack-{{PACK_NAME}}-hero
+      Notes:  44px min tap targets, tabular-nums on numbers,
+              responsive to 360px, no JS, no emoji.
+    ═══════════════════════════════════════════════════════════════
+  -->
+  <style>
+    /* ---------- Token declarations (override via overlay) ---------- */
+    :root {
+      --pack-{{PACK_NAME}}-accent: #333333;
+      --pack-{{PACK_NAME}}-accent-hover: #1a1a1a;
+      --pack-{{PACK_NAME}}-bg: #ffffff;
+      --pack-{{PACK_NAME}}-fg: #111111;
+      --pack-{{PACK_NAME}}-border: rgba(0, 0, 0, 0.08);
+      --pack-{{PACK_NAME}}-muted: rgba(17, 17, 17, 0.62);
+    }
+
+    /* ---------- Reset scoped to the component ---------- */
+    .pack-{{PACK_NAME}}-hero,
+    .pack-{{PACK_NAME}}-hero *,
+    .pack-{{PACK_NAME}}-hero *::before,
+    .pack-{{PACK_NAME}}-hero *::after {
+      box-sizing: border-box;
+    }
+
+    /* ---------- Root section ---------- */
+    .pack-{{PACK_NAME}}-hero {
+      background: var(--pack-{{PACK_NAME}}-bg, #ffffff);
+      color: var(--pack-{{PACK_NAME}}-fg, #111111);
+      font-family: 'General Sans', 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      padding: 96px 32px 88px;
+      border-bottom: 1px solid var(--pack-{{PACK_NAME}}-border, rgba(0, 0, 0, 0.08));
+    }
+
+    .pack-{{PACK_NAME}}-hero__inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* ---------- Eyebrow ---------- */
+    .pack-{{PACK_NAME}}-hero__eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--pack-{{PACK_NAME}}-accent, #333333);
+      margin-bottom: 28px;
+    }
+
+    /* ---------- Title ---------- */
+    .pack-{{PACK_NAME}}-hero__title {
+      margin: 0;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1.04;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--pack-{{PACK_NAME}}-fg, #111111);
+      max-width: 18ch;
+    }
+
+    /* ---------- Dek (sub-headline) ---------- */
+    .pack-{{PACK_NAME}}-hero__dek {
+      margin: 24px 0 0;
+      max-width: 56ch;
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--pack-{{PACK_NAME}}-muted, rgba(17, 17, 17, 0.62));
+    }
+
+    /* ---------- Proof line (numbers get tabular-nums) ---------- */
+    .pack-{{PACK_NAME}}-hero__proof {
+      margin: 20px 0 0;
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.01em;
+      color: var(--pack-{{PACK_NAME}}-muted, rgba(17, 17, 17, 0.62));
+    }
+
+    .pack-{{PACK_NAME}}-hero__proof-count {
+      font-weight: 500;
+      color: var(--pack-{{PACK_NAME}}-fg, #111111);
+    }
+
+    /* ---------- CTA row ---------- */
+    .pack-{{PACK_NAME}}-hero__cta-row {
+      margin-top: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    /* ---------- Buttons ---------- */
+    .pack-{{PACK_NAME}}-hero__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 20px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background-color 160ms cubic-bezier(0.2, 0, 0, 1),
+                  border-color 160ms cubic-bezier(0.2, 0, 0, 1),
+                  color 160ms cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .pack-{{PACK_NAME}}-hero__cta--primary {
+      background: var(--pack-{{PACK_NAME}}-accent, #333333);
+      color: var(--pack-{{PACK_NAME}}-bg, #ffffff);
+      border-color: var(--pack-{{PACK_NAME}}-accent, #333333);
+    }
+
+    .pack-{{PACK_NAME}}-hero__cta--primary:hover {
+      background: var(--pack-{{PACK_NAME}}-accent-hover, #1a1a1a);
+      border-color: var(--pack-{{PACK_NAME}}-accent-hover, #1a1a1a);
+    }
+
+    .pack-{{PACK_NAME}}-hero__cta--secondary {
+      background: transparent;
+      color: var(--pack-{{PACK_NAME}}-fg, #111111);
+      border-color: var(--pack-{{PACK_NAME}}-border, rgba(0, 0, 0, 0.08));
+    }
+
+    .pack-{{PACK_NAME}}-hero__cta--secondary:hover {
+      border-color: var(--pack-{{PACK_NAME}}-fg, #111111);
+    }
+
+    /* ---------- Focus rings on every interactive element ---------- */
+    .pack-{{PACK_NAME}}-hero__cta:focus-visible {
+      outline: 2px solid var(--pack-{{PACK_NAME}}-accent, #333333);
+      outline-offset: 3px;
+    }
+
+    /* ---------- Icon ---------- */
+    .pack-{{PACK_NAME}}-hero__icon {
+      flex: 0 0 auto;
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ---------- Responsive (down to 360px) ---------- */
+    @media (max-width: 720px) {
+      .pack-{{PACK_NAME}}-hero {
+        padding: 72px 20px 64px;
+      }
+      .pack-{{PACK_NAME}}-hero__title {
+        font-size: clamp(32px, 9vw, 48px);
+      }
+      .pack-{{PACK_NAME}}-hero__dek {
+        font-size: 16px;
+      }
+      .pack-{{PACK_NAME}}-hero__cta-row {
+        gap: 10px;
+      }
+      .pack-{{PACK_NAME}}-hero__cta {
+        flex: 1 1 auto;
+        justify-content: center;
+      }
+    }
+
+    /* ---------- Reduced-motion honor ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      .pack-{{PACK_NAME}}-hero__cta {
+        transition: opacity 160ms linear;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="pack-{{PACK_NAME}}-hero" aria-labelledby="pack-{{PACK_NAME}}-hero-title">
+    <div class="pack-{{PACK_NAME}}-hero__inner">
+
+      <!-- TODO: replace eyebrow with your section label (2-4 words, all-caps meaning) -->
+      <span class="pack-{{PACK_NAME}}-hero__eyebrow">Eyebrow label</span>
+
+      <!-- TODO: replace with your headline. Keep it under ~10 words. -->
+      <h1 id="pack-{{PACK_NAME}}-hero-title" class="pack-{{PACK_NAME}}-hero__title">
+        The headline that belongs to this pack.
+      </h1>
+
+      <!-- TODO: one-line dek. Qualify the headline, don't restate it. -->
+      <p class="pack-{{PACK_NAME}}-hero__dek">
+        A single clarifying sentence that tells the reader what happens on click and why they'd want that.
+      </p>
+
+      <!-- Tabular-nums on numeric proof line. Replace with a real number or delete. -->
+      <p class="pack-{{PACK_NAME}}-hero__proof">
+        Trusted by
+        <span class="pack-{{PACK_NAME}}-hero__proof-count">2,400</span>
+        teams shipping in production.
+      </p>
+
+      <div class="pack-{{PACK_NAME}}-hero__cta-row">
+        <!-- TODO: primary CTA — the one verb you want the reader to commit to -->
+        <a class="pack-{{PACK_NAME}}-hero__cta pack-{{PACK_NAME}}-hero__cta--primary" href="#primary">
+          Get started
+          <svg class="pack-{{PACK_NAME}}-hero__icon" viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5"/>
+          </svg>
+        </a>
+
+        <!-- TODO: secondary CTA — the lower-commitment escape hatch -->
+        <a class="pack-{{PACK_NAME}}-hero__cta pack-{{PACK_NAME}}-hero__cta--secondary" href="#secondary">
+          Learn more
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>

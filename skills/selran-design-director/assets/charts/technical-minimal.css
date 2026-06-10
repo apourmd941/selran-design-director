@@ -1,0 +1,139 @@
+/* Technical-Minimal — chart utilities
+ * Tonal stepping from accent #0A7A5C. Mono axis labels, tabular nums,
+ * hairline gridlines, legend suppressed in favor of direct end-labels.
+ */
+
+.dv-tm-root {
+  /* Series — tonal ramp from accent (emerald). Neutrals for low-emphasis. */
+  --chart-series-1: #0A7A5C;   /* accent */
+  --chart-series-2: #3BA684;   /* accent lightened */
+  --chart-series-3: #064D3A;   /* accent darkened */
+  --chart-series-4: #7CC8AE;   /* accent soft */
+  --chart-series-5: #71717A;   /* neutral anchor (zinc-500) */
+  --chart-series-6: #A1A1AA;   /* neutral light */
+  --chart-series-7: #033224;   /* accent near-black */
+  --chart-series-8: #52525B;   /* neutral deep */
+
+  --chart-axis-color: #52525B;
+  --chart-gridline: rgba(228, 228, 231, 0.6);
+  --chart-tick-color: #A1A1AA;
+  --chart-bg: #FAFAF9;
+  --chart-fg: #18181B;
+  --chart-border: #E4E4E7;
+  --chart-border-strong: #D4D4D8;
+
+  background: var(--chart-bg);
+  color: var(--chart-fg);
+  font-family: "General Sans", system-ui, sans-serif;
+}
+
+.dv-tm-root.dv-tm-dark {
+  --chart-series-1: #10B981;
+  --chart-series-2: #34D399;
+  --chart-series-3: #047857;
+  --chart-series-4: #6EE7B7;
+  --chart-series-5: #A1A1AA;
+  --chart-series-6: #D4D4D8;
+  --chart-series-7: #064E3B;
+  --chart-series-8: #71717A;
+  --chart-axis-color: #A1A1AA;
+  --chart-gridline: rgba(39, 39, 42, 0.8);
+  --chart-tick-color: #71717A;
+  --chart-bg: #0A0A0B;
+  --chart-fg: #F4F4F5;
+  --chart-border: #27272A;
+  --chart-border-strong: #3F3F46;
+}
+
+/* Title / subtitle */
+.dv-tm-title {
+  font-family: "General Sans", system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--chart-fg);
+  margin: 0 0 4px 0;
+}
+.dv-tm-subtitle {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--chart-tick-color);
+  margin: 0 0 16px 0;
+}
+
+/* Axis */
+.dv-tm-axis {
+  stroke: var(--chart-border-strong);
+  stroke-width: 1;
+  fill: none;
+}
+.dv-tm-gridline {
+  stroke: var(--chart-gridline);
+  stroke-width: 1;
+  fill: none;
+}
+.dv-tm-tick {
+  fill: var(--chart-tick-color);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+.dv-tm-axis-label {
+  fill: var(--chart-axis-color);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Legend — used only when direct labels aren't feasible */
+.dv-tm-legend {
+  display: flex;
+  gap: 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--chart-axis-color);
+  padding: 8px 0;
+}
+.dv-tm-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.dv-tm-legend-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Tooltip — hairline, no shadow */
+.dv-tm-tooltip {
+  background: var(--chart-bg);
+  border: 1px solid var(--chart-border-strong);
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--chart-fg);
+  box-shadow: none;
+}
+
+/* Annotation — rarely used here; kept minimal */
+.dv-tm-annotation {
+  font-family: "General Sans", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  fill: var(--chart-fg);
+}
+.dv-tm-annotation-line {
+  stroke: var(--chart-border-strong);
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+}

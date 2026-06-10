@@ -1,0 +1,189 @@
+<style>
+  .c-br-done {
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', ui-monospace, monospace);
+    color: var(--fg);
+    background: var(--bg);
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 16px;
+  }
+  .c-br-done__card {
+    width: 100%;
+    max-width: 560px;
+    border: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+  }
+  .c-br-done__head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 10px 16px;
+    background: var(--fg);
+    color: var(--bg);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    border-bottom: 2px solid var(--border, var(--fg));
+  }
+  .c-br-done__banner {
+    padding: 28px 24px 22px;
+    text-align: center;
+    /* diagonal stripes in bg-2 for success emphasis — no green */
+    background:
+      repeating-linear-gradient(
+        -45deg,
+        transparent 0,
+        transparent 10px,
+        color-mix(in oklab, var(--fg) 8%, transparent) 10px,
+        color-mix(in oklab, var(--fg) 8%, transparent) 12px
+      ),
+      var(--bg-2, color-mix(in oklab, var(--fg) 4%, var(--bg)));
+    border-bottom: 2px solid var(--border, var(--fg));
+  }
+  .c-br-done__tag {
+    display: inline-block;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+    color: var(--fg);
+    margin-bottom: 14px;
+  }
+  .c-br-done__headline {
+    font-size: 40px;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--fg);
+    margin: 0 0 8px;
+  }
+  .c-br-done__sub {
+    font-size: 12px;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin: 0;
+  }
+  .c-br-done__body {
+    padding: 22px 24px;
+  }
+  .c-br-done__summary {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 16px;
+    font-size: 12px;
+    padding: 14px 16px;
+    margin: 0 0 22px;
+    border: 2px dashed var(--border, var(--fg));
+    background: var(--bg);
+  }
+  .c-br-done__summary dt {
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+  .c-br-done__summary dd {
+    margin: 0;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+  }
+  .c-br-done__copy {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0 0 22px;
+  }
+  .c-br-done__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .c-br-done__btn {
+    padding: 14px 20px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    border: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+    color: var(--fg);
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: -2px;
+    white-space: nowrap;
+  }
+  .c-br-done__btn:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .c-br-done__btn:focus-visible {
+    outline: 4px solid var(--accent);
+    outline-offset: -4px;
+  }
+  .c-br-done__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-br-done__btn--primary:hover {
+    background: var(--fg);
+    color: var(--accent);
+    border-color: var(--fg);
+  }
+  .c-br-done__foot {
+    padding: 10px 16px;
+    border-top: 2px solid var(--border, var(--fg));
+    font-size: 11px;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  @media (max-width: 900px) {
+    .c-br-done__headline { font-size: 30px; }
+    .c-br-done__banner { padding: 22px 18px 18px; }
+    .c-br-done__body { padding: 18px; }
+  }
+</style>
+
+<section class="c-br-done" role="status" aria-live="polite" aria-labelledby="c-br-done-title">
+  <div class="c-br-done__card">
+    <div class="c-br-done__head">
+      <span>// INTAKE / COMMITTED</span>
+      <span>REF: NP-143</span>
+    </div>
+
+    <div class="c-br-done__banner">
+      <span class="c-br-done__tag" aria-hidden="true">[ OK ]</span>
+      <h1 class="c-br-done__headline" id="c-br-done-title">DONE.</h1>
+      <p class="c-br-done__sub">// intake written to ledger</p>
+    </div>
+
+    <div class="c-br-done__body">
+      <p class="c-br-done__copy">
+        Release filed. The plant has the order. Packing slips queued for print. You can close this tab. We will not email you about it.
+      </p>
+
+      <dl class="c-br-done__summary">
+        <dt>CAT #</dt><dd>NP-143</dd>
+        <dt>TITLE</dt><dd>OFFCUTS &mdash; "PINCH ROLLER"</dd>
+        <dt>PRESS</dt><dd>300 COPIES &middot; STANDARD</dd>
+        <dt>FILED</dt><dd>04/21/2026 &middot; 14:02</dd>
+      </dl>
+
+      <div class="c-br-done__actions">
+        <a class="c-br-done__btn c-br-done__btn--primary" href="#" autofocus>[ PROCEED ]</a>
+        <a class="c-br-done__btn" href="#">[ BACK ]</a>
+      </div>
+    </div>
+
+    <div class="c-br-done__foot">filetype: ledger.entry &middot; size: 0.4kb &middot; status: committed</div>
+  </div>
+</section>

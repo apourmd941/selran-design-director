@@ -1,0 +1,114 @@
+<style>
+  .c-br-crumbs {
+    display: block;
+    padding: 12px 16px;
+    background: var(--bg);
+    color: var(--fg);
+    border-bottom: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', ui-monospace, monospace);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .c-br-crumbs__list {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    line-height: 1.4;
+  }
+  .c-br-crumbs__item {
+    display: inline-flex;
+    align-items: center;
+  }
+  .c-br-crumbs__link {
+    color: var(--fg);
+    text-decoration: none;
+    padding: 3px 8px;
+    border: 2px solid transparent;
+    display: inline-block;
+  }
+  .c-br-crumbs__link:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .c-br-crumbs__link:focus-visible {
+    outline: 4px solid var(--accent);
+    outline-offset: -4px;
+  }
+  .c-br-crumbs__sep {
+    display: inline-block;
+    padding: 0 6px;
+    color: var(--fg-muted);
+    font-weight: 700;
+    user-select: none;
+  }
+  .c-br-crumbs__current {
+    font-weight: 700;
+    padding: 3px 8px;
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .c-br-crumbs__root {
+    font-weight: 700;
+    margin-right: 2px;
+  }
+  .c-br-crumbs__meta {
+    display: inline-block;
+    margin-left: 12px;
+    padding: 2px 6px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+    border: 2px solid var(--border, var(--fg));
+  }
+  .c-br-crumbs__truncate { display: none; }
+
+  @media (max-width: 900px) {
+    .c-br-crumbs__list .c-br-crumbs__item--mid,
+    .c-br-crumbs__list .c-br-crumbs__item--mid + .c-br-crumbs__item .c-br-crumbs__sep:first-child {
+      display: none;
+    }
+    .c-br-crumbs__truncate { display: inline-flex; }
+    .c-br-crumbs__meta { display: none; }
+  }
+</style>
+
+<nav class="c-br-crumbs" aria-label="Breadcrumb">
+  <ol class="c-br-crumbs__list">
+    <li class="c-br-crumbs__item">
+      <a class="c-br-crumbs__link c-br-crumbs__root" href="#">WORKSPACE</a>
+    </li>
+    <li class="c-br-crumbs__item" aria-hidden="true"><span class="c-br-crumbs__sep">&gt;</span></li>
+
+    <li class="c-br-crumbs__item c-br-crumbs__item--mid">
+      <a class="c-br-crumbs__link" href="#">NORTH&nbsp;PRESS</a>
+    </li>
+    <li class="c-br-crumbs__item c-br-crumbs__item--mid" aria-hidden="true"><span class="c-br-crumbs__sep">&gt;</span></li>
+
+    <li class="c-br-crumbs__item c-br-crumbs__truncate">
+      <span class="c-br-crumbs__link" aria-hidden="true">...</span>
+      <span class="c-br-crumbs__sep" aria-hidden="true">&gt;</span>
+    </li>
+
+    <li class="c-br-crumbs__item c-br-crumbs__item--mid">
+      <a class="c-br-crumbs__link" href="#">CATALOG</a>
+    </li>
+    <li class="c-br-crumbs__item c-br-crumbs__item--mid" aria-hidden="true"><span class="c-br-crumbs__sep">&gt;</span></li>
+
+    <li class="c-br-crumbs__item">
+      <a class="c-br-crumbs__link" href="#">RELEASES</a>
+    </li>
+    <li class="c-br-crumbs__item" aria-hidden="true"><span class="c-br-crumbs__sep">&gt;</span></li>
+
+    <li class="c-br-crumbs__item">
+      <span class="c-br-crumbs__current" aria-current="page">NP-142 / FERRIC</span>
+    </li>
+
+    <li class="c-br-crumbs__item">
+      <span class="c-br-crumbs__meta" aria-hidden="true">DEPTH: 5</span>
+    </li>
+  </ol>
+</nav>

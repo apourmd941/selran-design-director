@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: bold-distinctive
+  use: 404 page-not-found
+  variables: var(fg), var(bg), var(accent)
+  notes: massive display 404 numeral as the illustration; accent bar behind; small-caps caption
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="404 not found">
+  <style>
+    .bd-bg { fill: var(--bg, #F5F0E8); }
+    .bd-fg-fill { fill: var(--fg, #0A0A0B); }
+    .bd-accent-fill { fill: var(--accent, #C72500); }
+    .bd-display { font-family: "PP Editorial New", "Fraunces", "Tiempos Headline", Georgia, serif; font-weight: 900; }
+    .bd-meta { font-family: "General Sans", "Söhne", "Inter", ui-sans-serif, sans-serif; font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; fill: var(--fg, #0A0A0B); }
+    .bd-rule { stroke: var(--fg, #0A0A0B); stroke-width: 1; fill: none; vector-effect: non-scaling-stroke; }
+  </style>
+
+  <rect class="bd-bg" width="400" height="400"/>
+
+  <!-- top-left metadata -->
+  <line class="bd-rule" x1="30" y1="54" x2="180" y2="54"/>
+  <text x="30" y="44" class="bd-meta">Error · 404</text>
+
+  <!-- huge accent slash behind numerals (diagonal bar) -->
+  <polygon class="bd-accent-fill" points="10,280 390,130 390,180 10,330"/>
+
+  <!-- massive display 404, outline only, overlaps accent slash -->
+  <text x="200" y="290"
+        text-anchor="middle"
+        class="bd-display"
+        font-size="260"
+        letter-spacing="-12"
+        fill="var(--bg, #F5F0E8)"
+        stroke="var(--fg, #0A0A0B)"
+        stroke-width="3"
+        paint-order="stroke"
+        vector-effect="non-scaling-stroke">404</text>
+
+  <!-- bottom caption, italic display -->
+  <text x="200" y="355"
+        text-anchor="middle"
+        class="bd-display"
+        font-size="28"
+        font-style="italic"
+        fill="var(--fg, #0A0A0B)">Nothing to see here.</text>
+
+  <!-- bottom rule with small-caps -->
+  <line class="bd-rule" x1="60" y1="375" x2="340" y2="375"/>
+  <text x="200" y="392" text-anchor="middle" class="bd-meta">Route · Unmapped</text>
+</svg>

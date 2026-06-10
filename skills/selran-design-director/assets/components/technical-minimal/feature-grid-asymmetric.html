@@ -1,0 +1,133 @@
+<style>
+  .c-feat {
+    padding: 120px 0;
+  }
+  .c-feat__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .c-feat__head {
+    margin-bottom: 64px;
+    max-width: 720px;
+  }
+  .c-feat__head .mono {
+    color: var(--fg-muted);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .c-feat__head h2 {
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    color: var(--fg);
+  }
+  .c-feat__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .c-feat__tile {
+    background: var(--bg);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .c-feat__tile--big {
+    grid-row: span 2;
+    padding: 40px;
+  }
+  .c-feat__icon {
+    width: 32px; height: 32px;
+    color: var(--accent);
+  }
+  .c-feat__tile h3 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+  }
+  .c-feat__tile--big h3 { font-size: 24px; }
+  .c-feat__tile p {
+    color: var(--fg-muted);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .c-feat__link {
+    margin-top: auto;
+    font-size: 14px;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: gap 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-feat__link:hover { gap: 10px; }
+
+  @media (max-width: 900px) {
+    .c-feat { padding: 80px 0; }
+    .c-feat__head h2 { font-size: 28px; }
+    .c-feat__grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .c-feat__tile--big { grid-row: auto; }
+  }
+</style>
+
+<section class="c-feat">
+  <div class="c-feat__inner">
+    <div class="c-feat__head">
+      <span class="mono">01 · Product</span>
+      <h2>One ledger. Every dollar accounted for, from card swipe to close.</h2>
+    </div>
+    <div class="c-feat__grid">
+      <div class="c-feat__tile c-feat__tile--big">
+        <svg class="c-feat__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+          <path d="M3 5h18M3 12h18M3 19h18"/>
+          <circle cx="8" cy="5" r="1.5" fill="currentColor"/>
+          <circle cx="14" cy="12" r="1.5" fill="currentColor"/>
+          <circle cx="10" cy="19" r="1.5" fill="currentColor"/>
+        </svg>
+        <h3>Unified general ledger</h3>
+        <p>Every transaction — card, ACH, wire, invoice, expense report — posts to one double-entry ledger in real time. No import jobs, no reconciliation queue, no month-end archaeology.</p>
+        <a href="#" class="c-feat__link">Inside the ledger →</a>
+      </div>
+      <div class="c-feat__tile">
+        <svg class="c-feat__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+          <rect x="3" y="6" width="18" height="12" rx="1"/>
+          <path d="M3 10h18"/>
+        </svg>
+        <h3>Virtual &amp; physical cards</h3>
+        <p>Issue in seconds. Per-vendor limits, auto-categorized, posted straight to the ledger.</p>
+      </div>
+      <div class="c-feat__tile">
+        <svg class="c-feat__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+          <path d="M4 20V10l8-6 8 6v10"/>
+          <path d="M9 20v-6h6v6"/>
+        </svg>
+        <h3>Treasury sweep</h3>
+        <p>Idle cash moves to yield-bearing accounts overnight. FDIC-insured up to $5M.</p>
+      </div>
+      <div class="c-feat__tile">
+        <svg class="c-feat__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+          <path d="M4 17l6-6 4 4 6-8"/>
+          <path d="M14 5h6v6"/>
+        </svg>
+        <h3>Forecast &amp; actuals</h3>
+        <p>Build a driver-based model against real ledger data. Variance reports in one click.</p>
+      </div>
+      <div class="c-feat__tile">
+        <svg class="c-feat__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+          <rect x="4" y="3" width="16" height="18" rx="1"/>
+          <path d="M8 8h8M8 12h8M8 16h5"/>
+        </svg>
+        <h3>Audit-ready trail</h3>
+        <p>Immutable log of every edit, approval, and journal entry. Export to your auditor's format.</p>
+      </div>
+    </div>
+  </div>
+</section>

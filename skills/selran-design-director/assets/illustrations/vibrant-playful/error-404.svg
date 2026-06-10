@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: vibrant-playful
+  use: 404 page-not-found
+  variables: var(fg), var(bg), var(accent), var(palette-2)..5
+  notes: bold asymmetric collage, big 404 numeral as a layout element with pattern fill
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="404">
+  <style>
+    .vp-accent { fill: var(--accent, #C44A2E); }
+    .vp-p2     { fill: var(--palette-2, #1F6B88); }
+    .vp-p3     { fill: var(--palette-3, #9C6014); }
+    .vp-p4     { fill: var(--palette-4, #553E5A); }
+    .vp-p5     { fill: var(--palette-5, #2A7B60); }
+    .vp-fg-stroke { stroke: var(--fg, #1A1A1A); fill: none; stroke-width: 3; vector-effect: non-scaling-stroke; }
+  </style>
+
+  <defs>
+    <pattern id="vpe4-stripes" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="var(--palette-2, #1F6B88)"/>
+      <rect width="3" height="8" fill="var(--accent, #C44A2E)"/>
+    </pattern>
+    <pattern id="vpe4-dots" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="5" r="1.4" fill="var(--fg, #1A1A1A)"/>
+    </pattern>
+  </defs>
+
+  <!-- big colored background blob, green, rotated -->
+  <path class="vp-p5" d="M 60 120 L 320 60 L 360 280 L 100 340 Z" transform="rotate(-5 200 200)"/>
+
+  <!-- stripe-fill circle overlapping -->
+  <circle cx="100" cy="300" r="66" fill="url(#vpe4-stripes)"/>
+  <circle cx="100" cy="300" r="66" class="vp-fg-stroke"/>
+
+  <!-- huge 404 as display layout element -->
+  <text x="200" y="245"
+        text-anchor="middle"
+        font-family="Satoshi, General Sans, DM Sans, Söhne, ui-sans-serif, sans-serif"
+        font-weight="800"
+        font-size="150"
+        letter-spacing="-8"
+        fill="var(--bg, #FFFBF5)"
+        stroke="var(--fg, #1A1A1A)"
+        stroke-width="4"
+        paint-order="stroke">404</text>
+
+  <!-- dot-fill blob top-right -->
+  <path fill="url(#vpe4-dots)" d="M 280 50 L 360 60 L 350 130 L 270 120 Z" transform="rotate(8 320 90)"/>
+
+  <!-- amber pill bottom-right -->
+  <rect x="270" y="290" width="90" height="30" rx="15" class="vp-p3"/>
+
+  <!-- purple bolt -->
+  <polyline points="330,150 310,200 340,200 320,260"
+            fill="none"
+            stroke="var(--palette-4, #553E5A)"
+            stroke-width="6"
+            stroke-linejoin="miter"
+            stroke-linecap="square"
+            vector-effect="non-scaling-stroke"/>
+
+  <!-- tagline -->
+  <text x="200" y="370"
+        text-anchor="middle"
+        font-family="Satoshi, General Sans, DM Sans, ui-sans-serif, sans-serif"
+        font-weight="600"
+        font-size="14"
+        fill="var(--fg, #1A1A1A)">Oops — that page took a vacation.</text>
+</svg>

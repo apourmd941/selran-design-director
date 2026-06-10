@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: technical-minimal
+  use: 404 page-not-found
+  variables: var(fg), var(accent)
+  notes: wireframe page schematic with a "broken link" gap; annotation label; no cartoon characters
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Page not found">
+  <style>
+    .tm-stroke { stroke: var(--fg, currentColor); fill: none; stroke-width: 1.25; vector-effect: non-scaling-stroke; }
+    .tm-thin   { stroke: var(--fg, currentColor); fill: none; stroke-width: 1; opacity: .3; vector-effect: non-scaling-stroke; }
+    .tm-dash   { stroke: var(--fg, currentColor); fill: none; stroke-width: 1; stroke-dasharray: 3 3; opacity: .5; vector-effect: non-scaling-stroke; }
+    .tm-accent-stroke { stroke: var(--accent, #0A7A5C); fill: none; stroke-width: 1.25; vector-effect: non-scaling-stroke; }
+    .tm-accent { fill: var(--accent, #0A7A5C); opacity: .2; }
+    .tm-label  { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; fill: var(--fg, currentColor); opacity: .55; letter-spacing: .08em; }
+  </style>
+
+  <!-- schematic page (left) -->
+  <g transform="translate(70 100)">
+    <rect class="tm-stroke" x="0" y="0" width="110" height="150" rx="1"/>
+    <line class="tm-thin" x1="10" y1="22" x2="60" y2="22"/>
+    <line class="tm-thin" x1="10" y1="38" x2="90" y2="38"/>
+    <line class="tm-thin" x1="10" y1="54" x2="80" y2="54"/>
+    <rect class="tm-thin" x="10" y="72" width="90" height="50"/>
+  </g>
+
+  <!-- broken link: dashed arrow with gap + accent marker -->
+  <g transform="translate(0 175)">
+    <line class="tm-dash" x1="190" y1="0" x2="215" y2="0"/>
+    <circle cx="220" cy="0" r="4" class="tm-accent"/>
+    <circle cx="220" cy="0" r="4" class="tm-accent-stroke"/>
+    <line class="tm-accent-stroke" x1="216" y1="-4" x2="224" y2="4"/>
+    <line class="tm-accent-stroke" x1="224" y1="-4" x2="216" y2="4"/>
+    <line class="tm-dash" x1="230" y1="0" x2="255" y2="0"/>
+  </g>
+
+  <!-- schematic page (right, "missing" — hollow frame only) -->
+  <g transform="translate(265 100)">
+    <rect class="tm-dash" x="0" y="0" width="110" height="150" rx="1"/>
+  </g>
+
+  <!-- large 404 numeral, thin outline -->
+  <text x="200" y="70"
+        text-anchor="middle"
+        font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+        font-size="48"
+        font-weight="500"
+        fill="none"
+        stroke="var(--fg, currentColor)"
+        stroke-width="1.25"
+        letter-spacing="8">404</text>
+
+  <!-- annotation -->
+  <g transform="translate(0 310)">
+    <line class="tm-thin" x1="80" y1="0" x2="320" y2="0"/>
+    <text x="80"  y="20" class="tm-label">ROUTE</text>
+    <text x="320" y="20" text-anchor="end" class="tm-label">NOT FOUND</text>
+  </g>
+</svg>

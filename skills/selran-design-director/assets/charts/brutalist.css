@@ -1,0 +1,156 @@
+/* Brutalist — chart utilities
+ * Tonal stepping on accent #B84400, but mostly binary black/white/accent.
+ * Raw full grid, monospace everywhere, zero radius, zero shadow.
+ */
+
+.dv-br-root {
+  /* Series — accent + stark neutrals. No soft tints. */
+  --chart-series-1: #000000;   /* primary */
+  --chart-series-2: #B84400;   /* accent (safety orange) */
+  --chart-series-3: #595959;   /* gray */
+  --chart-series-4: #A88100;   /* warning yellow */
+  --chart-series-5: #007A3D;   /* success green */
+  --chart-series-6: #D10000;   /* danger red */
+  --chart-series-7: #1A1A1A;   /* near-black */
+  --chart-series-8: #999999;   /* mid gray */
+
+  --chart-axis-color: #000000;
+  --chart-gridline: rgba(0, 0, 0, 1);
+  --chart-tick-color: #000000;
+  --chart-bg: #FFFFFF;
+  --chart-fg: #000000;
+  --chart-border: #000000;
+  --chart-border-strong: #000000;
+
+  background: var(--chart-bg);
+  color: var(--chart-fg);
+  font-family: "Space Mono", "Courier New", monospace;
+  border: 2px solid var(--chart-border);
+  padding: 16px;
+}
+
+.dv-br-root.dv-br-dark {
+  --chart-series-1: #FFFFFF;
+  --chart-series-2: #FF6B00;
+  --chart-series-3: #999999;
+  --chart-series-4: #FFCC00;
+  --chart-series-5: #00E070;
+  --chart-series-6: #FF3030;
+  --chart-series-7: #DDDDDD;
+  --chart-series-8: #666666;
+  --chart-axis-color: #FFFFFF;
+  --chart-gridline: rgba(255, 255, 255, 1);
+  --chart-tick-color: #FFFFFF;
+  --chart-bg: #000000;
+  --chart-fg: #FFFFFF;
+  --chart-border: #FFFFFF;
+  --chart-border-strong: #FFFFFF;
+}
+
+/* Title / subtitle */
+.dv-br-title {
+  font-family: "Space Mono", monospace;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--chart-fg);
+  margin: 0 0 4px 0;
+  border-bottom: 2px solid var(--chart-border);
+  padding-bottom: 8px;
+}
+.dv-br-subtitle {
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--chart-fg);
+  margin: 0 0 16px 0;
+}
+
+/* Axis — full visible grid, 1px */
+.dv-br-axis {
+  stroke: var(--chart-axis-color);
+  stroke-width: 1;
+  fill: none;
+}
+.dv-br-gridline {
+  stroke: var(--chart-gridline);
+  stroke-width: 1;
+  fill: none;
+}
+.dv-br-tick {
+  fill: var(--chart-tick-color);
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  font-weight: 400;
+}
+.dv-br-axis-label {
+  fill: var(--chart-axis-color);
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+/* Legend — bracketed mono labels */
+.dv-br-legend {
+  display: flex;
+  gap: 16px;
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  color: var(--chart-fg);
+  padding: 12px 0 0 0;
+  border-top: 1px solid var(--chart-border);
+  margin-top: 12px;
+}
+.dv-br-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.dv-br-legend-item::before { content: "["; }
+.dv-br-legend-item::after { content: "]"; }
+.dv-br-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 0;
+  display: inline-block;
+}
+
+/* Tooltip — flat, bordered, no shadow, no radius */
+.dv-br-tooltip {
+  background: var(--chart-bg);
+  border: 2px solid var(--chart-border);
+  border-radius: 0;
+  padding: 8px 10px;
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  color: var(--chart-fg);
+  box-shadow: none;
+}
+.dv-br-tooltip:hover {
+  background: var(--chart-fg);
+  color: var(--chart-bg);
+}
+
+/* Annotation */
+.dv-br-annotation {
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  fill: var(--chart-fg);
+}
+.dv-br-annotation-line {
+  stroke: var(--chart-fg);
+  stroke-width: 1;
+  fill: none;
+}
+
+/* ASCII sparkline helper */
+.dv-br-sparkline-ascii {
+  font-family: "Space Mono", monospace;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: var(--chart-fg);
+  white-space: pre;
+}

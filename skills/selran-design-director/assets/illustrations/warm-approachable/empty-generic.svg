@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: warm-approachable
+  use: empty state
+  variables: var(fg), var(bg), var(accent)
+  notes: a warm empty basket sketch with rounded caps; soft pastel shadow; italic legend
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Nothing here yet">
+  <style>
+    .wa-stroke { stroke: var(--fg, #2D1B0F); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+    .wa-thin   { stroke: var(--fg, #2D1B0F); fill: none; stroke-width: 1.5; stroke-linecap: round; opacity: .5; vector-effect: non-scaling-stroke; }
+    .wa-accent-soft { fill: var(--accent, #B04A2C); opacity: .2; }
+    .wa-blush-soft  { fill: #E8B39A; opacity: .7; }
+    .wa-serif-it { font-family: "Fraunces", "Crimson Pro", Georgia, serif; font-style: italic; fill: var(--fg, #2D1B0F); opacity: .7; }
+  </style>
+
+  <!-- soft ground shadow -->
+  <ellipse cx="200" cy="320" rx="120" ry="12" class="wa-blush-soft"/>
+
+  <!-- basket: a wide rounded ellipse at top + tapered body -->
+  <g transform="translate(200 240)">
+    <!-- body -->
+    <path class="wa-stroke" fill="var(--bg, #FAF3E7)"
+          d="M -100 -10 C -105 30 -88 60 -68 74 L 68 74 C 88 60 105 30 100 -10 Z"/>
+
+    <!-- rim -->
+    <ellipse cx="0" cy="-10" rx="100" ry="16" fill="var(--bg, #FAF3E7)" class="wa-stroke"/>
+    <ellipse cx="0" cy="-10" rx="100" ry="16" class="wa-accent-soft"/>
+
+    <!-- weave lines on the body (rounded) -->
+    <path class="wa-thin" d="M -90 10 C -60 6 -30 14 0 10 C 30 6 60 14 90 10"/>
+    <path class="wa-thin" d="M -82 30 C -52 26 -22 34  8 30 C 38 26 68 34 84 30"/>
+    <path class="wa-thin" d="M -72 50 C -42 46 -12 54 18 50 C 48 46 68 54 74 50"/>
+
+    <!-- handle arc above -->
+    <path class="wa-stroke" stroke-width="2" d="M -70 -18 C -70 -70 70 -70 70 -18"/>
+  </g>
+
+  <!-- italic caption -->
+  <text x="200" y="360" text-anchor="middle" font-size="18" class="wa-serif-it">it's empty in here.</text>
+</svg>

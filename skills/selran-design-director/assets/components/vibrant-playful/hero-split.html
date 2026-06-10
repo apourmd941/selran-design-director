@@ -1,0 +1,183 @@
+<style>
+  .c-vp-hero-split {
+    padding: 96px 0;
+  }
+  .c-vp-hero-split__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .c-vp-hero-split__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    border-radius: 9999px;
+    background: color-mix(in oklab, var(--p0, var(--accent)) 14%, var(--bg));
+    color: var(--p0, var(--accent));
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .c-vp-hero-split__headline {
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 20px;
+  }
+  .c-vp-hero-split__headline em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .c-vp-hero-split__lead {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    max-width: 52ch;
+    margin-bottom: 32px;
+  }
+  .c-vp-hero-split__cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .c-vp-hero-split__btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 22px;
+    font-size: 15px; font-weight: 500;
+    border-radius: var(--radius-md, 12px);
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 280ms cubic-bezier(0.34, 1.1, 0.64, 1),
+                box-shadow 280ms cubic-bezier(0.34, 1.1, 0.64, 1);
+  }
+  .c-vp-hero-split__btn--primary { background: var(--accent); color: var(--bg); }
+  .c-vp-hero-split__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.14);
+  }
+  .c-vp-hero-split__btn--ghost {
+    background: transparent; color: var(--fg);
+    border-color: var(--border-strong, var(--border));
+  }
+  .c-vp-hero-split__btn--ghost:hover { background: var(--bg-2); }
+
+  .c-vp-hero-split__board {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: var(--bg-2);
+    border-radius: var(--radius-lg, 20px);
+    padding: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  }
+  .c-vp-hero-split__tile {
+    position: absolute;
+    border-radius: var(--radius-md, 12px);
+    padding: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--bg);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  }
+  .c-vp-hero-split__tile-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+    margin-bottom: 6px;
+  }
+  .c-vp-hero-split__tile-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .c-vp-hero-split__t0 {
+    top: 10%; left: 6%;
+    width: 46%;
+    background: var(--p0, var(--accent));
+    transform: rotate(-2deg);
+  }
+  .c-vp-hero-split__t1 {
+    top: 22%; right: 6%;
+    width: 44%;
+    background: var(--p1, var(--accent));
+    transform: rotate(3deg);
+  }
+  .c-vp-hero-split__t2 {
+    bottom: 16%; left: 18%;
+    width: 38%;
+    background: var(--p2, var(--accent));
+    transform: rotate(-1.5deg);
+  }
+  .c-vp-hero-split__t3 {
+    bottom: 6%; right: 10%;
+    width: 40%;
+    background: var(--p3, var(--accent));
+    transform: rotate(2deg);
+  }
+  .c-vp-hero-split__cursor {
+    position: absolute;
+    top: 48%; left: 48%;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--p4, var(--accent));
+    color: var(--bg);
+  }
+  .c-vp-hero-split__cursor::before {
+    content: '';
+    position: absolute;
+    top: -6px; left: -4px;
+    border: 6px solid transparent;
+    border-bottom-color: var(--p4, var(--accent));
+    transform: rotate(-30deg);
+  }
+
+  @media (max-width: 900px) {
+    .c-vp-hero-split { padding: 72px 0; }
+    .c-vp-hero-split__inner { grid-template-columns: 1fr; gap: 48px; }
+  }
+</style>
+
+<section class="c-vp-hero-split">
+  <div class="c-vp-hero-split__inner">
+    <div>
+      <span class="c-vp-hero-split__eyebrow">Real-time, together</span>
+      <h1 class="c-vp-hero-split__headline">
+        Sketch, comment, ship &mdash; <em>without the Slack ping.</em>
+      </h1>
+      <p class="c-vp-hero-split__lead">
+        Twelve designers can live-edit the same board. Every stroke has history, every comment has a cursor, and every export has a handoff link that doesn't go stale.
+      </p>
+      <div class="c-vp-hero-split__cta">
+        <a href="#" class="c-vp-hero-split__btn c-vp-hero-split__btn--primary">Try the canvas</a>
+        <a href="#" class="c-vp-hero-split__btn c-vp-hero-split__btn--ghost">See how it works</a>
+      </div>
+    </div>
+    <div class="c-vp-hero-split__board" role="img" aria-label="Collaborative canvas preview">
+      <div class="c-vp-hero-split__tile c-vp-hero-split__t0">
+        <div class="c-vp-hero-split__tile-label">Sketch</div>
+        <div class="c-vp-hero-split__tile-title">Onboarding / Step 01</div>
+      </div>
+      <div class="c-vp-hero-split__tile c-vp-hero-split__t1">
+        <div class="c-vp-hero-split__tile-label">Animate</div>
+        <div class="c-vp-hero-split__tile-title">Empty-state loop</div>
+      </div>
+      <div class="c-vp-hero-split__tile c-vp-hero-split__t2">
+        <div class="c-vp-hero-split__tile-label">Export</div>
+        <div class="c-vp-hero-split__tile-title">Brand kit / icons</div>
+      </div>
+      <div class="c-vp-hero-split__tile c-vp-hero-split__t3">
+        <div class="c-vp-hero-split__tile-label">Review</div>
+        <div class="c-vp-hero-split__tile-title">3 new comments</div>
+      </div>
+      <div class="c-vp-hero-split__cursor">Mina</div>
+    </div>
+  </div>
+</section>

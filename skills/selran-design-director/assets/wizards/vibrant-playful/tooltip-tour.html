@@ -1,0 +1,233 @@
+<style>
+  .c-vp-tour {
+    --ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --tone: var(--p2, var(--accent));
+    position: relative;
+    max-width: 340px;
+    padding: 18px 20px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px -16px rgba(0,0,0,0.22);
+    font-family: inherit;
+    color: var(--fg);
+    animation: c-vp-tour-pop 320ms var(--ease) both;
+  }
+  .c-vp-tour[data-cat="1"] { --tone: var(--p1, var(--accent)); }
+  .c-vp-tour[data-cat="2"] { --tone: var(--p2, var(--accent)); }
+  .c-vp-tour[data-cat="3"] { --tone: var(--p3, var(--accent)); }
+  .c-vp-tour[data-cat="4"] { --tone: var(--p4, var(--accent)); }
+  .c-vp-tour[data-cat="5"] { --tone: var(--p5, var(--accent)); }
+
+  @keyframes c-vp-tour-pop {
+    0%   { opacity: 0; transform: translateY(6px) scale(0.96); }
+    60%  { transform: translateY(-2px) scale(1.02); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .c-vp-tour__arrow {
+    position: absolute;
+    width: 16px; height: 16px;
+    background: var(--bg);
+    border-left: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    transform: rotate(45deg);
+    border-top-left-radius: 4px;
+  }
+  .c-vp-tour[data-placement="bottom"] .c-vp-tour__arrow {
+    top: -9px; left: 28px;
+  }
+  .c-vp-tour[data-placement="top"] .c-vp-tour__arrow {
+    bottom: -9px; left: 28px;
+    transform: rotate(225deg);
+  }
+  .c-vp-tour[data-placement="right"] .c-vp-tour__arrow {
+    left: -9px; top: 28px;
+    transform: rotate(-45deg);
+  }
+
+  .c-vp-tour__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .c-vp-tour__counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 10px 3px 4px;
+    border-radius: 9999px;
+    background: color-mix(in oklab, var(--tone) 14%, var(--bg));
+    color: var(--tone);
+    font-size: 11px;
+    font-weight: 500;
+    font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .c-vp-tour__counter-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px; height: 20px;
+    border-radius: 9999px;
+    background: var(--tone);
+    color: var(--bg);
+    font-size: 10px;
+  }
+  .c-vp-tour__close {
+    width: 28px; height: 28px;
+    border: none;
+    background: transparent;
+    border-radius: 9px;
+    color: var(--fg-muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 220ms var(--ease);
+  }
+  .c-vp-tour__close:hover { background: var(--bg-2); color: var(--fg); }
+  .c-vp-tour__close:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--tone);
+  }
+  .c-vp-tour__close svg { width: 13px; height: 13px; }
+
+  .c-vp-tour__title {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin: 0 0 6px;
+  }
+  .c-vp-tour__body {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--fg-muted);
+    margin: 0 0 14px;
+  }
+  .c-vp-tour__body strong { color: var(--fg); font-weight: 500; }
+
+  .c-vp-tour__progress {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 14px;
+  }
+  .c-vp-tour__progress span {
+    flex: 1;
+    height: 4px;
+    border-radius: 9999px;
+    background: var(--bg-2);
+  }
+  .c-vp-tour__progress span[data-done] { background: var(--tone); }
+  .c-vp-tour__progress span[data-active] {
+    background: var(--tone);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--tone) 22%, transparent);
+  }
+
+  .c-vp-tour__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .c-vp-tour__skip {
+    margin-right: auto;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg-muted);
+    cursor: pointer;
+    padding: 6px 4px;
+    transition: color 220ms var(--ease);
+  }
+  .c-vp-tour__skip:hover { color: var(--fg); }
+  .c-vp-tour__skip:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--tone);
+    border-radius: 6px;
+  }
+
+  .c-vp-tour__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 280ms var(--ease),
+                background-color 280ms var(--ease),
+                box-shadow 280ms var(--ease);
+  }
+  .c-vp-tour__btn--ghost {
+    background: var(--bg);
+    color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-vp-tour__btn--ghost:hover { background: var(--bg-2); transform: translateY(-1px); }
+  .c-vp-tour__btn--primary {
+    background: var(--tone);
+    color: var(--bg);
+  }
+  .c-vp-tour__btn--primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 22px color-mix(in oklab, var(--tone) 40%, transparent);
+  }
+  .c-vp-tour__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--tone);
+  }
+  .c-vp-tour__btn svg { width: 12px; height: 12px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-vp-tour { animation: none; }
+    .c-vp-tour__btn, .c-vp-tour__close, .c-vp-tour__skip { transition: none; }
+  }
+
+  @media (max-width: 900px) {
+    .c-vp-tour { max-width: calc(100vw - 32px); }
+    .c-vp-tour__arrow { display: none; }
+  }
+</style>
+
+<div class="c-vp-tour" role="dialog" aria-modal="false" aria-labelledby="c-vp-tour-title" aria-describedby="c-vp-tour-desc" data-placement="bottom" data-cat="2">
+  <span class="c-vp-tour__arrow" aria-hidden="true"></span>
+
+  <div class="c-vp-tour__head">
+    <span class="c-vp-tour__counter">
+      <span class="c-vp-tour__counter-num">2</span>
+      Tip 2 of 5
+    </span>
+    <button class="c-vp-tour__close" type="button" aria-label="Close tour">
+      <svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 4l6 6M10 4l-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <h2 class="c-vp-tour__title" id="c-vp-tour-title">Drag anywhere on the canvas.</h2>
+  <p class="c-vp-tour__body" id="c-vp-tour-desc">Hold <strong>Space</strong> to pan, or two-finger scroll. Your board never ends &mdash; just keep going.</p>
+
+  <div class="c-vp-tour__progress" aria-hidden="true">
+    <span data-done></span>
+    <span data-active></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="c-vp-tour__actions">
+    <button class="c-vp-tour__skip" type="button">Skip the tour</button>
+    <button class="c-vp-tour__btn c-vp-tour__btn--ghost" type="button">&larr; Prev</button>
+    <button class="c-vp-tour__btn c-vp-tour__btn--primary" type="button">
+      Next
+      <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 6h6M6 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</div>

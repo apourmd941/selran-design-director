@@ -1,0 +1,133 @@
+<style>
+  .c-tm-errin {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 14px;
+    align-items: start;
+    padding: 14px 18px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    font-family: inherit;
+    color: var(--fg);
+  }
+  .c-tm-errin + .c-tm-errin { border-top: none; }
+  .c-tm-errin__icon {
+    width: 28px; height: 28px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 6px;
+    background: var(--bg-2);
+    color: #B45309;
+    flex: 0 0 auto;
+  }
+  .c-tm-errin--danger .c-tm-errin__icon { color: #B91C1C; }
+  .c-tm-errin__body { min-width: 0; }
+  .c-tm-errin__eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #B45309;
+    margin: 0 0 4px;
+    font-weight: 500;
+  }
+  .c-tm-errin--danger .c-tm-errin__eyebrow { color: #B91C1C; }
+  .c-tm-errin__headline {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 2px;
+    line-height: 1.4;
+  }
+  .c-tm-errin__body-text {
+    font-size: 13px;
+    color: var(--fg-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .c-tm-errin__body-text code {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px;
+    padding: 1px 5px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--fg);
+  }
+  .c-tm-errin__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex: 0 0 auto;
+  }
+  .c-tm-errin__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-errin__link:hover { background: var(--bg-2); }
+  .c-tm-errin__link:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+  .c-tm-errin__dismiss {
+    width: 28px; height: 28px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid transparent;
+    background: transparent;
+    border-radius: 6px;
+    color: var(--fg-muted);
+    cursor: pointer;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-errin__dismiss:hover { background: var(--bg-2); color: var(--fg); }
+  .c-tm-errin__dismiss:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .c-tm-errin {
+      grid-template-columns: auto 1fr;
+      padding: 12px 14px;
+    }
+    .c-tm-errin__actions {
+      grid-column: 1 / -1;
+      justify-content: flex-start;
+      padding-top: 4px;
+    }
+  }
+</style>
+
+<div class="c-tm-errin" role="alert" aria-live="assertive">
+  <span class="c-tm-errin__icon" aria-hidden="true">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L14.5 13H1.5L8 1.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M8 6v3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><circle cx="8" cy="11" r="0.6" fill="currentColor"/></svg>
+  </span>
+  <div class="c-tm-errin__body">
+    <p class="c-tm-errin__eyebrow">Sync failed</p>
+    <p class="c-tm-errin__headline">We couldn't reach the ledger provider.</p>
+    <p class="c-tm-errin__body-text">Last attempted 2m ago · <code>TIMEOUT_502</code>. Your changes are saved locally and will retry automatically.</p>
+  </div>
+  <div class="c-tm-errin__actions">
+    <button class="c-tm-errin__link" type="button">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6a4 4 0 1 0 1.2-2.83M2 2v2h2" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Retry
+    </button>
+    <button class="c-tm-errin__dismiss" type="button" aria-label="Dismiss">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</div>

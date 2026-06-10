@@ -1,0 +1,19 @@
+# .packignore — glob patterns excluded from `selran pack build` archives
+# One pattern per line. Lines starting with # are comments.
+
+# Build artifacts
+dist/
+.pack-build-cache/
+
+# Editor cruft
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Notes / working files the author uses locally but doesn't publish
+NOTES.md
+drafts/
+
+# Scaffold-only doc — delete before publishing (the CLI hint file)
+README-scaffold.md

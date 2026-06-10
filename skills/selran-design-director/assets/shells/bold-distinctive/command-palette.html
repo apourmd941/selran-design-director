@@ -1,0 +1,273 @@
+<style>
+  .c-bd-palette {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10vh 24px 24px;
+    background: color-mix(in oklab, var(--fg) 55%, transparent);
+    font-family: inherit;
+    color: var(--fg);
+  }
+  .c-bd-palette[hidden] { display: none; }
+
+  .c-bd-palette__panel {
+    width: 100%;
+    max-width: 640px;
+    background: var(--bg);
+    border: 2px solid var(--fg);
+    box-shadow: 16px 16px 0 var(--accent);
+    display: flex;
+    flex-direction: column;
+    max-height: 72vh;
+    overflow: hidden;
+  }
+
+  .c-bd-palette__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 28px;
+    border-bottom: 2px solid var(--fg);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--fg-muted);
+  }
+  .c-bd-palette__meta kbd {
+    font-family: inherit;
+    padding: 2px 6px;
+    border: 1px solid var(--fg-muted);
+  }
+
+  .c-bd-palette__header {
+    padding: 24px 28px 18px;
+    border-bottom: 2px solid var(--fg);
+  }
+  .c-bd-palette__title {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 44px;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+    margin: 0 0 14px;
+  }
+  .c-bd-palette__title em { font-style: italic; color: var(--accent); }
+
+  .c-bd-palette__input-wrap { position: relative; }
+  .c-bd-palette__input {
+    width: 100%;
+    box-sizing: border-box;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid var(--fg);
+    padding: 10px 0 10px 0;
+    font-size: 20px;
+    font-family: inherit;
+    color: var(--fg);
+    outline: none;
+    transition: border-color 220ms ease;
+  }
+  .c-bd-palette__input::placeholder {
+    color: var(--fg-muted);
+    font-style: italic;
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+  }
+  .c-bd-palette__input:focus {
+    border-bottom-color: var(--accent);
+    border-bottom-width: 4px;
+    padding-bottom: 8px;
+  }
+
+  .c-bd-palette__results {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .c-bd-palette__group {
+    border-bottom: 2px solid var(--fg);
+  }
+  .c-bd-palette__group:last-child { border-bottom: 0; }
+  .c-bd-palette__group-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 18px 28px 10px;
+  }
+  .c-bd-palette__group-num {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 34px;
+    line-height: 0.95;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+  }
+  .c-bd-palette__group-title {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .c-bd-palette__list {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 14px;
+  }
+  .c-bd-palette__item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 28px;
+    cursor: pointer;
+    color: var(--fg);
+    text-decoration: none;
+    position: relative;
+    transition: background-color 220ms ease;
+  }
+  .c-bd-palette__item:hover,
+  .c-bd-palette__item[aria-selected="true"] {
+    background: var(--bg-2);
+  }
+  .c-bd-palette__item[aria-selected="true"]::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: var(--accent);
+  }
+  .c-bd-palette__item-label {
+    flex: 1;
+    font-size: 15px;
+    line-height: 1.3;
+  }
+  .c-bd-palette__item-hint {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+  }
+  .c-bd-palette__item[aria-selected="true"] .c-bd-palette__item-label {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 17px;
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-palette { padding: 5vh 12px 12px; }
+    .c-bd-palette__panel { box-shadow: 8px 8px 0 var(--accent); max-height: 88vh; }
+    .c-bd-palette__title { font-size: 36px; }
+    .c-bd-palette__group-num { font-size: 28px; }
+    .c-bd-palette__group-title { font-size: 18px; }
+    .c-bd-palette__meta { padding: 10px 20px; }
+    .c-bd-palette__header { padding: 20px 20px 14px; }
+    .c-bd-palette__item { padding: 10px 20px; }
+    .c-bd-palette__group-header { padding: 14px 20px 8px; }
+  }
+</style>
+
+<div class="c-bd-palette" role="dialog" aria-modal="true" aria-labelledby="bd-palette-title">
+  <div class="c-bd-palette__panel">
+    <div class="c-bd-palette__meta">
+      <span>Command &middot; {Brand}</span>
+      <span><kbd>Esc</kbd> to close</span>
+    </div>
+
+    <div class="c-bd-palette__header">
+      <h2 class="c-bd-palette__title" id="bd-palette-title">
+        <em>Find.</em>
+      </h2>
+      <div class="c-bd-palette__input-wrap">
+        <input
+          class="c-bd-palette__input"
+          type="search"
+          placeholder="Essays, authors, issues, actions&hellip;"
+          aria-label="Search"
+          autofocus
+        >
+      </div>
+    </div>
+
+    <div class="c-bd-palette__results" role="listbox" aria-label="Results">
+      <section class="c-bd-palette__group">
+        <header class="c-bd-palette__group-header">
+          <span class="c-bd-palette__group-num">01.</span>
+          <h3 class="c-bd-palette__group-title">Navigate</h3>
+        </header>
+        <ul class="c-bd-palette__list">
+          <li>
+            <a class="c-bd-palette__item" role="option" aria-selected="true" href="#">
+              <span class="c-bd-palette__item-label">Today's issue</span>
+              <span class="c-bd-palette__item-hint">G then T</span>
+            </a>
+          </li>
+          <li>
+            <a class="c-bd-palette__item" role="option" aria-selected="false" href="#">
+              <span class="c-bd-palette__item-label">The queue &mdash; 48 essays</span>
+              <span class="c-bd-palette__item-hint">G then Q</span>
+            </a>
+          </li>
+          <li>
+            <a class="c-bd-palette__item" role="option" aria-selected="false" href="#">
+              <span class="c-bd-palette__item-label">Saved essays</span>
+              <span class="c-bd-palette__item-hint">G then S</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="c-bd-palette__group">
+        <header class="c-bd-palette__group-header">
+          <span class="c-bd-palette__group-num">02.</span>
+          <h3 class="c-bd-palette__group-title">Actions</h3>
+        </header>
+        <ul class="c-bd-palette__list">
+          <li>
+            <a class="c-bd-palette__item" role="option" aria-selected="false" href="#">
+              <span class="c-bd-palette__item-label">Start a new annotation</span>
+              <span class="c-bd-palette__item-hint">&#8984;N</span>
+            </a>
+          </li>
+          <li>
+            <a class="c-bd-palette__item" role="option" aria-selected="false" href="#">
+              <span class="c-bd-palette__item-label">Share current essay&hellip;</span>
+              <span class="c-bd-palette__item-hint">&#8984;&#8679;S</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="c-bd-palette__group">
+        <header class="c-bd-palette__group-header">
+          <span class="c-bd-palette__group-num">03.</span>
+          <h3 class="c-bd-palette__group-title">Recent</h3>
+        </header>
+        <ul class="c-bd-palette__list">
+          <li>
+            <a class="c-bd-palette__item" role="option" aria-selected="false" href="#">
+              <span class="c-bd-palette__item-label">The internet is fine &mdash; Amara Wole</span>
+              <span class="c-bd-palette__item-hint">Essay</span>
+            </a>
+          </li>
+          <li>
+            <a class="c-bd-palette__item" role="option" aria-selected="false" href="#">
+              <span class="c-bd-palette__item-label">Notes on leaving the feed</span>
+              <span class="c-bd-palette__item-hint">Draft</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>

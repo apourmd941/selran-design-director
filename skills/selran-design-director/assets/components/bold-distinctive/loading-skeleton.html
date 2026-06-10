@@ -1,0 +1,157 @@
+<style>
+  .c-bd-skel {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 72px 40px;
+  }
+  .c-bd-skel__rule {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg);
+    padding: 18px 0;
+    border-top: 2px solid var(--fg);
+    border-bottom: 2px solid var(--fg);
+    margin-bottom: 40px;
+  }
+  .c-bd-skel__rule em {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    font-size: 15px;
+    color: var(--accent);
+  }
+  .c-bd-skel__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-bottom: 2px solid var(--fg);
+  }
+  .c-bd-skel__card {
+    padding: 32px 24px;
+    border-right: 2px solid var(--fg);
+    border-top: 2px solid var(--fg);
+  }
+  .c-bd-skel__card:nth-child(3n) { border-right: none; }
+  .c-bd-skel__num {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 72px;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+    margin: 0 0 16px;
+  }
+  .c-bd-skel__num span { color: var(--accent); font-style: italic; }
+  .c-bd-skel__bar {
+    height: 14px;
+    background: var(--fg);
+    position: relative;
+    overflow: hidden;
+  }
+  .c-bd-skel__bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-100%);
+    animation: c-bd-skel-sweep 2.6s cubic-bezier(0.2, 0, 0, 1) infinite;
+  }
+  .c-bd-skel__bar + .c-bd-skel__bar { margin-top: 8px; }
+  .c-bd-skel__bar--title { height: 20px; width: 70%; margin-bottom: 14px; }
+  .c-bd-skel__bar--long  { width: 100%; }
+  .c-bd-skel__bar--mid   { width: 82%; }
+  .c-bd-skel__bar--short { width: 44%; }
+  .c-bd-skel__foot {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--fg);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg);
+  }
+
+  .c-bd-skel__card:nth-child(2) .c-bd-skel__bar::after { animation-delay: 260ms; }
+  .c-bd-skel__card:nth-child(3) .c-bd-skel__bar::after { animation-delay: 520ms; }
+  .c-bd-skel__card:nth-child(4) .c-bd-skel__bar::after { animation-delay: 780ms; }
+  .c-bd-skel__card:nth-child(5) .c-bd-skel__bar::after { animation-delay: 1040ms; }
+  .c-bd-skel__card:nth-child(6) .c-bd-skel__bar::after { animation-delay: 1300ms; }
+
+  @keyframes c-bd-skel-sweep {
+    0%   { transform: translateX(-100%); }
+    55%  { transform: translateX(100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-skel { padding: 48px 24px; }
+    .c-bd-skel__grid { grid-template-columns: 1fr; }
+    .c-bd-skel__card { border-right: none !important; }
+    .c-bd-skel__num { font-size: 56px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-bd-skel__bar::after { animation: none; display: none; }
+  }
+</style>
+
+<section class="c-bd-skel" aria-busy="true" aria-label="Loading essays">
+  <div class="c-bd-skel__rule">
+    <span>Issue No. 07 &middot; Spring 2026</span>
+    <em>Setting the issue&hellip;</em>
+    <span>6 of 32 essays</span>
+  </div>
+  <div class="c-bd-skel__grid">
+    <article class="c-bd-skel__card">
+      <div class="c-bd-skel__num">01<span>.</span></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--title"></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--long"></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--mid"></div>
+      <div class="c-bd-skel__foot"><span>Essay</span><span>&mdash;</span></div>
+    </article>
+    <article class="c-bd-skel__card">
+      <div class="c-bd-skel__num">02<span>.</span></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--title"></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--long"></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--short"></div>
+      <div class="c-bd-skel__foot"><span>Reporting</span><span>&mdash;</span></div>
+    </article>
+    <article class="c-bd-skel__card">
+      <div class="c-bd-skel__num">03<span>.</span></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--title"></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--mid"></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--long"></div>
+      <div class="c-bd-skel__foot"><span>Dispatch</span><span>&mdash;</span></div>
+    </article>
+    <article class="c-bd-skel__card">
+      <div class="c-bd-skel__num">04<span>.</span></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--title"></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--long"></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--mid"></div>
+      <div class="c-bd-skel__foot"><span>Essay</span><span>&mdash;</span></div>
+    </article>
+    <article class="c-bd-skel__card">
+      <div class="c-bd-skel__num">05<span>.</span></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--title"></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--short"></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--long"></div>
+      <div class="c-bd-skel__foot"><span>Review</span><span>&mdash;</span></div>
+    </article>
+    <article class="c-bd-skel__card">
+      <div class="c-bd-skel__num">06<span>.</span></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--title"></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--mid"></div>
+      <div class="c-bd-skel__bar c-bd-skel__bar--short"></div>
+      <div class="c-bd-skel__foot"><span>Essay</span><span>&mdash;</span></div>
+    </article>
+  </div>
+</section>

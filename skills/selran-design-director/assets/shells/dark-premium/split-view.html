@@ -1,0 +1,377 @@
+<style>
+  .c-dp-split {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    height: 100vh;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: inherit;
+    isolation: isolate;
+  }
+
+  /* ---------- LIST PANE ---------- */
+  .c-dp-split__list {
+    border-right: 1px solid var(--border);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .c-dp-split__list-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-dp-split__list-title {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    color: var(--fg);
+    margin: 0;
+  }
+  .c-dp-split__list-meta {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .c-dp-split__list-scroll {
+    overflow-y: auto;
+    flex: 1 1 auto;
+  }
+  .c-dp-split__row {
+    display: grid;
+    grid-template-columns: 8px 1fr auto;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-split__row:hover { background: var(--bg-2); }
+  .c-dp-split__row[aria-selected="true"] {
+    background: color-mix(in oklab, var(--accent) 8%, var(--bg-2));
+  }
+  .c-dp-split__row[aria-selected="true"]::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    box-shadow: 0 0 14px -2px color-mix(in oklab, var(--accent) 60%, transparent);
+  }
+  .c-dp-split__dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 7px;
+    opacity: 0;
+    box-shadow: 0 0 8px color-mix(in oklab, var(--accent) 70%, transparent);
+  }
+  .c-dp-split__row[data-unread="true"] .c-dp-split__dot { opacity: 1; }
+  .c-dp-split__row-main { min-width: 0; }
+  .c-dp-split__row-top {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
+    margin-bottom: 4px;
+  }
+  .c-dp-split__row-from {
+    font-size: 13px; font-weight: 500;
+    letter-spacing: -0.005em;
+    color: var(--fg);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .c-dp-split__row[data-unread="true"] .c-dp-split__row-from { color: var(--fg); }
+  .c-dp-split__row:not([data-unread="true"]) .c-dp-split__row-from { color: var(--fg-muted); }
+  .c-dp-split__row-time {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    color: var(--fg-muted);
+    flex: 0 0 auto;
+    letter-spacing: 0.04em;
+  }
+  .c-dp-split__row-subject {
+    font-size: 13px;
+    color: var(--fg-muted);
+    margin-bottom: 3px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    letter-spacing: -0.005em;
+  }
+  .c-dp-split__row[data-unread="true"] .c-dp-split__row-subject { color: var(--fg); }
+  .c-dp-split__row-preview {
+    font-size: 12px;
+    color: var(--fg-muted);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .c-dp-split__row-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 7px;
+    margin-top: 6px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    border: 1px solid color-mix(in oklab, var(--accent) 40%, var(--border));
+    border-radius: 4px;
+    background: color-mix(in oklab, var(--accent) 6%, transparent);
+  }
+
+  /* ---------- DETAIL PANE ---------- */
+  .c-dp-split__detail {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--bg);
+    position: relative;
+  }
+  .c-dp-split__detail::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 280px;
+    background: radial-gradient(50% 100% at 50% 0%,
+      color-mix(in oklab, var(--accent) 8%, transparent) 0%,
+      transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .c-dp-split__detail-head {
+    position: relative;
+    z-index: 1;
+    padding: 28px 40px 22px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-dp-split__detail-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+    margin-bottom: 14px;
+  }
+  .c-dp-split__detail-eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px color-mix(in oklab, var(--accent) 80%, transparent);
+  }
+  .c-dp-split__detail-title {
+    font-size: 24px;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+  .c-dp-split__detail-meta {
+    display: flex; flex-wrap: wrap; gap: 16px 24px;
+    font-size: 13px;
+    color: var(--fg-muted);
+  }
+  .c-dp-split__detail-meta strong {
+    color: var(--fg);
+    font-weight: 500;
+    margin-right: 6px;
+  }
+
+  .c-dp-split__detail-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 28px 40px 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .c-dp-split__card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+  }
+  .c-dp-split__card-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+    margin: 0 0 8px;
+  }
+  .c-dp-split__card-value {
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+    margin: 0 0 4px;
+  }
+  .c-dp-split__card-delta {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+  .c-dp-split__body-copy {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--fg-muted);
+  }
+  .c-dp-split__body-copy p { margin: 0 0 14px; }
+  .c-dp-split__body-copy strong { color: var(--fg); font-weight: 500; }
+
+  .c-dp-split__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .c-dp-split__btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px;
+    font-size: 13px; font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+    transition: transform 220ms cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 220ms cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-split__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    box-shadow: 0 0 24px -6px color-mix(in oklab, var(--accent) 50%, transparent);
+  }
+  .c-dp-split__btn--primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 30px -8px color-mix(in oklab, var(--accent) 60%, transparent);
+  }
+  .c-dp-split__btn--ghost {
+    background: transparent;
+    color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-dp-split__btn--ghost:hover { background: var(--bg-2); border-color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .c-dp-split { grid-template-columns: 1fr; height: auto; }
+    .c-dp-split__list { border-right: 0; border-bottom: 1px solid var(--border); max-height: 360px; }
+    .c-dp-split__detail-head { padding: 22px 18px 16px; }
+    .c-dp-split__detail-body { padding: 22px 18px 32px; }
+    .c-dp-split__detail-title { font-size: 20px; }
+    .c-dp-split__card-value { font-size: 26px; }
+  }
+</style>
+
+<section class="c-dp-split" aria-label="Transactions">
+  <aside class="c-dp-split__list" aria-label="Transaction list">
+    <header class="c-dp-split__list-head">
+      <h2 class="c-dp-split__list-title">Inbox</h2>
+      <span class="c-dp-split__list-meta">12 UNREAD &middot; APR 21</span>
+    </header>
+    <div class="c-dp-split__list-scroll">
+      <a class="c-dp-split__row" href="#" aria-selected="true" data-unread="true">
+        <span class="c-dp-split__dot" aria-hidden="true"></span>
+        <div class="c-dp-split__row-main">
+          <div class="c-dp-split__row-top">
+            <span class="c-dp-split__row-from">Reserve-A Vault</span>
+            <span class="c-dp-split__row-time">09:42</span>
+          </div>
+          <div class="c-dp-split__row-subject">Wire confirmed &middot; MC-4208</div>
+          <div class="c-dp-split__row-preview">$2,400,000.00 transferred from custody. Settlement window Q2.</div>
+          <span class="c-dp-split__row-tag">Inbound</span>
+        </div>
+      </a>
+      <a class="c-dp-split__row" href="#" data-unread="true">
+        <span class="c-dp-split__dot" aria-hidden="true"></span>
+        <div class="c-dp-split__row-main">
+          <div class="c-dp-split__row-top">
+            <span class="c-dp-split__row-from">Risk Engine</span>
+            <span class="c-dp-split__row-time">08:18</span>
+          </div>
+          <div class="c-dp-split__row-subject">Duration band breach &middot; Portfolio 02</div>
+          <div class="c-dp-split__row-preview">The 30-day band exceeded its tolerance by 1.2bp. Recommend rebalance.</div>
+        </div>
+      </a>
+      <a class="c-dp-split__row" href="#">
+        <span class="c-dp-split__dot" aria-hidden="true"></span>
+        <div class="c-dp-split__row-main">
+          <div class="c-dp-split__row-top">
+            <span class="c-dp-split__row-from">A. Pourmohammadi</span>
+            <span class="c-dp-split__row-time">Yesterday</span>
+          </div>
+          <div class="c-dp-split__row-subject">Q1 close &middot; final review</div>
+          <div class="c-dp-split__row-preview">Books tied out; one reclass pending on Vendor-14. Sign-off queued.</div>
+        </div>
+      </a>
+      <a class="c-dp-split__row" href="#">
+        <span class="c-dp-split__dot" aria-hidden="true"></span>
+        <div class="c-dp-split__row-main">
+          <div class="c-dp-split__row-top">
+            <span class="c-dp-split__row-from">Custody &middot; Anchorage</span>
+            <span class="c-dp-split__row-time">Apr 19</span>
+          </div>
+          <div class="c-dp-split__row-subject">Monthly attestation posted</div>
+          <div class="c-dp-split__row-preview">Assets-on-ledger reconcile to on-chain holdings as of 4/18.</div>
+        </div>
+      </a>
+      <a class="c-dp-split__row" href="#">
+        <span class="c-dp-split__dot" aria-hidden="true"></span>
+        <div class="c-dp-split__row-main">
+          <div class="c-dp-split__row-top">
+            <span class="c-dp-split__row-from">M. Okonkwo</span>
+            <span class="c-dp-split__row-time">Apr 18</span>
+          </div>
+          <div class="c-dp-split__row-subject">Yield strategy memo</div>
+          <div class="c-dp-split__row-preview">Shifting 14% of T-Bill bucket into 1Y notes. Net pickup +38bp.</div>
+        </div>
+      </a>
+    </div>
+  </aside>
+
+  <main class="c-dp-split__detail" aria-label="Selected transaction">
+    <header class="c-dp-split__detail-head">
+      <div class="c-dp-split__detail-eyebrow">
+        <span class="dot" aria-hidden="true"></span>
+        <span>INBOUND &middot; SETTLED &middot; MC-4208</span>
+      </div>
+      <h1 class="c-dp-split__detail-title">Wire confirmed &mdash; Reserve-A Vault</h1>
+      <div class="c-dp-split__detail-meta">
+        <span><strong>From</strong> Anchorage Digital &middot; custody account</span>
+        <span><strong>Posted</strong> Apr 21, 2026 09:42 UTC</span>
+        <span><strong>Reference</strong> MC-4208-APR</span>
+      </div>
+    </header>
+
+    <div class="c-dp-split__detail-body">
+      <div class="c-dp-split__card">
+        <p class="c-dp-split__card-label">Amount</p>
+        <p class="c-dp-split__card-value">$2,400,000.00</p>
+        <p class="c-dp-split__card-delta">&uarr; 14.2% over prior month &middot; USD tabular</p>
+      </div>
+
+      <div class="c-dp-split__body-copy">
+        <p><strong>Summary.</strong> The inbound wire has cleared and is now reflected in Reserve-A's settled cash position. The funds were drawn from the custody account per the standing treasury instruction on file. No further action is required unless you wish to allocate immediately.</p>
+        <p>We recommend reviewing the allocation window before Q2 rebalancing begins. The next rebalance is scheduled for <strong>Apr 28, 09:00 UTC</strong> and will include any positions moved before that time.</p>
+      </div>
+
+      <div class="c-dp-split__actions">
+        <a class="c-dp-split__btn c-dp-split__btn--primary" href="#">Allocate funds &rarr;</a>
+        <a class="c-dp-split__btn c-dp-split__btn--ghost" href="#">View receipt</a>
+        <a class="c-dp-split__btn c-dp-split__btn--ghost" href="#">Archive</a>
+      </div>
+    </div>
+  </main>
+</section>

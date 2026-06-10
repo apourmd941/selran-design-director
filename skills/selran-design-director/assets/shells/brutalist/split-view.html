@@ -1,0 +1,251 @@
+<style>
+  .c-br-split {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    min-height: 560px;
+    height: 100%;
+    background: var(--bg);
+    color: var(--fg);
+    border: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', ui-monospace, monospace);
+    font-size: 13px;
+    box-sizing: border-box;
+  }
+  .c-br-split__list {
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid var(--border, var(--fg));
+    overflow: hidden;
+  }
+  .c-br-split__listhead {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 10px 14px;
+    background: var(--fg);
+    color: var(--bg);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    border-bottom: 2px solid var(--border, var(--fg));
+  }
+  .c-br-split__cols {
+    display: grid;
+    grid-template-columns: 72px 1fr 72px;
+    padding: 8px 14px;
+    font-size: 10px;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-bottom: 2px solid var(--border, var(--fg));
+    background: var(--bg-2);
+  }
+  .c-br-split__rows {
+    list-style: none;
+    margin: 0; padding: 0;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .c-br-split__row {
+    display: grid;
+    grid-template-columns: 72px 1fr 72px;
+    gap: 8px;
+    padding: 11px 14px;
+    border-bottom: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+    cursor: pointer;
+    color: var(--fg);
+    text-decoration: none;
+    align-items: baseline;
+  }
+  .c-br-split__row:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .c-br-split__row:hover .c-br-split__id,
+  .c-br-split__row:hover .c-br-split__time { color: var(--bg); }
+  .c-br-split__row[aria-current="true"],
+  .c-br-split__row[data-selected="true"] {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .c-br-split__row[aria-current="true"] .c-br-split__id,
+  .c-br-split__row[aria-current="true"] .c-br-split__time,
+  .c-br-split__row[data-selected="true"] .c-br-split__id,
+  .c-br-split__row[data-selected="true"] .c-br-split__time {
+    color: var(--bg);
+  }
+  .c-br-split__id {
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--fg-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .c-br-split__title {
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .c-br-split__time {
+    text-align: right;
+    font-size: 11px;
+    color: var(--fg-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .c-br-split__detail {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow-y: auto;
+  }
+  .c-br-split__section {
+    padding: 16px 20px;
+    border-bottom: 2px solid var(--border, var(--fg));
+  }
+  .c-br-split__section:last-child { border-bottom: 0; }
+  .c-br-split__sectionlabel {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--fg-muted);
+    padding: 2px 6px;
+    border: 2px solid var(--border, var(--fg));
+    margin-bottom: 10px;
+  }
+  .c-br-split__headline {
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    margin: 0 0 8px;
+    line-height: 1.15;
+  }
+  .c-br-split__sub {
+    font-size: 12px;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
+  }
+  .c-br-split__body p {
+    margin: 0 0 10px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .c-br-split__body p:last-child { margin-bottom: 0; }
+  .c-br-split__meta {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 16px;
+    font-size: 12px;
+  }
+  .c-br-split__meta dt {
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+  }
+  .c-br-split__meta dd {
+    margin: 0;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 900px) {
+    .c-br-split { grid-template-columns: 1fr; }
+    .c-br-split__list { border-right: 0; border-bottom: 2px solid var(--border, var(--fg)); max-height: 280px; }
+  }
+</style>
+
+<section class="c-br-split" aria-label="Archive browser">
+  <aside class="c-br-split__list" aria-label="Index">
+    <header class="c-br-split__listhead">
+      <span>// ARCHIVE / 38 ITEMS</span>
+      <span>ASC</span>
+    </header>
+    <div class="c-br-split__cols" aria-hidden="true">
+      <span>CAT #</span>
+      <span>TITLE</span>
+      <span style="text-align:right;">STAMP</span>
+    </div>
+    <ul class="c-br-split__rows" role="list">
+      <li>
+        <a class="c-br-split__row" href="#" data-selected="true" aria-current="true">
+          <span class="c-br-split__id">NP-142</span>
+          <span class="c-br-split__title">FERRIC &mdash; Seam Welder</span>
+          <span class="c-br-split__time">04/21</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-br-split__row" href="#">
+          <span class="c-br-split__id">NP-141</span>
+          <span class="c-br-split__title">DAMP SIGNAL &mdash; Rout Index</span>
+          <span class="c-br-split__time">03/04</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-br-split__row" href="#">
+          <span class="c-br-split__id">NP-140</span>
+          <span class="c-br-split__title">COLD RIVET &mdash; Plain Iron</span>
+          <span class="c-br-split__time">02/12</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-br-split__row" href="#">
+          <span class="c-br-split__id">NP-139</span>
+          <span class="c-br-split__title">GRAVEL OKAY &mdash; Slow Gate</span>
+          <span class="c-br-split__time">01/30</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-br-split__row" href="#">
+          <span class="c-br-split__id">NP-138</span>
+          <span class="c-br-split__title">FLATSTOCK &mdash; Mill Scale EP</span>
+          <span class="c-br-split__time">12/18</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-br-split__row" href="#">
+          <span class="c-br-split__id">NP-137</span>
+          <span class="c-br-split__title">HAND PLANE &mdash; Shavings</span>
+          <span class="c-br-split__time">11/02</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-br-split__row" href="#">
+          <span class="c-br-split__id">NP-136</span>
+          <span class="c-br-split__title">SPEC. SHEET &mdash; No. 3</span>
+          <span class="c-br-split__time">09/27</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <article class="c-br-split__detail" aria-label="Detail">
+    <section class="c-br-split__section">
+      <span class="c-br-split__sectionlabel">[ HEADER ]</span>
+      <h1 class="c-br-split__headline">NP-142 / FERRIC &mdash; "SEAM WELDER"</h1>
+      <p class="c-br-split__sub">LP / 300 COPIES / BLACK VINYL / SLEEVE: 350GSM UNCOATED</p>
+    </section>
+
+    <section class="c-br-split__section c-br-split__body">
+      <span class="c-br-split__sectionlabel">[ BODY ]</span>
+      <p>Recorded live to quarter-inch over two afternoons at the Mill Yard. One microphone per source. No overdubs. Notes kept in a pocket ledger; scans included in the gatefold.</p>
+      <p>Lacquers cut flat. Test pressings accepted on the third pass. Full run shipped from the plant 04/21.</p>
+    </section>
+
+    <section class="c-br-split__section">
+      <span class="c-br-split__sectionlabel">[ META ]</span>
+      <dl class="c-br-split__meta">
+        <dt>CAT #</dt><dd>NP-142</dd>
+        <dt>CUT</dt><dd>04/09/2026 &middot; LATHE 2</dd>
+        <dt>PRESS</dt><dd>300 / 300 &middot; STANDARD</dd>
+        <dt>SHIP</dt><dd>04/21/2026</dd>
+        <dt>FILETYPE</dt><dd>record.release &middot; 2.1KB</dd>
+      </dl>
+    </section>
+  </article>
+</section>

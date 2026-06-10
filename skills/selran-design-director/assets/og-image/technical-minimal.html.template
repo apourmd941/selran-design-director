@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>{{og.title}} — OG image</title>
+<style>
+  @page { size: 1200px 630px; margin: 0; }
+  html, body { margin: 0; padding: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: {{color.bg_primary}};
+    color: {{color.fg_primary}};
+    font-family: "{{type.body}}", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 72px 80px;
+    box-sizing: border-box;
+    position: relative;
+  }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .logo {
+    font-family: "{{type.mono}}", ui-monospace, monospace;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: {{type.tracking.caps}}em;
+    text-transform: uppercase;
+    color: {{color.fg_muted}};
+  }
+  .dot { width: 14px; height: 14px; border-radius: 50%; background: {{color.accent}}; margin-top: 5px; }
+  h1 {
+    font-family: "{{type.display}}", system-ui, sans-serif;
+    font-size: 88px;
+    font-weight: 600;
+    line-height: {{type.leading.display}};
+    letter-spacing: {{type.tracking.display}}em;
+    color: {{color.fg_primary}};
+    margin: 0;
+    max-width: 960px;
+  }
+  .bottom {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-top: 32px;
+    border-top: 1px solid {{color.border}};
+  }
+  .subtitle {
+    font-size: 24px;
+    color: {{color.fg_secondary}};
+    line-height: 1.45;
+    max-width: 720px;
+  }
+  .meta {
+    font-family: "{{type.mono}}", ui-monospace, monospace;
+    font-size: 14px;
+    color: {{color.fg_muted}};
+    letter-spacing: {{type.tracking.caps}}em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="top">
+    <div class="logo">{{og.logo}}</div>
+    <div class="dot"></div>
+  </div>
+  <h1>{{og.title}}</h1>
+  <div class="bottom">
+    <div class="subtitle">{{og.subtitle}}</div>
+    <div class="meta">v{{meta.version}}</div>
+  </div>
+</body>
+</html>
