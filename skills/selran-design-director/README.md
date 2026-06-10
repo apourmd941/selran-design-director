@@ -2,9 +2,9 @@
 
 A Claude skill that acts as a design director — asks the right questions, locks a design system, then executes across web UIs, native apps, documents, presentations, posters, and email.
 
-Released by [Selran](https://selran.com). MIT licensed. **Current version: 3.4**
+Released by [Selran](https://selran.com). MIT licensed. **Current version: 3.6** — by **Aidin Eslampour**.
 
-> Looking for the project-level README with repo structure, install instructions, and the commercial-pack catalog? See the [repo-level README one directory up](../README.md).
+> Looking for install instructions and the plugin overview? See the [project README](https://github.com/apourmd941/selran-design-director#readme).
 
 ## Why this exists
 
@@ -12,7 +12,7 @@ Most AI design skills either (a) auto-pick styles and lock you out of the decisi
 
 This skill is different:
 
-- **Asks 1–2 tappable questions** before writing code, using `ask_user_input_v0` — or shows a visual picker of seven pre-audited starter designs when the environment can render images
+- **Asks 1–2 tappable questions** before writing code — or shows a visual picker of seven pre-audited starter designs, adapting to what the host can render (inline options, option previews, or a browser-tab picker page; see SKILL.md § capability ladder)
 - **Skips questions the brief already answered** — no repetition
 - **Generates a `design-system.md` file** you can inspect and edit before anything is built
 - **Builds against that file** so UI, docs, decks, and posters share one voice
