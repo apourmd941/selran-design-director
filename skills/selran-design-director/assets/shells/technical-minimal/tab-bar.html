@@ -1,0 +1,85 @@
+<style>
+  .c-tm-tabs {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    font-family: inherit;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+  .c-tm-tabs::-webkit-scrollbar { display: none; }
+  .c-tm-tabs__list {
+    display: inline-flex;
+    gap: 4px;
+    margin: 0;
+    padding: 0 20px;
+    list-style: none;
+    min-width: 100%;
+    box-sizing: border-box;
+  }
+  .c-tm-tabs__tab {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 4px;
+    margin: 0 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg-muted);
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    font-family: inherit;
+    transition: color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-tabs__tab::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 2px;
+    background: transparent;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-tabs__tab:hover { color: var(--fg); }
+  .c-tm-tabs__tab[aria-selected="true"] {
+    color: var(--fg);
+  }
+  .c-tm-tabs__tab[aria-selected="true"]::after {
+    background: var(--accent);
+  }
+  .c-tm-tabs__tab:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+    border-radius: 4px;
+  }
+  .c-tm-tabs__count {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    padding: 1px 6px;
+    background: var(--bg-2);
+    color: var(--fg-muted);
+    border-radius: 9999px;
+    font-variant-numeric: tabular-nums;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-tabs__tab[aria-selected="true"] .c-tm-tabs__count {
+    background: color-mix(in oklab, var(--accent) 14%, transparent);
+    color: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .c-tm-tabs__list { padding: 0 12px; }
+  }
+</style>
+
+<div class="c-tm-tabs" role="tablist" aria-label="Ledger views">
+  <ul class="c-tm-tabs__list">
+    <li role="presentation"><button class="c-tm-tabs__tab" role="tab" aria-selected="true" type="button">Overview</button></li>
+    <li role="presentation"><button class="c-tm-tabs__tab" role="tab" aria-selected="false" type="button">Transactions <span class="c-tm-tabs__count">248</span></button></li>
+    <li role="presentation"><button class="c-tm-tabs__tab" role="tab" aria-selected="false" type="button">Reconciliation <span class="c-tm-tabs__count">12</span></button></li>
+    <li role="presentation"><button class="c-tm-tabs__tab" role="tab" aria-selected="false" type="button">Reports</button></li>
+    <li role="presentation"><button class="c-tm-tabs__tab" role="tab" aria-selected="false" type="button">Settings</button></li>
+  </ul>
+</div>

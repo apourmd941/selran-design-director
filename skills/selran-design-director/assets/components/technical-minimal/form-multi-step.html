@@ -1,0 +1,191 @@
+<style>
+  .c-tm-mstep {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-family: inherit;
+  }
+  .c-tm-mstep__head {
+    margin-bottom: 28px;
+  }
+  .c-tm-mstep__eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+    margin-bottom: 8px;
+  }
+  .c-tm-mstep__title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin: 0 0 4px;
+  }
+  .c-tm-mstep__sub {
+    font-size: 14px;
+    color: var(--fg-muted);
+    margin: 0;
+  }
+  .c-tm-mstep__progress {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 28px;
+  }
+  .c-tm-mstep__progress-seg {
+    height: 2px;
+    background: var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .c-tm-mstep__progress-seg[data-state="done"],
+  .c-tm-mstep__progress-seg[data-state="active"] {
+    background: var(--accent);
+  }
+  .c-tm-mstep__step[hidden] { display: none; }
+  .c-tm-mstep__field { margin-bottom: 14px; }
+  .c-tm-mstep__label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 6px;
+  }
+  .c-tm-mstep__input,
+  .c-tm-mstep__select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                box-shadow 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-mstep__input:hover,
+  .c-tm-mstep__select:hover { border-color: var(--fg-muted); }
+  .c-tm-mstep__input:focus-visible,
+  .c-tm-mstep__select:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent) 30%, transparent);
+  }
+  .c-tm-mstep__checks { display: grid; gap: 8px; }
+  .c-tm-mstep__check {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px;
+    font-size: 14px; color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .c-tm-mstep__check input { accent-color: var(--accent); }
+  .c-tm-mstep__check:hover { border-color: var(--fg-muted); }
+  .c-tm-mstep__actions {
+    display: flex; justify-content: space-between; gap: 12px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .c-tm-mstep__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 10px 18px;
+    font-size: 14px; font-weight: 500;
+    font-family: inherit;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                filter 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-mstep__btn--ghost {
+    background: var(--bg); color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-tm-mstep__btn--ghost:hover:not(:disabled) { background: var(--bg-2); }
+  .c-tm-mstep__btn--primary {
+    background: var(--accent); color: #fff;
+    border-color: var(--accent);
+  }
+  .c-tm-mstep__btn--primary:hover { filter: brightness(0.92); }
+  .c-tm-mstep__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+  .c-tm-mstep__btn:disabled {
+    opacity: 0.4; cursor: not-allowed;
+  }
+
+  @media (max-width: 900px) {
+    .c-tm-mstep { max-width: none; border: none; padding: 32px 20px; border-radius: 0; }
+  }
+</style>
+
+<form class="c-tm-mstep" novalidate aria-label="Onboarding, step 2 of 3">
+  <div class="c-tm-mstep__head">
+    <div class="c-tm-mstep__eyebrow">Step 02 / 03</div>
+    <h1 class="c-tm-mstep__title">Company details</h1>
+    <p class="c-tm-mstep__sub">Tell us where the ledger lives.</p>
+  </div>
+
+  <div class="c-tm-mstep__progress" aria-hidden="true">
+    <span class="c-tm-mstep__progress-seg" data-state="done"></span>
+    <span class="c-tm-mstep__progress-seg" data-state="active"></span>
+    <span class="c-tm-mstep__progress-seg" data-state="pending"></span>
+  </div>
+
+  <section class="c-tm-mstep__step" hidden aria-hidden="true">
+    <div class="c-tm-mstep__field">
+      <label class="c-tm-mstep__label" for="tm-ms-name">Full name</label>
+      <input class="c-tm-mstep__input" id="tm-ms-name" name="name" type="text" autocomplete="name" placeholder="Alex Chen">
+    </div>
+    <div class="c-tm-mstep__field">
+      <label class="c-tm-mstep__label" for="tm-ms-email">Work email</label>
+      <input class="c-tm-mstep__input" id="tm-ms-email" name="email" type="email" autocomplete="email" placeholder="alex@company.com">
+    </div>
+  </section>
+
+  <section class="c-tm-mstep__step">
+    <div class="c-tm-mstep__field">
+      <label class="c-tm-mstep__label" for="tm-ms-company">Company</label>
+      <input class="c-tm-mstep__input" id="tm-ms-company" name="company" type="text" autocomplete="organization" placeholder="Meridian Capital">
+    </div>
+    <div class="c-tm-mstep__field">
+      <label class="c-tm-mstep__label" for="tm-ms-size">Team size</label>
+      <select class="c-tm-mstep__select" id="tm-ms-size" name="size">
+        <option>1–10</option>
+        <option selected>11–50</option>
+        <option>51–200</option>
+        <option>201+</option>
+      </select>
+    </div>
+    <div class="c-tm-mstep__field">
+      <label class="c-tm-mstep__label" for="tm-ms-role">Your role</label>
+      <input class="c-tm-mstep__input" id="tm-ms-role" name="role" type="text" placeholder="Controller">
+    </div>
+  </section>
+
+  <section class="c-tm-mstep__step" hidden aria-hidden="true">
+    <div class="c-tm-mstep__field">
+      <label class="c-tm-mstep__label">Notify me about</label>
+      <div class="c-tm-mstep__checks">
+        <label class="c-tm-mstep__check"><input type="checkbox" checked> Weekly close summary</label>
+        <label class="c-tm-mstep__check"><input type="checkbox"> Product changelog</label>
+        <label class="c-tm-mstep__check"><input type="checkbox"> Partner offers</label>
+      </div>
+    </div>
+  </section>
+
+  <div class="c-tm-mstep__actions">
+    <button class="c-tm-mstep__btn c-tm-mstep__btn--ghost" type="button">Back</button>
+    <button class="c-tm-mstep__btn c-tm-mstep__btn--primary" type="button">Next →</button>
+  </div>
+</form>

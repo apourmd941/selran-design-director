@@ -1,0 +1,241 @@
+<style>
+  .c-bd-mstep {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0;
+    background: var(--bg);
+    border: 2px solid var(--fg);
+    font-family: inherit;
+    color: var(--fg);
+  }
+  .c-bd-mstep__meta {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 14px 32px;
+    border-bottom: 2px solid var(--fg);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-secondary, var(--fg));
+  }
+  .c-bd-mstep__hero {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: stretch;
+  }
+  .c-bd-mstep__marker {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-weight: 500;
+    font-size: clamp(84px, 14vw, 180px);
+    line-height: 0.82;
+    letter-spacing: -0.04em;
+    color: var(--fg);
+    padding: 36px 0 36px 32px;
+    background: var(--accent);
+    color: var(--bg);
+    border-right: 2px solid var(--fg);
+  }
+  .c-bd-mstep__marker small {
+    display: block;
+    font-family: inherit;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 18px;
+  }
+  .c-bd-mstep__heading {
+    padding: 36px 32px;
+  }
+  .c-bd-mstep__title {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(36px, 4.6vw, 56px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    margin: 0 0 12px;
+  }
+  .c-bd-mstep__title em { font-style: italic; color: var(--accent); }
+  .c-bd-mstep__lead {
+    font-size: 15px; line-height: 1.6;
+    color: var(--fg-secondary, var(--fg));
+    margin: 0;
+    max-width: 44ch;
+  }
+  .c-bd-mstep__stepper {
+    display: flex;
+    border-top: 2px solid var(--fg);
+    border-bottom: 2px solid var(--fg);
+  }
+  .c-bd-mstep__node {
+    flex: 1;
+    padding: 14px 22px;
+    font-family: var(--ff-display, 'PP Editorial New', Georgia, serif);
+    font-size: 18px;
+    border-right: 2px solid var(--fg);
+    color: var(--fg-muted, var(--fg-secondary, var(--fg)));
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .c-bd-mstep__node:last-child { border-right: 0; }
+  .c-bd-mstep__node b {
+    font-weight: 500;
+    font-size: 22px;
+  }
+  .c-bd-mstep__node[data-state="done"] { color: var(--fg); }
+  .c-bd-mstep__node[data-state="active"] {
+    background: var(--fg);
+    color: var(--bg);
+    font-style: italic;
+  }
+  .c-bd-mstep__body { padding: 32px; }
+  .c-bd-mstep__step[hidden] { display: none; }
+  .c-bd-mstep__field { margin-bottom: 22px; }
+  .c-bd-mstep__label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-secondary, var(--fg));
+    margin-bottom: 8px;
+  }
+  .c-bd-mstep__input,
+  .c-bd-mstep__select,
+  .c-bd-mstep__textarea {
+    width: 100%; box-sizing: border-box;
+    padding: 14px 14px;
+    font-size: 18px;
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 2px solid var(--fg);
+    border-radius: 0;
+    outline: none;
+    transition: box-shadow 200ms cubic-bezier(0.2, 0, 0, 1),
+                background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-bd-mstep__textarea { min-height: 96px; resize: vertical; line-height: 1.5; font-size: 16px; }
+  .c-bd-mstep__input:focus-visible,
+  .c-bd-mstep__select:focus-visible,
+  .c-bd-mstep__textarea:focus-visible {
+    background: var(--bg-2);
+    box-shadow: 6px 6px 0 var(--accent);
+  }
+  .c-bd-mstep__actions {
+    display: flex;
+    border-top: 2px solid var(--fg);
+  }
+  .c-bd-mstep__btn {
+    flex: 1;
+    padding: 20px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    background: var(--bg);
+    color: var(--fg);
+    border: 0;
+    border-right: 2px solid var(--fg);
+    cursor: pointer;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-bd-mstep__btn:last-child { border-right: 0; }
+  .c-bd-mstep__btn:hover:not(:disabled) { background: var(--fg); color: var(--bg); }
+  .c-bd-mstep__btn--primary {
+    background: var(--fg);
+    color: var(--bg);
+    flex: 2;
+  }
+  .c-bd-mstep__btn--primary:hover:not(:disabled) { background: var(--accent); color: var(--bg); }
+  .c-bd-mstep__btn:focus-visible {
+    outline: none;
+    background: var(--accent);
+    color: var(--bg);
+    box-shadow: inset 0 0 0 4px var(--fg);
+  }
+  .c-bd-mstep__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  @media (max-width: 900px) {
+    .c-bd-mstep { border-left: 0; border-right: 0; }
+    .c-bd-mstep__hero { grid-template-columns: 1fr; }
+    .c-bd-mstep__marker {
+      font-size: 80px; padding: 24px 24px 18px;
+      border-right: 0;
+      border-bottom: 2px solid var(--fg);
+    }
+    .c-bd-mstep__heading { padding: 24px; }
+    .c-bd-mstep__stepper { flex-direction: column; }
+    .c-bd-mstep__node { border-right: 0; border-bottom: 2px solid var(--fg); }
+    .c-bd-mstep__node:last-child { border-bottom: 0; }
+  }
+</style>
+
+<form class="c-bd-mstep" novalidate aria-label="Subscribe, step 2 of 3">
+  <div class="c-bd-mstep__meta">
+    <span>Subscription · Issue 07</span>
+    <span>Step 02 · of 03</span>
+  </div>
+
+  <div class="c-bd-mstep__hero">
+    <div class="c-bd-mstep__marker">
+      02.
+      <small>Delivery</small>
+    </div>
+    <div class="c-bd-mstep__heading">
+      <h2 class="c-bd-mstep__title">Where to <em>send</em> the print.</h2>
+      <p class="c-bd-mstep__lead">Four issues a year, set in 104-point Canela, printed in New Jersey, mailed in a flat brown sleeve.</p>
+    </div>
+  </div>
+
+  <div class="c-bd-mstep__stepper" aria-hidden="true">
+    <span class="c-bd-mstep__node" data-state="done"><b>01.</b> Reader</span>
+    <span class="c-bd-mstep__node" data-state="active"><b>02.</b> Delivery</span>
+    <span class="c-bd-mstep__node" data-state="pending"><b>03.</b> Billing</span>
+  </div>
+
+  <div class="c-bd-mstep__body">
+    <section class="c-bd-mstep__step" hidden aria-hidden="true">
+      <div class="c-bd-mstep__field">
+        <label class="c-bd-mstep__label" for="bd-ms-name">Full name</label>
+        <input class="c-bd-mstep__input" id="bd-ms-name" name="name" type="text" placeholder="Junie Vidal">
+      </div>
+      <div class="c-bd-mstep__field">
+        <label class="c-bd-mstep__label" for="bd-ms-email">Email</label>
+        <input class="c-bd-mstep__input" id="bd-ms-email" name="email" type="email" placeholder="junie@inbox.com">
+      </div>
+    </section>
+
+    <section class="c-bd-mstep__step">
+      <div class="c-bd-mstep__field">
+        <label class="c-bd-mstep__label" for="bd-ms-address">Mailing address</label>
+        <input class="c-bd-mstep__input" id="bd-ms-address" name="address" type="text" placeholder="214 Prospect Park West, Brooklyn NY 11215">
+      </div>
+      <div class="c-bd-mstep__field">
+        <label class="c-bd-mstep__label" for="bd-ms-country">Country</label>
+        <select class="c-bd-mstep__select" id="bd-ms-country" name="country">
+          <option>United States</option>
+          <option>Canada</option>
+          <option>United Kingdom</option>
+          <option>Elsewhere (we'll reach out)</option>
+        </select>
+      </div>
+      <div class="c-bd-mstep__field">
+        <label class="c-bd-mstep__label" for="bd-ms-gift">A note to the recipient (optional)</label>
+        <textarea class="c-bd-mstep__textarea" id="bd-ms-gift" name="gift" placeholder="Happy birthday, dear reader."></textarea>
+      </div>
+    </section>
+
+    <section class="c-bd-mstep__step" hidden aria-hidden="true">
+      <div class="c-bd-mstep__field">
+        <label class="c-bd-mstep__label" for="bd-ms-card">Card number</label>
+        <input class="c-bd-mstep__input" id="bd-ms-card" name="card" type="text" placeholder="•••• •••• •••• 4242">
+      </div>
+    </section>
+  </div>
+
+  <div class="c-bd-mstep__actions">
+    <button class="c-bd-mstep__btn" type="button">← Back</button>
+    <button class="c-bd-mstep__btn c-bd-mstep__btn--primary" type="button">Continue to billing →</button>
+  </div>
+</form>

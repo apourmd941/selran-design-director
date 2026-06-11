@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: dark-premium
+  use: empty state
+  variables: var(fg), var(bg), var(accent)
+  notes: single thin circle outline with one gilded dot; canvas mostly empty
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Empty">
+  <style>
+    .dp-bg     { fill: var(--bg, #0A0A0B); }
+    .dp-stroke { stroke: var(--fg, #F4F4F5); fill: none; stroke-width: 1; opacity: .6; vector-effect: non-scaling-stroke; }
+    .dp-thin   { stroke: var(--fg, #F4F4F5); fill: none; stroke-width: 1; opacity: .18; vector-effect: non-scaling-stroke; }
+    .dp-accent-stroke { stroke: var(--accent, #D4AF37); fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; }
+    .dp-accent-fill   { fill: var(--accent, #D4AF37); }
+    .dp-label  { font-family: "Söhne", "Inter", ui-sans-serif, sans-serif; font-size: 9px; fill: var(--fg, #F4F4F5); opacity: .45; letter-spacing: .3em; text-transform: uppercase; text-anchor: middle; }
+  </style>
+
+  <rect class="dp-bg" width="400" height="400"/>
+
+  <!-- concentric faint rings -->
+  <circle cx="200" cy="200" r="130" class="dp-thin"/>
+  <circle cx="200" cy="200" r="96"  class="dp-stroke"/>
+
+  <!-- single precise arc segment on the top -->
+  <path class="dp-accent-stroke" d="M 130 170 A 96 96 0 0 1 270 170"/>
+
+  <!-- gilded pinpoint where the arc terminates -->
+  <circle cx="270" cy="170" r="3.5" class="dp-accent-fill"/>
+  <circle cx="270" cy="170" r="7"   class="dp-accent-stroke" opacity=".5"/>
+
+  <!-- faint opposite terminus -->
+  <circle cx="130" cy="170" r="2" fill="var(--fg, #F4F4F5)" opacity=".4"/>
+
+  <text x="200" y="370" class="dp-label">Nothing to display</text>
+</svg>

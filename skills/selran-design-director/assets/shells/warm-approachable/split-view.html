@@ -1,0 +1,257 @@
+<style>
+  .c-wa-split {
+    display: grid;
+    grid-template-columns: minmax(280px, 360px) 1fr;
+    gap: 16px;
+    padding: 16px;
+    min-height: 640px;
+    background: var(--bg);
+    font-family: inherit;
+    color: var(--fg);
+    box-sizing: border-box;
+  }
+
+  .c-wa-split__list {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 14px rgba(61, 40, 23, 0.06);
+  }
+  .c-wa-split__list-head {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-wa-split__list-title {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-size: 20px; font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0 0 4px;
+    color: var(--fg);
+  }
+  .c-wa-split__list-sub {
+    font-size: 13px;
+    color: var(--fg-muted);
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .c-wa-split__search {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .c-wa-split__search input {
+    width: 100%; box-sizing: border-box;
+    padding: 8px 12px 8px 34px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    outline: none;
+    transition: border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-split__search input::placeholder { color: var(--fg-muted); }
+  .c-wa-split__search input:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 18%, transparent);
+  }
+  .c-wa-split__search-icon {
+    position: absolute;
+    left: 28px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--fg-muted);
+  }
+
+  .c-wa-split__items {
+    list-style: none; margin: 0; padding: 8px;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    display: grid;
+    gap: 4px;
+  }
+  .c-wa-split__item {
+    display: block;
+    padding: 12px 14px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-split__item:hover {
+    background: var(--bg);
+    box-shadow: 0 4px 10px rgba(61, 40, 23, 0.06);
+  }
+  .c-wa-split__item[aria-current="true"] {
+    background: var(--bg);
+    box-shadow: 0 6px 14px rgba(61, 40, 23, 0.10),
+                0 0 0 1px var(--accent) inset;
+  }
+  .c-wa-split__item:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg-2), 0 0 0 4px var(--accent);
+  }
+  .c-wa-split__item-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .c-wa-split__item-name {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--fg);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .c-wa-split__item-time {
+    font-size: 12px;
+    color: var(--fg-muted);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+  .c-wa-split__item-preview {
+    font-size: 13px;
+    color: var(--fg-muted);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .c-wa-split__detail {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 36px;
+    overflow-y: auto;
+    box-shadow: 0 4px 14px rgba(61, 40, 23, 0.06);
+  }
+  .c-wa-split__detail-eyebrow {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent);
+    margin: 0 0 6px;
+  }
+  .c-wa-split__detail-title {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-size: 30px; font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--fg);
+    margin: 0 0 18px;
+  }
+  .c-wa-split__detail-meta {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-bottom: 26px;
+  }
+  .c-wa-split__chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+  }
+  .c-wa-split__chip-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .c-wa-split__detail-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--fg);
+  }
+  .c-wa-split__detail-body p { margin: 0 0 14px; }
+  .c-wa-split__detail-body em {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-wa-split__item,
+    .c-wa-split__search input { transition: none; }
+  }
+
+  @media (max-width: 900px) {
+    .c-wa-split { grid-template-columns: 1fr; padding: 12px; min-height: 0; }
+    .c-wa-split__detail { padding: 24px 20px; }
+    .c-wa-split__detail-title { font-size: 24px; }
+  }
+</style>
+
+<section class="c-wa-split" aria-label="Case files">
+  <aside class="c-wa-split__list" aria-label="Family case files">
+    <div class="c-wa-split__list-head">
+      <h2 class="c-wa-split__list-title">Harbor Outreach</h2>
+      <p class="c-wa-split__list-sub">Twelve families, tended this week.</p>
+    </div>
+    <div class="c-wa-split__search">
+      <svg class="c-wa-split__search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="3.75" stroke="currentColor" stroke-width="1.3"/><path d="M9 9l2.5 2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <input type="search" placeholder="Find a family…" aria-label="Search case files">
+    </div>
+    <ul class="c-wa-split__items" role="list">
+      <li><a class="c-wa-split__item" href="#" aria-current="true">
+        <div class="c-wa-split__item-row">
+          <span class="c-wa-split__item-name">The Okonkwo family</span>
+          <span class="c-wa-split__item-time">today</span>
+        </div>
+        <p class="c-wa-split__item-preview">Follow-up after housing meeting. Adaeze asked about the after-school programme — see intake notes.</p>
+      </a></li>
+      <li><a class="c-wa-split__item" href="#">
+        <div class="c-wa-split__item-row">
+          <span class="c-wa-split__item-name">Sarai & James Benitez</span>
+          <span class="c-wa-split__item-time">yesterday</span>
+        </div>
+        <p class="c-wa-split__item-preview">New baby, eight weeks old. Formula and linens delivered Friday. Mother recovering well.</p>
+      </a></li>
+      <li><a class="c-wa-split__item" href="#">
+        <div class="c-wa-split__item-row">
+          <span class="c-wa-split__item-name">Mrs. Clara Hoang</span>
+          <span class="c-wa-split__item-time">Mon</span>
+        </div>
+        <p class="c-wa-split__item-preview">Grandson staying through summer. Meals lined up with Harbor Kitchen Tuesdays and Fridays.</p>
+      </a></li>
+      <li><a class="c-wa-split__item" href="#">
+        <div class="c-wa-split__item-row">
+          <span class="c-wa-split__item-name">The Ferreira household</span>
+          <span class="c-wa-split__item-time">Apr 14</span>
+        </div>
+        <p class="c-wa-split__item-preview">Rent bridge approved through June. Next touch-base scheduled for the first week of May.</p>
+      </a></li>
+      <li><a class="c-wa-split__item" href="#">
+        <div class="c-wa-split__item-row">
+          <span class="c-wa-split__item-name">Nadia Yusuf</span>
+          <span class="c-wa-split__item-time">Apr 12</span>
+        </div>
+        <p class="c-wa-split__item-preview">Evening childcare covered while studying for the nursing board. Three weeks to exam day.</p>
+      </a></li>
+    </ul>
+  </aside>
+
+  <article class="c-wa-split__detail" aria-labelledby="wa-split-title">
+    <p class="c-wa-split__detail-eyebrow">A note from today</p>
+    <h1 class="c-wa-split__detail-title" id="wa-split-title">The Okonkwo family — follow-up</h1>
+    <div class="c-wa-split__detail-meta">
+      <span class="c-wa-split__chip"><span class="c-wa-split__chip-dot" aria-hidden="true"></span>In touch weekly</span>
+      <span class="c-wa-split__chip">Housing · After-school</span>
+      <span class="c-wa-split__chip">Worker: Yael</span>
+    </div>
+    <div class="c-wa-split__detail-body">
+      <p>Dropped by this morning. Adaeze met me at the door with two of the younger ones in tow — she's holding it together beautifully. The housing meeting last week went the way we hoped, and the landlord has softened on the repair timeline. Kitchen sink is fixed; the back-room window is scheduled for next Tuesday.</p>
+      <p>Adaeze asked, gently, whether <em>the after-school programme could take Nnamdi a little earlier this term</em> — his bus drops him an hour before she's home from shift. I said yes and will coordinate with Mr. Petrov at the centre. No forms to fill out on her end.</p>
+      <p>Next visit: <em>Thursday, 4:30 pm.</em> I'll bring the paperwork for the summer grocery card and a tin of those biscuits she mentioned last time.</p>
+    </div>
+  </article>
+</section>

@@ -1,0 +1,84 @@
+<style>
+  .c-br-stats {
+    border-top: 2px solid var(--border, var(--fg));
+    border-bottom: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', monospace);
+  }
+  .c-br-stats__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .c-br-stats__item {
+    padding: 32px 28px;
+    border-right: 2px solid var(--border, var(--fg));
+  }
+  .c-br-stats__item:last-child { border-right: none; }
+  .c-br-stats__label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    margin-bottom: 14px;
+  }
+  .c-br-stats__num {
+    font-size: 56px;
+    line-height: 0.95;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 10px;
+  }
+  .c-br-stats__item--hot .c-br-stats__num { color: var(--accent); }
+  .c-br-stats__delta {
+    font-size: 12px;
+    color: var(--fg);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border, var(--fg));
+  }
+  .c-br-stats__delta strong { color: var(--accent); font-weight: 700; }
+
+  @media (max-width: 900px) {
+    .c-br-stats__inner { grid-template-columns: 1fr 1fr; }
+    .c-br-stats__item { border-right: 2px solid var(--border, var(--fg)); }
+    .c-br-stats__item:nth-child(2n) { border-right: none; }
+    .c-br-stats__item:nth-child(-n+2) {
+      border-bottom: 2px solid var(--border, var(--fg));
+    }
+  }
+  @media (max-width: 560px) {
+    .c-br-stats__inner { grid-template-columns: 1fr; }
+    .c-br-stats__item { border-right: none; border-bottom: 2px solid var(--border, var(--fg)); }
+    .c-br-stats__item:last-child { border-bottom: none; }
+  }
+</style>
+
+<section class="c-br-stats">
+  <div class="c-br-stats__inner">
+    <div class="c-br-stats__item">
+      <div class="c-br-stats__label">// releases / 2014—2026</div>
+      <div class="c-br-stats__num">142</div>
+      <div class="c-br-stats__delta"><strong>+11</strong> this year</div>
+    </div>
+    <div class="c-br-stats__item c-br-stats__item--hot">
+      <div class="c-br-stats__label">// % paid to artists</div>
+      <div class="c-br-stats__num">68%</div>
+      <div class="c-br-stats__delta">industry avg <strong>12%</strong></div>
+    </div>
+    <div class="c-br-stats__item">
+      <div class="c-br-stats__label">// copies per pressing</div>
+      <div class="c-br-stats__num">300</div>
+      <div class="c-br-stats__delta">every record, <strong>no exceptions</strong></div>
+    </div>
+    <div class="c-br-stats__item">
+      <div class="c-br-stats__label">// sponsored posts</div>
+      <div class="c-br-stats__num">0</div>
+      <div class="c-br-stats__delta">and it will <strong>stay 0</strong></div>
+    </div>
+  </div>
+</section>

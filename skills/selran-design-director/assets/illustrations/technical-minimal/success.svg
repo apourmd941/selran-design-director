@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: technical-minimal
+  use: success / completion moment
+  variables: var(fg), var(accent)
+  notes: precise geometric tick inside a thin isometric cube; no confetti, no gradients
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Operation succeeded">
+  <style>
+    .tm-stroke { stroke: var(--fg, currentColor); fill: none; stroke-width: 1.25; vector-effect: non-scaling-stroke; }
+    .tm-thin   { stroke: var(--fg, currentColor); fill: none; stroke-width: 1; opacity: .3; vector-effect: non-scaling-stroke; }
+    .tm-accent-stroke { stroke: var(--accent, #0A7A5C); fill: none; stroke-width: 1.5; stroke-linecap: square; stroke-linejoin: miter; vector-effect: non-scaling-stroke; }
+    .tm-accent { fill: var(--accent, #0A7A5C); opacity: .2; }
+    .tm-label  { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; fill: var(--fg, currentColor); opacity: .55; letter-spacing: .08em; text-anchor: middle; }
+  </style>
+
+  <!-- crosshair guides -->
+  <g class="tm-thin">
+    <line x1="200" y1="40" x2="200" y2="360"/>
+    <line x1="40" y1="200" x2="360" y2="200"/>
+  </g>
+
+  <!-- isometric cube -->
+  <g transform="translate(200 200)">
+    <!-- top face with accent fill -->
+    <path class="tm-accent"        d="M-100 -50 L0 -100 L100 -50 L0 0 Z"/>
+    <path class="tm-stroke"        d="M-100 -50 L0 -100 L100 -50 L0 0 Z"/>
+    <!-- left face -->
+    <path class="tm-stroke" d="M-100 -50 L-100 50 L0 100 L0 0 Z"/>
+    <!-- right face -->
+    <path class="tm-stroke" d="M100 -50 L100 50 L0 100 L0 0 Z"/>
+
+    <!-- accent tick across top face -->
+    <polyline class="tm-accent-stroke" points="-50,-42 -18,-12 62,-72"/>
+  </g>
+
+  <!-- concentric thin rings for emphasis -->
+  <circle cx="200" cy="200" r="140" class="tm-thin"/>
+  <circle cx="200" cy="200" r="160" class="tm-thin" opacity=".15"/>
+
+  <text x="200" y="360" class="tm-label">OPERATION · COMPLETE</text>
+</svg>

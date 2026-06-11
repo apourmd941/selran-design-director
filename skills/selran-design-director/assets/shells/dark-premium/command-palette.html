@@ -1,0 +1,297 @@
+<style>
+  .c-dp-cmdk {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 14vh 20px 20px;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    font-family: inherit;
+    animation: c-dp-cmdk-fade 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  @keyframes c-dp-cmdk-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .c-dp-cmdk__panel {
+    width: 100%;
+    max-width: 640px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--accent) 14%, transparent),
+      0 20px 80px -10px rgba(0, 0, 0, 0.7),
+      0 0 60px -10px color-mix(in oklab, var(--accent) 24%, transparent);
+    animation: c-dp-cmdk-rise 260ms cubic-bezier(0.19, 1, 0.22, 1);
+    isolation: isolate;
+    position: relative;
+  }
+  @keyframes c-dp-cmdk-rise {
+    from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .c-dp-cmdk__search {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-dp-cmdk__search-icon { color: var(--fg-muted); }
+  .c-dp-cmdk__search-input {
+    flex: 1 1 auto;
+    background: transparent;
+    border: 0;
+    outline: none;
+    color: var(--fg);
+    font-size: 15px;
+    font-family: inherit;
+    letter-spacing: -0.005em;
+  }
+  .c-dp-cmdk__search-input::placeholder { color: var(--fg-muted); }
+  .c-dp-cmdk__esc {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    padding: 3px 7px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--fg-muted);
+    background: var(--bg);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .c-dp-cmdk__results {
+    max-height: 440px;
+    overflow-y: auto;
+    padding: 8px;
+  }
+  .c-dp-cmdk__group { margin-bottom: 4px; }
+  .c-dp-cmdk__group-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+    padding: 10px 12px 6px;
+    margin: 0;
+  }
+  .c-dp-cmdk__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1px;
+  }
+  .c-dp-cmdk__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 180ms cubic-bezier(0.19, 1, 0.22, 1),
+                color 180ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-cmdk__item:hover,
+  .c-dp-cmdk__item[data-selected="true"] {
+    background: color-mix(in oklab, var(--accent) 8%, var(--bg-3, var(--bg)));
+  }
+  .c-dp-cmdk__item[data-selected="true"] {
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--accent) 30%, transparent);
+  }
+  .c-dp-cmdk__item-icon {
+    width: 28px; height: 28px;
+    flex: 0 0 auto;
+    border-radius: 6px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--accent);
+  }
+  .c-dp-cmdk__item-text {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .c-dp-cmdk__item-title {
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    color: var(--fg);
+  }
+  .c-dp-cmdk__item-meta {
+    font-size: 12px;
+    color: var(--fg-muted);
+  }
+  .c-dp-cmdk__kbd {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    color: var(--fg-muted);
+    padding: 3px 6px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg);
+    letter-spacing: 0.08em;
+  }
+
+  .c-dp-cmdk__foot {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 18px;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    color: var(--fg-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .c-dp-cmdk__foot-hints { display: inline-flex; align-items: center; gap: 12px; }
+  .c-dp-cmdk__foot-hints kbd {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    padding: 2px 5px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--fg);
+    background: var(--bg-2);
+    margin-right: 4px;
+  }
+
+  @media (max-width: 900px) {
+    .c-dp-cmdk { padding: 60px 14px 20px; }
+    .c-dp-cmdk__foot { padding: 10px 14px; }
+  }
+</style>
+
+<div class="c-dp-cmdk" role="dialog" aria-modal="true" aria-label="Command palette">
+  <div class="c-dp-cmdk__panel">
+    <div class="c-dp-cmdk__search">
+      <svg class="c-dp-cmdk__search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.3"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <input class="c-dp-cmdk__search-input" type="search" placeholder="Search or run a command..." aria-label="Search commands" autofocus>
+      <span class="c-dp-cmdk__esc" aria-hidden="true">ESC</span>
+    </div>
+
+    <div class="c-dp-cmdk__results" role="listbox">
+      <div class="c-dp-cmdk__group">
+        <p class="c-dp-cmdk__group-label">Suggested</p>
+        <ul class="c-dp-cmdk__list">
+          <li>
+            <a class="c-dp-cmdk__item" role="option" aria-selected="true" data-selected="true" href="#">
+              <span class="c-dp-cmdk__item-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 11l3-3 2 2 2-3 3 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="c-dp-cmdk__item-text">
+                <span class="c-dp-cmdk__item-title">Open primary vault</span>
+                <span class="c-dp-cmdk__item-meta">Treasury &middot; Meridian Capital</span>
+              </span>
+              <span class="c-dp-cmdk__kbd">&crarr;</span>
+            </a>
+          </li>
+          <li>
+            <a class="c-dp-cmdk__item" role="option" href="#">
+              <span class="c-dp-cmdk__item-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+              <span class="c-dp-cmdk__item-text">
+                <span class="c-dp-cmdk__item-title">New allocation</span>
+                <span class="c-dp-cmdk__item-meta">Create a new position</span>
+              </span>
+              <span class="c-dp-cmdk__kbd">&#8984;N</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="c-dp-cmdk__group">
+        <p class="c-dp-cmdk__group-label">Jump to</p>
+        <ul class="c-dp-cmdk__list">
+          <li>
+            <a class="c-dp-cmdk__item" role="option" href="#">
+              <span class="c-dp-cmdk__item-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="3" width="10" height="8" stroke="currentColor" stroke-width="1.3"/><path d="M2 6h10" stroke="currentColor" stroke-width="1.3"/></svg>
+              </span>
+              <span class="c-dp-cmdk__item-text">
+                <span class="c-dp-cmdk__item-title">Transactions &middot; April</span>
+                <span class="c-dp-cmdk__item-meta">248 entries</span>
+              </span>
+              <span class="c-dp-cmdk__kbd">G T</span>
+            </a>
+          </li>
+          <li>
+            <a class="c-dp-cmdk__item" role="option" href="#">
+              <span class="c-dp-cmdk__item-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" stroke="currentColor" stroke-width="1.3"/><path d="M5 2v10M2 5h10" stroke="currentColor" stroke-width="1.3"/></svg>
+              </span>
+              <span class="c-dp-cmdk__item-text">
+                <span class="c-dp-cmdk__item-title">Q1 2026 Report</span>
+                <span class="c-dp-cmdk__item-meta">Reports &middot; Draft</span>
+              </span>
+              <span class="c-dp-cmdk__kbd">G R</span>
+            </a>
+          </li>
+          <li>
+            <a class="c-dp-cmdk__item" role="option" href="#">
+              <span class="c-dp-cmdk__item-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.3"/></svg>
+              </span>
+              <span class="c-dp-cmdk__item-text">
+                <span class="c-dp-cmdk__item-title">Risk dashboard</span>
+                <span class="c-dp-cmdk__item-meta">3 active signals</span>
+              </span>
+              <span class="c-dp-cmdk__kbd">G K</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="c-dp-cmdk__group">
+        <p class="c-dp-cmdk__group-label">Commands</p>
+        <ul class="c-dp-cmdk__list">
+          <li>
+            <a class="c-dp-cmdk__item" role="option" href="#">
+              <span class="c-dp-cmdk__item-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11V5a2 2 0 012-2h4a2 2 0 012 2v6" stroke="currentColor" stroke-width="1.3"/><path d="M5 8h4" stroke="currentColor" stroke-width="1.3"/></svg>
+              </span>
+              <span class="c-dp-cmdk__item-text">
+                <span class="c-dp-cmdk__item-title">Export ledger as CSV</span>
+                <span class="c-dp-cmdk__item-meta">Last 30 days</span>
+              </span>
+              <span class="c-dp-cmdk__kbd">&#8984;&#8679;E</span>
+            </a>
+          </li>
+          <li>
+            <a class="c-dp-cmdk__item" role="option" href="#">
+              <span class="c-dp-cmdk__item-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v6M4.5 5.5L7 8l2.5-2.5M2 11h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="c-dp-cmdk__item-text">
+                <span class="c-dp-cmdk__item-title">Invite teammate</span>
+                <span class="c-dp-cmdk__item-meta">Workspace admin</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="c-dp-cmdk__foot">
+      <span>Meridian Capital</span>
+      <span class="c-dp-cmdk__foot-hints">
+        <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate</span>
+        <span><kbd>&crarr;</kbd> select</span>
+        <span><kbd>ESC</kbd> close</span>
+      </span>
+    </div>
+  </div>
+</div>

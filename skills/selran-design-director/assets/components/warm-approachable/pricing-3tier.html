@@ -1,0 +1,220 @@
+<style>
+  .c-wa-price {
+    padding: 120px 0;
+  }
+  .c-wa-price__inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .c-wa-price__head {
+    text-align: center;
+    margin-bottom: 64px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .c-wa-price__eyebrow {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    color: var(--accent);
+    font-size: 17px;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+  .c-wa-price__head h2 {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-size: clamp(32px, 4.2vw, 44px);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+  }
+  .c-wa-price__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+  .c-wa-price__plan {
+    background: var(--bg-2);
+    border-radius: var(--radius-lg, 24px);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 18px rgba(61, 40, 23, 0.05);
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-price__plan:hover { transform: translateY(-3px); }
+  .c-wa-price__plan--featured {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-12px);
+    box-shadow: 0 18px 40px rgba(61, 40, 23, 0.18);
+  }
+  .c-wa-price__plan--featured:hover { transform: translateY(-15px); }
+  .c-wa-price__label {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .c-wa-price__plan--featured .c-wa-price__label { color: var(--bg); }
+  .c-wa-price__flag {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    background: var(--bg);
+    color: var(--accent);
+    font-family: inherit;
+    font-style: normal;
+  }
+  .c-wa-price__amt {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-size: 56px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .c-wa-price__unit {
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.7;
+  }
+  .c-wa-price__desc {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 28px;
+    opacity: 0.85;
+    min-height: 44px;
+  }
+  .c-wa-price__list {
+    list-style: none;
+    margin: 0 0 32px;
+    padding: 0;
+    flex: 1;
+  }
+  .c-wa-price__list li {
+    padding: 10px 0 10px 26px;
+    font-size: 15px;
+    line-height: 1.5;
+    position: relative;
+  }
+  .c-wa-price__list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 16px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid currentColor;
+    opacity: 0.8;
+  }
+  .c-wa-price__list li::after {
+    content: '';
+    position: absolute;
+    left: 4px; top: 21px;
+    width: 6px; height: 3px;
+    border-left: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(-45deg);
+  }
+  .c-wa-price__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: var(--radius-lg, 24px);
+    border: 1px solid transparent;
+    text-decoration: none;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-price__btn--primary { background: var(--accent); color: var(--bg); }
+  .c-wa-price__btn--primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(61, 40, 23, 0.14);
+  }
+  .c-wa-price__btn--ghost {
+    background: transparent;
+    color: inherit;
+    border-color: currentColor;
+  }
+  .c-wa-price__btn--ghost:hover { background: rgba(255,255,255,0.12); }
+  .c-wa-price__plan:not(.c-wa-price__plan--featured) .c-wa-price__btn--ghost {
+    border-color: var(--border-strong, var(--border));
+    color: var(--fg);
+  }
+  .c-wa-price__plan:not(.c-wa-price__plan--featured) .c-wa-price__btn--ghost:hover { background: var(--bg); }
+  .c-wa-price__plan--featured .c-wa-price__btn--inverse {
+    background: var(--bg);
+    color: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .c-wa-price { padding: 72px 0; }
+    .c-wa-price__grid { grid-template-columns: 1fr; }
+    .c-wa-price__plan--featured { transform: none; }
+  }
+</style>
+
+<section class="c-wa-price">
+  <div class="c-wa-price__inner">
+    <div class="c-wa-price__head">
+      <span class="c-wa-price__eyebrow">Become a member</span>
+      <h2>Three ways to let us into your kitchen.</h2>
+    </div>
+    <div class="c-wa-price__grid">
+      <div class="c-wa-price__plan">
+        <span class="c-wa-price__label">The Sampler</span>
+        <div class="c-wa-price__amt">$24<span class="c-wa-price__unit">/mo</span></div>
+        <p class="c-wa-price__desc">One small, seasonal piece in the mail. For curious homes, or gifts for the ones you love.</p>
+        <ul class="c-wa-price__list">
+          <li>One item per month</li>
+          <li>Free first-class shipping</li>
+          <li>Maker's note with every piece</li>
+          <li>Cancel any month, no fuss</li>
+        </ul>
+        <a href="#" class="c-wa-price__btn c-wa-price__btn--ghost">Start with Sampler</a>
+      </div>
+      <div class="c-wa-price__plan c-wa-price__plan--featured">
+        <span class="c-wa-price__label">The Household <span class="c-wa-price__flag">Most loved</span></span>
+        <div class="c-wa-price__amt">$62<span class="c-wa-price__unit">/mo</span></div>
+        <p class="c-wa-price__desc">Three considered pieces each month &mdash; a daily object, a pantry staple, a small surprise.</p>
+        <ul class="c-wa-price__list">
+          <li>Three items per month</li>
+          <li>Priority mending &amp; repair</li>
+          <li>Member-only seasonal workshop</li>
+          <li>10% off everything, always</li>
+          <li>Free tea or honey with every box</li>
+        </ul>
+        <a href="#" class="c-wa-price__btn c-wa-price__btn--inverse">Join the household &rarr;</a>
+      </div>
+      <div class="c-wa-price__plan">
+        <span class="c-wa-price__label">The Keeper</span>
+        <div class="c-wa-price__amt">$148<span class="c-wa-price__unit">/mo</span></div>
+        <p class="c-wa-price__desc">For whole homes &mdash; setting the table, the guest room, the annual gifts. Curated with you.</p>
+        <ul class="c-wa-price__list">
+          <li>Quarterly call with your curator</li>
+          <li>Lifetime mending on all pieces</li>
+          <li>Early access, before the public</li>
+          <li>Two in-shop workshops a year</li>
+        </ul>
+        <a href="#" class="c-wa-price__btn c-wa-price__btn--ghost">Talk to a curator</a>
+      </div>
+    </div>
+  </div>
+</section>

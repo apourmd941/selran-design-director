@@ -1,0 +1,144 @@
+<style>
+  .c-br-spin {
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', ui-monospace, monospace);
+    color: var(--fg);
+  }
+
+  /* Full-screen variant */
+  .c-br-spin--full {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    background: var(--bg);
+  }
+  .c-br-spin__box {
+    border: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+    padding: 28px 32px;
+    min-width: 280px;
+    text-align: center;
+  }
+  .c-br-spin__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border, var(--fg));
+    margin-bottom: 16px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+  }
+  .c-br-spin__glyph {
+    font-size: 40px;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--fg);
+    display: inline-block;
+    width: 1.2em;
+    text-align: center;
+  }
+  .c-br-spin--full .c-br-spin__glyph {
+    animation: c-br-spin-step 800ms steps(4, end) infinite;
+  }
+  .c-br-spin__glyph::before { content: "|"; }
+
+  @keyframes c-br-spin-step {
+    0%   { content: ""; }
+    25%  { }
+    50%  { }
+    75%  { }
+    100% { }
+  }
+  /* steps() trick: swap character via animated content on ::before */
+  .c-br-spin--full .c-br-spin__glyph::before { animation: c-br-spin-chars 800ms steps(4, end) infinite; }
+  @keyframes c-br-spin-chars {
+    0%   { content: "|"; }
+    25%  { content: "/"; }
+    50%  { content: "-"; }
+    75%  { content: "\\"; }
+    100% { content: "|"; }
+  }
+
+  .c-br-spin__label {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg);
+  }
+  .c-br-spin__sub {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* Inline variant */
+  .c-br-spin--inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px;
+    border: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg);
+  }
+  .c-br-spin--inline .c-br-spin__glyph {
+    font-size: 14px;
+    animation: c-br-spin-step 800ms steps(4, end) infinite;
+  }
+  .c-br-spin--inline .c-br-spin__glyph::before {
+    content: "|";
+    animation: c-br-spin-chars 800ms steps(4, end) infinite;
+  }
+
+  .c-br-spin__static {
+    display: none;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 6px 10px;
+    border: 2px solid var(--border, var(--fg));
+    color: var(--fg);
+    letter-spacing: 0.12em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-br-spin__glyph { display: none; }
+    .c-br-spin__static { display: inline-block; }
+  }
+</style>
+
+<!-- FULL-SCREEN SPINNER -->
+<section class="c-br-spin c-br-spin--full" role="status" aria-live="polite" aria-label="Loading">
+  <div class="c-br-spin__box">
+    <div class="c-br-spin__meta">
+      <span>// FETCH / IN FLIGHT</span>
+      <span>REQ: 0142</span>
+    </div>
+    <span class="c-br-spin__glyph" aria-hidden="true"></span>
+    <span class="c-br-spin__static" aria-hidden="true">[ WAIT ]</span>
+    <strong class="c-br-spin__label">LOADING...</strong>
+    <span class="c-br-spin__sub">// PULLING CATALOG FROM DISK</span>
+  </div>
+</section>
+
+<!-- INLINE SPINNER (use anywhere mid-flow) -->
+<div style="padding:16px;">
+  <span class="c-br-spin c-br-spin--inline" role="status" aria-live="polite">
+    <span class="c-br-spin__glyph" aria-hidden="true"></span>
+    <span class="c-br-spin__static" aria-hidden="true">[ WAIT ]</span>
+    <span>SAVING...</span>
+  </span>
+</div>

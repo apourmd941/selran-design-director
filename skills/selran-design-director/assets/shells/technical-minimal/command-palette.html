@@ -1,0 +1,190 @@
+<style>
+  .c-tm-cmd {
+    position: fixed; inset: 0;
+    background: color-mix(in oklab, var(--fg) 40%, transparent);
+    display: flex; align-items: flex-start; justify-content: center;
+    padding: 80px 16px 16px;
+    z-index: 50;
+    font-family: inherit;
+  }
+  .c-tm-cmd[hidden] { display: none; }
+  .c-tm-cmd__panel {
+    width: 100%;
+    max-width: 640px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 160px);
+  }
+  .c-tm-cmd__search {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-tm-cmd__search-icon { color: var(--fg-muted); flex: 0 0 auto; }
+  .c-tm-cmd__input {
+    flex: 1 1 auto;
+    border: none;
+    background: transparent;
+    outline: none;
+    font: inherit;
+    font-size: 15px;
+    color: var(--fg);
+    padding: 2px 0;
+  }
+  .c-tm-cmd__input::placeholder { color: var(--fg-muted); }
+  .c-tm-cmd__esc {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--fg-muted);
+    padding: 2px 6px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg-2);
+  }
+  .c-tm-cmd__results {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 6px 0;
+  }
+  .c-tm-cmd__group { padding: 6px 0; }
+  .c-tm-cmd__group-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+    padding: 6px 20px;
+    margin: 0;
+  }
+  .c-tm-cmd__list { list-style: none; margin: 0; padding: 0; }
+  .c-tm-cmd__item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 20px;
+    font-size: 14px;
+    color: var(--fg);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .c-tm-cmd__item[aria-selected="true"],
+  .c-tm-cmd__item:hover {
+    background: var(--bg-2);
+  }
+  .c-tm-cmd__item-icon {
+    flex: 0 0 auto;
+    width: 16px; height: 16px;
+    color: var(--fg-muted);
+  }
+  .c-tm-cmd__item[aria-selected="true"] .c-tm-cmd__item-icon { color: var(--fg); }
+  .c-tm-cmd__item-meta {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--fg-muted);
+  }
+  .c-tm-cmd__foot {
+    display: flex; align-items: center; gap: 16px;
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--fg-muted);
+    letter-spacing: 0.04em;
+    background: var(--bg-2);
+  }
+  .c-tm-cmd__hint { display: inline-flex; align-items: center; gap: 6px; }
+  .c-tm-cmd__hint kbd {
+    font: inherit;
+    padding: 2px 5px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--fg);
+    min-width: 14px;
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .c-tm-cmd { padding: 40px 12px 12px; }
+    .c-tm-cmd__foot { gap: 10px; }
+  }
+</style>
+
+<div class="c-tm-cmd" role="presentation">
+  <div class="c-tm-cmd__panel" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="c-tm-cmd__search">
+      <svg class="c-tm-cmd__search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.25"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+      <input class="c-tm-cmd__input" type="text" placeholder="Search or type a command…" aria-label="Command input" autofocus>
+      <span class="c-tm-cmd__esc">esc</span>
+    </div>
+
+    <div class="c-tm-cmd__results" role="listbox" aria-label="Results">
+      <div class="c-tm-cmd__group">
+        <p class="c-tm-cmd__group-label">Navigate</p>
+        <ul class="c-tm-cmd__list">
+          <li class="c-tm-cmd__item" role="option" aria-selected="true">
+            <svg class="c-tm-cmd__item-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="2" width="5" height="5" stroke="currentColor" stroke-width="1.25"/><rect x="9" y="2" width="5" height="5" stroke="currentColor" stroke-width="1.25"/><rect x="2" y="9" width="5" height="5" stroke="currentColor" stroke-width="1.25"/></svg>
+            <span>Go to Dashboard</span>
+            <span class="c-tm-cmd__item-meta">G D</span>
+          </li>
+          <li class="c-tm-cmd__item" role="option" aria-selected="false">
+            <svg class="c-tm-cmd__item-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" stroke="currentColor" stroke-width="1.25"/></svg>
+            <span>Go to Ledgers</span>
+            <span class="c-tm-cmd__item-meta">G L</span>
+          </li>
+          <li class="c-tm-cmd__item" role="option" aria-selected="false">
+            <svg class="c-tm-cmd__item-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 13l4-5 3 3 5-7" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Go to Reports</span>
+            <span class="c-tm-cmd__item-meta">G R</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="c-tm-cmd__group" style="border-top: 1px solid var(--border);">
+        <p class="c-tm-cmd__group-label">Actions</p>
+        <ul class="c-tm-cmd__list">
+          <li class="c-tm-cmd__item" role="option" aria-selected="false">
+            <svg class="c-tm-cmd__item-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+            <span>Create new ledger</span>
+            <span class="c-tm-cmd__item-meta">N</span>
+          </li>
+          <li class="c-tm-cmd__item" role="option" aria-selected="false">
+            <svg class="c-tm-cmd__item-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h12M10 4l4 4-4 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Invite member</span>
+            <span class="c-tm-cmd__item-meta">I</span>
+          </li>
+          <li class="c-tm-cmd__item" role="option" aria-selected="false">
+            <svg class="c-tm-cmd__item-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 10l5 4 5-4M3 6l5 4 5-4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Export close report</span>
+            <span class="c-tm-cmd__item-meta">E</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="c-tm-cmd__group" style="border-top: 1px solid var(--border);">
+        <p class="c-tm-cmd__group-label">Recent</p>
+        <ul class="c-tm-cmd__list">
+          <li class="c-tm-cmd__item" role="option" aria-selected="false">
+            <svg class="c-tm-cmd__item-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.25"/><path d="M8 4.5v4l2 1" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+            <span>Q1 operating ledger</span>
+            <span class="c-tm-cmd__item-meta">2h ago</span>
+          </li>
+          <li class="c-tm-cmd__item" role="option" aria-selected="false">
+            <svg class="c-tm-cmd__item-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.25"/><path d="M8 4.5v4l2 1" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+            <span>Reconciliation · March</span>
+            <span class="c-tm-cmd__item-meta">Yesterday</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="c-tm-cmd__foot">
+      <span class="c-tm-cmd__hint"><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
+      <span class="c-tm-cmd__hint"><kbd>↵</kbd> Select</span>
+      <span class="c-tm-cmd__hint"><kbd>esc</kbd> Close</span>
+    </div>
+  </div>
+</div>

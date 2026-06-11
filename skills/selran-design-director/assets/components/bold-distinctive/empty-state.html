@@ -1,0 +1,114 @@
+<style>
+  .c-bd-empty {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 96px 40px;
+    text-align: left;
+    border-top: 2px solid var(--fg);
+    border-bottom: 2px solid var(--fg);
+  }
+  .c-bd-empty__rule {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted, var(--fg));
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--fg);
+    margin-bottom: 40px;
+  }
+  .c-bd-empty__marker {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(140px, 20vw, 220px);
+    line-height: 0.82;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    color: var(--fg);
+    margin: 0 0 -0.08em -8px;
+    font-variant-numeric: tabular-nums;
+  }
+  .c-bd-empty__marker span {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .c-bd-empty__headline {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(28px, 3.6vw, 40px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 24px 0 20px;
+  }
+  .c-bd-empty__headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .c-bd-empty__body {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--fg-secondary, var(--fg));
+    margin: 0 0 32px;
+    max-width: 52ch;
+  }
+  .c-bd-empty__cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .c-bd-empty__btn {
+    padding: 16px 24px;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    border: 2px solid var(--fg);
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-bd-empty__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-bd-empty__btn--primary:hover {
+    background: var(--fg);
+    border-color: var(--fg);
+  }
+  .c-bd-empty__btn--ghost {
+    background: transparent;
+    color: var(--fg);
+  }
+  .c-bd-empty__btn--ghost:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-empty { padding: 64px 24px; }
+  }
+</style>
+
+<section class="c-bd-empty">
+  <div class="c-bd-empty__rule">
+    <span>Your shelf &middot; Issue No. 07</span>
+    <span>0 essays saved</span>
+  </div>
+  <div class="c-bd-empty__marker">00<span>.</span></div>
+  <h2 class="c-bd-empty__headline">
+    A blank page, <em>for now.</em>
+  </h2>
+  <p class="c-bd-empty__body">
+    You haven't saved any essays yet. When you do, they'll keep a place here &mdash; with the kicker, the byline, and the issue it came from. No sorting, no feed. Just the pieces you went back to.
+  </p>
+  <div class="c-bd-empty__cta">
+    <a href="#" class="c-bd-empty__btn c-bd-empty__btn--primary">Read the cover story &rarr;</a>
+    <a href="#" class="c-bd-empty__btn c-bd-empty__btn--ghost">Browse the archive</a>
+  </div>
+</section>

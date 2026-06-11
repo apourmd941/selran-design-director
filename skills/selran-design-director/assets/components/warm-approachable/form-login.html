@@ -1,0 +1,193 @@
+<style>
+  .c-wa-login {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 44px 36px;
+    background: var(--bg-2);
+    border-radius: var(--radius-lg, 24px);
+    box-shadow: 0 10px 30px -10px rgba(61, 40, 23, 0.12),
+                0 2px 6px -2px rgba(61, 40, 23, 0.06);
+    font-family: inherit;
+  }
+  .c-wa-login__mark {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--accent);
+    position: relative;
+    margin: 0 auto 18px;
+    display: block;
+  }
+  .c-wa-login__mark::after {
+    content: ''; position: absolute; inset: 7px;
+    border-radius: 50%; background: var(--bg-2);
+  }
+  .c-wa-login__eyebrow {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .c-wa-login__headline {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-size: 28px;
+    line-height: 1.15;
+    font-weight: 500;
+    color: var(--fg);
+    text-align: center;
+    margin: 0 0 8px;
+  }
+  .c-wa-login__sub {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    text-align: center;
+    margin: 0 0 28px;
+  }
+  .c-wa-login__field { margin-bottom: 16px; }
+  .c-wa-login__label {
+    display: block;
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--fg);
+    margin-bottom: 6px;
+  }
+  .c-wa-login__row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .c-wa-login__forgot {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .c-wa-login__forgot:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .c-wa-login__input {
+    width: 100%; box-sizing: border-box;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border-strong, var(--border));
+    border-radius: var(--radius-md, 14px);
+    outline: none;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-login__input::placeholder { color: var(--fg-muted); }
+  .c-wa-login__input:hover { border-color: var(--accent); }
+  .c-wa-login__input:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 4px 14px rgba(61, 40, 23, 0.1),
+                0 0 0 4px color-mix(in oklab, var(--accent) 20%, transparent);
+  }
+  .c-wa-login__btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; box-sizing: border-box;
+    padding: 14px 24px;
+    margin-top: 10px;
+    font-size: 15px; font-weight: 500;
+    font-family: inherit;
+    background: var(--accent); color: var(--bg);
+    border: 0;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-login__btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(61, 40, 23, 0.18);
+  }
+  .c-wa-login__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--bg-2),
+                0 0 0 5px var(--accent);
+  }
+  .c-wa-login__divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 26px 0 16px;
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--fg-muted);
+  }
+  .c-wa-login__divider::before,
+  .c-wa-login__divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .c-wa-login__oauth { display: flex; flex-direction: column; gap: 10px; }
+  .c-wa-login__oauth-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 12px 18px;
+    font-size: 14px; font-weight: 500;
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border-strong, var(--border));
+    border-radius: 9999px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-login__oauth-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(61, 40, 23, 0.08);
+  }
+  .c-wa-login__oauth-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 25%, transparent);
+  }
+  .c-wa-login__oauth-btn svg { width: 16px; height: 16px; }
+  .c-wa-login__foot {
+    margin-top: 24px;
+    font-size: 14px;
+    color: var(--fg-muted);
+    text-align: center;
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+  }
+  .c-wa-login__foot a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+  @media (max-width: 900px) {
+    .c-wa-login { max-width: none; box-shadow: none; padding: 36px 24px; border-radius: 0; }
+  }
+</style>
+
+<form class="c-wa-login" novalidate>
+  <span class="c-wa-login__mark" aria-hidden="true"></span>
+  <div class="c-wa-login__eyebrow">Welcome back, friend</div>
+  <h1 class="c-wa-login__headline">Sign in to {Brand}</h1>
+  <p class="c-wa-login__sub">Your wishlist, orders, and reading nook — all here waiting.</p>
+
+  <div class="c-wa-login__field">
+    <label class="c-wa-login__label" for="wa-email">Your email</label>
+    <input class="c-wa-login__input" id="wa-email" name="email" type="email" autocomplete="email" placeholder="you@somewhere.com" required>
+  </div>
+
+  <div class="c-wa-login__field">
+    <div class="c-wa-login__row">
+      <label class="c-wa-login__label" for="wa-password">Password</label>
+      <a class="c-wa-login__forgot" href="#forgot">Forgot it?</a>
+    </div>
+    <input class="c-wa-login__input" id="wa-password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+  </div>
+
+  <button class="c-wa-login__btn" type="submit">Sign in →</button>
+
+  <div class="c-wa-login__divider">or with</div>
+
+  <div class="c-wa-login__oauth">
+    <a class="c-wa-login__oauth-btn" href="#google">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.35 11.1H12v3.8h5.35c-.23 1.23-1.44 3.6-5.35 3.6-3.22 0-5.85-2.67-5.85-5.95S8.78 6.6 12 6.6c1.83 0 3.06.78 3.77 1.45l2.57-2.48C16.7 4.1 14.55 3.2 12 3.2 7.06 3.2 3 7.25 3 12.2s4.06 9 9 9c5.2 0 8.65-3.65 8.65-8.8 0-.6-.06-1.05-.15-1.5z"/></svg>
+      Google
+    </a>
+    <a class="c-wa-login__oauth-btn" href="#github">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.7.11 2.5.33 1.9-1.29 2.74-1.02 2.74-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.33 4.69-4.56 4.94.36.31.68.91.68 1.85l-.01 2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+      GitHub
+    </a>
+  </div>
+
+  <p class="c-wa-login__foot">New here? <a href="#join">Become a member</a></p>
+</form>

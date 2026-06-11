@@ -1,0 +1,184 @@
+<style>
+  .c-bd-hero-stat {
+    padding: 80px 0 120px;
+    border-bottom: 2px solid var(--fg);
+    overflow: hidden;
+    position: relative;
+  }
+  .c-bd-hero-stat__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .c-bd-hero-stat__marker {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(140px, 26vw, 320px);
+    line-height: 0.82;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: var(--fg);
+    margin-bottom: -0.1em;
+    font-variant-numeric: tabular-nums;
+    margin-left: -8px;
+  }
+  .c-bd-hero-stat__marker span {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .c-bd-hero-stat__rule {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-top: 2px solid var(--fg);
+    border-bottom: 2px solid var(--fg);
+    margin-bottom: 40px;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    color: var(--fg);
+  }
+  .c-bd-hero-stat__grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 80px;
+    align-items: end;
+  }
+  .c-bd-hero-stat__headline {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(48px, 7vw, 104px);
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 32px;
+  }
+  .c-bd-hero-stat__headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .c-bd-hero-stat__lead {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--fg-secondary, var(--fg));
+    max-width: 50ch;
+    margin-bottom: 32px;
+  }
+  .c-bd-hero-stat__lead::first-letter {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 56px;
+    float: left;
+    line-height: 0.9;
+    padding: 4px 10px 0 0;
+    font-weight: 500;
+    color: var(--accent);
+    font-style: italic;
+  }
+  .c-bd-hero-stat__cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .c-bd-hero-stat__btn {
+    padding: 18px 28px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    border: 2px solid var(--fg);
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-bd-hero-stat__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-bd-hero-stat__btn--primary:hover {
+    background: var(--fg);
+    border-color: var(--fg);
+  }
+  .c-bd-hero-stat__btn--ghost {
+    background: transparent;
+    color: var(--fg);
+  }
+  .c-bd-hero-stat__btn--ghost:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  .c-bd-hero-stat__aside {
+    padding-left: 32px;
+    border-left: 2px solid var(--fg);
+  }
+  .c-bd-hero-stat__aside-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted, var(--fg-secondary, var(--fg)));
+    margin-bottom: 16px;
+  }
+  .c-bd-hero-stat__aside-quote {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--fg);
+    margin-bottom: 20px;
+  }
+  .c-bd-hero-stat__aside-byline {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted, var(--fg-secondary, var(--fg)));
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-hero-stat { padding: 56px 0 80px; }
+    .c-bd-hero-stat__inner { padding: 0 24px; }
+    .c-bd-hero-stat__grid { grid-template-columns: 1fr; gap: 40px; }
+    .c-bd-hero-stat__aside {
+      padding-left: 0;
+      padding-top: 24px;
+      border-left: none;
+      border-top: 2px solid var(--fg);
+    }
+  }
+</style>
+
+<section class="c-bd-hero-stat">
+  <div class="c-bd-hero-stat__inner">
+    <div class="c-bd-hero-stat__rule">
+      <span>Issue No. 07 · Spring 2026</span>
+      <span>Published in Brooklyn · Mailed in April</span>
+      <span>32 essays · 1 cover story</span>
+    </div>
+    <div class="c-bd-hero-stat__marker">07<span>.</span></div>
+    <div class="c-bd-hero-stat__grid">
+      <div>
+        <h1 class="c-bd-hero-stat__headline">
+          The internet is fine. <em>The feed</em> is the problem.
+        </h1>
+        <p class="c-bd-hero-stat__lead">
+          Our spring issue asks what the web looks like when you stop optimizing for the scroll. Thirty-two essays from writers who left the timeline and came back with something to say.
+        </p>
+        <div class="c-bd-hero-stat__cta">
+          <a href="#" class="c-bd-hero-stat__btn c-bd-hero-stat__btn--primary">Read the cover story</a>
+          <a href="#" class="c-bd-hero-stat__btn c-bd-hero-stat__btn--ghost">Order the print</a>
+        </div>
+      </div>
+      <aside class="c-bd-hero-stat__aside">
+        <div class="c-bd-hero-stat__aside-label">From the editor's letter</div>
+        <p class="c-bd-hero-stat__aside-quote">
+          "We have tried, issue after issue, to avoid the easy argument. This one is no easier, and the stakes only keep rising."
+        </p>
+        <div class="c-bd-hero-stat__aside-byline">— Amara Wole, editor-in-chief</div>
+      </aside>
+    </div>
+  </div>
+</section>

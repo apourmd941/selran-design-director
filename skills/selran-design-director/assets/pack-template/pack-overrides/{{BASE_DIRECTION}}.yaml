@@ -1,0 +1,30 @@
+# ═══════════════════════════════════════════════════════════════
+#  OVERLAY — {{PACK_NAME}} on top of {{BASE_DIRECTION}}
+#  Only override tokens that genuinely differ from the core starter.
+#  If a value equals the core's value, delete the line.
+#  See ../references/aesthetic-directions.md for core starter values.
+# ═══════════════════════════════════════════════════════════════
+
+# Color overrides (accent is usually the first thing to customize)
+color:
+  accent: "#333333"            # REPLACE with your accent hex
+  accent_hover: "#1a1a1a"      # REPLACE with your darker hover
+
+# Type overrides (uncomment what you need, delete what you don't)
+# type:
+#   display_family: "'Source Serif 4', 'Iowan Old Style', Georgia, serif"
+#   body_family: "'General Sans', 'IBM Plex Sans', system-ui, sans-serif"
+#   scale_max: "56px"
+
+# Spacing (rarely overridden)
+# spacing:
+#   base_unit: 8
+
+# Motion (rarely overridden)
+# motion:
+#   duration_base: "200ms"
+
+# Personality — 2-4 sentences describing signature gestures unique to this pack
+personality:
+  - "describe one signature gesture in a single sentence"
+  - "add a second if the pack has two signature moves"

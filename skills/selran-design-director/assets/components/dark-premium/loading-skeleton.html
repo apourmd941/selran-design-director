@@ -1,0 +1,200 @@
+<style>
+  .c-dp-skel {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 64px 32px;
+  }
+  .c-dp-skel__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .c-dp-skel__eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .c-dp-skel__eyebrow .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px color-mix(in oklab, var(--accent) 80%, transparent);
+    animation: c-dp-skel-dot 1.6s ease-in-out infinite;
+  }
+  .c-dp-skel__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .c-dp-skel__card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .c-dp-skel__bar {
+    height: 12px;
+    border-radius: 6px;
+    background: color-mix(in oklab, var(--fg) 12%, var(--bg-2));
+    position: relative;
+    overflow: hidden;
+  }
+  .c-dp-skel__bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      color-mix(in oklab, var(--accent) 28%, transparent) 45%,
+      color-mix(in oklab, var(--fg) 20%, transparent) 50%,
+      color-mix(in oklab, var(--accent) 28%, transparent) 55%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: c-dp-skel-sweep 2.4s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+  }
+  .c-dp-skel__bar + .c-dp-skel__bar { margin-top: 12px; }
+  .c-dp-skel__bar--title { height: 18px; width: 58%; margin-bottom: 18px; }
+  .c-dp-skel__bar--long { width: 100%; }
+  .c-dp-skel__bar--mid { width: 78%; }
+  .c-dp-skel__bar--short { width: 40%; }
+  .c-dp-skel__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .c-dp-skel__num {
+    width: 76px; height: 16px; border-radius: 6px;
+    background: color-mix(in oklab, var(--fg) 12%, var(--bg-2));
+    position: relative; overflow: hidden;
+  }
+  .c-dp-skel__num::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      color-mix(in oklab, var(--accent) 28%, transparent) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: c-dp-skel-sweep 2.4s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+  }
+  .c-dp-skel__chip {
+    width: 52px; height: 20px; border-radius: 999px;
+    background: color-mix(in oklab, var(--accent) 20%, var(--bg-2));
+    position: relative; overflow: hidden;
+  }
+  .c-dp-skel__chip::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      color-mix(in oklab, var(--accent) 35%, transparent) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: c-dp-skel-sweep 2.4s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+  }
+  .c-dp-skel__card:nth-child(2) .c-dp-skel__bar::after,
+  .c-dp-skel__card:nth-child(2) .c-dp-skel__num::after,
+  .c-dp-skel__card:nth-child(2) .c-dp-skel__chip::after { animation-delay: 300ms; }
+  .c-dp-skel__card:nth-child(3) .c-dp-skel__bar::after,
+  .c-dp-skel__card:nth-child(3) .c-dp-skel__num::after,
+  .c-dp-skel__card:nth-child(3) .c-dp-skel__chip::after { animation-delay: 600ms; }
+  .c-dp-skel__card:nth-child(4) .c-dp-skel__bar::after,
+  .c-dp-skel__card:nth-child(4) .c-dp-skel__num::after,
+  .c-dp-skel__card:nth-child(4) .c-dp-skel__chip::after { animation-delay: 900ms; }
+  .c-dp-skel__card:nth-child(5) .c-dp-skel__bar::after,
+  .c-dp-skel__card:nth-child(5) .c-dp-skel__num::after,
+  .c-dp-skel__card:nth-child(5) .c-dp-skel__chip::after { animation-delay: 1200ms; }
+  .c-dp-skel__card:nth-child(6) .c-dp-skel__bar::after,
+  .c-dp-skel__card:nth-child(6) .c-dp-skel__num::after,
+  .c-dp-skel__card:nth-child(6) .c-dp-skel__chip::after { animation-delay: 1500ms; }
+
+  @keyframes c-dp-skel-sweep {
+    0%   { transform: translateX(-100%); }
+    60%  { transform: translateX(100%); }
+    100% { transform: translateX(100%); }
+  }
+  @keyframes c-dp-skel-dot {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.35; }
+  }
+
+  @media (max-width: 900px) {
+    .c-dp-skel__grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-dp-skel__bar::after,
+    .c-dp-skel__num::after,
+    .c-dp-skel__chip::after,
+    .c-dp-skel__eyebrow .dot { animation: none; }
+    .c-dp-skel__bar::after,
+    .c-dp-skel__num::after,
+    .c-dp-skel__chip::after { display: none; }
+  }
+</style>
+
+<section class="c-dp-skel" aria-busy="true" aria-label="Loading positions">
+  <div class="c-dp-skel__header">
+    <span class="c-dp-skel__eyebrow"><span class="dot"></span>Syncing positions&hellip;</span>
+    <div class="c-dp-skel__num" style="width: 140px;"></div>
+  </div>
+  <div class="c-dp-skel__grid">
+    <div class="c-dp-skel__card">
+      <div class="c-dp-skel__bar c-dp-skel__bar--title"></div>
+      <div class="c-dp-skel__bar c-dp-skel__bar--long"></div>
+      <div class="c-dp-skel__bar c-dp-skel__bar--mid"></div>
+      <div class="c-dp-skel__row"><div class="c-dp-skel__num"></div><div class="c-dp-skel__chip"></div></div>
+    </div>
+    <div class="c-dp-skel__card">
+      <div class="c-dp-skel__bar c-dp-skel__bar--title"></div>
+      <div class="c-dp-skel__bar c-dp-skel__bar--long"></div>
+      <div class="c-dp-skel__bar c-dp-skel__bar--short"></div>
+      <div class="c-dp-skel__row"><div class="c-dp-skel__num"></div><div class="c-dp-skel__chip"></div></div>
+    </div>
+    <div class="c-dp-skel__card">
+      <div class="c-dp-skel__bar c-dp-skel__bar--title"></div>
+      <div class="c-dp-skel__bar c-dp-skel__bar--mid"></div>
+      <div class="c-dp-skel__bar c-dp-skel__bar--long"></div>
+      <div class="c-dp-skel__row"><div class="c-dp-skel__num"></div><div class="c-dp-skel__chip"></div></div>
+    </div>
+    <div class="c-dp-skel__card">
+      <div class="c-dp-skel__bar c-dp-skel__bar--title"></div>
+      <div class="c-dp-skel__bar c-dp-skel__bar--long"></div>
+      <div class="c-dp-skel__bar c-dp-skel__bar--mid"></div>
+      <div class="c-dp-skel__row"><div class="c-dp-skel__num"></div><div class="c-dp-skel__chip"></div></div>
+    </div>
+    <div class="c-dp-skel__card">
+      <div class="c-dp-skel__bar c-dp-skel__bar--title"></div>
+      <div class="c-dp-skel__bar c-dp-skel__bar--short"></div>
+      <div class="c-dp-skel__bar c-dp-skel__bar--long"></div>
+      <div class="c-dp-skel__row"><div class="c-dp-skel__num"></div><div class="c-dp-skel__chip"></div></div>
+    </div>
+    <div class="c-dp-skel__card">
+      <div class="c-dp-skel__bar c-dp-skel__bar--title"></div>
+      <div class="c-dp-skel__bar c-dp-skel__bar--mid"></div>
+      <div class="c-dp-skel__bar c-dp-skel__bar--short"></div>
+      <div class="c-dp-skel__row"><div class="c-dp-skel__num"></div><div class="c-dp-skel__chip"></div></div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: vibrant-playful
+  use: marketing hero
+  variables: var(fg), var(bg), var(accent), var(palette-1)..4 (optional)
+  notes: bold filled shapes, dynamic asymmetric composition, pattern fills (dots/stripes/halftone)
+         coordinated 5-hue palette — not rainbow
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-label="Vibrant abstract composition">
+  <style>
+    .vp-bg       { fill: var(--bg, #FFFBF5); }
+    .vp-accent   { fill: var(--accent, #C44A2E); }
+    .vp-p2       { fill: var(--palette-2, #1F6B88); }
+    .vp-p3       { fill: var(--palette-3, #9C6014); }
+    .vp-p4       { fill: var(--palette-4, #553E5A); }
+    .vp-p5       { fill: var(--palette-5, #2A7B60); }
+    .vp-fg-stroke{ stroke: var(--fg, #1A1A1A); fill: none; stroke-width: 3; stroke-linecap: square; vector-effect: non-scaling-stroke; }
+    .vp-accent-stroke { stroke: var(--accent, #C44A2E); fill: none; stroke-width: 3; vector-effect: non-scaling-stroke; }
+  </style>
+
+  <defs>
+    <!-- dot pattern -->
+    <pattern id="vp-dots" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="7" cy="7" r="2.2" fill="var(--fg, #1A1A1A)"/>
+    </pattern>
+    <!-- stripe pattern (diagonal) -->
+    <pattern id="vp-stripes" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+      <rect width="10" height="10" fill="var(--bg, #FFFBF5)"/>
+      <rect width="4" height="10" fill="var(--accent, #C44A2E)"/>
+    </pattern>
+    <!-- checker pattern (small) -->
+    <pattern id="vp-check" width="12" height="12" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="var(--palette-2, #1F6B88)"/>
+      <rect x="6" y="6" width="6" height="6" fill="var(--palette-2, #1F6B88)"/>
+    </pattern>
+  </defs>
+
+  <rect class="vp-bg" width="1200" height="600"/>
+
+  <!-- big solid circle, left, accent color -->
+  <circle cx="260" cy="280" r="190" class="vp-accent"/>
+
+  <!-- wedge overlapping the circle, stripes pattern -->
+  <path fill="url(#vp-stripes)" d="M 140 170 L 420 100 L 380 340 L 180 340 Z" transform="rotate(-8 280 230)"/>
+
+  <!-- thick outlined square, rotated, overlapping -->
+  <rect x="440" y="340" width="180" height="180" rx="22"
+        class="vp-p5" transform="rotate(-9 530 430)"/>
+  <rect x="440" y="340" width="180" height="180" rx="22"
+        class="vp-fg-stroke" transform="rotate(-9 530 430)"/>
+
+  <!-- dot-fill rounded triangle on top right -->
+  <path fill="url(#vp-dots)" d="M 720 80 L 980 100 L 880 320 Z"/>
+  <path class="vp-fg-stroke" d="M 720 80 L 980 100 L 880 320 Z" stroke-linejoin="round"/>
+
+  <!-- purple blob bottom-right, organic -->
+  <path class="vp-p4" d="M 900 380
+        C 1020 360 1130 420 1150 500
+        C 1160 560 1100 600 980 580
+        C 880 564 820 510 830 460
+        C 836 418 850 390 900 380 Z"/>
+
+  <!-- amber pill, bottom-left -->
+  <rect x="100" y="480" width="220" height="60" rx="30" class="vp-p3"/>
+
+  <!-- teal checker crescent, upper-right -->
+  <path fill="url(#vp-check)" d="M 1040 200 A 120 120 0 0 1 1160 80 L 1160 60 A 140 140 0 0 0 1020 200 Z"/>
+
+  <!-- accent outline circle, floating -->
+  <circle cx="790" cy="440" r="44" class="vp-accent-stroke" stroke-width="4" fill="var(--bg, #FFFBF5)"/>
+  <circle cx="790" cy="440" r="20" class="vp-accent"/>
+
+  <!-- small teal dot -->
+  <circle cx="500" cy="150" r="16" class="vp-p2"/>
+
+  <!-- narrow zig-zag bolt (accent stroke) -->
+  <polyline class="vp-accent-stroke" stroke-linejoin="miter" stroke-linecap="square" stroke-width="5"
+            fill="none" points="630,80 650,140 620,150 644,230"/>
+
+  <!-- thin full-width baseline (anchor the composition) -->
+  <line class="vp-fg-stroke" stroke-width="2" x1="60" y1="560" x2="1140" y2="560"/>
+</svg>

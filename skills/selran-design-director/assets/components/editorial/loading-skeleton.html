@@ -1,0 +1,165 @@
+<style>
+  .c-ed-skel {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+  .c-ed-skel__byline {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-skel__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px 40px;
+  }
+  .c-ed-skel__card {
+    padding-top: 4px;
+  }
+  .c-ed-skel__card + .c-ed-skel__card + .c-ed-skel__card + .c-ed-skel__card {
+    border-top: 1px solid var(--border);
+    padding-top: 36px;
+    margin-top: 12px;
+  }
+  .c-ed-skel__band {
+    position: relative;
+    overflow: hidden;
+    background: color-mix(in oklab, var(--fg) 6%, transparent);
+    border-radius: 1px;
+  }
+  .c-ed-skel__band::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in oklab, var(--bg) 72%, transparent) 50%,
+      transparent 100%
+    );
+    animation: c-ed-skel-sweep 2.4s ease-in-out infinite;
+  }
+  .c-ed-skel__band--kicker { height: 10px; width: 32%; margin-bottom: 18px; }
+  .c-ed-skel__band--headline {
+    height: 24px; width: 90%; margin-bottom: 10px;
+    background: color-mix(in oklab, var(--fg) 10%, transparent);
+  }
+  .c-ed-skel__band--headline2 { height: 24px; width: 70%; margin-bottom: 22px;
+    background: color-mix(in oklab, var(--fg) 10%, transparent);
+  }
+  .c-ed-skel__band--line { height: 10px; width: 100%; margin-bottom: 10px; }
+  .c-ed-skel__band--line-mid { width: 88%; }
+  .c-ed-skel__band--line-short { width: 52%; }
+  .c-ed-skel__byline-skel {
+    height: 9px;
+    width: 40%;
+    margin-top: 24px;
+    background: color-mix(in oklab, var(--fg) 6%, transparent);
+    position: relative;
+    overflow: hidden;
+  }
+  .c-ed-skel__byline-skel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in oklab, var(--bg) 72%, transparent) 50%,
+      transparent 100%
+    );
+    animation: c-ed-skel-sweep 2.4s ease-in-out infinite;
+  }
+  .c-ed-skel__card:nth-child(2) .c-ed-skel__band::after,
+  .c-ed-skel__card:nth-child(2) .c-ed-skel__byline-skel::after { animation-delay: 200ms; }
+  .c-ed-skel__card:nth-child(3) .c-ed-skel__band::after,
+  .c-ed-skel__card:nth-child(3) .c-ed-skel__byline-skel::after { animation-delay: 400ms; }
+  .c-ed-skel__card:nth-child(4) .c-ed-skel__band::after,
+  .c-ed-skel__card:nth-child(4) .c-ed-skel__byline-skel::after { animation-delay: 600ms; }
+  .c-ed-skel__card:nth-child(5) .c-ed-skel__band::after,
+  .c-ed-skel__card:nth-child(5) .c-ed-skel__byline-skel::after { animation-delay: 800ms; }
+  .c-ed-skel__card:nth-child(6) .c-ed-skel__band::after,
+  .c-ed-skel__card:nth-child(6) .c-ed-skel__byline-skel::after { animation-delay: 1000ms; }
+
+  @keyframes c-ed-skel-sweep {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @media (max-width: 900px) {
+    .c-ed-skel { padding: 56px 24px; }
+    .c-ed-skel__grid { grid-template-columns: 1fr; gap: 36px; }
+    .c-ed-skel__card + .c-ed-skel__card + .c-ed-skel__card + .c-ed-skel__card { border-top: none; padding-top: 0; margin-top: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-ed-skel__band::after,
+    .c-ed-skel__byline-skel::after { animation: none; display: none; }
+  }
+</style>
+
+<section class="c-ed-skel" aria-busy="true" aria-label="Loading essays">
+  <div class="c-ed-skel__byline">Loading this issue&hellip;</div>
+  <div class="c-ed-skel__grid">
+    <article class="c-ed-skel__card">
+      <div class="c-ed-skel__band c-ed-skel__band--kicker"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--headline"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--headline2"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line c-ed-skel__band--line-mid"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line c-ed-skel__band--line-short"></div>
+      <div class="c-ed-skel__byline-skel"></div>
+    </article>
+    <article class="c-ed-skel__card">
+      <div class="c-ed-skel__band c-ed-skel__band--kicker"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--headline"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--headline2"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line c-ed-skel__band--line-mid"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line c-ed-skel__band--line-short"></div>
+      <div class="c-ed-skel__byline-skel"></div>
+    </article>
+    <article class="c-ed-skel__card">
+      <div class="c-ed-skel__band c-ed-skel__band--kicker"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--headline"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--headline2"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line c-ed-skel__band--line-mid"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line c-ed-skel__band--line-short"></div>
+      <div class="c-ed-skel__byline-skel"></div>
+    </article>
+    <article class="c-ed-skel__card">
+      <div class="c-ed-skel__band c-ed-skel__band--kicker"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--headline"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--headline2"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line c-ed-skel__band--line-mid"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line c-ed-skel__band--line-short"></div>
+      <div class="c-ed-skel__byline-skel"></div>
+    </article>
+    <article class="c-ed-skel__card">
+      <div class="c-ed-skel__band c-ed-skel__band--kicker"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--headline"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--headline2"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line c-ed-skel__band--line-mid"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line c-ed-skel__band--line-short"></div>
+      <div class="c-ed-skel__byline-skel"></div>
+    </article>
+    <article class="c-ed-skel__card">
+      <div class="c-ed-skel__band c-ed-skel__band--kicker"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--headline"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--headline2"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line c-ed-skel__band--line-mid"></div>
+      <div class="c-ed-skel__band c-ed-skel__band--line c-ed-skel__band--line-short"></div>
+      <div class="c-ed-skel__byline-skel"></div>
+    </article>
+  </div>
+</section>

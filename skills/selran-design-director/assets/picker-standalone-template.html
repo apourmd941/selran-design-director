@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pick a design direction</title>
+<!--
+  picker-standalone-template.html — capability-ladder rung 3 (browser-tab picker).
+
+  Self-contained: inline styles only, NO network requests (works offline, from
+  file://). Fonts are approximated with system stacks — the real direction fonts
+  load in the actual artifact; this picker only needs to convey the FEEL.
+
+  HOW TO INSTANTIATE (the skill does this):
+  1. Duplicate the block between CARD-START and CARD-END once per option
+     (7 for the direction picker; 3-4 for forks/decision moments).
+  2. Fill per-card placeholders from assets/direction-starters/<direction>.md:
+       {{N}}                 1-based option number
+       {{DIRECTION_NAME}}    plain-language label (NOT internal names — "Warm & human",
+                             not "warm-approachable") unless the user already knows them
+       {{FEEL_LINE}}         one sentence: how this direction feels and when to use it
+       {{BG}} {{BG2}} {{FG}} {{FG_MUTED}} {{ACCENT}} {{ACCENT_FG}} {{BORDER}}
+       {{RADIUS}}            px number
+       {{DISPLAY_STACK}}     system approximation of the display font
+                             (serif direction → Georgia, 'Times New Roman', serif;
+                              sans → -apple-system, 'Helvetica Neue', sans-serif;
+                              mono-flavored → ui-monospace, 'SF Mono', monospace)
+       {{BODY_STACK}}        same idea for body text
+       {{SAMPLE_HEADLINE}}   short headline IN THE PROJECT'S DOMAIN (from the brief —
+                             a bakery brief shows a bakery headline, not lorem ipsum)
+       {{SAMPLE_BODY}}       one supporting sentence, same rule
+       {{SAMPLE_CTA}}        two-word button label fitting the project
+  3. Replace {{PROJECT_NAME}} in the header.
+  4. Write to .design/picker.html in the project, open with the platform opener,
+     and ask the user for the number or name in chat.
+-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #101014; color: #e8e8ec;
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    padding: 40px 24px 80px;
+  }
+  .page-head { max-width: 1180px; margin: 0 auto 8px; }
+  .page-head h1 { font-size: 26px; font-weight: 650; letter-spacing: -0.01em; }
+  .page-head p  { color: #9b9ba6; margin-top: 6px; font-size: 15px; }
+  .page-head .how {
+    display: inline-block; margin-top: 14px; padding: 10px 14px;
+    background: #1b1b22; border: 1px solid #2e2e38; border-radius: 8px;
+    color: #d6d6de; font-size: 14.5px;
+  }
+  .grid {
+    max-width: 1180px; margin: 28px auto 0;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 22px;
+  }
+  .card {
+    background: #16161c; border: 1px solid #2a2a33; border-radius: 12px;
+    overflow: hidden; transition: border-color .15s, transform .15s;
+  }
+  .card:hover { border-color: #6a6a7a; transform: translateY(-2px); }
+  .card .meta { padding: 14px 16px 16px; display: flex; gap: 12px; align-items: baseline; }
+  .card .num {
+    flex: none; width: 30px; height: 30px; border-radius: 50%;
+    background: #2a2a33; color: #fff; font-weight: 700; font-size: 15px;
+    display: inline-flex; align-items: center; justify-content: center;
+    transform: translateY(4px);
+  }
+  .card .name { font-size: 17px; font-weight: 650; }
+  .card .feel { color: #9b9ba6; font-size: 13.5px; margin-top: 3px; }
+  /* the mini-mockup: rendered with THAT direction's tokens */
+  .mock { padding: 26px 24px 24px; min-height: 210px; }
+  .mock .eyebrow { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .65; margin-bottom: 10px; }
+  .mock h2 { font-size: 24px; line-height: 1.15; margin-bottom: 8px; font-weight: 700; }
+  .mock p  { font-size: 13.5px; line-height: 1.5; opacity: .8; max-width: 36ch; }
+  .mock .row { display: flex; gap: 10px; margin-top: 16px; align-items: center; }
+  .mock .btn { font-size: 13px; font-weight: 600; padding: 9px 16px; display: inline-block; }
+  .mock .chip { font-size: 12px; padding: 7px 12px; display: inline-block; }
+</style>
+</head>
+<body>
+  <div class="page-head">
+    <h1>How should {{PROJECT_NAME}} feel?</h1>
+    <p>Seven directions, each shown as a tiny live sample — same content, different soul.</p>
+    <span class="how">👉 Pick the one you like, then <strong>go back to Claude and say its number or name</strong> (e.g. “number 3” or “the warm one”). Nothing to install, nothing to click here.</span>
+  </div>
+
+  <div class="grid">
+
+    <!-- CARD-START -->
+    <div class="card">
+      <div class="mock" style="background: {{BG}}; color: {{FG}}; font-family: {{BODY_STACK}};">
+        <div class="eyebrow" style="color: {{FG_MUTED}};">{{DIRECTION_NAME}}</div>
+        <h2 style="font-family: {{DISPLAY_STACK}}; color: {{FG}};">{{SAMPLE_HEADLINE}}</h2>
+        <p style="color: {{FG_MUTED}};">{{SAMPLE_BODY}}</p>
+        <div class="row">
+          <span class="btn" style="background: {{ACCENT}}; color: {{ACCENT_FG}}; border-radius: {{RADIUS}}px;">{{SAMPLE_CTA}}</span>
+          <span class="chip" style="border: 1px solid {{BORDER}}; color: {{FG_MUTED}}; background: {{BG2}}; border-radius: {{RADIUS}}px;">Learn more</span>
+        </div>
+      </div>
+      <div class="meta">
+        <span class="num">{{N}}</span>
+        <span>
+          <span class="name">{{DIRECTION_NAME}}</span>
+          <div class="feel">{{FEEL_LINE}}</div>
+        </span>
+      </div>
+    </div>
+    <!-- CARD-END -->
+
+  </div>
+</body>
+</html>

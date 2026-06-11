@@ -1,0 +1,144 @@
+/* Editorial — chart utilities
+ * Tonal stepping from accent #7A1F1F (oxblood). Serif labels,
+ * single-series preferred, annotated-line as the signature chart.
+ */
+
+.dv-ed-root {
+  /* Series — tonal from oxblood; warm neutrals as context */
+  --chart-series-1: #7A1F1F;   /* accent */
+  --chart-series-2: #A04040;   /* accent lightened */
+  --chart-series-3: #4D0F0F;   /* accent darkened */
+  --chart-series-4: #C06868;   /* accent soft */
+  --chart-series-5: #6B6B6B;   /* warm gray anchor */
+  --chart-series-6: #9C9C9C;   /* warm gray light */
+  --chart-series-7: #2A0808;   /* accent near-black */
+  --chart-series-8: #3D3D3D;   /* warm gray deep */
+
+  --chart-axis-color: #3D3D3D;
+  --chart-gridline: rgba(214, 207, 190, 0.7);
+  --chart-tick-color: #6B6B6B;
+  --chart-bg: #F5F1EA;
+  --chart-fg: #1A1A1A;
+  --chart-border: #D6CFBE;
+  --chart-border-strong: #B8AE96;
+
+  background: var(--chart-bg);
+  color: var(--chart-fg);
+  font-family: "Söhne", "Inter", system-ui, sans-serif;
+}
+
+.dv-ed-root.dv-ed-dark {
+  --chart-series-1: #D85E5E;
+  --chart-series-2: #EA7A7A;
+  --chart-series-3: #9B3A3A;
+  --chart-series-4: #F39999;
+  --chart-series-5: #8D8775;
+  --chart-series-6: #C4BDAC;
+  --chart-series-7: #5C1717;
+  --chart-series-8: #6B6558;
+  --chart-axis-color: #C4BDAC;
+  --chart-gridline: rgba(42, 38, 32, 0.9);
+  --chart-tick-color: #8D8775;
+  --chart-bg: #14110D;
+  --chart-fg: #F5F1EA;
+  --chart-border: #2A2620;
+  --chart-border-strong: #443D31;
+}
+
+/* Title / subtitle — serif display, italic subtitle */
+.dv-ed-title {
+  font-family: "Fraunces", "Georgia", serif;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--chart-fg);
+  margin: 0 0 8px 0;
+}
+.dv-ed-subtitle {
+  font-family: "Söhne", "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--chart-tick-color);
+  letter-spacing: 0.02em;
+  margin: 0 0 24px 0;
+}
+
+/* Axis — serif numerics, baseline only */
+.dv-ed-axis {
+  stroke: var(--chart-border-strong);
+  stroke-width: 1;
+  fill: none;
+}
+.dv-ed-gridline {
+  stroke: var(--chart-gridline);
+  stroke-width: 1;
+  fill: none;
+}
+.dv-ed-tick {
+  fill: var(--chart-tick-color);
+  font-family: "Fraunces", "Georgia", serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+.dv-ed-axis-label {
+  fill: var(--chart-axis-color);
+  font-family: "Söhne", "Inter", sans-serif;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Legend — used sparingly; italic caption style */
+.dv-ed-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: "Söhne", "Inter", sans-serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--chart-axis-color);
+  padding: 0;
+}
+.dv-ed-legend-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.dv-ed-legend-dot {
+  width: 10px;
+  height: 2px;
+  display: inline-block;
+}
+
+/* Tooltip — paper feel, warm soft shadow */
+.dv-ed-tooltip {
+  background: var(--chart-bg);
+  border: 1px solid var(--chart-border);
+  border-radius: 2px;
+  padding: 10px 14px;
+  font-family: "Söhne", "Inter", sans-serif;
+  font-size: 14px;
+  color: var(--chart-fg);
+  box-shadow: 0 2px 10px rgba(26, 26, 26, 0.08);
+}
+.dv-ed-tooltip strong {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+}
+
+/* Annotation — the signature move */
+.dv-ed-annotation {
+  font-family: "Fraunces", "Georgia", serif;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 400;
+  fill: var(--chart-fg);
+  line-height: 1.4;
+}
+.dv-ed-annotation-line {
+  stroke: var(--chart-fg);
+  stroke-width: 1;
+  fill: none;
+}

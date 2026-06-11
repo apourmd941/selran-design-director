@@ -1,0 +1,70 @@
+{
+  "$description": "{{PROJECT_NAME}} — Figma Tokens Studio format. Import via the Tokens Studio plugin.",
+  "color": {
+    "bg": {
+      "primary":   { "value": "{{color.bg_primary}}",   "type": "color" },
+      "secondary": { "value": "{{color.bg_secondary}}", "type": "color" },
+      "tertiary":  { "value": "{{color.bg_tertiary}}",  "type": "color" }
+    },
+    "fg": {
+      "primary":   { "value": "{{color.fg_primary}}",   "type": "color" },
+      "secondary": { "value": "{{color.fg_secondary}}", "type": "color" },
+      "muted":     { "value": "{{color.fg_muted}}",     "type": "color" }
+    },
+    "accent": {
+      "default": { "value": "{{color.accent}}",       "type": "color" },
+      "hover":   { "value": "{{color.accent_hover}}", "type": "color" }
+    },
+    "border": {
+      "default": { "value": "{{color.border}}",        "type": "color" },
+      "strong":  { "value": "{{color.border_strong}}", "type": "color" }
+    },
+    "semantic": {
+      "success": { "value": "{{color.success}}", "type": "color" },
+      "warning": { "value": "{{color.warning}}", "type": "color" },
+      "danger":  { "value": "{{color.danger}}",  "type": "color" }
+    }
+  },
+  "type": {
+    "family": {
+      "display": { "value": "{{type.display}}", "type": "fontFamilies" },
+      "body":    { "value": "{{type.body}}",    "type": "fontFamilies" },
+      "mono":    { "value": "{{type.mono}}",    "type": "fontFamilies" }
+    },
+    "scale": {
+      "xs":      { "value": "{{type.scale.xs}}",      "type": "fontSizes" },
+      "sm":      { "value": "{{type.scale.sm}}",      "type": "fontSizes" },
+      "base":    { "value": "{{type.scale.base}}",    "type": "fontSizes" },
+      "lg":      { "value": "{{type.scale.lg}}",      "type": "fontSizes" },
+      "xl":      { "value": "{{type.scale.xl}}",      "type": "fontSizes" },
+      "xxl":     { "value": "{{type.scale.xxl}}",     "type": "fontSizes" },
+      "display": { "value": "{{type.scale.display}}", "type": "fontSizes" }
+    },
+    "leading": {
+      "body":    { "value": "{{type.leading.body}}",    "type": "lineHeights" },
+      "ui":      { "value": "{{type.leading.ui}}",      "type": "lineHeights" },
+      "display": { "value": "{{type.leading.display}}", "type": "lineHeights" }
+    }
+  },
+  "spacing": {
+    "base": { "value": "{{spacing.base_unit}}", "type": "spacing" },
+    "1":    { "value": "{{spacing.base_unit}}", "type": "spacing" },
+    "2":    { "value": "8",  "type": "spacing" },
+    "3":    { "value": "12", "type": "spacing" },
+    "4":    { "value": "16", "type": "spacing" },
+    "6":    { "value": "24", "type": "spacing" },
+    "8":    { "value": "32", "type": "spacing" }
+  },
+  "radius": {
+    "sm":   { "value": "{{spacing.radius.sm}}",   "type": "borderRadius" },
+    "md":   { "value": "{{spacing.radius.md}}",   "type": "borderRadius" },
+    "lg":   { "value": "{{spacing.radius.lg}}",   "type": "borderRadius" },
+    "full": { "value": "{{spacing.radius.full}}", "type": "borderRadius" }
+  },
+  "motion": {
+    "duration_fast": { "value": "{{motion.duration_fast}}", "type": "other" },
+    "duration_base": { "value": "{{motion.duration_base}}", "type": "other" },
+    "duration_slow": { "value": "{{motion.duration_slow}}", "type": "other" },
+    "easing_out":    { "value": "{{motion.easing}}",        "type": "other" }
+  }
+}

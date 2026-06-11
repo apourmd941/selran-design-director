@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<!--
+  Selran Pack Showcase — year-page template (v3.4+).
+  Purpose: static HTML/CSS template that renders the annual winners page.
+  Consumed by a forthcoming renderer that reads showcase/<year>/winners.md
+  and fills in category winners, citations, and scorecards.
+  Ships as a working stub with 2026 placeholders so the file is useful on its own.
+  Host target: https://selran.design/showcase/<year>/
+  No JavaScript. No external CDN. Self-contained serif stack.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2026 Selran Pack Showcase — Winners</title>
+  <meta name="description" content="The 2026 Selran Pack Showcase — curated annual recognition for high-craft packs across six categories." />
+
+  <meta property="og:title" content="2026 Selran Pack Showcase — Winners" />
+  <meta property="og:description" content="Curated annual recognition for high-craft packs across six categories." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://selran.design/showcase/2026/" />
+  <meta property="og:image" content="https://selran.design/showcase/2026/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    :root {
+      --showcase-bg:            #F5F1EA;
+      --showcase-bg-alt:        #EEE8DC;
+      --showcase-fg:            #1A1A1A;
+      --showcase-fg-muted:      #5C5449;
+      --showcase-rule:          #D6CFBE;
+      --showcase-rule-strong:   #B8AE96;
+      --showcase-accent:        #7A1F1F;
+      --showcase-accent-hover:  #5C1717;
+      --showcase-serif:         "Fraunces", "Source Serif 4", "Iowan Old Style", "Hoefler Text", "Georgia", serif;
+      --showcase-sans:          "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      --showcase-measure:       64ch;
+      --showcase-gutter:        clamp(20px, 4vw, 48px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --showcase-bg:           #14110D;
+        --showcase-bg-alt:       #1D1A15;
+        --showcase-fg:           #F5F1EA;
+        --showcase-fg-muted:     #C4BDAC;
+        --showcase-rule:         #2A2620;
+        --showcase-rule-strong:  #443D31;
+        --showcase-accent:       #D85E5E;
+        --showcase-accent-hover: #EA7A7A;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      background: var(--showcase-bg, #F5F1EA);
+      color: var(--showcase-fg, #1A1A1A);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--showcase-serif, Georgia, serif);
+      font-size: clamp(16px, 1.8vw, 18px);
+      line-height: 1.6;
+      background: var(--showcase-bg, #F5F1EA);
+      color: var(--showcase-fg, #1A1A1A);
+    }
+
+    .showcase-page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: clamp(40px, 8vw, 96px) var(--showcase-gutter, 32px) 120px;
+    }
+
+    .showcase-header {
+      border-bottom: 1px solid var(--showcase-rule, #D6CFBE);
+      padding-bottom: clamp(32px, 5vw, 56px);
+      margin-bottom: clamp(40px, 6vw, 72px);
+    }
+
+    .showcase-eyebrow {
+      font-family: var(--showcase-sans, sans-serif);
+      font-size: clamp(11px, 1.2vw, 13px);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--showcase-fg-muted, #5C5449);
+      margin: 0 0 18px;
+    }
+
+    .showcase-title {
+      font-family: var(--showcase-serif, Georgia, serif);
+      font-size: clamp(40px, 7vw, 72px);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      margin: 0 0 12px;
+      color: var(--showcase-fg, #1A1A1A);
+    }
+
+    .showcase-subtitle {
+      font-family: var(--showcase-serif, Georgia, serif);
+      font-size: clamp(20px, 2.6vw, 28px);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--showcase-fg-muted, #5C5449);
+      margin: 0 0 24px;
+    }
+
+    .showcase-dateline {
+      font-family: var(--showcase-sans, sans-serif);
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      color: var(--showcase-fg-muted, #5C5449);
+      margin: 0 0 32px;
+    }
+
+    .showcase-panel {
+      max-width: var(--showcase-measure, 64ch);
+      font-size: clamp(15px, 1.6vw, 17px);
+      color: var(--showcase-fg-muted, #5C5449);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .showcase-panel strong {
+      color: var(--showcase-fg, #1A1A1A);
+      font-weight: 600;
+    }
+
+    .showcase-main {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(48px, 6vw, 80px);
+    }
+
+    .showcase-card {
+      border-top: 1px solid var(--showcase-rule, #D6CFBE);
+      padding-top: clamp(28px, 4vw, 44px);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(16px, 2.5vw, 28px);
+    }
+
+    .showcase-card-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .showcase-category {
+      font-family: var(--showcase-sans, sans-serif);
+      font-size: clamp(11px, 1.2vw, 13px);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--showcase-fg-muted, #5C5449);
+      margin: 0;
+    }
+
+    .showcase-card-heading {
+      font-family: var(--showcase-serif, Georgia, serif);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--showcase-fg, #1A1A1A);
+      margin: 0;
+    }
+
+    .showcase-winner {
+      font-family: var(--showcase-serif, Georgia, serif);
+      font-size: clamp(22px, 2.8vw, 28px);
+      font-weight: 500;
+      color: var(--showcase-accent, #7A1F1F);
+      margin: 4px 0 2px;
+      font-style: italic;
+    }
+
+    .showcase-author {
+      font-family: var(--showcase-sans, sans-serif);
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      color: var(--showcase-fg-muted, #5C5449);
+      margin: 0;
+    }
+
+    .showcase-citation {
+      max-width: var(--showcase-measure, 64ch);
+      font-size: clamp(16px, 1.8vw, 18px);
+      line-height: 1.65;
+      color: var(--showcase-fg, #1A1A1A);
+      margin: 0;
+    }
+
+    .showcase-citation p {
+      margin: 0 0 1em;
+    }
+
+    .showcase-citation p:last-child { margin-bottom: 0; }
+
+    .showcase-scorecard {
+      border-top: 1px solid var(--showcase-rule, #D6CFBE);
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .showcase-scorecard-label {
+      font-family: var(--showcase-sans, sans-serif);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--showcase-fg-muted, #5C5449);
+      margin: 0;
+    }
+
+    .showcase-scorecard-body {
+      font-family: var(--showcase-sans, sans-serif);
+      font-size: clamp(13px, 1.4vw, 15px);
+      color: var(--showcase-fg, #1A1A1A);
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum";
+      letter-spacing: 0.01em;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .showcase-scorecard-total {
+      color: var(--showcase-accent, #7A1F1F);
+      font-weight: 600;
+    }
+
+    .showcase-link {
+      font-family: var(--showcase-sans, sans-serif);
+      font-size: 14px;
+      color: var(--showcase-accent, #7A1F1F);
+      text-decoration: none;
+      border-bottom: 1px solid var(--showcase-accent, #7A1F1F);
+      padding-bottom: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      align-self: flex-start;
+      transition: color 180ms ease, border-color 180ms ease;
+    }
+
+    .showcase-link:hover {
+      color: var(--showcase-accent-hover, #5C1717);
+      border-color: var(--showcase-accent-hover, #5C1717);
+    }
+
+    .showcase-link:focus-visible,
+    .showcase-footer-link:focus-visible {
+      outline: 2px solid var(--showcase-accent, #7A1F1F);
+      outline-offset: 3px;
+      border-radius: 1px;
+    }
+
+    .showcase-link-arrow {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+    }
+
+    .showcase-footer {
+      border-top: 1px solid var(--showcase-rule, #D6CFBE);
+      margin-top: clamp(64px, 8vw, 96px);
+      padding-top: clamp(24px, 3vw, 32px);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .showcase-footer-text {
+      font-family: var(--showcase-sans, sans-serif);
+      font-size: 13px;
+      color: var(--showcase-fg-muted, #5C5449);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .showcase-footer-link {
+      color: var(--showcase-accent, #7A1F1F);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 180ms ease;
+    }
+
+    .showcase-footer-link:hover { border-bottom-color: var(--showcase-accent-hover, #5C1717); }
+
+    .showcase-mark {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      vertical-align: -3px;
+      color: var(--showcase-accent, #7A1F1F);
+      margin-right: 6px;
+    }
+
+    @media (min-width: 720px) {
+      .showcase-card {
+        grid-template-columns: minmax(220px, 260px) 1fr;
+        gap: 40px;
+      }
+      .showcase-card-body {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="showcase-page">
+
+    <header class="showcase-header">
+      <p class="showcase-eyebrow">
+        <svg class="showcase-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M12 2l2.39 6.96L22 9.27l-5.5 4.64L18.18 22 12 17.77 5.82 22l1.68-8.09L2 9.27l7.61-.31L12 2z"/>
+        </svg>
+        Selran Pack Showcase — 2026
+      </p>
+      <h1 class="showcase-title">2026 Pack Showcase</h1>
+      <p class="showcase-subtitle">Winners</p>
+      <p class="showcase-dateline">Published December 15, 2026</p>
+      <p class="showcase-panel">
+        Judged by the <strong>Selran Design Director team</strong> with the 2026 rotating community judge [tbd]. Three panelists, six categories, five months of nominations, six weeks of review. Full rubric at <code>showcase/judging-rubric.md</code>; full category definitions at <code>showcase/categories.md</code>.
+      </p>
+    </header>
+
+    <main class="showcase-main">
+
+      <!-- Category 1: Pack of the Year -->
+      <section class="showcase-card" aria-labelledby="cat-poty">
+        <div class="showcase-card-header">
+          <p class="showcase-category">Pack of the Year</p>
+          <h2 class="showcase-card-heading" id="cat-poty">Overall excellence</h2>
+          <p class="showcase-winner">[winner-pack-name]</p>
+          <p class="showcase-author">by [pack-author]</p>
+        </div>
+        <div class="showcase-card-body">
+          <div class="showcase-citation">
+            <!-- citation goes here -->
+            <p>Placeholder citation. 150–200 words of panel commentary. Should cite specific sections of the reference doc, specific overlay tokens, and specific components. Replace with real text when the 2026 cycle concludes.</p>
+          </div>
+          <div class="showcase-scorecard">
+            <h3 class="showcase-scorecard-label">Scorecard</h3>
+            <p class="showcase-scorecard-body">
+              CSS 18/20 &middot; Ref 20/20 &middot; Overlay 15/20 &middot; Components 17/20 &middot; Docs 9/10 &middot; Fit 10/10
+              <span class="showcase-scorecard-total"> = 89/100</span>
+            </p>
+          </div>
+          <a class="showcase-link" href="https://registry.selran.design/packs/[winner-pack-name]">
+            Registry entry
+            <svg class="showcase-link-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+              <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M2 6h8M6 2l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Category 2: Best Reference Doc -->
+      <section class="showcase-card" aria-labelledby="cat-ref">
+        <div class="showcase-card-header">
+          <p class="showcase-category">Best Reference Doc</p>
+          <h2 class="showcase-card-heading" id="cat-ref">Writing that teaches</h2>
+          <p class="showcase-winner">[winner-pack-name]</p>
+          <p class="showcase-author">by [pack-author]</p>
+        </div>
+        <div class="showcase-card-body">
+          <div class="showcase-citation">
+            <!-- citation goes here -->
+            <p>Placeholder citation. The panel commentary for Best Reference Doc should quote or paraphrase a specific passage and name what the writing does well — a tight forbidden-phrases list, a cited reference-brand analysis, a voice that teaches rather than declares.</p>
+          </div>
+          <div class="showcase-scorecard">
+            <h3 class="showcase-scorecard-label">Scorecard</h3>
+            <p class="showcase-scorecard-body">
+              CSS 15/20 &middot; Ref 20/20 &middot; Overlay 13/20 &middot; Components 14/20 &middot; Docs 10/10 &middot; Fit 10/10
+              <span class="showcase-scorecard-total"> = 82/100</span>
+            </p>
+          </div>
+          <a class="showcase-link" href="https://registry.selran.design/packs/[winner-pack-name]">
+            Registry entry
+            <svg class="showcase-link-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+              <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M2 6h8M6 2l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Category 3: Best Component Discipline -->
+      <section class="showcase-card" aria-labelledby="cat-disc">
+        <div class="showcase-card-header">
+          <p class="showcase-category">Best Component Discipline</p>
+          <h2 class="showcase-card-heading" id="cat-disc">Clean under inspection</h2>
+          <p class="showcase-winner">[winner-pack-name]</p>
+          <p class="showcase-author">by [pack-author]</p>
+        </div>
+        <div class="showcase-card-body">
+          <div class="showcase-citation">
+            <!-- citation goes here -->
+            <p>Placeholder citation. For Best Component Discipline, cite the scoped class pattern, token-fallback coverage, focus-visible and reduced-motion behavior, and any anti-pattern the pack conspicuously avoided.</p>
+          </div>
+          <div class="showcase-scorecard">
+            <h3 class="showcase-scorecard-label">Scorecard</h3>
+            <p class="showcase-scorecard-body">
+              CSS 20/20 &middot; Ref 16/20 &middot; Overlay 14/20 &middot; Components 20/20 &middot; Docs 8/10 &middot; Fit 10/10
+              <span class="showcase-scorecard-total"> = 88/100</span>
+            </p>
+          </div>
+          <a class="showcase-link" href="https://registry.selran.design/packs/[winner-pack-name]">
+            Registry entry
+            <svg class="showcase-link-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+              <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M2 6h8M6 2l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Category 4: Best Free / MIT Pack -->
+      <section class="showcase-card" aria-labelledby="cat-mit">
+        <div class="showcase-card-header">
+          <p class="showcase-category">Best Free / MIT Pack</p>
+          <h2 class="showcase-card-heading" id="cat-mit">A gift to the ecosystem</h2>
+          <p class="showcase-winner">[winner-pack-name]</p>
+          <p class="showcase-author">by [pack-author]</p>
+        </div>
+        <div class="showcase-card-body">
+          <div class="showcase-citation">
+            <!-- citation goes here -->
+            <p>Placeholder citation. For Best Free / MIT Pack, the panel should name the pack on its own merits — not because it is free — and explain what the MIT author chose to teach the ecosystem with this release.</p>
+          </div>
+          <div class="showcase-scorecard">
+            <h3 class="showcase-scorecard-label">Scorecard</h3>
+            <p class="showcase-scorecard-body">
+              CSS 17/20 &middot; Ref 19/20 &middot; Overlay 16/20 &middot; Components 16/20 &middot; Docs 9/10 &middot; Fit 10/10
+              <span class="showcase-scorecard-total"> = 87/100</span>
+            </p>
+          </div>
+          <a class="showcase-link" href="https://registry.selran.design/packs/[winner-pack-name]">
+            Registry entry
+            <svg class="showcase-link-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+              <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M2 6h8M6 2l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Category 5: Most Impactful New Pack -->
+      <section class="showcase-card" aria-labelledby="cat-new">
+        <div class="showcase-card-header">
+          <p class="showcase-category">Most Impactful New Pack</p>
+          <h2 class="showcase-card-heading" id="cat-new">The one that changed the conversation</h2>
+          <p class="showcase-winner">[winner-pack-name]</p>
+          <p class="showcase-author">by [pack-author]</p>
+        </div>
+        <div class="showcase-card-body">
+          <div class="showcase-citation">
+            <!-- citation goes here -->
+            <p>Placeholder citation. Most Impactful New Pack citations should name what the pack did first, or did better, and what authors in the same vertical will likely borrow in the following year.</p>
+          </div>
+          <div class="showcase-scorecard">
+            <h3 class="showcase-scorecard-label">Scorecard</h3>
+            <p class="showcase-scorecard-body">
+              CSS 16/20 &middot; Ref 18/20 &middot; Overlay 17/20 &middot; Components 15/20 &middot; Docs 8/10 &middot; Fit 10/10
+              <span class="showcase-scorecard-total"> = 84/100</span>
+            </p>
+          </div>
+          <a class="showcase-link" href="https://registry.selran.design/packs/[winner-pack-name]">
+            Registry entry
+            <svg class="showcase-link-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+              <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M2 6h8M6 2l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Category 6: Best Overlay -->
+      <section class="showcase-card" aria-labelledby="cat-overlay">
+        <div class="showcase-card-header">
+          <p class="showcase-category">Best Overlay</p>
+          <h2 class="showcase-card-heading" id="cat-overlay">Tokens-only, surgical</h2>
+          <p class="showcase-winner">[winner-pack-name]</p>
+          <p class="showcase-author">by [pack-author]</p>
+        </div>
+        <div class="showcase-card-body">
+          <div class="showcase-citation">
+            <!-- citation goes here -->
+            <p>Placeholder citation. Best Overlay commentary should reference the specific <code>pack-overrides/&lt;direction&gt;.yaml</code> file, count overridden tokens, and explain why the diff is coherent rather than sprawling.</p>
+          </div>
+          <div class="showcase-scorecard">
+            <h3 class="showcase-scorecard-label">Scorecard</h3>
+            <p class="showcase-scorecard-body">
+              CSS 16/20 &middot; Ref 15/20 &middot; Overlay 20/20 &middot; Components 15/20 &middot; Docs 8/10 &middot; Fit 10/10
+              <span class="showcase-scorecard-total"> = 84/100</span>
+            </p>
+          </div>
+          <a class="showcase-link" href="https://registry.selran.design/packs/[winner-pack-name]">
+            Registry entry
+            <svg class="showcase-link-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+              <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M2 6h8M6 2l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="showcase-footer">
+      <p class="showcase-footer-text">
+        Past years: <a class="showcase-footer-link" href="../2025/">2025</a> (forthcoming) &middot; Full archive and process at <a class="showcase-footer-link" href="../">showcase/</a>.
+      </p>
+      <p class="showcase-footer-text">
+        Nominate a pack for 2027: <a class="showcase-footer-link" href="../../showcase/submission-template.md">submission template</a>. Nominations open June 1, 2027; close October 31, 2027; winners December 15, 2027.
+      </p>
+      <p class="showcase-footer-text">
+        Curation, not analytics. Judgment, not optimization.
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>

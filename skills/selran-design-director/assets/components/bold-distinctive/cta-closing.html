@@ -1,0 +1,140 @@
+<style>
+  .c-bd-cta {
+    background: var(--fg);
+    color: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .c-bd-cta__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 120px 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .c-bd-cta__bleed {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-weight: 900;
+    font-size: clamp(160px, 28vw, 420px);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    color: var(--accent);
+    position: absolute;
+    bottom: -0.12em;
+    left: -0.08em;
+    opacity: 0.22;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+  .c-bd-cta__rule {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-top: 2px solid var(--bg);
+    border-bottom: 2px solid var(--bg);
+    margin-bottom: 48px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .c-bd-cta__grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 64px;
+    align-items: end;
+  }
+  .c-bd-cta__headline {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(56px, 8vw, 136px);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+  }
+  .c-bd-cta__headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .c-bd-cta__right { display: flex; flex-direction: column; gap: 20px; }
+  .c-bd-cta__lead {
+    font-size: 18px;
+    line-height: 1.55;
+    opacity: 0.85;
+    max-width: 44ch;
+  }
+  .c-bd-cta__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .c-bd-cta__btn {
+    padding: 22px 28px;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    border: 2px solid var(--bg);
+    margin-bottom: -2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-bd-cta__btn::after { content: '→'; font-size: 18px; }
+  .c-bd-cta__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-bd-cta__btn--primary:hover {
+    background: var(--bg);
+    color: var(--accent);
+  }
+  .c-bd-cta__btn--ghost {
+    background: transparent;
+    color: var(--bg);
+  }
+  .c-bd-cta__btn--ghost:hover {
+    background: var(--bg);
+    color: var(--fg);
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-cta__inner { padding: 72px 24px; }
+    .c-bd-cta__grid { grid-template-columns: 1fr; gap: 40px; }
+    .c-bd-cta__bleed { font-size: clamp(120px, 36vw, 240px); }
+  }
+</style>
+
+<section class="c-bd-cta">
+  <span class="c-bd-cta__bleed" aria-hidden="true">07.</span>
+  <div class="c-bd-cta__inner">
+    <div class="c-bd-cta__rule">
+      <span>End matter · Issue 07</span>
+      <span>Next issue mails July 14</span>
+      <span>Subscribe before June 30</span>
+    </div>
+    <div class="c-bd-cta__grid">
+      <h2 class="c-bd-cta__headline">
+        Read the <em>whole thing.</em>
+      </h2>
+      <div class="c-bd-cta__right">
+        <p class="c-bd-cta__lead">
+          A subscription to {Brand} pays our writers. That's the whole business model. Ninety-six dollars a year, four print issues, thirty-two new essays, and a Friday note from the editor.
+        </p>
+        <div class="c-bd-cta__actions">
+          <a href="#" class="c-bd-cta__btn c-bd-cta__btn--primary">Subscribe — $96/year</a>
+          <a href="#" class="c-bd-cta__btn c-bd-cta__btn--ghost">Gift a subscription</a>
+          <a href="#" class="c-bd-cta__btn c-bd-cta__btn--ghost">Read a free essay</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

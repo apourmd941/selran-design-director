@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>{{og.title}} — OG image</title>
+<style>
+  @page { size: 1200px 630px; margin: 0; }
+  html, body { margin: 0; padding: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: {{color.bg_primary}};
+    color: {{color.fg_primary}};
+    font-family: "{{type.body}}", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 60px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card {
+    background: {{color.bg_secondary}};
+    border-radius: 28px;
+    padding: 72px 80px;
+    width: 100%; height: 100%;
+    box-shadow: 0 24px 64px -16px rgba(80, 50, 20, 0.18);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+  .top { display: flex; align-items: center; gap: 16px; }
+  .dot {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: {{color.accent}};
+  }
+  .logo {
+    font-family: "{{type.display}}", Georgia, serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: {{color.fg_primary}};
+  }
+  h1 {
+    font-family: "{{type.display}}", Georgia, serif;
+    font-size: 84px;
+    font-weight: 500;
+    line-height: {{type.leading.display}};
+    letter-spacing: {{type.tracking.display}}em;
+    color: {{color.fg_primary}};
+    margin: 0;
+    max-width: 920px;
+  }
+  h1 em {
+    font-style: italic;
+    color: {{color.accent}};
+  }
+  .subtitle {
+    font-size: 26px;
+    line-height: 1.55;
+    color: {{color.fg_secondary}};
+    max-width: 820px;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="top">
+      <div class="dot"></div>
+      <div class="logo">{{og.logo}}</div>
+    </div>
+    <div>
+      <h1>{{og.title}}</h1>
+    </div>
+    <div class="subtitle">{{og.subtitle}}</div>
+  </div>
+</body>
+</html>

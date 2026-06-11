@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  {{meta.project}} — dimensions (spacing, radius, type scale)
+  Drop into res/values/dimens.xml. Same file for light and night.
+-->
+<resources>
+    <!-- Spacing (multiples of base_unit) -->
+    <dimen name="space_base">{{spacing.base_unit}}dp</dimen>
+    <dimen name="space_xs">{{spacing.base_unit}}dp</dimen>
+    <dimen name="space_sm">8dp</dimen>
+    <dimen name="space_md">12dp</dimen>
+    <dimen name="space_lg">16dp</dimen>
+    <dimen name="space_xl">24dp</dimen>
+    <dimen name="space_xxl">32dp</dimen>
+    <dimen name="space_3xl">48dp</dimen>
+    <dimen name="space_4xl">64dp</dimen>
+
+    <!-- Corner radius -->
+    <dimen name="radius_sm">{{spacing.radius.sm}}dp</dimen>
+    <dimen name="radius_md">{{spacing.radius.md}}dp</dimen>
+    <dimen name="radius_lg">{{spacing.radius.lg}}dp</dimen>
+    <dimen name="radius_full">{{spacing.radius.full}}dp</dimen>
+
+    <!-- Type scale (sp for text, dp otherwise) -->
+    <dimen name="text_xs">{{type.scale.xs}}sp</dimen>
+    <dimen name="text_sm">{{type.scale.sm}}sp</dimen>
+    <dimen name="text_base">{{type.scale.base}}sp</dimen>
+    <dimen name="text_lg">{{type.scale.lg}}sp</dimen>
+    <dimen name="text_xl">{{type.scale.xl}}sp</dimen>
+    <dimen name="text_xxl">{{type.scale.xxl}}sp</dimen>
+    <dimen name="text_display">{{type.scale.display}}sp</dimen>
+
+    <!-- Motion (ms as integers — reference via @integer/... or convert at call site) -->
+    <integer name="duration_fast">{{motion.duration_fast}}</integer>
+    <integer name="duration_base">{{motion.duration_base}}</integer>
+    <integer name="duration_slow">{{motion.duration_slow}}</integer>
+</resources>

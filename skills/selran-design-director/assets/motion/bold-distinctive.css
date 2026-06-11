@@ -1,0 +1,167 @@
+/* ==========================================================================
+   Motion: Bold-Distinctive
+   Prefix: .m-bd-*
+   Feel: confident, orchestrated. One big entrance per screen.
+   Signature gesture: confident slide — large-type architecture slides in long.
+   ========================================================================== */
+
+:root {
+  --m-bd-duration-fast:     var(--motion-duration-fast,   150ms);
+  --m-bd-duration-base:     var(--motion-duration,        250ms);
+  --m-bd-duration-slow:     var(--motion-duration-slow,   500ms);
+  --m-bd-duration-hero:     900ms;
+  --m-bd-easing:            var(--motion-easing,          cubic-bezier(0.2, 0, 0, 1));
+  --m-bd-easing-dramatic:   cubic-bezier(0.19, 1, 0.22, 1);
+  --m-bd-easing-spring:     cubic-bezier(0.34, 1.35, 0.5, 1);
+}
+
+/* ---------- Transitions --------------------------------------------------- */
+
+.m-bd-btn {
+  transition:
+    background-color var(--m-bd-duration-base) var(--m-bd-easing),
+    color            var(--m-bd-duration-base) var(--m-bd-easing),
+    transform        var(--m-bd-duration-base) var(--m-bd-easing-dramatic),
+    border-color     var(--m-bd-duration-base) var(--m-bd-easing);
+}
+.m-bd-btn:hover  { transform: translateX(3px); }
+.m-bd-btn:active { transform: translateX(0); transition-duration: 120ms; }
+
+.m-bd-card {
+  transition:
+    transform    var(--m-bd-duration-base) var(--m-bd-easing-dramatic),
+    border-color var(--m-bd-duration-base) var(--m-bd-easing),
+    color        var(--m-bd-duration-base) var(--m-bd-easing);
+}
+.m-bd-card:hover { transform: translate(2px, -2px); }
+
+/* Link underline — big sweep, left to right, heavier weight */
+.m-bd-link {
+  position: relative;
+  text-decoration: none;
+}
+.m-bd-link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 3px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--m-bd-duration-slow) var(--m-bd-easing-dramatic);
+}
+.m-bd-link:hover::after,
+.m-bd-link:focus-visible::after { transform: scaleX(1); }
+
+/* Big-type hover — color shift, for display elements */
+.m-bd-display-hover {
+  transition: color var(--m-bd-duration-base) var(--m-bd-easing);
+}
+.m-bd-display-hover:hover { color: var(--color-accent, #C72500); }
+
+.m-bd-input {
+  transition:
+    border-color var(--m-bd-duration-base) var(--m-bd-easing),
+    box-shadow   var(--m-bd-duration-base) var(--m-bd-easing);
+}
+.m-bd-input:focus-visible {
+  outline: none;
+  border-color: var(--color-accent, #C72500);
+  box-shadow: 4px 4px 0 0 var(--color-accent, #C72500);  /* offset-block focus — on-brand */
+}
+
+/* ---------- Entrance animations ------------------------------------------ */
+
+@keyframes m-bd-slide-in {
+  from { opacity: 0; transform: translateX(-48px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes m-bd-fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.m-bd-enter-fade-up {
+  animation: m-bd-fade-up var(--m-bd-duration-slow) var(--m-bd-easing-dramatic) both;
+}
+
+/* Stagger — orchestrated, paced like a reveal sequence */
+.m-bd-stagger > * { animation: m-bd-fade-up var(--m-bd-duration-slow) var(--m-bd-easing-dramatic) both; }
+.m-bd-stagger > *:nth-child(1) { animation-delay:   0ms; }
+.m-bd-stagger > *:nth-child(2) { animation-delay: 100ms; }
+.m-bd-stagger > *:nth-child(3) { animation-delay: 200ms; }
+.m-bd-stagger > *:nth-child(4) { animation-delay: 300ms; }
+.m-bd-stagger > *:nth-child(5) { animation-delay: 400ms; }
+.m-bd-stagger > *:nth-child(6) { animation-delay: 500ms; }
+
+/* ---------- Micro-interactions ------------------------------------------- */
+
+.m-bd-press { transition: transform 120ms var(--m-bd-easing-spring); }
+.m-bd-press:active { transform: scale(0.97); }
+
+.m-bd-tap-scale { transition: transform var(--m-bd-duration-fast) var(--m-bd-easing-spring); }
+.m-bd-tap-scale:active { transform: scale(0.96); }
+
+@keyframes m-bd-spin { to { transform: rotate(360deg); } }
+.m-bd-icon-spin { animation: m-bd-spin 900ms linear infinite; }
+
+/* ---------- Signature gesture: confident slide --------------------------- */
+/* Massive display elements enter with a long horizontal slide —
+   matching the aesthetic's "display type as architecture" philosophy. */
+
+@keyframes m-bd-confident-slide {
+  0%   { opacity: 0; transform: translateX(-80px); letter-spacing: -0.01em; }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateX(0); letter-spacing: normal; }
+}
+
+.m-bd-confident-slide {
+  animation: m-bd-confident-slide var(--m-bd-duration-hero) var(--m-bd-easing-dramatic) both;
+}
+
+/* Numeric marker reveal — for "01", "02", "03" style section markers */
+@keyframes m-bd-marker-in {
+  0%   { opacity: 0; transform: translateY(40px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.m-bd-marker-in {
+  animation: m-bd-marker-in 700ms var(--m-bd-easing-dramatic) both;
+}
+
+/* Display-type curtain — text wipes up from below a mask line */
+@keyframes m-bd-curtain-up {
+  0%   { clip-path: inset(100% 0 0 0); transform: translateY(20px); }
+  100% { clip-path: inset(0 0 0 0);    transform: translateY(0); }
+}
+.m-bd-curtain-up {
+  animation: m-bd-curtain-up var(--m-bd-duration-hero) var(--m-bd-easing-dramatic) both;
+}
+
+/* ---------- Reduced motion ----------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .m-bd-btn,
+  .m-bd-card,
+  .m-bd-link::after,
+  .m-bd-display-hover,
+  .m-bd-input,
+  .m-bd-press,
+  .m-bd-tap-scale {
+    transition-duration: 0.01ms !important;
+  }
+  .m-bd-enter-fade-up,
+  .m-bd-stagger > *,
+  .m-bd-confident-slide,
+  .m-bd-marker-in,
+  .m-bd-curtain-up,
+  .m-bd-icon-spin {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    clip-path: none !important;
+  }
+  .m-bd-btn:hover,
+  .m-bd-btn:active,
+  .m-bd-card:hover,
+  .m-bd-press:active,
+  .m-bd-tap-scale:active { transform: none; }
+}

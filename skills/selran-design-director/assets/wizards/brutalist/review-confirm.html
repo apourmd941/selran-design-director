@@ -1,0 +1,265 @@
+<style>
+  .c-br-review {
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', ui-monospace, monospace);
+    color: var(--fg);
+    background: var(--bg);
+    border: 2px solid var(--border, var(--fg));
+    max-width: 720px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .c-br-review__head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 12px 18px;
+    background: var(--fg); color: var(--bg);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    border-bottom: 2px solid var(--border, var(--fg));
+  }
+  .c-br-review__title {
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0;
+    padding: 18px 18px 4px;
+  }
+  .c-br-review__sub {
+    font-size: 12px;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 16px;
+    padding: 0 18px;
+  }
+
+  .c-br-review__body { padding: 0 18px 12px; }
+
+  .c-br-review__section { margin-bottom: 18px; }
+  .c-br-review__divider {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--fg);
+    padding: 6px 0;
+    margin: 0 0 8px;
+    border-bottom: 2px solid var(--border, var(--fg));
+  }
+  .c-br-review__divider-label::before { content: "--- "; color: var(--fg-muted); }
+  .c-br-review__divider-label::after { content: " ---"; color: var(--fg-muted); }
+  .c-br-review__edit {
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    padding: 2px 6px;
+    background: var(--bg);
+    color: var(--fg);
+    border: 2px solid var(--border, var(--fg));
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .c-br-review__edit:hover { background: var(--fg); color: var(--bg); }
+  .c-br-review__edit:focus-visible { outline: 4px solid var(--accent); outline-offset: -4px; }
+
+  .c-br-review__list {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .c-br-review__row {
+    display: grid;
+    grid-template-columns: minmax(140px, 180px) 1fr;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border, var(--fg));
+    font-size: 13px;
+  }
+  .c-br-review__row:last-child { border-bottom: 0; }
+  .c-br-review__key {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+  }
+  .c-br-review__value {
+    margin: 0;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+    word-break: break-word;
+  }
+  .c-br-review__value--warn::before { content: "[!] "; font-weight: 700; color: var(--fg); }
+
+  .c-br-review__totals {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px;
+    margin: 18px 18px 0;
+    padding: 12px 14px;
+    border: 2px solid var(--border, var(--fg));
+    background: var(--bg-2, color-mix(in oklab, var(--fg) 4%, var(--bg)));
+  }
+  .c-br-review__totals .c-br-review__key { font-size: 12px; }
+  .c-br-review__totals .c-br-review__value {
+    font-size: 14px;
+    font-weight: 700;
+    text-align: right;
+  }
+  .c-br-review__grand .c-br-review__key { font-size: 13px; color: var(--fg); }
+  .c-br-review__grand .c-br-review__value { font-size: 18px; }
+
+  .c-br-review__actions {
+    display: flex;
+    margin-top: 18px;
+    border-top: 2px solid var(--border, var(--fg));
+  }
+  .c-br-review__btn {
+    flex: 1;
+    padding: 16px 20px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    background: var(--bg);
+    color: var(--fg);
+    border: 0;
+    border-right: 2px solid var(--border, var(--fg));
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+  }
+  .c-br-review__btn:last-child { border-right: 0; }
+  .c-br-review__btn:hover { background: var(--fg); color: var(--bg); }
+  .c-br-review__btn:focus-visible { outline: 4px solid var(--accent); outline-offset: -4px; }
+  .c-br-review__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    flex: 2;
+  }
+  .c-br-review__btn--primary:hover { background: var(--fg); color: var(--accent); }
+  .c-br-review__foot {
+    padding: 10px 18px;
+    border-top: 2px solid var(--border, var(--fg));
+    font-size: 11px;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  @media (max-width: 900px) {
+    .c-br-review__row { grid-template-columns: 1fr; gap: 2px; }
+    .c-br-review__title { font-size: 20px; }
+  }
+</style>
+
+<form class="c-br-review" novalidate>
+  <div class="c-br-review__head">
+    <span>// REVIEW / COMMIT</span>
+    <span>STEP 4 / 4</span>
+  </div>
+
+  <h1 class="c-br-review__title">Review intake</h1>
+  <p class="c-br-review__sub">Read it. Fix what's wrong. Then commit it.</p>
+
+  <div class="c-br-review__body">
+
+    <section class="c-br-review__section" aria-labelledby="c-br-rv-basics">
+      <header class="c-br-review__divider">
+        <span id="c-br-rv-basics" class="c-br-review__divider-label">BASICS</span>
+        <a class="c-br-review__edit" href="#step-1" aria-label="Edit basics">[EDIT]</a>
+      </header>
+      <dl class="c-br-review__list">
+        <div class="c-br-review__row">
+          <dt class="c-br-review__key">CAT #</dt>
+          <dd class="c-br-review__value">NP-143</dd>
+        </div>
+        <div class="c-br-review__row">
+          <dt class="c-br-review__key">ARTIST</dt>
+          <dd class="c-br-review__value">OFFCUTS</dd>
+        </div>
+        <div class="c-br-review__row">
+          <dt class="c-br-review__key">TITLE</dt>
+          <dd class="c-br-review__value">"PINCH ROLLER"</dd>
+        </div>
+        <div class="c-br-review__row">
+          <dt class="c-br-review__key">FORMAT</dt>
+          <dd class="c-br-review__value">LP / 33 RPM / 140G BLACK</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="c-br-review__section" aria-labelledby="c-br-rv-press">
+      <header class="c-br-review__divider">
+        <span id="c-br-rv-press" class="c-br-review__divider-label">PRESSING</span>
+        <a class="c-br-review__edit" href="#step-2" aria-label="Edit pressing">[EDIT]</a>
+      </header>
+      <dl class="c-br-review__list">
+        <div class="c-br-review__row">
+          <dt class="c-br-review__key">PLANT</dt>
+          <dd class="c-br-review__value">MILL YARD / LATHE 2</dd>
+        </div>
+        <div class="c-br-review__row">
+          <dt class="c-br-review__key">RUN SIZE</dt>
+          <dd class="c-br-review__value">300 COPIES</dd>
+        </div>
+        <div class="c-br-review__row">
+          <dt class="c-br-review__key">SLEEVE</dt>
+          <dd class="c-br-review__value">350GSM UNCOATED / SCREEN 1C</dd>
+        </div>
+        <div class="c-br-review__row">
+          <dt class="c-br-review__key">TEST PRESS</dt>
+          <dd class="c-br-review__value c-br-review__value--warn">PENDING APPROVAL</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="c-br-review__section" aria-labelledby="c-br-rv-ship">
+      <header class="c-br-review__divider">
+        <span id="c-br-rv-ship" class="c-br-review__divider-label">SHIP</span>
+        <a class="c-br-review__edit" href="#step-3" aria-label="Edit shipping">[EDIT]</a>
+      </header>
+      <dl class="c-br-review__list">
+        <div class="c-br-review__row">
+          <dt class="c-br-review__key">SHIP TO</dt>
+          <dd class="c-br-review__value">NORTH PRESS WAREHOUSE<br>412 SHEET METAL LN / UNIT B</dd>
+        </div>
+        <div class="c-br-review__row">
+          <dt class="c-br-review__key">CARRIER</dt>
+          <dd class="c-br-review__value">FREIGHT / PALLET &times; 1</dd>
+        </div>
+        <div class="c-br-review__row">
+          <dt class="c-br-review__key">ETA</dt>
+          <dd class="c-br-review__value">05/02/2026</dd>
+        </div>
+      </dl>
+    </section>
+
+  </div>
+
+  <dl class="c-br-review__totals">
+    <dt class="c-br-review__key">PRESS COST</dt>
+    <dd class="c-br-review__value">$1,860.00</dd>
+    <dt class="c-br-review__key">SLEEVES + INSERTS</dt>
+    <dd class="c-br-review__value">$420.00</dd>
+    <dt class="c-br-review__key">FREIGHT</dt>
+    <dd class="c-br-review__value">$190.00</dd>
+    <dt class="c-br-review__key c-br-review__grand">TOTAL</dt>
+    <dd class="c-br-review__value c-br-review__grand">$2,470.00</dd>
+  </dl>
+
+  <div class="c-br-review__actions">
+    <a class="c-br-review__btn" href="#step-3">[ BACK ]</a>
+    <button class="c-br-review__btn c-br-review__btn--primary" type="submit">[ SUBMIT ]</button>
+  </div>
+
+  <div class="c-br-review__foot">// commit is final. prints the packing slip. no take-backs.</div>
+</form>

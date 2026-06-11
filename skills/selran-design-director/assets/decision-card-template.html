@@ -1,0 +1,363 @@
+<!--
+  decision-card-template.html
+  ---------------------------
+  Phase 3 tweak-menu / decision surface for the Selran Design Director skill.
+
+  Renders 2–4 decision options as side-by-side visual cards, each containing a
+  tiny rendered preview of that option's *outcome*. The user sees the change
+  next to the change they'd be picking instead, so the diff between options
+  is visible rather than described.
+
+  Use it from inside any of these moments (see `references/decision-cards.md`):
+
+    - Phase 3 tweak menu (the default path)
+    - Reference-ingestion confirmation (Phase 22)
+    - Token-tweak preview (3-up: base 4 / base 6 / base 8)
+    - Direction fusion proposal (current vs. proposed)
+    - Pre-build sanity check (one card showing the about-to-ship slice)
+
+  How to populate it:
+
+    The skill substitutes the placeholders below with values pulled from the
+    active design-system.md. Use simple string-replace at render time; the
+    template is intentionally syntax-light so any host environment can fill
+    it in without a templating engine.
+
+    Tokens (from the active design-system.md `color`, `type`, `spacing`):
+      {{COLOR_BG}}            page background, e.g. "#FAFAF5"
+      {{COLOR_PAPER}}         card surface, usually slightly brighter than bg
+      {{COLOR_FG}}             primary ink
+      {{COLOR_FG_MUTED}}       secondary ink (rationale, captions)
+      {{COLOR_BORDER}}         hairline rule between sections / cards
+      {{COLOR_BORDER_SOFT}}    inner rule under each card preview
+      {{COLOR_ACCENT}}         the current accent (used by the commit card)
+      {{TYPE_DISPLAY_FAMILY}}  display font stack (with system fallbacks)
+      {{TYPE_BODY_FAMILY}}     body / sans font stack (with system fallbacks)
+
+    Header content:
+      {{EYEBROW}}              uppercase eyebrow, e.g. "Tweak menu"
+      {{TITLE}}                short serif headline, e.g. "What should change?"
+      {{BREADCRUMB_HTML}}      direction · artifact · version (allowed: <b>, <br>)
+
+    Card grid:
+      {{CARDS_HTML}}           one fragment per option (see card-fragment block)
+
+    Footer (both optional — pass empty string to suppress):
+      {{FREE_TEXT_HTML}}       "None of these — describe what you want" link
+      {{NUDGE_HTML}}           rabbit-hole nudge after 3+ tweaks
+
+  ────────────────────────────────────────────────────────────────────────
+  Card fragment (one per option). The skill assembles these and joins them
+  before substituting into {{CARDS_HTML}}. Available kinds:
+
+    bolder   — accent saturated (preview shows --accent-bold)
+    dialed   — accent dialed back to near-fg (preview shows --accent-monochrome)
+    swap     — typography swap (preview uses sans family throughout)
+    palette  — palette shift (preview shows alt token swatches)
+    neutral  — generic option, preview uses default tokens
+    commit   — destination card (check mark + "ready to ship")
+
+    <article class="card card--{{KIND}}">
+      <div class="card__preview">{{PREVIEW_HTML}}</div>
+      <div class="card__body">
+        <h2 class="card__label">{{LABEL}}</h2>
+        <p class="card__rationale">{{RATIONALE}}</p>
+        <div class="card__pick">{{PICK_LABEL}}</div>
+      </div>
+    </article>
+
+  Preview HTML guidance:
+    Keep each preview to ONE concrete slice of the artifact (a stat-led
+    headline, a button + caption, a paragraph + drop-cap) so the change
+    between cards is the only variable. Don't render a full landing page
+    in a 200px card — pick the smallest slice that demonstrates the
+    option's effect. The commit card omits the eyebrow and centers a
+    check mark; everything else inherits the editorial preview frame.
+  ────────────────────────────────────────────────────────────────────────
+
+  EXAMPLE OUTPUT — what the file looks like fully populated for an
+  editorial direction with three tweak options + the commit card:
+
+    Eyebrow:    "Tweak menu"
+    Title:      "What should change?"
+    Breadcrumb: "<b>Editorial</b> · landing page hero<br />v3 · two tweaks so far"
+    Cards:      bolder | dialed | swap | commit
+    Footer:     free-text + nudge
+
+  See `references/decision-cards.md` for 5 worked examples and the
+  populator pseudo-code.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{EYEBROW}} — {{TITLE}}</title>
+<style>
+  :root {
+    --bg:                {{COLOR_BG}};
+    --paper:             {{COLOR_PAPER}};
+    --ink:               {{COLOR_FG}};
+    --ink-muted:         {{COLOR_FG_MUTED}};
+    --rule:              {{COLOR_BORDER}};
+    --rule-soft:         {{COLOR_BORDER_SOFT}};
+    --accent:            {{COLOR_ACCENT}};
+
+    /* Derived accents for tweak previews. The skill computes these per
+       direction; if not provided, fall back to the base accent so the
+       template still renders safely. */
+    --accent-bold:       {{COLOR_ACCENT_BOLD}};
+    --accent-monochrome: {{COLOR_ACCENT_MONOCHROME}};
+
+    --serif:             {{TYPE_DISPLAY_FAMILY}};
+    --sans:              {{TYPE_BODY_FAMILY}};
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-feature-settings: "kern" 1, "liga" 1, "onum" 1, "pnum" 1;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  .menu {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: clamp(28px, 5vw, 56px) clamp(20px, 5vw, 48px) 64px;
+  }
+
+  .menu__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .menu__eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .menu__title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 3vw, 28px);
+    margin: 4px 0 0;
+    color: var(--ink);
+  }
+  .menu__breadcrumb {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-muted);
+    text-align: right;
+  }
+  .menu__breadcrumb b { color: var(--ink); font-weight: 600; }
+
+  .menu__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 160ms ease-out, border-color 160ms ease-out;
+  }
+  .card:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+  .card__preview {
+    height: 200px;
+    padding: 24px 22px;
+    border-bottom: 1px solid var(--rule-soft);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Card-kind modifiers — accent + typography swaps applied to the preview
+     so the diff between options is visible at a glance. */
+  .card--bolder  .card__stat   { color: var(--accent-bold); }
+  .card--dialed  .card__stat   { color: var(--accent-monochrome); }
+
+  .card--swap    .card__preview { font-family: var(--sans); }
+  .card--swap    .card__stat   {
+    font-family: var(--sans);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+  }
+  .card--swap    .card__caption {
+    font-family: var(--sans);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .card--commit  .card__preview {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Default preview content classes — the {{PREVIEW_HTML}} fragments use
+     these so cards stay visually consistent across menus. */
+  .card__eyebrow {
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 10px;
+  }
+  .card__stat {
+    font-family: var(--serif);
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums oldstyle-nums;
+  }
+  .card__caption {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-top: 8px;
+    font-style: italic;
+  }
+  .card__commit-mark {
+    font-family: var(--serif);
+    font-size: 56px;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .card__commit-state {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 14px;
+  }
+  .card__commit-state b { color: var(--ink); font-weight: 600; }
+
+  .card__body {
+    padding: 18px 22px 22px;
+  }
+  .card__label {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    letter-spacing: -0.005em;
+  }
+  .card__rationale {
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink-muted);
+    margin: 0;
+  }
+  .card__pick {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 14px;
+  }
+  .card__pick::before {
+    content: "→ ";
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .menu__footer {
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .menu__free {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-muted);
+  }
+  .menu__free a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+  }
+  .menu__nudge {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+  }
+  .menu__nudge b { color: var(--ink); font-weight: 600; }
+
+  @media (prefers-color-scheme: dark) {
+    /* Direction-specific dark tokens come from the active design-system.md's
+       `color.dark` block. The skill substitutes those when populating the
+       template; this @media block is the fallback for direction-agnostic
+       inversion when no `color.dark` is supplied. */
+    body { background: #161614; color: #E8E4DA; }
+    .menu__header, .menu__footer { border-color: #2C2A26; }
+    .card { background: #1C1B19; border-color: #2C2A26; }
+    .card__preview { background: #1C1B19; border-bottom-color: #232220; }
+    .card:hover { border-color: #5C5A55; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none; }
+    .card:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+  <main class="menu">
+
+    <header class="menu__header">
+      <div>
+        <div class="menu__eyebrow">{{EYEBROW}}</div>
+        <h1 class="menu__title">{{TITLE}}</h1>
+      </div>
+      <div class="menu__breadcrumb">{{BREADCRUMB_HTML}}</div>
+    </header>
+
+    <section class="menu__grid">
+      {{CARDS_HTML}}
+    </section>
+
+    <footer class="menu__footer">
+      <div class="menu__free">{{FREE_TEXT_HTML}}</div>
+      <div class="menu__nudge">{{NUDGE_HTML}}</div>
+    </footer>
+
+  </main>
+</body>
+</html>

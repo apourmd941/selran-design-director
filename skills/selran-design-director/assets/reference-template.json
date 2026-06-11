@@ -1,0 +1,93 @@
+{
+    "schema_version": "1.0",
+    "id": "ref_01HW0XVZ8NM3K9F7B6Q4D2RTYE",
+    "source": {
+        "kind": "url",
+        "url": "https://example.com/notebook-app",
+        "fetched_at": "2026-04-26T12:00:00Z",
+        "sha256_of_response": "9c8f6a8d1b2c3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f",
+        "robots_txt_allowed": true,
+        "rendered_viewport": "1280x800"
+    },
+    "extracted": {
+        "palette": [
+            {
+                "hex": "#FFFFFF",
+                "role_guess": "bg",
+                "weight": 0.41
+            },
+            {
+                "hex": "#191919",
+                "role_guess": "fg",
+                "weight": 0.32,
+                "wcag_pair": {
+                    "on_white": 16.40,
+                    "on_black": 1.28
+                }
+            },
+            {
+                "hex": "#5E6AD2",
+                "role_guess": "accent",
+                "weight": 0.12,
+                "wcag_pair": {
+                    "on_white": 4.96,
+                    "on_black": 4.23
+                }
+            },
+            {
+                "hex": "#E5E5E5",
+                "role_guess": "border",
+                "weight": 0.09
+            },
+            {
+                "hex": "#7A7A7A",
+                "role_guess": "muted",
+                "weight": 0.06
+            }
+        ],
+        "type": {
+            "display_family_signal": "geometric-sans",
+            "display_family_match": "Inter",
+            "body_family_signal": "geometric-sans",
+            "body_family_match": "Inter",
+            "scale_ratio_estimate": 1.25,
+            "tracking_signal": "tight"
+        },
+        "spacing": {
+            "base_unit_estimate": 4,
+            "rhythm_signal": "8px-grid"
+        },
+        "radius": {
+            "primary_radius_estimate": 8,
+            "radius_consistency": "high"
+        },
+        "motion": {
+            "transition_count": 12,
+            "average_duration_ms": 180,
+            "easing_signal": "ease-out"
+        }
+    },
+    "direction_scores": [
+        {"direction": "technical-minimal", "score": 0.71, "rationale": "geometric-sans display + tight tracking + consistent restrained radius + 8px-grid + muted neutral mid-tone + ease-out at 120-220ms"},
+        {"direction": "editorial",         "score": 0.18, "rationale": "no serif display, no measured-line-length signal"},
+        {"direction": "bold-distinctive",  "score": 0.05, "rationale": "muted accent saturation; no oversized type"},
+        {"direction": "warm-approachable", "score": 0.12, "rationale": "humanist body absent; cool palette"},
+        {"direction": "vibrant-playful",   "score": 0.04, "rationale": "low saturation; small radius; minimal motion"},
+        {"direction": "dark-premium",      "score": 0.09, "rationale": "light background dominant"},
+        {"direction": "brutalist",         "score": 0.03, "rationale": "high radius consistency; no monospace; no raw signal"}
+    ],
+    "caveats": [
+        {
+            "code": "INTER_DETECTED",
+            "severity": "warn",
+            "message": "Body family matches Inter — substituting General Sans per anti-patterns. The original Inter signal is preserved as extracted.type.body_family_match for transparency."
+        },
+        {
+            "code": "RADIUS_DEFAULT_DETECTED",
+            "severity": "warn",
+            "message": "Default 8px-everywhere radius detected. Substituting a two-tier radius scheme: primary surfaces use the chosen direction's radius, secondary surfaces use a smaller radius or square corners for visual hierarchy. The flat rounded-everything signature is an AI-generated tell."
+        }
+    ],
+    "trademark_safe": true,
+    "stored_assets_kept": []
+}

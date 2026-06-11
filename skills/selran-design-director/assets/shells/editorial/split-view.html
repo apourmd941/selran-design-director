@@ -1,0 +1,245 @@
+<style>
+  .c-ed-split {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    min-height: 100vh;
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+  }
+
+  .c-ed-split__list {
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    background: var(--bg);
+  }
+  .c-ed-split__list-head {
+    padding: 28px 28px 18px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 1;
+  }
+  .c-ed-split__list-eyebrow {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-bottom: 8px;
+  }
+  .c-ed-split__list-title {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .c-ed-split__list-title em { font-style: italic; color: var(--accent); }
+
+  .c-ed-split__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .c-ed-split__item {
+    display: block;
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+    transition: background-color 250ms ease;
+  }
+  .c-ed-split__item:hover { background: var(--bg-2); }
+  .c-ed-split__item[aria-current="true"] {
+    background: var(--bg-2);
+    border-left: 2px solid var(--accent);
+    padding-left: 26px;
+  }
+  .c-ed-split__item:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+  .c-ed-split__item-byline {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 10px;
+    color: var(--fg-muted);
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .c-ed-split__item-title {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 17px;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    font-weight: 500;
+    margin: 0 0 6px;
+    color: var(--fg);
+  }
+  .c-ed-split__item[aria-current="true"] .c-ed-split__item-title em,
+  .c-ed-split__item-title em { font-style: italic; color: var(--accent); }
+  .c-ed-split__item-excerpt {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .c-ed-split__item-author {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--fg-muted);
+    margin-top: 8px;
+    display: block;
+  }
+
+  .c-ed-split__detail {
+    overflow-y: auto;
+    background: var(--bg);
+  }
+  .c-ed-split__article {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 72px 40px 96px;
+  }
+  .c-ed-split__article-eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    padding-bottom: 16px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .c-ed-split__article-eyebrow em {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 13px;
+    color: var(--fg);
+  }
+  .c-ed-split__article-headline {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: clamp(32px, 4.4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    margin: 0 0 28px;
+    color: var(--fg);
+  }
+  .c-ed-split__article-headline em { font-style: italic; color: var(--accent); }
+  .c-ed-split__article-deck {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--fg-muted);
+    margin: 0 0 40px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-split__article-body {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--fg);
+  }
+  .c-ed-split__article-body p { margin: 0 0 20px; }
+  .c-ed-split__article-body > p:first-of-type::first-letter {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 68px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .c-ed-split { grid-template-columns: 1fr; }
+    .c-ed-split__list { border-right: 0; border-bottom: 1px solid var(--border); max-height: 50vh; }
+    .c-ed-split__article { padding: 40px 24px 64px; }
+  }
+</style>
+
+<div class="c-ed-split">
+  <aside class="c-ed-split__list" aria-label="Reading list">
+    <div class="c-ed-split__list-head">
+      <span class="c-ed-split__list-eyebrow">Issue IV · Spring 2026</span>
+      <h2 class="c-ed-split__list-title">This <em>week</em></h2>
+    </div>
+    <ol class="c-ed-split__items">
+      <li>
+        <a class="c-ed-split__item" href="#" aria-current="true">
+          <div class="c-ed-split__item-byline"><span>Essay</span><span>14 min</span></div>
+          <h3 class="c-ed-split__item-title">On the virtue of <em>slow software</em></h3>
+          <p class="c-ed-split__item-excerpt">A reconsideration of the tools we reach for in the morning, and what happens when an app earns a second minute of our attention rather than a second of it.</p>
+          <span class="c-ed-split__item-author">Emma Fallon · Apr 18</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-ed-split__item" href="#">
+          <div class="c-ed-split__item-byline"><span>Notes</span><span>6 min</span></div>
+          <h3 class="c-ed-split__item-title">A quieter case for finance done well</h3>
+          <p class="c-ed-split__item-excerpt">Between the spreadsheet and the quarterly review, a habit hardened. Three operators describe the moment they decided to stop waiting for month-end.</p>
+          <span class="c-ed-split__item-author">Hassan Aldarwish · Apr 16</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-ed-split__item" href="#">
+          <div class="c-ed-split__item-byline"><span>Interview</span><span>22 min</span></div>
+          <h3 class="c-ed-split__item-title">The month was never the problem</h3>
+          <p class="c-ed-split__item-excerpt">A conversation with Nora Keene on pace, posture, and the quiet craft of keeping a ledger you can trust without flinching.</p>
+          <span class="c-ed-split__item-author">Iris Park · Apr 14</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-ed-split__item" href="#">
+          <div class="c-ed-split__item-byline"><span>Dispatch</span><span>4 min</span></div>
+          <h3 class="c-ed-split__item-title">Field notes from a <em>longer</em> week</h3>
+          <p class="c-ed-split__item-excerpt">On writing at walking pace, and why the second draft always begins outside.</p>
+          <span class="c-ed-split__item-author">Juno Oritz · Apr 11</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-ed-split__item" href="#">
+          <div class="c-ed-split__item-byline"><span>Draft</span><span>8 min</span></div>
+          <h3 class="c-ed-split__item-title">Against the dashboard</h3>
+          <p class="c-ed-split__item-excerpt">Five charts on the home screen, and the quiet way they replace thinking with glancing.</p>
+          <span class="c-ed-split__item-author">Nora Keene · Apr 9</span>
+        </a>
+      </li>
+    </ol>
+  </aside>
+
+  <main class="c-ed-split__detail">
+    <article class="c-ed-split__article">
+      <div class="c-ed-split__article-eyebrow">
+        <span>Essay</span>
+        <span>Issue IV</span>
+        <em>by Emma Fallon</em>
+      </div>
+      <h1 class="c-ed-split__article-headline">On the virtue of <em>slow software.</em></h1>
+      <p class="c-ed-split__article-deck">A reconsideration of the tools we reach for in the morning, and what happens when an app earns a second minute of our attention rather than a second of it.</p>
+      <div class="c-ed-split__article-body">
+        <p>Somewhere between the notifications and the tabs, a habit hardened. We opened the app, glanced at it, closed it, opened it again — an endless loop of near-attention that accomplished nothing but filled the day. The app was designed for it. Every surface was a summary; every summary gestured toward another.</p>
+        <p>There is a quieter argument to be made. Software can ask for less of us and give more back. A single view, held steady, that rewards the act of looking. A reading list that does not refresh on pull. A page that loads once and stays loaded. None of this is impossible; most of it is unfashionable.</p>
+        <p>The question is not whether we have time for slow software. The question is what the fast software has been spending our time on. A morning spent glancing is a morning spent glancing. A morning spent reading is, usually, a better morning.</p>
+      </div>
+    </article>
+  </main>
+</div>

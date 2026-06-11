@@ -1,0 +1,185 @@
+<style>
+  .c-br-login {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 0;
+    background: var(--bg);
+    border: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', monospace);
+    color: var(--fg);
+  }
+  .c-br-login__head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 14px 20px;
+    border-bottom: 2px solid var(--border, var(--fg));
+    background: var(--fg);
+    color: var(--bg);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .c-br-login__body { padding: 24px 20px 20px; }
+  .c-br-login__headline {
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0 0 6px;
+    line-height: 1.15;
+  }
+  .c-br-login__sub {
+    font-size: 13px;
+    color: var(--fg-muted);
+    margin: 0 0 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .c-br-login__field { margin-bottom: 16px; }
+  .c-br-login__label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+  }
+  .c-br-login__row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .c-br-login__forgot {
+    font-size: 11px;
+    color: var(--fg);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .c-br-login__forgot:hover { background: var(--accent); color: var(--bg); text-decoration: none; }
+  .c-br-login__input {
+    width: 100%; box-sizing: border-box;
+    padding: 11px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 2px solid var(--border, var(--fg));
+    border-radius: 0;
+    outline: none;
+  }
+  .c-br-login__input::placeholder { color: var(--fg-muted); }
+  .c-br-login__input:focus-visible {
+    outline: 4px solid var(--accent);
+    outline-offset: 0;
+  }
+  .c-br-login__btn {
+    display: block; width: 100%;
+    padding: 14px 18px;
+    margin-top: 8px;
+    font-family: inherit;
+    font-size: 14px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--accent);
+    color: var(--bg);
+    border: 2px solid var(--border, var(--fg));
+    border-radius: 0;
+    cursor: pointer;
+  }
+  .c-br-login__btn:hover { background: var(--fg); color: var(--accent); }
+  .c-br-login__btn:focus-visible {
+    outline: 4px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .c-br-login__divider {
+    display: flex; align-items: center; gap: 10px;
+    margin: 24px 0 14px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+  }
+  .c-br-login__divider::before,
+  .c-br-login__divider::after { content: ''; flex: 1; border-top: 2px dashed var(--border, var(--fg)); }
+  .c-br-login__oauth { display: flex; flex-direction: column; gap: 8px; }
+  .c-br-login__oauth-btn {
+    display: inline-flex; align-items: center; justify-content: space-between;
+    padding: 11px 14px;
+    font-family: inherit;
+    font-size: 13px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg);
+    background: var(--bg);
+    border: 2px solid var(--border, var(--fg));
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .c-br-login__oauth-btn:hover { background: var(--fg); color: var(--bg); }
+  .c-br-login__oauth-btn:focus-visible {
+    outline: 4px solid var(--accent);
+    outline-offset: 0;
+  }
+  .c-br-login__oauth-btn svg { width: 14px; height: 14px; }
+  .c-br-login__foot {
+    display: flex; justify-content: space-between;
+    padding: 12px 20px;
+    border-top: 2px solid var(--border, var(--fg));
+    background: var(--bg-2);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+  }
+  .c-br-login__foot a {
+    color: var(--fg);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .c-br-login__foot a:hover { background: var(--accent); color: var(--bg); text-decoration: none; }
+
+  @media (max-width: 900px) {
+    .c-br-login { max-width: none; border-left: 0; border-right: 0; }
+  }
+</style>
+
+<form class="c-br-login" novalidate>
+  <div class="c-br-login__head">
+    <span>// LOGIN.HTML</span>
+    <span>{BRAND} · 0.4kb</span>
+  </div>
+  <div class="c-br-login__body">
+    <h1 class="c-br-login__headline">Sign in</h1>
+    <p class="c-br-login__sub">members only. no tracking. one session.</p>
+
+    <div class="c-br-login__field">
+      <label class="c-br-login__label" for="br-email">[ EMAIL ]</label>
+      <input class="c-br-login__input" id="br-email" name="email" type="email" autocomplete="email" placeholder="name@domain.com" required>
+    </div>
+
+    <div class="c-br-login__field">
+      <div class="c-br-login__row">
+        <label class="c-br-login__label" for="br-password">[ PASSWORD ]</label>
+        <a class="c-br-login__forgot" href="#forgot">Forgot?</a>
+      </div>
+      <input class="c-br-login__input" id="br-password" name="password" type="password" autocomplete="current-password" placeholder="********" required>
+    </div>
+
+    <button class="c-br-login__btn" type="submit">Sign in →</button>
+
+    <div class="c-br-login__divider">— or —</div>
+
+    <div class="c-br-login__oauth">
+      <a class="c-br-login__oauth-btn" href="#google">
+        <span>Google</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.35 11.1H12v3.8h5.35c-.23 1.23-1.44 3.6-5.35 3.6-3.22 0-5.85-2.67-5.85-5.95S8.78 6.6 12 6.6c1.83 0 3.06.78 3.77 1.45l2.57-2.48C16.7 4.1 14.55 3.2 12 3.2 7.06 3.2 3 7.25 3 12.2s4.06 9 9 9c5.2 0 8.65-3.65 8.65-8.8 0-.6-.06-1.05-.15-1.5z"/></svg>
+      </a>
+      <a class="c-br-login__oauth-btn" href="#github">
+        <span>GitHub</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.7.11 2.5.33 1.9-1.29 2.74-1.02 2.74-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.33 4.69-4.56 4.94.36.31.68.91.68 1.85l-.01 2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="c-br-login__foot">
+    <span>No account?</span>
+    <a href="#join">Request invite →</a>
+  </div>
+</form>

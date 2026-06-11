@@ -1,0 +1,296 @@
+<style>
+  .c-bd-split {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    min-height: 100vh;
+    background: var(--bg);
+    border: 2px solid var(--fg);
+    font-family: inherit;
+    color: var(--fg);
+  }
+
+  .c-bd-split__list {
+    border-right: 2px solid var(--fg);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .c-bd-split__list-header {
+    padding: 24px 24px 16px;
+    border-bottom: 2px solid var(--fg);
+  }
+  .c-bd-split__list-eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .c-bd-split__list-title {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 32px;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    margin: 0;
+  }
+  .c-bd-split__list-title em { font-style: italic; color: var(--accent); }
+
+  .c-bd-split__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .c-bd-split__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 18px;
+    padding: 20px 24px;
+    color: var(--fg);
+    text-decoration: none;
+    border-bottom: 1px solid var(--fg);
+    position: relative;
+    transition: background-color 220ms ease;
+  }
+  .c-bd-split__item:hover { background: var(--bg-2); }
+  .c-bd-split__item:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -4px;
+  }
+  .c-bd-split__item[aria-current="true"] {
+    background: var(--bg-2);
+  }
+  .c-bd-split__item[aria-current="true"]::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 8px;
+    background: var(--accent);
+  }
+
+  .c-bd-split__num {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 28px;
+    line-height: 0.9;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+    padding-top: 2px;
+  }
+  .c-bd-split__item[aria-current="true"] .c-bd-split__num {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .c-bd-split__item-body { min-width: 0; }
+  .c-bd-split__item-title {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+  }
+  .c-bd-split__item-meta {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
+  .c-bd-split__reader {
+    padding: 56px 64px 72px;
+    overflow-y: auto;
+    background: var(--bg);
+  }
+  .c-bd-split__reader-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--fg);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 32px;
+  }
+  .c-bd-split__reader-num {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(100px, 14vw, 180px);
+    line-height: 0.85;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    color: var(--fg);
+    margin: 0 0 -0.05em -6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .c-bd-split__reader-num em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .c-bd-split__reader-kicker {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--fg-muted);
+    margin: 16px 0 12px;
+  }
+  .c-bd-split__reader-title {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(44px, 6vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 24px;
+    max-width: 22ch;
+  }
+  .c-bd-split__reader-title em { font-style: italic; color: var(--accent); }
+  .c-bd-split__reader-byline {
+    display: flex;
+    gap: 20px;
+    padding: 16px 0;
+    border-top: 2px solid var(--fg);
+    border-bottom: 2px solid var(--fg);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg);
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .c-bd-split__reader-body {
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--fg);
+    max-width: 60ch;
+  }
+  .c-bd-split__reader-body p + p { margin-top: 1.1em; }
+  .c-bd-split__reader-body p:first-of-type::first-letter {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 72px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 14px 0 0;
+    font-weight: 500;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-split {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+    .c-bd-split__list {
+      border-right: 0;
+      border-bottom: 2px solid var(--fg);
+      max-height: 45vh;
+    }
+    .c-bd-split__reader { padding: 36px 24px 48px; }
+    .c-bd-split__reader-num { font-size: 92px; }
+  }
+</style>
+
+<div class="c-bd-split">
+  <aside class="c-bd-split__list" aria-label="Essays">
+    <header class="c-bd-split__list-header">
+      <span class="c-bd-split__list-eyebrow">Issue 07 &middot; The archive</span>
+      <h2 class="c-bd-split__list-title">Thirty-two <em>pieces.</em></h2>
+    </header>
+    <ul class="c-bd-split__items">
+      <li>
+        <a class="c-bd-split__item" href="#" aria-current="true">
+          <span class="c-bd-split__num">001</span>
+          <div class="c-bd-split__item-body">
+            <h3 class="c-bd-split__item-title">The internet is fine. The feed is the problem.</h3>
+            <div class="c-bd-split__item-meta">
+              <span>Amara Wole</span>
+              <span>14 min</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="c-bd-split__item" href="#">
+          <span class="c-bd-split__num">002</span>
+          <div class="c-bd-split__item-body">
+            <h3 class="c-bd-split__item-title">Notes on leaving the timeline.</h3>
+            <div class="c-bd-split__item-meta">
+              <span>Iris Park</span>
+              <span>8 min</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="c-bd-split__item" href="#">
+          <span class="c-bd-split__num">003</span>
+          <div class="c-bd-split__item-body">
+            <h3 class="c-bd-split__item-title">A small, slow reading room.</h3>
+            <div class="c-bd-split__item-meta">
+              <span>Jun Okafor</span>
+              <span>11 min</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="c-bd-split__item" href="#">
+          <span class="c-bd-split__num">004</span>
+          <div class="c-bd-split__item-body">
+            <h3 class="c-bd-split__item-title">What the archive remembers.</h3>
+            <div class="c-bd-split__item-meta">
+              <span>Lena Varga</span>
+              <span>19 min</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="c-bd-split__item" href="#">
+          <span class="c-bd-split__num">005</span>
+          <div class="c-bd-split__item-body">
+            <h3 class="c-bd-split__item-title">Paper, ink, and the patience to wait.</h3>
+            <div class="c-bd-split__item-meta">
+              <span>Mira Solace</span>
+              <span>6 min</span>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <article class="c-bd-split__reader">
+    <div class="c-bd-split__reader-meta">
+      <span>Issue 07 &middot; Essay 001</span>
+      <span>Saved &middot; 14 min read</span>
+    </div>
+    <div class="c-bd-split__reader-num">01<em>.</em></div>
+    <p class="c-bd-split__reader-kicker">The cover story</p>
+    <h1 class="c-bd-split__reader-title">The internet is fine. <em>The feed</em> is the problem.</h1>
+    <div class="c-bd-split__reader-byline">
+      <span>By Amara Wole</span>
+      <span>Editor-in-chief</span>
+      <span>Published April 2026</span>
+    </div>
+    <div class="c-bd-split__reader-body">
+      <p>We have tried, issue after issue, to avoid the easy argument. The timeline is bad. The web is dying. The feed is eating itself. These are the slogans of the exhausted. They are, by now, a kind of weather &mdash; complained about, endured, still there tomorrow.</p>
+      <p>But when you read thirty-two essays in a row from writers who stopped scrolling, something else shows up. The internet they describe is not dead. It is patient. It is a place you go on purpose, for a reason, for a while. It is mostly quiet. It rewards the things a feed punishes: length, second thoughts, a thing written once and kept.</p>
+    </div>
+  </article>
+</div>

@@ -1,0 +1,251 @@
+<style>
+  .c-tm-split {
+    display: grid;
+    grid-template-columns: minmax(280px, 360px) 1fr;
+    height: calc(100vh - 56px);
+    min-height: 520px;
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+  }
+  .c-tm-split__list {
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    background: var(--bg);
+  }
+  .c-tm-split__list-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0;
+    background: var(--bg);
+    z-index: 1;
+  }
+  .c-tm-split__list-title {
+    font-size: 14px; font-weight: 600; margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .c-tm-split__list-count {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--fg-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+  .c-tm-split__items { list-style: none; margin: 0; padding: 0; }
+  .c-tm-split__item {
+    display: block;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-split__item:hover { background: var(--bg-2); }
+  .c-tm-split__item[aria-current="true"] {
+    background: var(--bg-2);
+  }
+  .c-tm-split__item[aria-current="true"]::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--accent);
+  }
+  .c-tm-split__item:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--accent);
+  }
+  .c-tm-split__item-row {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 3px;
+  }
+  .c-tm-split__sender {
+    font-size: 13px; font-weight: 500;
+    color: var(--fg);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .c-tm-split__item--unread .c-tm-split__sender { font-weight: 600; }
+  .c-tm-split__time {
+    flex: 0 0 auto;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--fg-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .c-tm-split__subject {
+    font-size: 13px;
+    color: var(--fg);
+    margin-bottom: 2px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .c-tm-split__item--unread .c-tm-split__subject { font-weight: 500; }
+  .c-tm-split__preview {
+    font-size: 12px;
+    color: var(--fg-muted);
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .c-tm-split__dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .c-tm-split__item:not(.c-tm-split__item--unread) .c-tm-split__dot { visibility: hidden; }
+  .c-tm-split__detail {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background: var(--bg);
+  }
+  .c-tm-split__detail-head {
+    padding: 24px 32px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-tm-split__detail-subject {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+    line-height: 1.25;
+  }
+  .c-tm-split__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--fg-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .c-tm-split__meta strong {
+    color: var(--fg);
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: inherit;
+    font-size: 13px;
+  }
+  .c-tm-split__meta-row { display: inline-flex; align-items: center; gap: 6px; }
+  .c-tm-split__body {
+    padding: 24px 32px 40px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--fg);
+    max-width: 68ch;
+  }
+  .c-tm-split__body p { margin: 0 0 16px; }
+  .c-tm-split__body p:last-child { margin-bottom: 0; }
+  .c-tm-split__sig {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--fg-muted);
+  }
+
+  @media (max-width: 900px) {
+    .c-tm-split {
+      grid-template-columns: 1fr;
+      height: auto;
+    }
+    .c-tm-split__list { border-right: none; border-bottom: 1px solid var(--border); max-height: 50vh; }
+    .c-tm-split__detail-head, .c-tm-split__body { padding-left: 20px; padding-right: 20px; }
+  }
+</style>
+
+<div class="c-tm-split" role="region" aria-label="Inbox">
+  <section class="c-tm-split__list" aria-label="Inbox list">
+    <div class="c-tm-split__list-head">
+      <h2 class="c-tm-split__list-title">Inbox</h2>
+      <span class="c-tm-split__list-count">47 UNREAD</span>
+    </div>
+    <ul class="c-tm-split__items">
+      <li><a class="c-tm-split__item c-tm-split__item--unread" href="#" aria-current="true">
+        <div class="c-tm-split__item-row">
+          <span class="c-tm-split__sender"><span class="c-tm-split__dot" aria-hidden="true"></span>Sofia Reyes</span>
+          <span class="c-tm-split__time">10:24</span>
+        </div>
+        <div class="c-tm-split__subject">Q1 close — reviewers assigned</div>
+        <div class="c-tm-split__preview">Pulled in Mark and Priya for the operating ledger walkthrough. Flagged three items that need your sign-off before Friday…</div>
+      </a></li>
+      <li><a class="c-tm-split__item c-tm-split__item--unread" href="#">
+        <div class="c-tm-split__item-row">
+          <span class="c-tm-split__sender"><span class="c-tm-split__dot" aria-hidden="true"></span>Stripe</span>
+          <span class="c-tm-split__time">09:01</span>
+        </div>
+        <div class="c-tm-split__subject">Weekly payout summary · $184,204.21</div>
+        <div class="c-tm-split__preview">Your payout for the week of April 14 is scheduled for deposit on April 22. Includes 1,248 transactions…</div>
+      </a></li>
+      <li><a class="c-tm-split__item" href="#">
+        <div class="c-tm-split__item-row">
+          <span class="c-tm-split__sender"><span class="c-tm-split__dot" aria-hidden="true"></span>Mark Liao</span>
+          <span class="c-tm-split__time">Yest.</span>
+        </div>
+        <div class="c-tm-split__subject">Reconciliation variance — March</div>
+        <div class="c-tm-split__preview">Hit $1.82 in stray fees across the March ledger. Minor but flagging in case you want to widen the tolerance threshold next close.</div>
+      </a></li>
+      <li><a class="c-tm-split__item" href="#">
+        <div class="c-tm-split__item-row">
+          <span class="c-tm-split__sender"><span class="c-tm-split__dot" aria-hidden="true"></span>Priya Shah</span>
+          <span class="c-tm-split__time">Yest.</span>
+        </div>
+        <div class="c-tm-split__subject">Access request — Northwind workspace</div>
+        <div class="c-tm-split__preview">Requesting member access to the Northwind workspace so I can pull in their March statements. Role-only, no admin.</div>
+      </a></li>
+      <li><a class="c-tm-split__item" href="#">
+        <div class="c-tm-split__item-row">
+          <span class="c-tm-split__sender"><span class="c-tm-split__dot" aria-hidden="true"></span>{Brand} System</span>
+          <span class="c-tm-split__time">Apr 18</span>
+        </div>
+        <div class="c-tm-split__subject">Ledger export complete — 2026-Q1.csv</div>
+        <div class="c-tm-split__preview">Your export finished in 14s. 4,218 transactions, 26 accounts, 3 workspaces included. Download expires in 7 days.</div>
+      </a></li>
+      <li><a class="c-tm-split__item" href="#">
+        <div class="c-tm-split__item-row">
+          <span class="c-tm-split__sender"><span class="c-tm-split__dot" aria-hidden="true"></span>Jordan Kim</span>
+          <span class="c-tm-split__time">Apr 17</span>
+        </div>
+        <div class="c-tm-split__subject">Invoice #INV-2026-0412 paid</div>
+        <div class="c-tm-split__preview">Payment confirmed via wire. Please find the remittance attached for your records. Thanks as always for the quick turnaround.</div>
+      </a></li>
+      <li><a class="c-tm-split__item" href="#">
+        <div class="c-tm-split__item-row">
+          <span class="c-tm-split__sender"><span class="c-tm-split__dot" aria-hidden="true"></span>Legal · Axis</span>
+          <span class="c-tm-split__time">Apr 16</span>
+        </div>
+        <div class="c-tm-split__subject">MSA draft v2 — redlines attached</div>
+        <div class="c-tm-split__preview">Attaching the countersigned draft with Axis's redlines. The material edits are in sections 4, 7.2, and the IP schedule…</div>
+      </a></li>
+    </ul>
+  </section>
+
+  <article class="c-tm-split__detail" aria-label="Message detail">
+    <header class="c-tm-split__detail-head">
+      <h1 class="c-tm-split__detail-subject">Q1 close — reviewers assigned</h1>
+      <div class="c-tm-split__meta">
+        <span class="c-tm-split__meta-row">From <strong>Sofia Reyes</strong></span>
+        <span class="c-tm-split__meta-row">To <strong>Alex Chen</strong></span>
+        <span class="c-tm-split__meta-row">Thread · 4 messages</span>
+        <span class="c-tm-split__meta-row">APR 21 · 10:24</span>
+      </div>
+    </header>
+    <div class="c-tm-split__body">
+      <p>Alex — pulled in Mark and Priya to co-review the Q1 operating ledger. Both accepted this morning; Mark is taking AP/AR and Priya is on inter-company entries.</p>
+      <p>Three items need your sign-off before Friday: the Axis rebill variance ($1,842.10), the March reclassification of the Stripe payout cluster, and the reconciliation tolerance change we discussed. All three are flagged in the close checklist.</p>
+      <p>If you want, I can pre-draft the variance memo so you only need to review — otherwise I'll wait for your note after the Thursday stand-up.</p>
+      <p class="c-tm-split__sig">— Sofia<br>Controller · Meridian Capital</p>
+    </div>
+  </article>
+</div>

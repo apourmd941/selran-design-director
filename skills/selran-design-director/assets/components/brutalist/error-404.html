@@ -1,0 +1,166 @@
+<style>
+  .c-br-404 {
+    min-height: 100vh;
+    padding: 32px 24px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', monospace);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .c-br-404__inner {
+    max-width: 960px;
+    width: 100%;
+    border: 2px solid var(--border, var(--fg));
+    padding: 40px;
+    background: var(--bg);
+  }
+  .c-br-404__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border, var(--fg));
+    margin-bottom: 28px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+  }
+  .c-br-404__huge {
+    font-size: clamp(56px, 11vw, 128px);
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    margin: 0 0 24px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--border, var(--fg));
+    word-break: break-word;
+  }
+  .c-br-404__huge span {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 0 12px;
+  }
+  .c-br-404__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 0;
+  }
+  .c-br-404__left {
+    padding-right: 32px;
+    border-right: 2px solid var(--border, var(--fg));
+  }
+  .c-br-404__right { padding-left: 32px; }
+  .c-br-404__label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    margin-bottom: 12px;
+  }
+  .c-br-404__body {
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 0 0 24px;
+    color: var(--fg);
+  }
+  .c-br-404__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .c-br-404__btn {
+    padding: 14px 20px;
+    font-family: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 13px;
+    border: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+    color: var(--fg);
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: -2px;
+  }
+  .c-br-404__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-br-404__btn--primary:hover {
+    background: var(--fg);
+    color: var(--accent);
+    border-color: var(--fg);
+  }
+  .c-br-404__btn:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .c-br-404__list {
+    list-style: none;
+    padding: 0; margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .c-br-404__list li {
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--border, var(--fg));
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .c-br-404__list li:last-child { border-bottom: none; }
+  .c-br-404__list a {
+    color: var(--fg);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .c-br-404__list a:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  @media (max-width: 900px) {
+    .c-br-404__inner { padding: 24px; }
+    .c-br-404__grid { grid-template-columns: 1fr; }
+    .c-br-404__left { padding-right: 0; border-right: none; border-bottom: 2px solid var(--border, var(--fg)); padding-bottom: 24px; margin-bottom: 24px; }
+    .c-br-404__right { padding-left: 0; }
+  }
+</style>
+
+<main class="c-br-404">
+  <div class="c-br-404__inner">
+    <div class="c-br-404__meta">
+      <span>// error-log // status 404</span>
+      <span>requested: /catalog/item-404</span>
+      <span>last touched: 2026-04-20</span>
+    </div>
+    <h1 class="c-br-404__huge">PAGE <span>MISSING.</span></h1>
+    <div class="c-br-404__grid">
+      <div class="c-br-404__left">
+        <div class="c-br-404__label">// what happened</div>
+        <p class="c-br-404__body">
+          The URL you hit does not resolve to a record, zine issue, or show listing. Possibly typed wrong. Possibly moved. Possibly never existed. Try one of the doors below.
+        </p>
+        <div class="c-br-404__cta">
+          <a href="/" class="c-br-404__btn c-br-404__btn--primary">BACK HOME &rarr;</a>
+          <a href="/catalog" class="c-br-404__btn">BROWSE CATALOG</a>
+        </div>
+      </div>
+      <aside class="c-br-404__right">
+        <div class="c-br-404__label">// shortcuts</div>
+        <ul class="c-br-404__list">
+          <li><a href="/catalog">catalog</a></li>
+          <li><a href="/artists">artists</a></li>
+          <li><a href="/zine">zine</a></li>
+          <li><a href="/shows">shows</a></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</main>

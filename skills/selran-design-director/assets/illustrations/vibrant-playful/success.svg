@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: vibrant-playful
+  use: success / completion moment
+  variables: var(fg), var(bg), var(accent), var(palette-2)..5
+  notes: asymmetric collage with a big bold check, pattern-fill supporting shapes, confetti dashes
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Success">
+  <style>
+    .vp-accent { fill: var(--accent, #C44A2E); }
+    .vp-p2     { fill: var(--palette-2, #1F6B88); }
+    .vp-p3     { fill: var(--palette-3, #9C6014); }
+    .vp-p4     { fill: var(--palette-4, #553E5A); }
+    .vp-p5     { fill: var(--palette-5, #2A7B60); }
+    .vp-fg-stroke     { stroke: var(--fg, #1A1A1A); fill: none; stroke-width: 3; vector-effect: non-scaling-stroke; }
+    .vp-check-stroke  { stroke: var(--bg, #FFFBF5); fill: none; stroke-width: 14; stroke-linecap: square; stroke-linejoin: miter; vector-effect: non-scaling-stroke; }
+  </style>
+
+  <defs>
+    <pattern id="vps-dots" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="6" cy="6" r="1.6" fill="var(--fg, #1A1A1A)"/>
+    </pattern>
+  </defs>
+
+  <!-- big rotated square, accent, as the hero -->
+  <rect x="100" y="100" width="200" height="200" rx="24" class="vp-p5" transform="rotate(-8 200 200)"/>
+  <rect x="100" y="100" width="200" height="200" rx="24" class="vp-fg-stroke" transform="rotate(-8 200 200)"/>
+
+  <!-- large check drawn in bg color on top -->
+  <g transform="rotate(-8 200 200)">
+    <polyline class="vp-check-stroke" points="140,210 188,250 262,162"/>
+  </g>
+
+  <!-- accent circle overlapping corner, top-right -->
+  <circle cx="310" cy="100" r="34" class="vp-accent"/>
+  <circle cx="310" cy="100" r="34" class="vp-fg-stroke"/>
+
+  <!-- dot-fill small wedge bottom-left -->
+  <path fill="url(#vps-dots)" d="M 60 320 L 130 310 L 120 360 Z"/>
+
+  <!-- teal pill -->
+  <rect x="80" y="90" width="80" height="26" rx="13" class="vp-p2"/>
+
+  <!-- confetti dashes (multi-color, placed intentionally — not random) -->
+  <g stroke-linecap="round" stroke-width="5" vector-effect="non-scaling-stroke" fill="none">
+    <line x1="60"  y1="60"  x2="80"  y2="80"  stroke="var(--accent, #C44A2E)"/>
+    <line x1="340" y1="180" x2="360" y2="170" stroke="var(--palette-3, #9C6014)"/>
+    <line x1="350" y1="280" x2="348" y2="310" stroke="var(--palette-4, #553E5A)"/>
+    <line x1="50"  y1="240" x2="40"  y2="220" stroke="var(--palette-2, #1F6B88)"/>
+    <line x1="300" y1="330" x2="320" y2="342" stroke="var(--palette-5, #2A7B60)"/>
+  </g>
+
+  <!-- small amber dot -->
+  <circle cx="350" cy="240" r="10" class="vp-p3"/>
+
+  <!-- tagline -->
+  <text x="200" y="380"
+        text-anchor="middle"
+        font-family="Satoshi, General Sans, DM Sans, ui-sans-serif, sans-serif"
+        font-weight="700"
+        font-size="20"
+        fill="var(--fg, #1A1A1A)">Nice work!</text>
+</svg>

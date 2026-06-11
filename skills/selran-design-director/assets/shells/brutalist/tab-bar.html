@@ -1,0 +1,125 @@
+<style>
+  .c-br-tabs {
+    background: var(--bg);
+    color: var(--fg);
+    border-bottom: 2px solid var(--border, var(--fg));
+    border-top: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', ui-monospace, monospace);
+  }
+  .c-br-tabs__inner {
+    display: flex;
+    align-items: stretch;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+  .c-br-tabs__list {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    align-items: stretch;
+    flex: 1;
+  }
+  .c-br-tabs__item { display: flex; }
+  .c-br-tabs__tab {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 18px;
+    min-height: 44px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg);
+    background: var(--bg);
+    text-decoration: none;
+    border: 0;
+    border-right: 2px solid var(--border, var(--fg));
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .c-br-tabs__tab:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .c-br-tabs__tab:focus-visible { outline: 4px solid var(--accent); outline-offset: -4px; }
+  .c-br-tabs__tab[aria-current="page"],
+  .c-br-tabs__tab[aria-selected="true"] {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .c-br-tabs__tab[aria-current="page"] .c-br-tabs__count,
+  .c-br-tabs__tab[aria-selected="true"] .c-br-tabs__count {
+    border-color: var(--bg);
+    color: var(--bg);
+  }
+  .c-br-tabs__marker {
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .c-br-tabs__count {
+    display: inline-block;
+    padding: 1px 5px;
+    font-size: 10px;
+    border: 2px solid var(--border, var(--fg));
+    line-height: 1;
+    color: var(--fg-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .c-br-tabs__tab:hover .c-br-tabs__count {
+    border-color: var(--bg);
+    color: var(--bg);
+  }
+  .c-br-tabs__meta {
+    display: inline-flex; align-items: center;
+    margin-left: auto;
+    padding: 0 18px;
+    font-size: 11px;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-left: 2px solid var(--border, var(--fg));
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .c-br-tabs__tab { padding: 12px 14px; font-size: 12px; }
+    .c-br-tabs__meta { display: none; }
+  }
+</style>
+
+<nav class="c-br-tabs" aria-label="Section">
+  <div class="c-br-tabs__inner">
+    <ul class="c-br-tabs__list" role="tablist">
+      <li class="c-br-tabs__item" role="presentation">
+        <a class="c-br-tabs__tab" role="tab" aria-selected="true" aria-current="page" href="#">
+          <span class="c-br-tabs__marker" aria-hidden="true">[&#x25A0;]</span>
+          <span>CATALOG</span>
+          <span class="c-br-tabs__count">142</span>
+        </a>
+      </li>
+      <li class="c-br-tabs__item" role="presentation">
+        <a class="c-br-tabs__tab" role="tab" aria-selected="false" href="#">
+          <span>PRESSINGS</span>
+          <span class="c-br-tabs__count">38</span>
+        </a>
+      </li>
+      <li class="c-br-tabs__item" role="presentation">
+        <a class="c-br-tabs__tab" role="tab" aria-selected="false" href="#">
+          <span>MAIL ORDER</span>
+          <span class="c-br-tabs__count">9</span>
+        </a>
+      </li>
+      <li class="c-br-tabs__item" role="presentation">
+        <a class="c-br-tabs__tab" role="tab" aria-selected="false" href="#">
+          <span>DISTRO</span>
+        </a>
+      </li>
+      <li class="c-br-tabs__item" role="presentation">
+        <a class="c-br-tabs__tab" role="tab" aria-selected="false" href="#">
+          <span>LEDGER</span>
+        </a>
+      </li>
+    </ul>
+    <span class="c-br-tabs__meta">// VIEW: GRID / SORT: CAT #</span>
+  </div>
+</nav>

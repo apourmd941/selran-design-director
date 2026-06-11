@@ -1,0 +1,165 @@
+<style>
+  .c-wa-feat {
+    padding: 120px 0;
+  }
+  .c-wa-feat__inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .c-wa-feat__head {
+    margin-bottom: 64px;
+    max-width: 640px;
+  }
+  .c-wa-feat__eyebrow {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    color: var(--accent);
+    font-size: 17px;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+  .c-wa-feat__head h2 {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-size: clamp(32px, 4.2vw, 44px);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+  }
+  .c-wa-feat__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+  }
+  .c-wa-feat__tile {
+    background: var(--bg-2);
+    border-radius: var(--radius-lg, 24px);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 4px 14px rgba(61, 40, 23, 0.05);
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-feat__tile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(61, 40, 23, 0.1);
+  }
+  .c-wa-feat__tile--big {
+    grid-row: span 2;
+    padding: 40px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+  }
+  .c-wa-feat__icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.15;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    position: relative;
+  }
+  .c-wa-feat__icon svg {
+    width: 20px; height: 20px;
+    color: var(--accent);
+    position: absolute;
+    opacity: 1;
+  }
+  .c-wa-feat__tile h3 {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+  }
+  .c-wa-feat__tile--big h3 { font-size: 30px; }
+  .c-wa-feat__tile p {
+    color: var(--fg-muted);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .c-wa-feat__link {
+    margin-top: auto;
+    font-size: 15px;
+    color: var(--accent);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: gap 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-feat__link:hover { gap: 12px; }
+
+  @media (max-width: 900px) {
+    .c-wa-feat { padding: 72px 0; }
+    .c-wa-feat__grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .c-wa-feat__tile--big { grid-row: auto; padding: 32px; }
+  }
+</style>
+
+<section class="c-wa-feat">
+  <div class="c-wa-feat__inner">
+    <div class="c-wa-feat__head">
+      <span class="c-wa-feat__eyebrow">What we stand for</span>
+      <h2>Nothing we sell arrives unannounced, unknown, or unrepairable.</h2>
+    </div>
+    <div class="c-wa-feat__grid">
+      <div class="c-wa-feat__tile c-wa-feat__tile--big">
+        <div class="c-wa-feat__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C9 6 6 8 4 10c0 6 4 10 8 10s8-4 8-10c-2-2-5-4-8-8z"/>
+          </svg>
+        </div>
+        <h3>Maker-first sourcing</h3>
+        <p>Every piece is made by a named workshop we've visited &mdash; 34 of them, across 12 countries. The maker's card in your package tells you their story, their city, and how to write to them. We keep the margin honest and show it on our website.</p>
+        <a href="#" class="c-wa-feat__link">See the atlas of makers &rarr;</a>
+      </div>
+      <div class="c-wa-feat__tile">
+        <div class="c-wa-feat__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+            <path d="M12 3v18M3 12h18"/>
+            <circle cx="12" cy="12" r="9"/>
+          </svg>
+        </div>
+        <h3>Ten-year mender's promise</h3>
+        <p>Broken handle? Cracked glaze? Send it back. We'll mend or replace &mdash; for ten whole years.</p>
+      </div>
+      <div class="c-wa-feat__tile">
+        <div class="c-wa-feat__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+            <path d="M20 7L9 18l-5-5"/>
+          </svg>
+        </div>
+        <h3>Honest materials only</h3>
+        <p>No blends, no coatings we won't name. Linen, stoneware, oak, beeswax. Simple ingredients, listed plainly.</p>
+      </div>
+      <div class="c-wa-feat__tile">
+        <div class="c-wa-feat__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+            <path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <h3>A store, not a warehouse</h3>
+        <p>Two brick-and-mortar shops in Brooklyn and Lisbon. Free mending at the counter, always.</p>
+      </div>
+      <div class="c-wa-feat__tile">
+        <div class="c-wa-feat__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+            <path d="M4 19l4-8 4 6 3-5 5 7"/>
+            <circle cx="8" cy="6" r="2"/>
+          </svg>
+        </div>
+        <h3>Seasonal, not endless</h3>
+        <p>Four collections a year, rooted in the month. No dropshipped trend pieces, no flash sales.</p>
+      </div>
+    </div>
+  </div>
+</section>

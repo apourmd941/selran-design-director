@@ -1,0 +1,123 @@
+# ═══════════════════════════════════════════════════════════════
+#  SELRAN ENTERPRISE PACK EXAMPLE — reference manifest
+#  Shows all enterprise-specific fields in pack.yaml.
+#
+#  For the standard (non-enterprise) fields, see any pack in
+#  packs-official/ (e.g., packs-official/fintech/pack.yaml).
+#  For the full enterprise spec, see:
+#    selran-design-director/references/pack-enterprise.md
+#
+#  Install requires:
+#    - an enterprise license with organization.slug == "acme-corp"
+#    - tier >= "premium" (because enterprise_tier: "premium")
+#  Install fails at the entitlement check if either is unmet.
+# ═══════════════════════════════════════════════════════════════
+
+# --- Identity ---------------------------------------------------
+name: "acme-internal-components"
+version: "1.0.0"
+display_name: "Acme Internal Component Library"
+author: "Acme Design Systems Team"
+homepage: "https://design.acme.corp"
+description: >
+  Internal component library for Acme Corp's financial products.
+  Ships proprietary ledger rows, compliance badges, and transaction
+  tables aligned to Acme's internal design tokens. Not for
+  external distribution; not available on the canonical registry.
+
+# --- Licensing --------------------------------------------------
+license: "Proprietary"
+license_file: "LICENSE"
+
+# price_usd is 0 for private packs because they are not sold.
+# Private packs are distributed inside the licensee's organization
+# under the enterprise contract; the pack itself has no SKU.
+# The `price_usd` field remains in the manifest schema for
+# registry/validator compatibility — set it to 0 and move on.
+price_usd: 0
+
+# ═══════════════════════════════════════════════════════════════
+#  ENTERPRISE FIELDS (all three are optional, backward-compatible)
+# ═══════════════════════════════════════════════════════════════
+
+# (1) private: true
+#     Marks this pack as organization-internal.
+#     - Cannot be published to the canonical Selran registry; the
+#       registry's PR template rejects entries with `private: true`.
+#     - Must be served from a private registry the org self-hosts
+#       (see `selran enterprise private-registry set <url>` or the
+#       SELRAN_PRIVATE_REGISTRY_URL environment variable).
+#     - If absent or set to false, the pack is treated as public
+#       and standard commercial/MIT rules apply.
+private: true
+
+# (2) organization: "<org-slug>"
+#     REQUIRED when private: true.
+#     Kebab-case slug of the owning organization. At install time,
+#     the CLI enforces an exact match against the enterprise
+#     license's organization.slug field. Mismatches fail with an
+#     entitlement error — there is no override flag, no force
+#     install, no bypass.
+#
+#     This is the ONLY org-scoped check. There is no additional
+#     entitlement layer, no per-user ACL, no runtime license
+#     ping. Match the slug, hold a valid license, install works.
+organization: "acme-corp"
+
+# (3) enterprise_tier: "standard" | "premium" | null
+#     Minimum enterprise tier required to install this pack.
+#       null or absent — any valid license (commercial or
+#                        enterprise) can install. The org-slug
+#                        check in (2) still applies when private.
+#       "standard"     — requires Standard Enterprise OR Premium
+#                        Enterprise. Rejects per-pack Commercial.
+#       "premium"      — requires Premium Enterprise only.
+#                        Rejects Standard Enterprise and Commercial.
+#
+#     Gating happens at install time in the CLI. The skill itself
+#     does not check this field; by the time a pack is installed,
+#     its entitlement has already been verified.
+enterprise_tier: "premium"
+
+# --- Compatibility ----------------------------------------------
+requires_core: ">=3.4.0"
+requires_packs: []
+
+# --- What this pack ships ---------------------------------------
+provides:
+  components:
+    - "provides/components/acme-ledger-row.html"
+    - "provides/components/acme-compliance-badge.html"
+    - "provides/components/acme-transaction-table.html"
+  references:
+    - "provides/references/acme-internal-patterns.md"
+  sample_screens:
+    - "provides/sample-screens/acme-dashboard.sample.html"
+
+# --- Overlay: acme-internal technical-minimal -------------------
+# Users opt in via `direction: technical-minimal+acme-internal-components`
+# in design-system.md. Only keys that genuinely differ from the core
+# starter are listed — overlays are diffs, not complete token sets.
+pack_overrides:
+  technical-minimal:
+    color:
+      accent: "#1A3E7C"             # Acme institutional navy
+      accent_hover: "#122B58"
+    personality:
+      - "tabular numerals on every ledger row and transaction amount"
+      - "Acme-internal compliance copy — legal-approved phrases only"
+
+# --- Provenance --------------------------------------------------
+created: "2026-04-23"
+updated: "2026-04-23"
+
+# ═══════════════════════════════════════════════════════════════
+#  PRIVATE-REGISTRY INTERACTION
+#  - CLI resolves canonical FIRST, then private. Canonical wins on
+#    name collisions — prefix private pack names with your org slug
+#    (e.g., "acme-*") to avoid accidental shadowing.
+#  - Set SELRAN_PRIVATE_REGISTRY_URL so the CLI knows where to look,
+#    or use `selran enterprise private-registry set <url>`.
+#  - Private packs may be signed with ed25519 under the org's own
+#    key; publish a `signing_key_id` that matches the org slug.
+# ═══════════════════════════════════════════════════════════════

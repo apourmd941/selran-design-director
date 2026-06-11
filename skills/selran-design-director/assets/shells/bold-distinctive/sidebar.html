@@ -1,0 +1,262 @@
+<style>
+  .c-bd-sidebar {
+    width: 280px;
+    min-height: 100vh;
+    background: var(--bg);
+    border-right: 2px solid var(--fg);
+    padding: 40px 28px 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    font-family: inherit;
+    color: var(--fg);
+    position: relative;
+  }
+  .c-bd-sidebar[data-collapsed="true"] { width: 80px; padding: 40px 12px 32px; }
+  .c-bd-sidebar[data-collapsed="true"] .c-bd-sidebar__wordmark-text,
+  .c-bd-sidebar[data-collapsed="true"] .c-bd-sidebar__section-title,
+  .c-bd-sidebar[data-collapsed="true"] .c-bd-sidebar__link-label,
+  .c-bd-sidebar[data-collapsed="true"] .c-bd-sidebar__link-num,
+  .c-bd-sidebar[data-collapsed="true"] .c-bd-sidebar__meta,
+  .c-bd-sidebar[data-collapsed="true"] .c-bd-sidebar__meta-value {
+    display: none;
+  }
+  .c-bd-sidebar[data-collapsed="true"] .c-bd-sidebar__link {
+    justify-content: center;
+    padding: 12px 0;
+  }
+
+  .c-bd-sidebar__header {
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--fg);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .c-bd-sidebar__wordmark {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    text-decoration: none;
+    color: var(--fg);
+  }
+  .c-bd-sidebar__wordmark-text {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .c-bd-sidebar__wordmark-text em { font-style: italic; color: var(--accent); }
+  .c-bd-sidebar__toggle {
+    appearance: none;
+    background: transparent;
+    border: 2px solid var(--fg);
+    width: 28px; height: 28px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    color: var(--fg);
+    font-family: inherit;
+    padding: 0;
+    transition: background-color 220ms ease, color 220ms ease;
+  }
+  .c-bd-sidebar__toggle:hover { background: var(--fg); color: var(--bg); }
+  .c-bd-sidebar__toggle:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .c-bd-sidebar__section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .c-bd-sidebar__section + .c-bd-sidebar__section {
+    padding-top: 28px;
+    border-top: 2px solid var(--fg);
+  }
+  .c-bd-sidebar__section-title {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .c-bd-sidebar__nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .c-bd-sidebar__nav li { position: relative; }
+  .c-bd-sidebar__link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 10px 10px 14px;
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 1.4;
+    transition: background-color 220ms ease, color 220ms ease;
+    position: relative;
+  }
+  .c-bd-sidebar__link:hover {
+    background: var(--bg-2);
+  }
+  .c-bd-sidebar__link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+  .c-bd-sidebar__link[aria-current="page"] {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .c-bd-sidebar__link[aria-current="page"]::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 8px;
+    background: var(--accent);
+  }
+  .c-bd-sidebar__link-num {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 13px;
+    color: var(--fg-muted);
+    font-variant-numeric: tabular-nums;
+    min-width: 22px;
+    letter-spacing: -0.01em;
+  }
+  .c-bd-sidebar__link[aria-current="page"] .c-bd-sidebar__link-num {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .c-bd-sidebar__link-label { flex: 1; }
+  .c-bd-sidebar__link-count {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+  }
+
+  .c-bd-sidebar__footer {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 2px solid var(--fg);
+  }
+  .c-bd-sidebar__meta {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .c-bd-sidebar__meta-value {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--fg);
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-sidebar {
+      width: 100%;
+      min-height: 0;
+      border-right: 0;
+      border-bottom: 2px solid var(--fg);
+      padding: 24px;
+    }
+  }
+</style>
+
+<aside class="c-bd-sidebar" aria-label="Primary navigation">
+  <div class="c-bd-sidebar__header">
+    <a class="c-bd-sidebar__wordmark" href="#">
+      <span class="c-bd-sidebar__wordmark-text">{Brand}<em>.</em></span>
+    </a>
+    <button class="c-bd-sidebar__toggle" type="button" aria-expanded="true" aria-label="Collapse navigation">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+        <path d="M6.5 1.5L3 5l3.5 3.5" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </button>
+  </div>
+
+  <section class="c-bd-sidebar__section" aria-label="Reading">
+    <h2 class="c-bd-sidebar__section-title">Reading</h2>
+    <ul class="c-bd-sidebar__nav">
+      <li>
+        <a class="c-bd-sidebar__link" href="#" aria-current="page">
+          <span class="c-bd-sidebar__link-num">01</span>
+          <span class="c-bd-sidebar__link-label">Today's issue</span>
+          <span class="c-bd-sidebar__link-count">12</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-bd-sidebar__link" href="#">
+          <span class="c-bd-sidebar__link-num">02</span>
+          <span class="c-bd-sidebar__link-label">The queue</span>
+          <span class="c-bd-sidebar__link-count">48</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-bd-sidebar__link" href="#">
+          <span class="c-bd-sidebar__link-num">03</span>
+          <span class="c-bd-sidebar__link-label">Saved essays</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-bd-sidebar__link" href="#">
+          <span class="c-bd-sidebar__link-num">04</span>
+          <span class="c-bd-sidebar__link-label">Read later</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="c-bd-sidebar__section" aria-label="Library">
+    <h2 class="c-bd-sidebar__section-title">Library</h2>
+    <ul class="c-bd-sidebar__nav">
+      <li>
+        <a class="c-bd-sidebar__link" href="#">
+          <span class="c-bd-sidebar__link-num">05</span>
+          <span class="c-bd-sidebar__link-label">Collections</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-bd-sidebar__link" href="#">
+          <span class="c-bd-sidebar__link-num">06</span>
+          <span class="c-bd-sidebar__link-label">Highlights</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-bd-sidebar__link" href="#">
+          <span class="c-bd-sidebar__link-num">07</span>
+          <span class="c-bd-sidebar__link-label">Annotations</span>
+        </a>
+      </li>
+      <li>
+        <a class="c-bd-sidebar__link" href="#">
+          <span class="c-bd-sidebar__link-num">08</span>
+          <span class="c-bd-sidebar__link-label">Archive</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <div class="c-bd-sidebar__footer">
+    <span class="c-bd-sidebar__meta">Issue No.</span>
+    <span class="c-bd-sidebar__meta-value">07 &middot; Spring 2026</span>
+  </div>
+</aside>

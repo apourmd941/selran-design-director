@@ -1,0 +1,146 @@
+# Font fallback chains per script × direction.
+#
+# Used at build time when `i18n.scripts` declares scripts beyond Latin.
+# The build composes a full font-family stack: [primary face] → [script fallback] → [generic].
+#
+# All fallbacks are Google Fonts Noto family members by default — free, open-license, broad coverage.
+# Directions that prefer a specific fallback (editorial picks Source Han Serif over Noto Sans CJK)
+# override per-direction.
+
+# ═══════════════════════════════════════════════════════════════
+# Latin (baseline — always supported; included for completeness)
+# ═══════════════════════════════════════════════════════════════
+latin:
+  default:      ["Inter", "system-ui", "sans-serif"]
+  technical-minimal:  ["General Sans", "Inter Tight", "Inter", "system-ui", "sans-serif"]
+  editorial:    ["Fraunces", "Source Serif Pro", "Georgia", "serif"]
+  dark-premium: ["Saol Display", "Editorial New", "Fraunces", "Georgia", "serif"]
+  warm-approachable:  ["Manrope", "DM Sans", "Inter", "system-ui", "sans-serif"]
+  vibrant-playful:    ["Sora", "Plus Jakarta Sans", "Inter", "system-ui", "sans-serif"]
+  brutalist:    ["Space Grotesk", "IBM Plex Mono", "Courier New", "monospace"]
+  bold-distinctive:   ["Migra", "Saol Display", "General Sans", "Inter", "sans-serif"]
+
+# ═══════════════════════════════════════════════════════════════
+# CJK — Chinese (simplified + traditional), Japanese, Korean
+# ═══════════════════════════════════════════════════════════════
+# Noto Sans/Serif CJK covers JP/KR/SC/TC in one family but is large (~16MB per weight).
+# Split into per-region files in production: NotoSansJP, NotoSansKR, NotoSansSC, NotoSansTC.
+cjk:
+  default:      ["Noto Sans JP", "Noto Sans SC", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", "sans-serif"]
+  technical-minimal:  ["Noto Sans JP", "Noto Sans SC", "Hiragino Kaku Gothic ProN", "Yu Gothic", "sans-serif"]
+  editorial:    ["Source Han Serif", "Noto Serif JP", "Noto Serif SC", "Hiragino Mincho ProN", "Yu Mincho", "serif"]
+  dark-premium: ["Source Han Serif", "Noto Serif JP", "Hiragino Mincho ProN", "serif"]
+  warm-approachable:  ["Noto Sans JP", "Noto Sans KR", "Hiragino Kaku Gothic ProN", "sans-serif"]
+  vibrant-playful:    ["Noto Sans JP", "Noto Sans SC", "Noto Sans KR", "sans-serif"]
+  brutalist:    ["Noto Sans Mono CJK JP", "Noto Sans JP", "monospace"]
+  bold-distinctive:   ["Noto Serif JP", "Source Han Serif", "Hiragino Mincho ProN", "serif"]
+  # Line-height adjustment: CJK needs ~1.7 body leading vs. Latin's 1.55
+  line_height_multiplier: 1.1
+  # Letter-spacing: never apply positive tracking to CJK; zero it out
+  tracking_override:
+    display: 0
+    body: 0
+    caps: 0   # no "uppercase small caps" concept in CJK
+
+# ═══════════════════════════════════════════════════════════════
+# Arabic (RTL; requires joining/shaping)
+# ═══════════════════════════════════════════════════════════════
+arabic:
+  default:      ["Noto Sans Arabic", "Noto Naskh Arabic", "Geeza Pro", "Tahoma", "sans-serif"]
+  technical-minimal:  ["Noto Sans Arabic", "IBM Plex Sans Arabic", "Geeza Pro", "sans-serif"]
+  editorial:    ["Noto Serif Arabic", "Aref Ruqaa", "Amiri", "Georgia", "serif"]
+  dark-premium: ["Noto Serif Arabic", "Aref Ruqaa", "serif"]
+  warm-approachable:  ["Noto Sans Arabic", "Almarai", "sans-serif"]
+  vibrant-playful:    ["Noto Sans Arabic", "Cairo", "sans-serif"]
+  brutalist:    ["Noto Sans Arabic", "Reem Kufi", "sans-serif"]
+  bold-distinctive:   ["Noto Serif Arabic", "Aref Ruqaa", "serif"]
+  # Arabic ignores text-transform: uppercase (no case concept)
+  tracking_override:
+    caps: 0
+  # Numerals: respect locale — Western (0–9) default; Eastern (٠–٩) when explicitly set
+  numeral_system: "western"   # or "eastern"
+
+# ═══════════════════════════════════════════════════════════════
+# Hebrew (RTL; no joining)
+# ═══════════════════════════════════════════════════════════════
+hebrew:
+  default:      ["Noto Sans Hebrew", "Arial Hebrew", "Tahoma", "sans-serif"]
+  technical-minimal:  ["Noto Sans Hebrew", "Heebo", "sans-serif"]
+  editorial:    ["Noto Serif Hebrew", "Frank Ruhl Libre", "David", "serif"]
+  dark-premium: ["Noto Serif Hebrew", "Frank Ruhl Libre", "serif"]
+  warm-approachable:  ["Noto Sans Hebrew", "Rubik", "sans-serif"]
+  vibrant-playful:    ["Noto Sans Hebrew", "Assistant", "sans-serif"]
+  brutalist:    ["Noto Sans Hebrew", "Secular One", "sans-serif"]
+  bold-distinctive:   ["Noto Serif Hebrew", "Frank Ruhl Libre", "serif"]
+
+# ═══════════════════════════════════════════════════════════════
+# Cyrillic (Russian, Ukrainian, Serbian, Bulgarian, Belarusian)
+# ═══════════════════════════════════════════════════════════════
+# Many Latin fonts ship Cyrillic natively; fall back to Noto where they don't.
+cyrillic:
+  default:      ["Inter", "Roboto", "Noto Sans", "PT Sans", "Arial", "sans-serif"]
+  technical-minimal:  ["General Sans", "Inter Tight", "Noto Sans", "PT Sans", "sans-serif"]
+  editorial:    ["Fraunces", "PT Serif", "Noto Serif", "serif"]
+  dark-premium: ["Saol Display", "PT Serif", "Noto Serif", "serif"]
+  warm-approachable:  ["Manrope", "PT Sans", "Noto Sans", "sans-serif"]
+  vibrant-playful:    ["Sora", "PT Sans", "Noto Sans", "sans-serif"]
+  brutalist:    ["Space Grotesk", "PT Mono", "Noto Sans Mono", "monospace"]
+  bold-distinctive:   ["Migra", "PT Serif", "Noto Serif", "serif"]
+
+# ═══════════════════════════════════════════════════════════════
+# Devanagari (Hindi, Marathi, Nepali, Sanskrit)
+# ═══════════════════════════════════════════════════════════════
+devanagari:
+  default:      ["Noto Sans Devanagari", "Hind", "sans-serif"]
+  technical-minimal:  ["Noto Sans Devanagari", "Hind", "Inter", "sans-serif"]
+  editorial:    ["Noto Serif Devanagari", "Tiro Devanagari Hindi", "serif"]
+  dark-premium: ["Noto Serif Devanagari", "Tiro Devanagari Hindi", "serif"]
+  warm-approachable:  ["Noto Sans Devanagari", "Hind", "sans-serif"]
+  vibrant-playful:    ["Noto Sans Devanagari", "Baloo 2", "sans-serif"]
+  brutalist:    ["Noto Sans Devanagari", "Hind Mono", "monospace"]
+  bold-distinctive:   ["Noto Serif Devanagari", "Tiro Devanagari Hindi", "serif"]
+  # Devanagari needs extra line-height for matras
+  line_height_multiplier: 1.15
+
+# ═══════════════════════════════════════════════════════════════
+# Thai (no word boundaries in script)
+# ═══════════════════════════════════════════════════════════════
+thai:
+  default:      ["Noto Sans Thai", "Sarabun", "Kanit", "sans-serif"]
+  technical-minimal:  ["Noto Sans Thai", "Sarabun", "sans-serif"]
+  editorial:    ["Noto Serif Thai", "Bai Jamjuree", "serif"]
+  dark-premium: ["Noto Serif Thai", "Bai Jamjuree", "serif"]
+  warm-approachable:  ["Noto Sans Thai", "Prompt", "sans-serif"]
+  vibrant-playful:    ["Noto Sans Thai", "Kanit", "sans-serif"]
+  brutalist:    ["Noto Sans Thai", "IBM Plex Sans Thai", "sans-serif"]
+  bold-distinctive:   ["Noto Serif Thai", "Bai Jamjuree", "serif"]
+  # Thai should use `word-break: keep-all` + locale-aware line breaking (ICU)
+  line_break: "keep-all"
+
+# ═══════════════════════════════════════════════════════════════
+# Loading strategy
+# ═══════════════════════════════════════════════════════════════
+# When assembling font stacks at build time:
+#   1. Start with the direction's primary face (from `type.display/body/mono`)
+#   2. Append the script fallbacks for every script in `i18n.scripts`
+#   3. End with generic family (sans-serif / serif / monospace)
+#
+# For self-hosted delivery:
+#   - Subset to the needed script only (Noto Sans CJK JP is 16MB full; JP subset is 4MB)
+#   - Use `unicode-range` in @font-face to scope each font to its script
+#   - Apply `font-display: swap` on all remote fonts
+#
+# Example @font-face setup for CJK in technical-minimal:
+#
+#   @font-face {
+#     font-family: "General Sans";
+#     src: url("/fonts/general-sans.woff2") format("woff2");
+#     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+#     font-display: swap;
+#   }
+#   @font-face {
+#     font-family: "Noto Sans JP";
+#     src: url("/fonts/noto-sans-jp-subset.woff2") format("woff2");
+#     unicode-range: U+3000-303F, U+3040-309F, U+30A0-30FF, U+4E00-9FFF, U+FF00-FFEF;
+#     font-display: swap;
+#   }

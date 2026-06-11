@@ -1,0 +1,86 @@
+<style>
+  .c-tm-spin {
+    font-family: inherit;
+    color: var(--fg);
+  }
+  .c-tm-spin--full {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    background: var(--bg);
+    z-index: 40;
+  }
+  .c-tm-spin--inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 24px 20px;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .c-tm-spin__ring {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    animation: c-tm-spin-rot 900ms linear infinite;
+  }
+  .c-tm-spin--inline .c-tm-spin__ring {
+    width: 16px;
+    height: 16px;
+    border-width: 1.5px;
+  }
+  .c-tm-spin__label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .c-tm-spin--inline .c-tm-spin__label {
+    font-size: 12px;
+    letter-spacing: 0;
+    text-transform: none;
+    font-family: inherit;
+  }
+  .c-tm-spin__static { display: none; }
+
+  @keyframes c-tm-spin-rot {
+    to { transform: rotate(360deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-tm-spin__ring { display: none; animation: none; }
+    .c-tm-spin__static {
+      display: inline-block;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+  }
+</style>
+
+<!-- Variant A: Full-screen -->
+<div class="c-tm-spin c-tm-spin--full" role="status" aria-live="polite">
+  <span class="c-tm-spin__ring" aria-hidden="true"></span>
+  <span class="c-tm-spin__static" aria-hidden="true">Loading</span>
+  <span class="c-tm-spin__label">Loading…</span>
+</div>
+
+<!-- Variant B: Container-scoped inline -->
+<div class="c-tm-spin c-tm-spin--inline" role="status" aria-live="polite">
+  <span class="c-tm-spin__ring" aria-hidden="true"></span>
+  <span class="c-tm-spin__static" aria-hidden="true">Loading</span>
+  <span class="c-tm-spin__label">Loading transactions…</span>
+</div>

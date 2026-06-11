@@ -1,0 +1,146 @@
+<style>
+  .c-dp-404 {
+    min-height: 100vh;
+    padding: 40px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .c-dp-404::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      color-mix(in oklab, var(--accent) 22%, transparent) 0%,
+      transparent 65%
+    );
+    z-index: -1;
+    pointer-events: none;
+  }
+  .c-dp-404__inner {
+    max-width: 640px;
+    width: 100%;
+    text-align: center;
+  }
+  .c-dp-404__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-2);
+    margin-bottom: 36px;
+  }
+  .c-dp-404__eyebrow .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px color-mix(in oklab, var(--accent) 80%, transparent);
+  }
+  .c-dp-404__eyebrow .mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg-muted);
+  }
+  .c-dp-404__code {
+    font-size: clamp(120px, 20vw, 240px);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--fg);
+    margin: 0 0 8px;
+    background: linear-gradient(
+      180deg,
+      var(--fg) 0%,
+      color-mix(in oklab, var(--accent) 70%, var(--fg)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 40px color-mix(in oklab, var(--accent) 30%, transparent));
+  }
+  .c-dp-404__headline {
+    font-size: clamp(22px, 2.6vw, 28px);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin: 24px 0 12px;
+    line-height: 1.3;
+  }
+  .c-dp-404__body {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--fg-muted);
+    margin: 0 auto 44px;
+    max-width: 52ch;
+  }
+  .c-dp-404__actions {
+    display: inline-flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .c-dp-404__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 300ms cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 300ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-404__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-dp-404__btn--primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 30px -8px color-mix(in oklab, var(--accent) 50%, transparent);
+  }
+  .c-dp-404__btn--ghost {
+    background: transparent;
+    color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-dp-404__btn--ghost:hover {
+    background: var(--bg-2);
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .c-dp-404__headline { font-size: 18px; }
+  }
+</style>
+
+<main class="c-dp-404">
+  <div class="c-dp-404__inner">
+    <span class="c-dp-404__eyebrow">
+      <span class="dot"></span>
+      <span class="mono">STATUS 404 &middot; RESOURCE MISSING</span>
+    </span>
+    <h1 class="c-dp-404__code">404</h1>
+    <h2 class="c-dp-404__headline">The page you were looking for isn't here.</h2>
+    <p class="c-dp-404__body">It may have been renamed, archived, or moved into a later report. Head back to your dashboard, or let our team help you find what you came for.</p>
+    <div class="c-dp-404__actions">
+      <a href="/" class="c-dp-404__btn c-dp-404__btn--primary">Back to dashboard &rarr;</a>
+      <a href="/contact" class="c-dp-404__btn c-dp-404__btn--ghost">Contact concierge</a>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,478 @@
+<!--
+  ==============================================================================
+  Palette Picker — runtime palette exploration panel
+  ==============================================================================
+
+  A floating bottom-right panel that lets a viewer swap the 5-slot secondary
+  palette live and preview three escalating "pattern" intensities. Two flows:
+
+    Inside the direction
+      Chip-select one of four curated palettes (Off / A Accent-only /
+      B Warm earth / C Cool steel) + Light/Medium/Heavy intensity.
+    Explore outside
+      Radio-select a mood (Jewel / Vibrant / Bold) + Light/Medium/Heavy.
+
+  Substituted placeholders (render via palette-picker.emit.py):
+    {{color.accent}}       — primary accent from design-system.md
+    {{color.accent_hover}} — hover shade
+    {{color.bg_primary}}   — page background (for pill text contrast)
+    {{accent.tonal.1}} .. {{accent.tonal.5}}
+                           — 5 hand-computed HSL-shifted variations of the
+                             accent, produced by the render helper. Powers
+                             palette "A · Accent only". If a user paste this
+                             template without running the helper, the five
+                             tonal slots fall back to the raw accent hex.
+
+  Class hooks the host page should add to elements it wants re-themed.
+  These are opt-in — the panel will do nothing visible without them:
+
+    .sec-1 .. .sec-5      Always-colored elements (plain `color:`). Useful for
+                          icons or permanent section accents independent of
+                          pattern intensity.
+    .pp-label             Label-sized text that should pick up the matching
+                          section color at pattern 1+ (e.g. section eyebrows,
+                          card headers). At pattern 3 these become filled pills.
+    .pp-num               Big numeric displays that pick up color at pattern 2+
+                          (e.g. stat numbers, headline prices).
+    .pp-pill              Opt-in: force a .pp-label element to always render
+                          pill-style at pattern 3 (useful if you only want
+                          some labels to convert).
+
+  Each element that picks up color must also sit inside a wrapper whose
+  nth-child position determines its slot (1–5) — use `.pp-group > .pp-item`
+  if you want deterministic slotting, or rely on the host page's own
+  repeating structure and mark items with `.pp-slot-1` .. `.pp-slot-5`.
+
+  Host page contract:
+    1. Declare --sec-1 .. --sec-5 on :root (any initial value; panel overrides).
+    2. Mark elements with the opt-in classes above and a slot class
+       (.pp-slot-1 .. .pp-slot-5) for pattern-cascaded coloring.
+    3. Paste this entire snippet immediately before </body>.
+
+  localStorage key: "palette-picker" (shared across any host using this).
+  ==============================================================================
+-->
+<style>
+  /* ---------- Pattern-cascaded coloring via slot classes ---------- */
+
+  /* Always-on slot colors (independent of pattern intensity). */
+  .sec-1 { color: var(--sec-1) !important; }
+  .sec-2 { color: var(--sec-2) !important; }
+  .sec-3 { color: var(--sec-3) !important; }
+  .sec-4 { color: var(--sec-4) !important; }
+  .sec-5 { color: var(--sec-5) !important; }
+
+  /* Pattern 1+ : color opt-in labels per slot. */
+  body[data-palette-pattern="1"] .pp-slot-1 .pp-label,
+  body[data-palette-pattern="2"] .pp-slot-1 .pp-label,
+  body[data-palette-pattern="3"] .pp-slot-1 .pp-label { color: var(--sec-1); }
+  body[data-palette-pattern="1"] .pp-slot-2 .pp-label,
+  body[data-palette-pattern="2"] .pp-slot-2 .pp-label,
+  body[data-palette-pattern="3"] .pp-slot-2 .pp-label { color: var(--sec-2); }
+  body[data-palette-pattern="1"] .pp-slot-3 .pp-label,
+  body[data-palette-pattern="2"] .pp-slot-3 .pp-label,
+  body[data-palette-pattern="3"] .pp-slot-3 .pp-label { color: var(--sec-3); }
+  body[data-palette-pattern="1"] .pp-slot-4 .pp-label,
+  body[data-palette-pattern="2"] .pp-slot-4 .pp-label,
+  body[data-palette-pattern="3"] .pp-slot-4 .pp-label { color: var(--sec-4); }
+  body[data-palette-pattern="1"] .pp-slot-5 .pp-label,
+  body[data-palette-pattern="2"] .pp-slot-5 .pp-label,
+  body[data-palette-pattern="3"] .pp-slot-5 .pp-label { color: var(--sec-5); }
+
+  /* Pattern 2+ : color opt-in big numerics per slot. */
+  body[data-palette-pattern="2"] .pp-slot-1 .pp-num,
+  body[data-palette-pattern="3"] .pp-slot-1 .pp-num { color: var(--sec-1); }
+  body[data-palette-pattern="2"] .pp-slot-2 .pp-num,
+  body[data-palette-pattern="3"] .pp-slot-2 .pp-num { color: var(--sec-2); }
+  body[data-palette-pattern="2"] .pp-slot-3 .pp-num,
+  body[data-palette-pattern="3"] .pp-slot-3 .pp-num { color: var(--sec-3); }
+  body[data-palette-pattern="2"] .pp-slot-4 .pp-num,
+  body[data-palette-pattern="3"] .pp-slot-4 .pp-num { color: var(--sec-4); }
+  body[data-palette-pattern="2"] .pp-slot-5 .pp-num,
+  body[data-palette-pattern="3"] .pp-slot-5 .pp-num { color: var(--sec-5); }
+
+  /* Pattern 3 : labels become filled pills (affects .pp-label and .pp-pill). */
+  body[data-palette-pattern="3"] .pp-label,
+  body[data-palette-pattern="3"] .pp-pill {
+    display: inline-block;
+    color: {{color.bg_primary}} !important;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+  }
+  body[data-palette-pattern="3"] .pp-slot-1 .pp-label,
+  body[data-palette-pattern="3"] .pp-slot-1 .pp-pill { background: var(--sec-1); }
+  body[data-palette-pattern="3"] .pp-slot-2 .pp-label,
+  body[data-palette-pattern="3"] .pp-slot-2 .pp-pill { background: var(--sec-2); }
+  body[data-palette-pattern="3"] .pp-slot-3 .pp-label,
+  body[data-palette-pattern="3"] .pp-slot-3 .pp-pill { background: var(--sec-3); }
+  body[data-palette-pattern="3"] .pp-slot-4 .pp-label,
+  body[data-palette-pattern="3"] .pp-slot-4 .pp-pill { background: var(--sec-4); }
+  body[data-palette-pattern="3"] .pp-slot-5 .pp-label,
+  body[data-palette-pattern="3"] .pp-slot-5 .pp-pill { background: var(--sec-5); }
+
+  /* ---------- Design controls panel ---------- */
+
+  .dp {
+    position: fixed; bottom: 20px; right: 20px;
+    z-index: 200;
+    font-family: 'General Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .dp-toggle {
+    background: #0A0A0B; color: #F4F4F5;
+    border: 1px solid #27272A; border-radius: 8px;
+    padding: 10px 14px; font-size: 12px; font-weight: 500;
+    cursor: pointer; display: flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .dp-toggle:hover { background: #151517; }
+  .dp-toggle .dot { width: 8px; height: 8px; border-radius: 50%; background: {{color.accent}}; display: inline-block; }
+  .dp-body {
+    position: absolute; bottom: calc(100% + 10px); right: 0;
+    width: 360px; max-height: 78vh; overflow-y: auto;
+    background: #0A0A0B; color: #F4F4F5;
+    border: 1px solid #27272A; border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 20px 40px -12px rgba(0,0,0,0.5);
+    font-size: 13px; line-height: 1.5;
+  }
+  .dp-body[hidden] { display: none; }
+  .dp-section + .dp-section { margin-top: 24px; padding-top: 20px; border-top: 1px solid #27272A; }
+  .dp-heading {
+    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: #A1A1AA; margin-bottom: 14px;
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  }
+  .dp-heading .dp-sub { color: #52525B; font-weight: 400; }
+  .dp-heading .dp-warn {
+    background: #422006; color: #FDBA74;
+    padding: 3px 8px; border-radius: 3px;
+    font-size: 9px; letter-spacing: 0.06em;
+  }
+  .dp-chips { display: flex; flex-direction: column; gap: 8px; }
+  .dp-chip {
+    background: transparent; border: 1px solid #27272A;
+    color: #F4F4F5; text-align: left;
+    padding: 12px; border-radius: 6px; cursor: pointer;
+    display: flex; flex-direction: column; gap: 6px;
+    transition: background 150ms, border-color 150ms;
+  }
+  .dp-chip:hover { background: #151517; border-color: #3F3F46; }
+  .dp-chip.active { border-color: var(--sec-1); background: #151517; }
+  .dp-chip.active::after {
+    content: "✓ ACTIVE"; font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 9px; letter-spacing: 0.08em; color: #10B981;
+    margin-top: 2px;
+  }
+  .dp-swatches { display: flex; gap: 4px; }
+  .dp-swatches span {
+    width: 18px; height: 18px; border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .dp-chip .dp-name { font-size: 13px; font-weight: 500; }
+  .dp-chip .dp-desc { font-size: 11px; color: #A1A1AA; line-height: 1.4; }
+
+  .dp-intro { font-size: 12px; color: #A1A1AA; margin-bottom: 14px; line-height: 1.5; }
+  .dp-q { margin-bottom: 14px; }
+  .dp-q-label {
+    display: block; font-size: 11px; color: #D4D4D8;
+    margin-bottom: 6px; font-weight: 500;
+  }
+  .dp-q-hint { font-size: 10px; color: #71717A; margin-top: 4px; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.04em; }
+  .dp-radio-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .dp-radio-group button {
+    background: transparent; border: 1px solid #27272A;
+    color: #D4D4D8; padding: 8px 4px; border-radius: 4px;
+    font-family: inherit; font-size: 11px; cursor: pointer;
+    transition: all 150ms;
+  }
+  .dp-radio-group button:hover { border-color: #3F3F46; color: #F4F4F5; }
+  .dp-radio-group button.active {
+    background: #F4F4F5; color: #0A0A0B; border-color: #F4F4F5;
+    font-weight: 500;
+  }
+  .dp-apply {
+    width: 100%; background: {{color.accent}}; color: {{color.bg_primary}};
+    border: none; padding: 10px; border-radius: 6px;
+    font-family: inherit; font-size: 12px; font-weight: 500;
+    cursor: pointer; letter-spacing: 0.02em;
+    transition: background 150ms;
+  }
+  .dp-apply:hover:not(:disabled) { background: {{color.accent_hover}}; }
+  .dp-apply:disabled { background: #3F3F46; color: #71717A; cursor: not-allowed; }
+  .dp-reset {
+    width: 100%; background: transparent; border: 1px solid #27272A;
+    color: #A1A1AA; padding: 8px; border-radius: 4px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    cursor: pointer;
+  }
+  .dp-reset:hover { color: #F4F4F5; border-color: #3F3F46; }
+
+  @media (max-width: 600px) {
+    .dp-body { width: calc(100vw - 40px); max-width: 340px; }
+  }
+</style>
+
+<!-- ================ Design controls panel ================ -->
+<div class="dp" id="dp">
+  <button class="dp-toggle" id="dp-toggle" aria-expanded="false" aria-controls="dp-body">
+    <span class="dot" id="dp-dot"></span>
+    <span id="dp-toggle-label">Design controls</span>
+  </button>
+  <div class="dp-body" id="dp-body" hidden>
+
+    <div class="dp-section">
+      <div class="dp-heading">
+        <span>Inside the direction</span>
+        <span class="dp-sub">on-brand</span>
+      </div>
+      <div class="dp-intro">Two choices — palette + how visible you want it on the page.</div>
+      <label class="dp-q-label" style="margin-bottom: 8px;">1 · Palette</label>
+      <div class="dp-chips">
+        <button class="dp-chip" data-inside="off">
+          <div class="dp-swatches">
+            <span style="background:{{color.accent}}"></span><span style="background:{{color.accent}}"></span><span style="background:{{color.accent}}"></span><span style="background:{{color.accent}}"></span><span style="background:{{color.accent}}"></span>
+          </div>
+          <div class="dp-name">Off · Accent only</div>
+          <div class="dp-desc">Single accent, zero section variation. The strictest read.</div>
+        </button>
+        <button class="dp-chip" data-inside="a">
+          <div class="dp-swatches">
+            <span style="background:{{accent.tonal.1}}"></span><span style="background:{{accent.tonal.2}}"></span><span style="background:{{accent.tonal.3}}"></span><span style="background:{{accent.tonal.4}}"></span><span style="background:{{accent.tonal.5}}"></span>
+          </div>
+          <div class="dp-name">A · Accent only</div>
+          <div class="dp-desc">One hue family, five shades. Tonal depth without hue variety.</div>
+        </button>
+        <button class="dp-chip" data-inside="b">
+          <div class="dp-swatches">
+            <span style="background:{{color.accent}}"></span><span style="background:#B45309"></span><span style="background:#A16207"></span><span style="background:#7F1D1D"></span><span style="background:#78716C"></span>
+          </div>
+          <div class="dp-name">B · Warm earth</div>
+          <div class="dp-desc">Accent anchor + warm spectrum. Reads confident, slightly human.</div>
+        </button>
+        <button class="dp-chip" data-inside="c">
+          <div class="dp-swatches">
+            <span style="background:{{color.accent}}"></span><span style="background:#1E3A8A"></span><span style="background:#0C4A6E"></span><span style="background:#475569"></span><span style="background:#57534E"></span>
+          </div>
+          <div class="dp-name">C · Cool steel</div>
+          <div class="dp-desc">Accent + navy + slate. Most corporate of the three.</div>
+        </button>
+      </div>
+
+      <div class="dp-q" style="margin-top: 16px;">
+        <label class="dp-q-label">2 · Pattern intensity</label>
+        <div class="dp-radio-group" data-axis="in-pattern">
+          <button data-value="1">Light</button>
+          <button data-value="2">Medium</button>
+          <button data-value="3">Heavy</button>
+        </div>
+        <div class="dp-q-hint">Light = colored labels. Medium = + colored numbers. Heavy = + filled pills.</div>
+      </div>
+
+      <button class="dp-apply" id="dp-apply-in" disabled>Pick a palette and intensity</button>
+    </div>
+
+    <div class="dp-section">
+      <div class="dp-heading">
+        <span>Explore outside</span>
+        <span class="dp-warn">exits direction</span>
+      </div>
+      <div class="dp-intro">
+        Two quick choices. The first picks a color family, the second picks how hard to push it into the design.
+      </div>
+
+      <div class="dp-q">
+        <label class="dp-q-label">1 · Color mood</label>
+        <div class="dp-radio-group" data-axis="mood">
+          <button data-value="jewel">Jewel</button>
+          <button data-value="vibrant">Vibrant</button>
+          <button data-value="bold">Bold</button>
+        </div>
+        <div class="dp-q-hint" id="mood-hint">Pick a family.</div>
+      </div>
+
+      <div class="dp-q">
+        <label class="dp-q-label">2 · Pattern intensity</label>
+        <div class="dp-radio-group" data-axis="pattern">
+          <button data-value="1">Light</button>
+          <button data-value="2">Medium</button>
+          <button data-value="3">Heavy</button>
+        </div>
+        <div class="dp-q-hint" id="pattern-hint">Light = colored labels. Medium = + colored numbers. Heavy = + filled pills.</div>
+      </div>
+
+      <button class="dp-apply" id="dp-apply-out" disabled>Pick a mood and intensity</button>
+    </div>
+
+    <div class="dp-section">
+      <button class="dp-reset" id="dp-reset">Reset to accent only</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const INSIDE = {
+    off: { hues: ['{{color.accent}}','{{color.accent}}','{{color.accent}}','{{color.accent}}','{{color.accent}}'], label: 'Off · Accent only' },
+    a:   { hues: ['{{accent.tonal.1}}','{{accent.tonal.2}}','{{accent.tonal.3}}','{{accent.tonal.4}}','{{accent.tonal.5}}'], label: 'A · Accent only' },
+    b:   { hues: ['{{color.accent}}','#B45309','#A16207','#7F1D1D','#78716C'], label: 'B · Warm earth' },
+    c:   { hues: ['{{color.accent}}','#1E3A8A','#0C4A6E','#475569','#57534E'], label: 'C · Cool steel' },
+  };
+  const MOODS = {
+    jewel:   { hues: ['#0F766E','#BE185D','#A16207','#1D4ED8','#166534'], label: 'Jewel'   },
+    vibrant: { hues: ['#EA580C','#0D9488','#7C3AED','#DB2777','#B45309'], label: 'Vibrant' },
+    bold:    { hues: ['#DC2626','#2563EB','#059669','#7E22CE','#0A0A0B'], label: 'Bold'    },
+  };
+  const PATTERNS = { '1': 'Light', '2': 'Medium', '3': 'Heavy' };
+  const STORAGE_KEY = 'palette-picker';
+
+  const dpBody     = document.getElementById('dp-body');
+  const dpToggle   = document.getElementById('dp-toggle');
+  const dpLabel    = document.getElementById('dp-toggle-label');
+  const dpDot      = document.getElementById('dp-dot');
+  const dpApplyIn  = document.getElementById('dp-apply-in');
+  const dpApplyOut = document.getElementById('dp-apply-out');
+  const dpReset    = document.getElementById('dp-reset');
+
+  let insideSel  = { palette: null, intensity: null };
+  let outsideSel = { mood: null,    pattern: null   };
+
+  function applyHues(hues, mode, pattern) {
+    const root = document.documentElement.style;
+    hues.forEach((hex, idx) => root.setProperty('--sec-' + (idx + 1), hex));
+    document.body.dataset.paletteMode = mode;
+    document.body.dataset.palettePattern = String(pattern);
+    dpDot.style.background = hues[0];
+  }
+
+  function highlightChip(key) {
+    document.querySelectorAll('.dp-chip').forEach(c => c.classList.toggle('active', c.dataset.inside === key));
+  }
+
+  function clearRadios(axis) {
+    document.querySelectorAll(`.dp-radio-group[data-axis="${axis}"] button`).forEach(b => b.classList.remove('active'));
+  }
+
+  function applyInside() {
+    const { palette, intensity } = insideSel;
+    const p = INSIDE[palette]; if (!p) return;
+    applyHues(p.hues, 'in', intensity);
+    dpLabel.textContent = `${p.label} · ${PATTERNS[intensity]}`;
+    outsideSel = { mood: null, pattern: null };
+    clearRadios('mood'); clearRadios('pattern');
+    updateOutsideApply();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ kind: 'inside', palette, intensity }));
+  }
+
+  function applyOutside() {
+    const { mood, pattern } = outsideSel;
+    const m = MOODS[mood]; if (!m) return;
+    applyHues(m.hues, 'out', pattern);
+    dpLabel.textContent = `${m.label} · ${PATTERNS[pattern]} · outside`;
+    insideSel = { palette: null, intensity: null };
+    highlightChip(null);
+    clearRadios('in-pattern');
+    updateInsideApply();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ kind: 'outside', mood, pattern }));
+  }
+
+  function updateInsideApply() {
+    const { palette, intensity } = insideSel;
+    dpApplyIn.disabled = !(palette && intensity);
+    if (palette && intensity) {
+      dpApplyIn.textContent = `Apply ${INSIDE[palette].label} · ${PATTERNS[intensity]} →`;
+    } else if (!palette && !intensity) {
+      dpApplyIn.textContent = 'Pick a palette and intensity';
+    } else if (!palette) {
+      dpApplyIn.textContent = 'Pick a palette ↑';
+    } else {
+      dpApplyIn.textContent = 'Pick a pattern intensity ↑';
+    }
+  }
+
+  function updateOutsideApply() {
+    const { mood, pattern } = outsideSel;
+    dpApplyOut.disabled = !(mood && pattern);
+    if (mood && pattern) {
+      dpApplyOut.textContent = `Apply ${MOODS[mood].label} · ${PATTERNS[pattern]} →`;
+    } else if (!mood && !pattern) {
+      dpApplyOut.textContent = 'Pick a mood and intensity';
+    } else if (!mood) {
+      dpApplyOut.textContent = 'Pick a color mood ↑';
+    } else {
+      dpApplyOut.textContent = 'Pick a pattern intensity ↑';
+    }
+  }
+
+  document.querySelectorAll('.dp-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      insideSel.palette = chip.dataset.inside;
+      highlightChip(chip.dataset.inside);
+      updateInsideApply();
+    });
+  });
+
+  document.querySelectorAll('.dp-radio-group').forEach(group => {
+    const axis = group.dataset.axis;
+    group.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const v = btn.dataset.value;
+        if (axis === 'in-pattern') { insideSel.intensity = v; updateInsideApply(); }
+        else if (axis === 'mood')  { outsideSel.mood = v;      updateOutsideApply(); }
+        else if (axis === 'pattern'){ outsideSel.pattern = v;  updateOutsideApply(); }
+      });
+    });
+  });
+
+  dpApplyIn.addEventListener('click', () => {
+    if (insideSel.palette && insideSel.intensity) applyInside();
+  });
+  dpApplyOut.addEventListener('click', () => {
+    if (outsideSel.mood && outsideSel.pattern) applyOutside();
+  });
+
+  dpReset.addEventListener('click', () => {
+    applyHues(INSIDE.off.hues, 'in', 0);
+    dpLabel.textContent = 'Off · Accent only';
+    insideSel = { palette: null, intensity: null };
+    outsideSel = { mood: null, pattern: null };
+    highlightChip(null);
+    clearRadios('in-pattern'); clearRadios('mood'); clearRadios('pattern');
+    updateInsideApply(); updateOutsideApply();
+    localStorage.removeItem(STORAGE_KEY);
+  });
+
+  dpToggle.addEventListener('click', () => {
+    const open = dpBody.hasAttribute('hidden');
+    if (open) { dpBody.removeAttribute('hidden'); dpToggle.setAttribute('aria-expanded', 'true'); }
+    else      { dpBody.setAttribute('hidden', '');  dpToggle.setAttribute('aria-expanded', 'false'); }
+  });
+
+  (function restore() {
+    updateInsideApply(); updateOutsideApply();
+    applyHues(INSIDE.off.hues, 'in', 0);
+    dpLabel.textContent = 'Off · Accent only';
+
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    try {
+      const saved = JSON.parse(raw);
+      if (saved.kind === 'inside' && INSIDE[saved.palette]) {
+        insideSel = { palette: saved.palette, intensity: String(saved.intensity) };
+        highlightChip(saved.palette);
+        document.querySelector(`.dp-radio-group[data-axis="in-pattern"] button[data-value="${saved.intensity}"]`)?.classList.add('active');
+        applyInside();
+      } else if (saved.kind === 'outside' && MOODS[saved.mood]) {
+        outsideSel = { mood: saved.mood, pattern: String(saved.pattern) };
+        document.querySelector(`.dp-radio-group[data-axis="mood"] button[data-value="${saved.mood}"]`)?.classList.add('active');
+        document.querySelector(`.dp-radio-group[data-axis="pattern"] button[data-value="${saved.pattern}"]`)?.classList.add('active');
+        applyOutside();
+      }
+    } catch (e) { /* keep default */ }
+  })();
+</script>

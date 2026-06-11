@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- {{meta.project}} — editorial favicon. Serif letter with thin rule underneath. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
+  <rect width="24" height="24" fill="{{color.bg_primary}}"/>
+  <text x="12" y="16" text-anchor="middle"
+        font-family="{{type.display}}, Georgia, serif"
+        font-size="17" font-weight="500"
+        font-style="italic"
+        fill="{{color.fg_primary}}">{{FAVICON_GLYPH}}</text>
+  <rect x="6" y="19" width="12" height="0.8" fill="{{color.accent}}"/>
+</svg>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  {{meta.project}} — Material 3 theme scaffold.
+  Emit to res/values/themes.xml AND res/values-night/themes.xml (identical
+  file — the @color references resolve day/night through values-night/colors.xml).
+
+  Token → Material 3 slot mapping:
+    primary       ← accent          (brand action color)
+    onPrimary     ← bg_primary      (text/icon on accent)
+    secondary     ← accent_hover    (secondary action)
+    surface       ← bg_primary
+    onSurface     ← fg_primary
+    surfaceVariant ← bg_secondary
+    onSurfaceVariant ← fg_secondary
+    background    ← bg_primary
+    onBackground  ← fg_primary
+    outline       ← border
+    outlineVariant ← border_strong
+    error         ← danger
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.{{meta.project}}" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary (accent) -->
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorOnPrimary">@color/bg_primary</item>
+        <item name="colorPrimaryContainer">@color/accent_hover</item>
+        <item name="colorOnPrimaryContainer">@color/bg_primary</item>
+
+        <!-- Secondary -->
+        <item name="colorSecondary">@color/accent_hover</item>
+        <item name="colorOnSecondary">@color/bg_primary</item>
+
+        <!-- Surfaces -->
+        <item name="colorSurface">@color/bg_primary</item>
+        <item name="colorOnSurface">@color/fg_primary</item>
+        <item name="colorSurfaceVariant">@color/bg_secondary</item>
+        <item name="colorOnSurfaceVariant">@color/fg_secondary</item>
+        <item name="android:colorBackground">@color/bg_primary</item>
+        <item name="colorOnBackground">@color/fg_primary</item>
+
+        <!-- Outlines -->
+        <item name="colorOutline">@color/border</item>
+        <item name="colorOutlineVariant">@color/border_strong</item>
+
+        <!-- Semantic -->
+        <item name="colorError">@color/danger</item>
+        <item name="colorOnError">@color/bg_primary</item>
+
+        <!-- Shape (corner radius defaults) -->
+        <item name="shapeAppearanceCornerSmall">@style/ShapeAppearance.{{meta.project}}.Small</item>
+        <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.{{meta.project}}.Medium</item>
+        <item name="shapeAppearanceCornerLarge">@style/ShapeAppearance.{{meta.project}}.Large</item>
+    </style>
+
+    <style name="ShapeAppearance.{{meta.project}}.Small" parent="ShapeAppearance.Material3.Corner.Small">
+        <item name="cornerSize">@dimen/radius_sm</item>
+    </style>
+    <style name="ShapeAppearance.{{meta.project}}.Medium" parent="ShapeAppearance.Material3.Corner.Medium">
+        <item name="cornerSize">@dimen/radius_md</item>
+    </style>
+    <style name="ShapeAppearance.{{meta.project}}.Large" parent="ShapeAppearance.Material3.Corner.Large">
+        <item name="cornerSize">@dimen/radius_lg</item>
+    </style>
+</resources>

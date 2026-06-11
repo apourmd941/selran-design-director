@@ -1,0 +1,152 @@
+<style>
+  .c-br-errin {
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', ui-monospace, monospace);
+    color: var(--fg);
+    background: var(--bg);
+    border: 2px solid var(--border, var(--fg));
+    padding: 0;
+    margin: 0 0 16px;
+    max-width: 720px;
+  }
+  .c-br-errin__head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 8px 14px;
+    background: var(--fg);
+    color: var(--bg);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .c-br-errin__body {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 16px;
+    /* diagonal stripe pattern — accent/fg, never red */
+    background:
+      repeating-linear-gradient(
+        -45deg,
+        transparent 0,
+        transparent 8px,
+        color-mix(in oklab, var(--fg) 10%, transparent) 8px,
+        color-mix(in oklab, var(--fg) 10%, transparent) 10px
+      ),
+      var(--bg);
+  }
+  .c-br-errin__tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px;
+    border: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+  .c-br-errin__content { min-width: 0; }
+  .c-br-errin__title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fg);
+    margin: 0 0 4px;
+  }
+  .c-br-errin__msg {
+    font-size: 13px;
+    color: var(--fg);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .c-br-errin__code {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 2px 6px;
+    font-size: 11px;
+    color: var(--fg-muted);
+    border: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .c-br-errin__actions {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  .c-br-errin__btn {
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg);
+    background: var(--bg);
+    border: 2px solid var(--border, var(--fg));
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: -2px;
+    white-space: nowrap;
+  }
+  .c-br-errin__btn:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .c-br-errin__btn:focus-visible {
+    outline: 4px solid var(--accent);
+    outline-offset: -4px;
+  }
+  .c-br-errin__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-br-errin__btn--primary:hover {
+    background: var(--fg);
+    color: var(--accent);
+    border-color: var(--fg);
+  }
+  .c-br-errin__foot {
+    padding: 8px 14px;
+    border-top: 2px solid var(--border, var(--fg));
+    font-size: 11px;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    background: var(--bg);
+  }
+
+  @media (max-width: 900px) {
+    .c-br-errin__body {
+      grid-template-columns: 1fr;
+    }
+    .c-br-errin__actions { justify-content: flex-start; }
+  }
+</style>
+
+<div class="c-br-errin" role="alert" aria-live="assertive">
+  <div class="c-br-errin__head">
+    <span>// ERR &mdash; REQUEST FAILED</span>
+    <span>STATUS: BROKEN</span>
+  </div>
+  <div class="c-br-errin__body">
+    <span class="c-br-errin__tag" aria-hidden="true">[ERR]</span>
+    <div class="c-br-errin__content">
+      <p class="c-br-errin__title">COULD NOT LOAD CATALOG</p>
+      <p class="c-br-errin__msg">Connection to the press ledger dropped mid-fetch. Nothing was saved. Try again, or check the cable.</p>
+      <span class="c-br-errin__code" aria-hidden="true">CODE: NET_TIMEOUT / 504</span>
+    </div>
+    <div class="c-br-errin__actions">
+      <button class="c-br-errin__btn c-br-errin__btn--primary" type="button">[ RETRY ]</button>
+      <a class="c-br-errin__btn" href="#">[ OPEN LOG ]</a>
+    </div>
+  </div>
+  <div class="c-br-errin__foot">// attempt: 2 of 3 &middot; last try: 00:03 ago</div>
+</div>

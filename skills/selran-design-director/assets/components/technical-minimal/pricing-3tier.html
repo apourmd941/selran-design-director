@@ -1,0 +1,176 @@
+<style>
+  .c-price {
+    padding: 120px 0;
+  }
+  .c-price__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .c-price__head {
+    margin-bottom: 64px;
+    max-width: 720px;
+  }
+  .c-price__head .mono {
+    color: var(--fg-muted);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .c-price__head h2 {
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    color: var(--fg);
+  }
+  .c-price__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .c-price__plan {
+    padding: 40px 32px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+  }
+  .c-price__plan:last-child { border-right: none; }
+  .c-price__plan--featured { background: var(--bg-2); }
+  .c-price__plan .mono {
+    color: var(--fg-muted);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .c-price__plan--featured .mono { color: var(--accent); }
+  .c-price__amt {
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    margin-bottom: 8px;
+    color: var(--fg);
+  }
+  .c-price__unit {
+    font-size: 15px;
+    color: var(--fg-muted);
+    font-weight: 400;
+  }
+  .c-price__desc {
+    color: var(--fg-muted);
+    font-size: 14px;
+    margin-bottom: 32px;
+    min-height: 42px;
+  }
+  .c-price__list {
+    list-style: none;
+    margin: 0 0 32px;
+    padding: 0;
+    flex: 1;
+  }
+  .c-price__list li {
+    padding: 10px 0;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--fg-muted);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .c-price__list li::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+  .c-price__list li:last-child { border-bottom: none; }
+  .c-price__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-price__btn--primary { background: var(--accent); color: #fff; }
+  .c-price__btn--primary:hover { filter: brightness(0.92); }
+  .c-price__btn--ghost {
+    background: transparent;
+    color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-price__btn--ghost:hover { background: var(--bg-2); }
+
+  @media (max-width: 900px) {
+    .c-price { padding: 80px 0; }
+    .c-price__head h2 { font-size: 28px; }
+    .c-price__grid { grid-template-columns: 1fr; }
+    .c-price__plan {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .c-price__plan:last-child { border-bottom: none; }
+  }
+</style>
+
+<section class="c-price">
+  <div class="c-price__inner">
+    <div class="c-price__head">
+      <span class="mono">03 · Pricing</span>
+      <h2>Priced by transaction volume, not seats.</h2>
+    </div>
+    <div class="c-price__grid">
+      <div class="c-price__plan">
+        <span class="mono">Starter</span>
+        <div class="c-price__amt">$0<span class="c-price__unit"> / mo</span></div>
+        <div class="c-price__desc">For teams under $500k ARR, founder-led finance.</div>
+        <ul class="c-price__list">
+          <li>Up to 250 transactions / mo</li>
+          <li>Virtual cards, ACH, wires</li>
+          <li>Ledger &amp; monthly close</li>
+          <li>QuickBooks / Xero sync</li>
+        </ul>
+        <a href="#" class="c-price__btn c-price__btn--ghost">Open account</a>
+      </div>
+      <div class="c-price__plan c-price__plan--featured">
+        <span class="mono">Operator</span>
+        <div class="c-price__amt">$249<span class="c-price__unit"> / mo</span></div>
+        <div class="c-price__desc">For teams from Series A through post-ICP. Fractional or in-house CFO.</div>
+        <ul class="c-price__list">
+          <li>Up to 5,000 transactions / mo</li>
+          <li>Driver-based forecasting</li>
+          <li>Treasury sweep (up to $5M)</li>
+          <li>Audit-ready trail &amp; exports</li>
+          <li>Priority support — 4h SLA</li>
+        </ul>
+        <a href="#" class="c-price__btn c-price__btn--primary">Open account →</a>
+      </div>
+      <div class="c-price__plan">
+        <span class="mono">Scale</span>
+        <div class="c-price__amt">Custom</div>
+        <div class="c-price__desc">For multi-entity orgs, regulated industries, Series C+.</div>
+        <ul class="c-price__list">
+          <li>Unlimited transactions</li>
+          <li>Multi-entity consolidation</li>
+          <li>NetSuite / Sage Intacct sync</li>
+          <li>SSO, SCIM, advanced RBAC</li>
+          <li>Dedicated solutions engineer</li>
+        </ul>
+        <a href="#" class="c-price__btn c-price__btn--ghost">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>

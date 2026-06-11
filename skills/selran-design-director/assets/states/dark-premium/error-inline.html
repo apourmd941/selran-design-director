@@ -1,0 +1,138 @@
+<style>
+  .c-dp-err {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-left: 3px solid #F87171;
+    border-radius: 8px;
+    font-family: inherit;
+    color: var(--fg);
+    position: relative;
+    isolation: isolate;
+  }
+  .c-dp-err::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    background: linear-gradient(90deg,
+      color-mix(in oklab, #F87171 8%, transparent) 0%,
+      transparent 30%);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .c-dp-err__icon {
+    flex: 0 0 auto;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: color-mix(in oklab, #F87171 18%, var(--bg));
+    color: #F87171;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px; font-weight: 600;
+    margin-top: 1px;
+    box-shadow: 0 0 14px -2px color-mix(in oklab, #F87171 50%, transparent);
+  }
+  .c-dp-err__body {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .c-dp-err__label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #F87171;
+    margin: 0 0 4px;
+  }
+  .c-dp-err__title {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    color: var(--fg);
+    margin: 0 0 4px;
+  }
+  .c-dp-err__detail {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    margin: 0;
+  }
+  .c-dp-err__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 10px;
+  }
+  .c-dp-err__retry {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-err__retry:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .c-dp-err__retry:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--accent);
+    border-radius: 4px;
+  }
+  .c-dp-err__secondary {
+    font-size: 13px;
+    color: var(--fg-muted);
+    text-decoration: none;
+    transition: color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-err__secondary:hover { color: var(--fg); }
+
+  .c-dp-err__close {
+    flex: 0 0 auto;
+    width: 24px; height: 24px;
+    border-radius: 4px;
+    background: transparent;
+    border: 0;
+    color: var(--fg-muted);
+    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: color 220ms cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-err__close:hover { color: var(--fg); background: var(--bg); }
+
+  @media (max-width: 900px) {
+    .c-dp-err { padding: 14px 16px; gap: 12px; }
+    .c-dp-err__title { font-size: 13px; }
+    .c-dp-err__detail { font-size: 12px; }
+  }
+</style>
+
+<div class="c-dp-err" role="alert" aria-live="assertive">
+  <span class="c-dp-err__icon" aria-hidden="true">!</span>
+  <div class="c-dp-err__body">
+    <p class="c-dp-err__label">Transfer failed</p>
+    <p class="c-dp-err__title">We couldn't settle the wire to Reserve-A.</p>
+    <p class="c-dp-err__detail">The custody account rejected the routing reference. Your funds have not left the source ledger. Retry with the same amount, or choose a different destination.</p>
+    <div class="c-dp-err__actions">
+      <button class="c-dp-err__retry" type="button">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M10 5V2.5M10 2.5H7.5M10 2.5L7.5 5A4 4 0 106 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Retry transfer
+      </button>
+      <a class="c-dp-err__secondary" href="#">View logs</a>
+    </div>
+  </div>
+  <button class="c-dp-err__close" type="button" aria-label="Dismiss">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+  </button>
+</div>

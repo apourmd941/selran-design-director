@@ -1,0 +1,185 @@
+<style>
+  .c-wa-validate {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 44px 40px;
+    background: var(--bg-2);
+    border-radius: var(--radius-lg, 24px);
+    box-shadow: 0 10px 30px -10px rgba(61, 40, 23, 0.12),
+                0 2px 6px -2px rgba(61, 40, 23, 0.06);
+    font-family: inherit;
+  }
+  .c-wa-validate__eyebrow {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .c-wa-validate__title {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-size: 30px; line-height: 1.15; font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 8px;
+  }
+  .c-wa-validate__sub {
+    font-size: 15px; line-height: 1.6;
+    color: var(--fg-muted);
+    margin: 0 0 28px;
+  }
+  .c-wa-validate__field { margin-bottom: 18px; }
+  .c-wa-validate__label {
+    display: block;
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--fg);
+    margin-bottom: 6px;
+  }
+  .c-wa-validate__input-wrap { position: relative; }
+  .c-wa-validate__input {
+    width: 100%; box-sizing: border-box;
+    padding: 12px 40px 12px 16px;
+    font-size: 15px; font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border-strong, var(--border));
+    border-radius: var(--radius-md, 14px);
+    outline: none;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-validate__input:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 4px 14px rgba(61, 40, 23, 0.1),
+                0 0 0 4px color-mix(in oklab, var(--accent) 20%, transparent);
+  }
+  .c-wa-validate__field[data-state="valid"] .c-wa-validate__input {
+    border-color: var(--semantic-success, #6B8E4E);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--semantic-success, #6B8E4E) 20%, transparent);
+  }
+  .c-wa-validate__field[data-state="invalid"] .c-wa-validate__input {
+    border-color: var(--semantic-error, #B44E3E);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--semantic-error, #B44E3E) 20%, transparent);
+  }
+  .c-wa-validate__field[data-state="disabled"] .c-wa-validate__input {
+    background: var(--bg-2);
+    color: var(--fg-muted);
+    cursor: not-allowed;
+    border-style: dashed;
+  }
+  .c-wa-validate__icon {
+    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+    width: 20px; height: 20px;
+    display: none;
+    border-radius: 50%;
+    align-items: center; justify-content: center;
+    color: var(--bg);
+    pointer-events: none;
+  }
+  .c-wa-validate__field[data-state="valid"] .c-wa-validate__icon--ok {
+    display: flex;
+    background: var(--semantic-success, #6B8E4E);
+  }
+  .c-wa-validate__field[data-state="invalid"] .c-wa-validate__icon--err {
+    display: flex;
+    background: var(--semantic-error, #B44E3E);
+  }
+  .c-wa-validate__icon svg { width: 12px; height: 12px; }
+  .c-wa-validate__msg {
+    display: none;
+    margin-top: 8px;
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 14px;
+  }
+  .c-wa-validate__field[data-state="valid"] .c-wa-validate__msg--ok {
+    display: flex; align-items: baseline; gap: 6px;
+    color: var(--semantic-success, #6B8E4E);
+  }
+  .c-wa-validate__field[data-state="invalid"] .c-wa-validate__msg--err {
+    display: flex; align-items: baseline; gap: 6px;
+    color: var(--semantic-error, #B44E3E);
+  }
+  .c-wa-validate__field[data-state="disabled"] .c-wa-validate__msg--note {
+    display: block;
+    color: var(--fg-muted);
+  }
+  .c-wa-validate__actions {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: flex-end;
+  }
+  .c-wa-validate__btn {
+    padding: 14px 28px;
+    font-size: 15px; font-weight: 500;
+    font-family: inherit;
+    background: var(--accent); color: var(--bg);
+    border: 0; border-radius: 9999px;
+    cursor: pointer;
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-validate__btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(61, 40, 23, 0.18);
+  }
+  .c-wa-validate__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--bg-2), 0 0 0 5px var(--accent);
+  }
+  .c-wa-validate__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  @media (max-width: 900px) {
+    .c-wa-validate { max-width: none; box-shadow: none; padding: 36px 24px; border-radius: 0; }
+    .c-wa-validate__title { font-size: 26px; }
+  }
+</style>
+
+<form class="c-wa-validate" novalidate>
+  <div class="c-wa-validate__eyebrow">Your details</div>
+  <h2 class="c-wa-validate__title">A few small things</h2>
+  <p class="c-wa-validate__sub">So we can send the right parcel to the right porch.</p>
+
+  <div class="c-wa-validate__field" data-state="default">
+    <label class="c-wa-validate__label" for="wa-v-name">Your name</label>
+    <div class="c-wa-validate__input-wrap">
+      <input class="c-wa-validate__input" id="wa-v-name" name="name" type="text" placeholder="Linnea Halme">
+    </div>
+  </div>
+
+  <div class="c-wa-validate__field" data-state="valid">
+    <label class="c-wa-validate__label" for="wa-v-postcode">Postcode</label>
+    <div class="c-wa-validate__input-wrap">
+      <input class="c-wa-validate__input" id="wa-v-postcode" name="postcode" type="text" value="11215" aria-describedby="wa-v-postcode-ok">
+      <span class="c-wa-validate__icon c-wa-validate__icon--ok" aria-hidden="true">
+        <svg viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M3 8.5l3.2 3L13 5"/></svg>
+      </span>
+    </div>
+    <div class="c-wa-validate__msg c-wa-validate__msg--ok" id="wa-v-postcode-ok">Lovely — we deliver to Brooklyn on Thursdays.</div>
+  </div>
+
+  <div class="c-wa-validate__field" data-state="invalid">
+    <label class="c-wa-validate__label" for="wa-v-email">Email</label>
+    <div class="c-wa-validate__input-wrap">
+      <input class="c-wa-validate__input" id="wa-v-email" name="email" type="email" value="linnea@inbox" aria-invalid="true" aria-describedby="wa-v-email-err">
+      <span class="c-wa-validate__icon c-wa-validate__icon--err" aria-hidden="true">
+        <svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </span>
+    </div>
+    <div class="c-wa-validate__msg c-wa-validate__msg--err" id="wa-v-email-err">A full address, please — the .com or .net bit matters.</div>
+  </div>
+
+  <div class="c-wa-validate__field" data-state="disabled">
+    <label class="c-wa-validate__label" for="wa-v-member">Member number</label>
+    <div class="c-wa-validate__input-wrap">
+      <input class="c-wa-validate__input" id="wa-v-member" name="member" type="text" value="No. 00214" disabled>
+    </div>
+    <div class="c-wa-validate__msg c-wa-validate__msg--note">Assigned the day you joined — not to be fussed with.</div>
+  </div>
+
+  <div class="c-wa-validate__actions">
+    <button class="c-wa-validate__btn" type="submit" disabled>Save my details</button>
+  </div>
+</form>
