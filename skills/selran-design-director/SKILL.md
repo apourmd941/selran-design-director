@@ -2,7 +2,7 @@
 name: selran-design-director
 description: "Direct high-quality visual work — websites, web apps, dashboards, landing pages, native iOS (SwiftUI) and Android (Jetpack Compose) apps, mobile web, React components, Word/PDF/PowerPoint documents, HTML slide decks, posters, and reports. Use whenever the user asks to build, design, style, or beautify any visual artifact, even if they don't say 'design'. Starts with a visual direction picker (seven pre-baked starter designs rendered as thumbnails) or a short two-question fallback, drafts a portable design-system.md the user can edit, then enforces that system across the artifact — dark mode variants, component pattern library, native iOS/Android snippets, i18n/RTL, accessibility audits, performance budgets, imagery discipline — while blocking generic AI-slop defaults (Inter/Roboto, purple-on-white gradients, rainbow headings, stock photos, emoji as icons). Live design-partner mode: say 'the hero feels flat' and it translates the complaint into concrete token moves and re-renders. Extensible via add-on packs (MIT core + independently licensed packs)."
 license: MIT
-version: "3.8"
+version: "3.8.0"
 ---
 
 # Selran Design Director
