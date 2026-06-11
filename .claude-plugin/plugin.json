@@ -1,7 +1,7 @@
 {
   "name": "design-director",
   "description": "Selran Design Director — direct high-quality visual work from Claude: websites, web apps, dashboards, native iOS/Android, documents, slide decks, posters. Pick a direction from seven rendered starter designs, get a portable design-system.md, and have it enforced across every artifact — dark mode, component library, accessibility audits, i18n/RTL, performance budgets — while generic AI-slop defaults are blocked. MIT core; extensible via independently licensed add-on packs.",
-  "version": "3.8.0",
+  "version": "3.8.1",
   "author": {
     "name": "Aidin Eslampour",
     "email": "aidin.eslampour@selran.ai",

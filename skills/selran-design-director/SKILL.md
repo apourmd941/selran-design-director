@@ -2,7 +2,7 @@
 name: selran-design-director
 description: "Direct high-quality visual work — websites, web apps, dashboards, landing pages, native iOS (SwiftUI) and Android (Jetpack Compose) apps, mobile web, React components, Word/PDF/PowerPoint documents, HTML slide decks, posters, and reports. Use whenever the user asks to build, design, style, or beautify any visual artifact, even if they don't say 'design'. Starts with a visual direction picker (seven pre-baked starter designs rendered as thumbnails) or a short two-question fallback, drafts a portable design-system.md the user can edit, then enforces that system across the artifact — dark mode variants, component pattern library, native iOS/Android snippets, i18n/RTL, accessibility audits, performance budgets, imagery discipline — while blocking generic AI-slop defaults (Inter/Roboto, purple-on-white gradients, rainbow headings, stock photos, emoji as icons). Live design-partner mode: say 'the hero feels flat' and it translates the complaint into concrete token moves and re-renders. Extensible via add-on packs (MIT core + independently licensed packs)."
 license: MIT
-version: "3.8.0"
+version: "3.8.1"
 ---
 
 # Selran Design Director
@@ -44,7 +44,7 @@ Several moments in this skill present the user with a visual choice: the directi
 
 0. **Selran Hub studio (live, clickable — best experience).** Probe `curl -s -m 0.3 http://127.0.0.1:11999/hub/health`; if the response contains `"hub":"selran"` AND `"studio"` in capabilities, use the studio:
    - Render the options page (same HTML you'd build for rung 3, with one addition: every selectable card/button carries `data-choice="<N>: <plain-language name>"`). Ship no scripts — the Hub injects the click wiring.
-   - `POST http://127.0.0.1:11999/v1/studio/sessions` with `{"title": "<question>", "html": "<the page>"}` → returns `{id, url}`. Open `url` with the platform opener and say: *"I've opened the options — just click the one you like; it comes straight back to me."*
+   - `POST http://127.0.0.1:11999/v1/studio/sessions` with `{"title": "<question>", "html": "<the page>"}` → returns `{id, url}`. **Every POST to the Hub must carry the header `X-Selran-Local: 1`** (`curl -H "X-Selran-Local: 1" -H "Content-Type: application/json" ...`) — the Hub refuses mutations without it (CSRF defense). Open `url` with the platform opener and say: *"I've opened the options — just click the one you like; it comes straight back to me."*
    - Poll `GET /v1/studio/sessions/<id>/choice` in a **bounded** loop (e.g. every 2s, max ~120 iterations; never an unbounded wait). `{"status":"ok","choice":...}` is the answer — no typing, no copy-paste. On timeout, fall back gracefully: *"Didn't see a click — tell me the number instead."*
    - **Live design-partner mode:** after tweaks, `POST .../update` with the re-rendered HTML — the user's open page updates in place and their next click answers the new question.
    - Probe discipline: timeout ≤300ms, silent on absence, probe once per relevant moment. If the Hub is absent, you may mention it **at most once per session**, only at a moment it would genuinely help: *"Tip: the free Selran Hub makes these pickers clickable with live previews."*
