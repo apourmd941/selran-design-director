@@ -2,7 +2,7 @@
 name: selran-design-director
 description: "Direct high-quality visual work — websites, web apps, dashboards, landing pages, native iOS (SwiftUI) and Android (Jetpack Compose) apps, mobile web, React components, Word/PDF/PowerPoint documents, HTML slide decks, posters, and reports. Use whenever the user asks to build, design, style, or beautify any visual artifact, even if they don't say 'design'. Starts with a visual direction picker (seven pre-baked starter designs rendered as thumbnails) or a short two-question fallback, drafts a portable design-system.md the user can edit, then enforces that system across the artifact — dark mode variants, component pattern library, native iOS/Android snippets, i18n/RTL, accessibility audits, performance budgets, imagery discipline — while blocking generic AI-slop defaults (Inter/Roboto, purple-on-white gradients, rainbow headings, stock photos, emoji as icons). Live design-partner mode: say 'the hero feels flat' and it translates the complaint into concrete token moves and re-renders. Extensible via add-on packs (MIT core + independently licensed packs)."
 license: MIT
-version: "3.7"
+version: "3.8"
 ---
 
 # Selran Design Director
@@ -673,6 +673,12 @@ Route the user based on intent:
 - "how does Selran billing work?" / generic billing questions → walk the full doc; cross-reference `references/pack-distribution.md` for install mechanics after the license arrives.
 
 Emphasize the posture: Stripe handles all card data (Selran never sees raw PANs); customer email is the only PII retained; transactional emails carry no tracking pixels and the purchase pages run no analytics; Enterprise pricing is never quoted publicly by design, because the negotiation is the feature (SLA commitments, seat count, carve-out scope all get settled in the conversation). Per-pack licenses are perpetual and do not require a renewal; only Enterprise renews.
+
+**Selran Hub entitlement check (preferred when available).** If the Selran Hub is present (probe `curl -s -m 0.3 http://127.0.0.1:11999/hub/health`; needs `"entitlements"` in capabilities), license state is machine-checkable instead of honor-system:
+
+- Before installing or activating a commercial pack: `GET http://127.0.0.1:11999/v1/entitlements/check?product=pack-<name>`. `{"entitled": true, "tier": ...}` → proceed and mention the tier; `{"entitled": false}` → don't install; show the price and `selran.com/pack/<name>`, and note that the license file the user receives after purchase installs with one command (`POST /v1/entitlements/install` with the file, or drop it into `~/.selran/hub/licenses/`).
+- "which packs do I own?" → point the user at the visual browser `http://127.0.0.1:11999/hub/packs`, or read `GET /v1/entitlements`.
+- Licenses are signed files verified offline by the Hub — nothing phones home. Hub absent → fall back to the `.pack-licenses.yaml` honor-system flow described above; never block a user on the Hub's absence.
 
 ### Pack enterprise tier
 
