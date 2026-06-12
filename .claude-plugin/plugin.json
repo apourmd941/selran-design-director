@@ -1,7 +1,7 @@
 {
   "name": "design-director",
-  "description": "Selran Design Director — direct high-quality visual work from Claude: websites, web apps, dashboards, native iOS/Android, documents, slide decks, posters. Pick a direction from seven rendered starter designs, get a portable design-system.md, and have it enforced across every artifact — dark mode, component library, accessibility audits, i18n/RTL, performance budgets — while generic AI-slop defaults are blocked. MIT core; extensible via independently licensed add-on packs.",
-  "version": "3.8.1",
+  "description": "Selran Design Director — stop shipping the default AI look. Pick from seven rendered design directions, get a portable design-system.md, and have it enforced on everything Claude builds — websites, apps, native mobile, documents, decks — with dark mode, accessibility audits, i18n, and performance budgets built in. MIT core; independently licensed add-on packs.",
+  "version": "3.8.2",
   "author": {
     "name": "Aidin Eslampour",
     "email": "aidin.eslampour@selran.ai",
