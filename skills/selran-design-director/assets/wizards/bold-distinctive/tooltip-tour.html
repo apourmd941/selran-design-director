@@ -1,0 +1,177 @@
+<style>
+  .c-bd-tour {
+    max-width: 420px;
+    background: var(--bg);
+    border: 2px solid var(--fg);
+    box-shadow: 10px 10px 0 var(--accent);
+    padding: 28px 28px 20px 36px;
+    font-family: inherit;
+    color: var(--fg);
+    position: relative;
+  }
+  .c-bd-tour::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 8px;
+    background: var(--accent);
+  }
+
+  .c-bd-tour__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 14px;
+  }
+  .c-bd-tour__meta-step {
+    color: var(--accent);
+  }
+
+  .c-bd-tour__headline {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 10px;
+  }
+  .c-bd-tour__body {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0 0 24px;
+  }
+
+  .c-bd-tour__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 16px;
+    border-top: 2px solid var(--fg);
+  }
+  .c-bd-tour__skip {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--fg-muted);
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--fg-muted);
+    transition: color 220ms ease, text-decoration-color 220ms ease;
+  }
+  .c-bd-tour__skip:hover {
+    color: var(--fg);
+    text-decoration-color: var(--accent);
+  }
+  .c-bd-tour__skip:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .c-bd-tour__nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .c-bd-tour__link {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--fg);
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--accent);
+    transition: color 220ms ease;
+  }
+  .c-bd-tour__link:hover { color: var(--accent); }
+  .c-bd-tour__link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .c-bd-tour__link[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+    text-decoration-color: var(--fg-muted);
+  }
+  .c-bd-tour__link--next {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 17px;
+  }
+
+  /* Arrow pointer — editorial rule, not a bubble tail */
+  .c-bd-tour__pointer {
+    position: absolute;
+    left: -2px;
+    top: -24px;
+    width: 40px;
+    height: 24px;
+    border-left: 2px solid var(--fg);
+    border-top: 2px solid var(--fg);
+    background: var(--bg);
+  }
+  .c-bd-tour__pointer::after {
+    content: "";
+    position: absolute;
+    left: 0; top: 0;
+    width: 8px; height: 24px;
+    background: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-tour {
+      max-width: none;
+      padding: 22px 22px 18px 28px;
+      box-shadow: 6px 6px 0 var(--accent);
+    }
+    .c-bd-tour__headline { font-size: 24px; }
+  }
+</style>
+
+<div
+  class="c-bd-tour"
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="bd-tour-title"
+  aria-describedby="bd-tour-body"
+>
+  <span class="c-bd-tour__pointer" aria-hidden="true"></span>
+
+  <div class="c-bd-tour__meta">
+    <span class="c-bd-tour__meta-step">Tip 02 of 05</span>
+    <span>{Brand} &middot; Orientation</span>
+  </div>
+
+  <h3 class="c-bd-tour__headline" id="bd-tour-title">
+    The queue keeps your place.
+  </h3>
+  <p class="c-bd-tour__body" id="bd-tour-body">
+    Anything you save lands here in order read. No feed, no algorithm &mdash; just the pieces you picked, waiting for a quieter hour.
+  </p>
+
+  <div class="c-bd-tour__footer">
+    <button class="c-bd-tour__skip" type="button">Skip the tour</button>
+    <div class="c-bd-tour__nav">
+      <button class="c-bd-tour__link" type="button">&larr; Prev</button>
+      <button class="c-bd-tour__link c-bd-tour__link--next" type="button" autofocus>Next &rarr;</button>
+    </div>
+  </div>
+</div>

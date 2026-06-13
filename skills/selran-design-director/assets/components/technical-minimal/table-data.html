@@ -1,0 +1,105 @@
+<style>
+  .c-table {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 13px;
+  }
+  .c-table__row {
+    display: grid;
+    grid-template-columns: 100px 1fr 110px 90px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .c-table__row:last-child { border-bottom: none; }
+  .c-table__row--head {
+    background: var(--bg-2);
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 11px;
+  }
+  .c-table__amt {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .c-table__tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fg-muted);
+  }
+  .c-table__tag--ok {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 700px) {
+    .c-table__row {
+      grid-template-columns: 70px 1fr 80px;
+      font-size: 12px;
+      padding: 12px 14px;
+    }
+    .c-table__row > :nth-child(3) { display: none; }
+  }
+</style>
+
+<div class="c-table" role="table" aria-label="Sample ledger entries">
+  <div class="c-table__row c-table__row--head">
+    <div>Date</div>
+    <div>Description</div>
+    <div>Category</div>
+    <div style="text-align:right;">Amount</div>
+  </div>
+  <div class="c-table__row">
+    <div>04 · 18</div>
+    <div>AWS — us-east-1 compute</div>
+    <div><span class="c-table__tag">Infra</span></div>
+    <div class="c-table__amt">−4,821.10</div>
+  </div>
+  <div class="c-table__row">
+    <div>04 · 18</div>
+    <div>Stripe payout</div>
+    <div><span class="c-table__tag c-table__tag--ok">Revenue</span></div>
+    <div class="c-table__amt">+128,440.00</div>
+  </div>
+  <div class="c-table__row">
+    <div>04 · 17</div>
+    <div>Gusto — biweekly payroll</div>
+    <div><span class="c-table__tag">Payroll</span></div>
+    <div class="c-table__amt">−312,900.00</div>
+  </div>
+  <div class="c-table__row">
+    <div>04 · 17</div>
+    <div>Ramp — Q2 software renewals</div>
+    <div><span class="c-table__tag">SaaS</span></div>
+    <div class="c-table__amt">−18,220.00</div>
+  </div>
+  <div class="c-table__row">
+    <div>04 · 16</div>
+    <div>Customer — Oak Labs, invoice 2047</div>
+    <div><span class="c-table__tag c-table__tag--ok">Revenue</span></div>
+    <div class="c-table__amt">+42,000.00</div>
+  </div>
+  <div class="c-table__row">
+    <div>04 · 16</div>
+    <div>Treasury sweep → 4.62% APY</div>
+    <div><span class="c-table__tag">Treasury</span></div>
+    <div class="c-table__amt">+0.00</div>
+  </div>
+  <div class="c-table__row">
+    <div>04 · 15</div>
+    <div>Legal — Wilson Sonsini retainer</div>
+    <div><span class="c-table__tag">Legal</span></div>
+    <div class="c-table__amt">−24,500.00</div>
+  </div>
+</div>

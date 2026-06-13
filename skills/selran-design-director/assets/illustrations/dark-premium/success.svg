@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: dark-premium
+  use: success moment
+  variables: var(fg), var(bg), var(accent)
+  notes: a single gilded arc meeting its terminal point; subtle glow; cinematic restraint
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Completed">
+  <style>
+    .dp-bg     { fill: var(--bg, #0A0A0B); }
+    .dp-stroke { stroke: var(--fg, #F4F4F5); fill: none; stroke-width: 1; opacity: .45; vector-effect: non-scaling-stroke; }
+    .dp-thin   { stroke: var(--fg, #F4F4F5); fill: none; stroke-width: 1; opacity: .18; vector-effect: non-scaling-stroke; }
+    .dp-accent-stroke { stroke: var(--accent, #D4AF37); fill: none; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+    .dp-accent-fill   { fill: var(--accent, #D4AF37); }
+    .dp-label  { font-family: "Söhne", "Inter", ui-sans-serif, sans-serif; font-size: 9px; fill: var(--fg, #F4F4F5); opacity: .55; letter-spacing: .32em; text-transform: uppercase; text-anchor: middle; }
+  </style>
+
+  <defs>
+    <radialGradient id="dp-success-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="var(--accent, #D4AF37)" stop-opacity=".2"/>
+      <stop offset="70%" stop-color="var(--accent, #D4AF37)" stop-opacity=".03"/>
+      <stop offset="100%" stop-color="var(--accent, #D4AF37)" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect class="dp-bg" width="400" height="400"/>
+
+  <!-- hero glow behind the terminal point -->
+  <circle cx="200" cy="200" r="140" fill="url(#dp-success-glow)"/>
+
+  <!-- full thin circumference -->
+  <circle cx="200" cy="200" r="110" class="dp-thin"/>
+
+  <!-- traced gold arc: ~270° sweep ending at the top -->
+  <path class="dp-accent-stroke" d="M 200 90 A 110 110 0 1 0 90 200" stroke-linecap="round"/>
+
+  <!-- terminal pinpoint (the "click into place" moment) -->
+  <circle cx="200" cy="90" r="5" class="dp-accent-fill"/>
+  <circle cx="200" cy="90" r="10" class="dp-accent-stroke" opacity=".55"/>
+  <circle cx="200" cy="90" r="18" class="dp-accent-stroke" opacity=".2"/>
+
+  <!-- tiny fg dot opposite (origin of the arc) -->
+  <circle cx="90" cy="200" r="2" fill="var(--fg, #F4F4F5)" opacity=".55"/>
+
+  <text x="200" y="360" class="dp-label">Complete</text>
+</svg>

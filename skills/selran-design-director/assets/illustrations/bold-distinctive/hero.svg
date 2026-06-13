@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: bold-distinctive
+  use: marketing hero, manifesto opener
+  variables: var(fg) (near-black ink), var(bg) (cream), var(accent) (hot red)
+  notes: oversized display type as layout architecture; asymmetric; typography overlaps shape elements;
+         large numeric section marker; one wildcard rotation
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-label="Bold distinctive hero">
+  <style>
+    .bd-bg          { fill: var(--bg, #F5F0E8); }
+    .bd-fg-fill     { fill: var(--fg, #0A0A0B); }
+    .bd-fg-stroke   { stroke: var(--fg, #0A0A0B); fill: none; stroke-width: 2; vector-effect: non-scaling-stroke; }
+    .bd-accent-fill { fill: var(--accent, #C72500); }
+    .bd-accent-stroke { stroke: var(--accent, #C72500); fill: none; stroke-width: 2; vector-effect: non-scaling-stroke; }
+    .bd-display     { font-family: "PP Editorial New", "Fraunces", "Tiempos Headline", Georgia, serif; font-weight: 900; }
+    .bd-meta        { font-family: "General Sans", "Söhne", "Inter", ui-sans-serif, sans-serif; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; fill: var(--fg, #0A0A0B); }
+  </style>
+
+  <rect class="bd-bg" width="1200" height="600"/>
+
+  <!-- top left: small-caps metadata label with rule -->
+  <line class="bd-fg-stroke" stroke-width="1" x1="80" y1="88" x2="240" y2="88"/>
+  <text x="80" y="74" class="bd-meta">Issue No. 01 · Hero Plate</text>
+  <text x="80" y="108" class="bd-meta" fill="var(--accent, #C72500)">Selran · Bold Series</text>
+
+  <!-- huge section marker 01, rotated slightly, behind main headline -->
+  <text x="200" y="540"
+        class="bd-display"
+        font-size="520"
+        letter-spacing="-30"
+        fill="var(--bg, #F5F0E8)"
+        stroke="var(--fg, #0A0A0B)"
+        stroke-width="3"
+        paint-order="stroke"
+        vector-effect="non-scaling-stroke">01</text>
+
+  <!-- accent solid bar behind main headline (graphic element) -->
+  <rect class="bd-accent-fill" x="440" y="210" width="560" height="72" transform="rotate(-1.5 720 246)"/>
+
+  <!-- huge display headline set across two lines, right side -->
+  <text x="460" y="265"
+        class="bd-display"
+        font-size="86"
+        letter-spacing="-2"
+        fill="var(--bg, #F5F0E8)">EARN</text>
+  <text x="620" y="265"
+        class="bd-display"
+        font-size="86"
+        letter-spacing="-2"
+        fill="var(--bg, #F5F0E8)"
+        font-style="italic">attention.</text>
+
+  <!-- second line: big italic run, deliberate crop feel -->
+  <text x="460" y="360"
+        class="bd-display"
+        font-size="140"
+        letter-spacing="-6"
+        font-style="italic"
+        fill="var(--fg, #0A0A0B)">Not&#160;the</text>
+  <text x="460" y="488"
+        class="bd-display"
+        font-size="140"
+        letter-spacing="-6"
+        fill="var(--fg, #0A0A0B)">AVERAGE.</text>
+
+  <!-- wildcard: small rotated tag/annotation as signature move -->
+  <g transform="translate(1050 140) rotate(12)">
+    <rect class="bd-accent-fill" x="-60" y="-14" width="120" height="28"/>
+    <text x="0" y="5" text-anchor="middle" class="bd-meta" fill="var(--bg, #F5F0E8)">Manifesto</text>
+  </g>
+
+  <!-- bottom-right metadata with rule -->
+  <line class="bd-fg-stroke" stroke-width="1" x1="960" y1="542" x2="1120" y2="542"/>
+  <text x="1120" y="530" text-anchor="end" class="bd-meta">Volume · 2026</text>
+  <text x="1120" y="562" text-anchor="end" class="bd-meta" fill="var(--accent, #C72500)">Read · Underlined</text>
+</svg>

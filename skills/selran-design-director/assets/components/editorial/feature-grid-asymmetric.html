@@ -1,0 +1,135 @@
+<style>
+  .c-ed-feat {
+    padding: 96px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-feat__inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .c-ed-feat__head {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 64px;
+    margin-bottom: 64px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-feat__section-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: var(--fg-muted);
+  }
+  .c-ed-feat__kicker {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 40px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    color: var(--fg);
+  }
+  .c-ed-feat__kicker em { font-style: italic; color: var(--accent); }
+
+  .c-ed-feat__body {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .c-ed-feat__columns {
+    column-count: 2;
+    column-gap: 40px;
+    column-rule: 1px solid var(--border);
+  }
+  .c-ed-feat__columns h3 {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin: 0 0 8px;
+    break-after: avoid;
+  }
+  .c-ed-feat__columns h3:not(:first-child) { margin-top: 28px; }
+  .c-ed-feat__columns p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--fg);
+    margin: 0 0 14px;
+  }
+  .c-ed-feat__figure {
+    border: 1px solid var(--border);
+    padding: 32px;
+    background: var(--bg-2);
+    position: sticky;
+    top: 48px;
+  }
+  .c-ed-feat__figure figcaption {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 10px;
+    color: var(--fg-muted);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-feat__figure .stat {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 56px;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    margin-bottom: 8px;
+  }
+  .c-ed-feat__figure .note {
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--fg-muted);
+  }
+
+  @media (max-width: 900px) {
+    .c-ed-feat { padding: 64px 0; }
+    .c-ed-feat__head { grid-template-columns: 1fr; gap: 24px; }
+    .c-ed-feat__body { grid-template-columns: 1fr; gap: 40px; }
+    .c-ed-feat__columns { column-count: 1; }
+    .c-ed-feat__figure { position: static; }
+    .c-ed-feat__kicker { font-size: 30px; }
+  }
+</style>
+
+<section class="c-ed-feat">
+  <div class="c-ed-feat__inner">
+    <div class="c-ed-feat__head">
+      <div class="c-ed-feat__section-label">Chapter One · The Ledger</div>
+      <h2 class="c-ed-feat__kicker">
+        The case for a <em>correct-as-you-go</em> account of the business.
+      </h2>
+    </div>
+
+    <div class="c-ed-feat__body">
+      <div class="c-ed-feat__columns">
+        <h3>The close was an artifact</h3>
+        <p>For a century, the monthly close was a consequence of paper and postage — numbers had to be gathered, then reconciled, then written down. The ritual survived the paper.</p>
+        <p>What {Brand} offers is not a faster close. It's the absence of one: every transaction posts, categorizes, and reconciles at the instant it happens.</p>
+
+        <h3>A product, not a report</h3>
+        <p>The ledger is the product. Not an export, not a dashboard that summarizes an export — the thing itself. Drill from the P&amp;L line to the receipt in two clicks. Override a rule and leave a trail. Let the auditor read the history.</p>
+
+        <h3>Trust is the feature</h3>
+        <p>When the numbers are right on Tuesday, they are right on Friday. That is the whole argument. Every feature — cards, treasury, forecasts — exists only because the ledger underneath can be trusted. Nothing else would survive a Series B.</p>
+      </div>
+
+      <figure class="c-ed-feat__figure">
+        <figcaption>Figure 01 · Close time, median</figcaption>
+        <div class="stat">2.1<span style="font-size: 0.45em; color: var(--fg-muted);"> days</span></div>
+        <p class="note">Against an industry median of 6.9 days — itself down from 13 in 2015. The ceiling, not the floor, is moving.</p>
+      </figure>
+    </div>
+  </div>
+</section>

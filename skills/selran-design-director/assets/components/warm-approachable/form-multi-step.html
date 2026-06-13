@@ -1,0 +1,213 @@
+<style>
+  .c-wa-mstep {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 44px 40px;
+    background: var(--bg-2);
+    border-radius: var(--radius-lg, 24px);
+    box-shadow: 0 10px 30px -10px rgba(61, 40, 23, 0.12),
+                0 2px 6px -2px rgba(61, 40, 23, 0.06);
+    font-family: inherit;
+  }
+  .c-wa-mstep__eyebrow {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .c-wa-mstep__title {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-size: 30px; line-height: 1.15;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 8px;
+  }
+  .c-wa-mstep__lead {
+    font-size: 15px; line-height: 1.6;
+    color: var(--fg-muted);
+    margin: 0 0 28px;
+  }
+  .c-wa-mstep__progress {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 28px;
+  }
+  .c-wa-mstep__dot {
+    width: 24px; height: 24px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--border-strong, var(--border));
+    color: var(--fg-muted);
+    font-size: 12px; font-weight: 500;
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-mstep__dot[data-state="done"] { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .c-wa-mstep__dot[data-state="active"] {
+    background: var(--accent); border-color: var(--accent); color: var(--bg);
+    transform: scale(1.18);
+    box-shadow: 0 4px 14px rgba(61, 40, 23, 0.18);
+  }
+  .c-wa-mstep__line {
+    flex: 1; height: 2px; background: var(--border);
+    border-radius: 1px;
+  }
+  .c-wa-mstep__line[data-state="done"] { background: var(--accent); }
+  .c-wa-mstep__step[hidden] { display: none; }
+  .c-wa-mstep__field { margin-bottom: 16px; }
+  .c-wa-mstep__label {
+    display: block;
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--fg);
+    margin-bottom: 6px;
+  }
+  .c-wa-mstep__input,
+  .c-wa-mstep__select {
+    width: 100%; box-sizing: border-box;
+    padding: 12px 16px;
+    font-size: 15px; font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border-strong, var(--border));
+    border-radius: var(--radius-md, 14px);
+    outline: none;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-mstep__input:focus-visible,
+  .c-wa-mstep__select:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 4px 14px rgba(61, 40, 23, 0.1),
+                0 0 0 4px color-mix(in oklab, var(--accent) 20%, transparent);
+  }
+  .c-wa-mstep__radios { display: grid; gap: 10px; }
+  .c-wa-mstep__radio {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border-strong, var(--border));
+    border-radius: var(--radius-md, 14px);
+    cursor: pointer;
+    transition: border-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-mstep__radio:hover { border-color: var(--accent); }
+  .c-wa-mstep__radio input { accent-color: var(--accent); margin-top: 4px; }
+  .c-wa-mstep__radio strong {
+    display: block;
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-weight: 500;
+    color: var(--fg); font-size: 15px;
+  }
+  .c-wa-mstep__radio small { color: var(--fg-muted); font-size: 13px; line-height: 1.5; }
+  .c-wa-mstep__actions {
+    display: flex; justify-content: space-between; gap: 12px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .c-wa-mstep__btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 12px 24px;
+    font-size: 14px; font-weight: 500;
+    font-family: inherit;
+    border-radius: 9999px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .c-wa-mstep__btn--ghost {
+    background: var(--bg); color: var(--fg);
+    border-color: var(--border-strong, var(--border));
+  }
+  .c-wa-mstep__btn--ghost:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(61, 40, 23, 0.08);
+  }
+  .c-wa-mstep__btn--primary {
+    background: var(--accent); color: var(--bg);
+  }
+  .c-wa-mstep__btn--primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(61, 40, 23, 0.18);
+  }
+  .c-wa-mstep__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--bg-2), 0 0 0 5px var(--accent);
+  }
+  .c-wa-mstep__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  @media (max-width: 900px) {
+    .c-wa-mstep { max-width: none; box-shadow: none; padding: 36px 24px; border-radius: 0; }
+    .c-wa-mstep__title { font-size: 26px; }
+  }
+</style>
+
+<form class="c-wa-mstep" novalidate aria-label="Become a member, step 2 of 3">
+  <div class="c-wa-mstep__eyebrow">Step two, of three</div>
+  <h1 class="c-wa-mstep__title">How should we send things?</h1>
+  <p class="c-wa-mstep__lead">Tell us where to mail your first quarterly box — we'll keep it tucked in your account.</p>
+
+  <div class="c-wa-mstep__progress" aria-hidden="true">
+    <span class="c-wa-mstep__dot" data-state="done">1</span>
+    <span class="c-wa-mstep__line" data-state="done"></span>
+    <span class="c-wa-mstep__dot" data-state="active">2</span>
+    <span class="c-wa-mstep__line" data-state="pending"></span>
+    <span class="c-wa-mstep__dot" data-state="pending">3</span>
+  </div>
+
+  <section class="c-wa-mstep__step" hidden aria-hidden="true">
+    <div class="c-wa-mstep__field">
+      <label class="c-wa-mstep__label" for="wa-ms-name">Your name</label>
+      <input class="c-wa-mstep__input" id="wa-ms-name" name="name" type="text" placeholder="Linnea Halme">
+    </div>
+    <div class="c-wa-mstep__field">
+      <label class="c-wa-mstep__label" for="wa-ms-email">Email for updates</label>
+      <input class="c-wa-mstep__input" id="wa-ms-email" name="email" type="email" placeholder="linnea@inbox.com">
+    </div>
+  </section>
+
+  <section class="c-wa-mstep__step">
+    <div class="c-wa-mstep__field">
+      <label class="c-wa-mstep__label" for="wa-ms-address">Street address</label>
+      <input class="c-wa-mstep__input" id="wa-ms-address" name="address" type="text" placeholder="48 Orchard Lane">
+    </div>
+    <div class="c-wa-mstep__field">
+      <label class="c-wa-mstep__label" for="wa-ms-city">City, postcode</label>
+      <input class="c-wa-mstep__input" id="wa-ms-city" name="city" type="text" placeholder="Brooklyn, NY 11215">
+    </div>
+    <div class="c-wa-mstep__field">
+      <label class="c-wa-mstep__label" for="wa-ms-country">Country</label>
+      <select class="c-wa-mstep__select" id="wa-ms-country" name="country">
+        <option>United States</option>
+        <option>Portugal</option>
+        <option>United Kingdom</option>
+        <option>Other — we'll reach out</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="c-wa-mstep__step" hidden aria-hidden="true">
+    <div class="c-wa-mstep__field">
+      <label class="c-wa-mstep__label">How often?</label>
+      <div class="c-wa-mstep__radios">
+        <label class="c-wa-mstep__radio">
+          <input type="radio" name="cadence" value="q" checked>
+          <span><strong>Quarterly</strong><br><small>Four seasonal boxes a year — our rhythm.</small></span>
+        </label>
+        <label class="c-wa-mstep__radio">
+          <input type="radio" name="cadence" value="m">
+          <span><strong>Monthly</strong><br><small>A small parcel, more often.</small></span>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <div class="c-wa-mstep__actions">
+    <button class="c-wa-mstep__btn c-wa-mstep__btn--ghost" type="button">← Back</button>
+    <button class="c-wa-mstep__btn c-wa-mstep__btn--primary" type="button">Continue →</button>
+  </div>
+</form>

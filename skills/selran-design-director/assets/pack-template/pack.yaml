@@ -1,0 +1,63 @@
+# ═══════════════════════════════════════════════════════════════
+#  PACK MANIFEST — {{PACK_DISPLAY_NAME}}
+#  Scaffolded by `selran pack init`. See:
+#    ../references/packs.md                  (core pack spec)
+#    ../references/pack-authoring.md         (authoring guide)
+#    ../references/pack-distribution.md      (CLI + registry + publish)
+# ═══════════════════════════════════════════════════════════════
+
+# --- Identity ----------------------------------------------------
+name: "{{PACK_NAME}}"
+version: "0.1.0"
+display_name: "{{PACK_DISPLAY_NAME}}"
+author: "{{AUTHOR}}"
+homepage: "{{HOMEPAGE}}"
+description: >
+  {{DESCRIPTION}}
+
+# --- Licensing ---------------------------------------------------
+# One of: MIT | Apache-2.0 | CC-BY-4.0 | Commercial | Proprietary
+license: "{{LICENSE}}"
+license_file: "LICENSE"
+# Uncomment for commercial packs:
+# license_url: "https://example.com/packs/{{PACK_NAME}}/license"
+# price_usd: {{PRICE_USD}}
+
+# --- Compatibility ----------------------------------------------
+requires_core: ">=3.4.0"
+requires_packs: []
+
+# --- What this pack ships ---------------------------------------
+provides:
+  directions: []
+  components:
+    - "provides/components/{{PACK_NAME}}-hero.html"
+    # Add more components here as you build them.
+  shells: []
+  states: []
+  wizards: []
+  charts: []
+  motion: []
+  illustrations: []
+  references:
+    - "provides/references/{{PACK_NAME}}-patterns.md"
+  sample_screens: []
+  exports: []
+
+# --- Overlay: {{BASE_DIRECTION}} --------------------------------
+# Users opt in via `direction: {{BASE_DIRECTION}}+{{PACK_NAME}}` in their
+# design-system.md. Only override tokens that GENUINELY differ from the
+# core {{BASE_DIRECTION}} starter. If a value would equal the core's value,
+# delete the line.
+pack_overrides:
+  {{BASE_DIRECTION}}:
+    color:
+      accent: "#333333"            # REPLACE with your accent
+      accent_hover: "#1a1a1a"      # REPLACE with your hover
+    personality:
+      - "describe one signature gesture in a single sentence"
+      - "add a second if the pack has two signature moves"
+
+# --- Provenance --------------------------------------------------
+created: "{{DATE}}"
+updated: "{{DATE}}"

@@ -1,0 +1,186 @@
+<style>
+  .c-ed-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+    padding: 40px 28px 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    font-family: inherit;
+    color: var(--fg);
+  }
+  .c-ed-sidebar[data-collapsed="true"] { width: 72px; padding: 40px 14px 32px; }
+  .c-ed-sidebar[data-collapsed="true"] .c-ed-sidebar__wordmark,
+  .c-ed-sidebar[data-collapsed="true"] .c-ed-sidebar__section-title,
+  .c-ed-sidebar[data-collapsed="true"] .c-ed-sidebar__link-label,
+  .c-ed-sidebar[data-collapsed="true"] .c-ed-sidebar__meta { display: none; }
+  .c-ed-sidebar[data-collapsed="true"] .c-ed-sidebar__link { justify-content: center; padding: 10px 0; }
+
+  .c-ed-sidebar__header {
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .c-ed-sidebar__wordmark {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+  }
+  .c-ed-sidebar__wordmark em { font-style: italic; color: var(--accent); }
+  .c-ed-sidebar__toggle {
+    appearance: none;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    width: 26px; height: 26px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    color: var(--fg-muted);
+    transition: color 250ms ease, border-color 250ms ease;
+  }
+  .c-ed-sidebar__toggle:hover { color: var(--fg); border-color: var(--fg); }
+  .c-ed-sidebar__toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .c-ed-sidebar__section { display: flex; flex-direction: column; gap: 4px; }
+  .c-ed-sidebar__section + .c-ed-sidebar__section {
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .c-ed-sidebar__section-title {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 14px;
+    font-style: italic;
+    color: var(--fg-muted);
+    margin: 0 0 12px;
+    font-weight: 400;
+  }
+  .c-ed-sidebar__nav { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  .c-ed-sidebar__link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: 3px;
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 1.5;
+    transition: background-color 250ms ease, color 250ms ease;
+  }
+  .c-ed-sidebar__link:hover { background: var(--bg-2); }
+  .c-ed-sidebar__link[aria-current="page"] {
+    color: var(--accent);
+    font-style: italic;
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+  }
+  .c-ed-sidebar__link[aria-current="page"] .c-ed-sidebar__glyph { color: var(--accent); }
+  .c-ed-sidebar__link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .c-ed-sidebar__glyph {
+    width: 14px; height: 14px;
+    color: var(--fg-muted);
+    flex: none;
+  }
+  .c-ed-sidebar__link-count {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+  }
+
+  .c-ed-sidebar__footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .c-ed-sidebar__meta {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .c-ed-sidebar__meta-value {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--fg);
+  }
+
+  @media (max-width: 900px) {
+    .c-ed-sidebar { width: 100%; min-height: 0; border-right: 0; border-bottom: 1px solid var(--border); padding: 24px; }
+  }
+</style>
+
+<aside class="c-ed-sidebar" aria-label="Primary navigation">
+  <div class="c-ed-sidebar__header">
+    <span class="c-ed-sidebar__wordmark">{Brand}<em>.</em></span>
+    <button class="c-ed-sidebar__toggle" type="button" aria-expanded="true" aria-label="Collapse navigation">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+        <path d="M6.5 1.5L3 5l3.5 3.5" stroke="currentColor" stroke-width="1"/>
+      </svg>
+    </button>
+  </div>
+
+  <section class="c-ed-sidebar__section" aria-label="Reading">
+    <h2 class="c-ed-sidebar__section-title">Reading</h2>
+    <ul class="c-ed-sidebar__nav">
+      <li><a class="c-ed-sidebar__link" href="#" aria-current="page">
+        <svg class="c-ed-sidebar__glyph" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2h10v10H2z" stroke="currentColor" stroke-width="1"/><path d="M5 5h4M5 8h4" stroke="currentColor" stroke-width="1"/></svg>
+        <span class="c-ed-sidebar__link-label">Today's issue</span>
+        <span class="c-ed-sidebar__link-count">12</span>
+      </a></li>
+      <li><a class="c-ed-sidebar__link" href="#">
+        <svg class="c-ed-sidebar__glyph" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 3h10M2 7h10M2 11h6" stroke="currentColor" stroke-width="1"/></svg>
+        <span class="c-ed-sidebar__link-label">Queue</span>
+        <span class="c-ed-sidebar__link-count">48</span>
+      </a></li>
+      <li><a class="c-ed-sidebar__link" href="#">
+        <svg class="c-ed-sidebar__glyph" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 2v10l4-2 4 2V2z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/></svg>
+        <span class="c-ed-sidebar__link-label">Saved essays</span>
+      </a></li>
+      <li><a class="c-ed-sidebar__link" href="#">
+        <svg class="c-ed-sidebar__glyph" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1"/><path d="M7 4v3l2 1.5" stroke="currentColor" stroke-width="1"/></svg>
+        <span class="c-ed-sidebar__link-label">Read later</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section class="c-ed-sidebar__section" aria-label="Library">
+    <h2 class="c-ed-sidebar__section-title">Library</h2>
+    <ul class="c-ed-sidebar__nav">
+      <li><a class="c-ed-sidebar__link" href="#">
+        <svg class="c-ed-sidebar__glyph" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2h4v10H2zM8 2h4v10H8z" stroke="currentColor" stroke-width="1"/></svg>
+        <span class="c-ed-sidebar__link-label">Collections</span>
+      </a></li>
+      <li><a class="c-ed-sidebar__link" href="#">
+        <svg class="c-ed-sidebar__glyph" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2l2 4 4 .5-3 3 .8 4L7 11.5 3.2 13.5 4 9.5 1 6.5l4-.5z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/></svg>
+        <span class="c-ed-sidebar__link-label">Highlights</span>
+      </a></li>
+      <li><a class="c-ed-sidebar__link" href="#">
+        <svg class="c-ed-sidebar__glyph" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 2h7l2 2v8H3z" stroke="currentColor" stroke-width="1"/><path d="M5 6h5M5 9h5" stroke="currentColor" stroke-width="1"/></svg>
+        <span class="c-ed-sidebar__link-label">Notes</span>
+      </a></li>
+      <li><a class="c-ed-sidebar__link" href="#">
+        <svg class="c-ed-sidebar__glyph" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 3h8v8H3z" stroke="currentColor" stroke-width="1"/><path d="M3 3l4 4 4-4" stroke="currentColor" stroke-width="1"/></svg>
+        <span class="c-ed-sidebar__link-label">Newsletters</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <div class="c-ed-sidebar__footer">
+    <span class="c-ed-sidebar__meta">Issue No.</span>
+    <span class="c-ed-sidebar__meta-value">IV &middot; Spring 2026</span>
+  </div>
+</aside>

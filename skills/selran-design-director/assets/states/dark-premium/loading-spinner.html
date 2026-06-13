@@ -1,0 +1,111 @@
+<style>
+  /* ----------- Full-screen variant ----------- */
+  .c-dp-load {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: inherit;
+    isolation: isolate;
+  }
+  .c-dp-load::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(40% 40% at 50% 50%,
+      color-mix(in oklab, var(--accent) 14%, transparent) 0%,
+      transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .c-dp-load__arc {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-right-color: color-mix(in oklab, var(--accent) 60%, transparent);
+    box-shadow: 0 0 24px -4px color-mix(in oklab, var(--accent) 40%, transparent);
+    animation: c-dp-load-spin 900ms linear infinite;
+  }
+  @keyframes c-dp-load-spin {
+    to { transform: rotate(360deg); }
+  }
+  .c-dp-load__label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--fg-muted);
+  }
+  .c-dp-load__label::after {
+    content: "";
+    display: inline-block;
+    width: 1ch;
+    text-align: left;
+    animation: c-dp-load-dots 1.4s steps(4, end) infinite;
+  }
+  @keyframes c-dp-load-dots {
+    0%   { content: ""; }
+    25%  { content: "."; }
+    50%  { content: ".."; }
+    75%  { content: "..."; }
+    100% { content: ""; }
+  }
+
+  /* ----------- Inline variant ----------- */
+  .c-dp-load--inline {
+    position: static;
+    display: inline-flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-2);
+    width: auto;
+    height: auto;
+  }
+  .c-dp-load--inline::before { display: none; }
+  .c-dp-load--inline .c-dp-load__arc {
+    width: 14px; height: 14px;
+    border-width: 1.5px;
+    box-shadow: 0 0 10px -2px color-mix(in oklab, var(--accent) 40%, transparent);
+  }
+  .c-dp-load--inline .c-dp-load__label {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-dp-load__arc {
+      animation: none;
+      border-top-color: var(--accent);
+      border-right-color: var(--accent);
+      border-bottom-color: var(--border);
+      border-left-color: var(--border);
+    }
+    .c-dp-load__label::after {
+      animation: none;
+      content: "";
+    }
+  }
+</style>
+
+<!-- Full-screen variant -->
+<div class="c-dp-load" role="status" aria-live="polite" aria-label="Loading">
+  <span class="c-dp-load__arc" aria-hidden="true"></span>
+  <span class="c-dp-load__label">Loading</span>
+</div>
+
+<!-- Inline variant (use as a chip inside lists/cards) -->
+<span class="c-dp-load c-dp-load--inline" role="status" aria-live="polite">
+  <span class="c-dp-load__arc" aria-hidden="true"></span>
+  <span class="c-dp-load__label">Fetching</span>
+</span>

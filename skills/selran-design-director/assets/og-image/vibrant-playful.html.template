@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>{{og.title}} — OG image</title>
+<style>
+  @page { size: 1200px 630px; margin: 0; }
+  html, body { margin: 0; padding: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: {{color.bg_primary}};
+    color: {{color.fg_primary}};
+    font-family: "{{type.body}}", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    box-sizing: border-box;
+  }
+  .color-block {
+    background: {{color.accent}};
+    position: relative;
+    overflow: hidden;
+  }
+  .color-block::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 80%, {{color.palette.1}} 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, {{color.palette.2}} 0%, transparent 55%);
+    mix-blend-mode: multiply;
+    opacity: 0.85;
+  }
+  .logo {
+    position: absolute; top: 48px; left: 48px;
+    font-family: "{{type.display}}", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: {{color.bg_primary}};
+  }
+  .main {
+    padding: 72px 80px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    box-sizing: border-box;
+  }
+  h1 {
+    font-family: "{{type.display}}", sans-serif;
+    font-size: 92px;
+    font-weight: 700;
+    line-height: {{type.leading.display}};
+    letter-spacing: {{type.tracking.display}}em;
+    color: {{color.fg_primary}};
+    margin: 0;
+  }
+  .subtitle {
+    font-size: 26px;
+    line-height: 1.5;
+    color: {{color.fg_secondary}};
+    margin-top: 32px;
+    max-width: 620px;
+  }
+  .pills { display: flex; gap: 10px; margin-top: 36px; }
+  .pill {
+    padding: 8px 16px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 500;
+    color: {{color.bg_primary}};
+  }
+</style>
+</head>
+<body>
+  <div class="color-block">
+    <div class="logo">{{og.logo}}</div>
+  </div>
+  <div class="main">
+    <div>
+      <h1>{{og.title}}</h1>
+      <div class="subtitle">{{og.subtitle}}</div>
+    </div>
+    <div class="pills">
+      <div class="pill" style="background: {{color.accent}}">new</div>
+      <div class="pill" style="background: {{color.palette.1}}">v{{meta.version}}</div>
+      <div class="pill" style="background: {{color.palette.2}}">read</div>
+    </div>
+  </div>
+</body>
+</html>

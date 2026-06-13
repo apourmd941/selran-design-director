@@ -1,0 +1,295 @@
+# RTL (right-to-left) mirror rules per component type.
+#
+# Used when `i18n.rtl: true`. Web components that use logical CSS properties
+# (padding-inline-start, margin-inline-end, etc.) flip automatically — this
+# list covers what DOESN'T flip automatically and needs explicit handling.
+#
+# Three categories:
+#   flip:      element mirrors (icons, order, progress direction)
+#   no_flip:   stays as-is even in RTL (logos, code, universal conventions)
+#   depends:   conditional — check notes
+
+# ═══════════════════════════════════════════════════════════════
+# Navigation & wayfinding
+# ═══════════════════════════════════════════════════════════════
+
+top_nav:
+  flip:
+    - "logo position (left → right)"
+    - "menu items order (reverse)"
+    - "CTA button position (right → left)"
+    - "hamburger icon position"
+  no_flip:
+    - "logo itself (brand mark stays as-is)"
+    - "search icon (magnifying glass is symmetrical)"
+
+sidebar:
+  flip:
+    - "sidebar on the opposite side of viewport (right → left of content)"
+    - "collapse/expand chevron direction"
+    - "item label alignment"
+  no_flip:
+    - "icon glyphs that aren't directional"
+
+breadcrumbs:
+  flip:
+    - "order (root on the right)"
+    - "separator chevron direction (› becomes ‹)"
+  no_flip:
+    - "home icon"
+
+tabs:
+  flip:
+    - "tab order (first tab on the right)"
+    - "active tab indicator starts on the right"
+  no_flip:
+    - "tab icons (generally symmetrical)"
+
+pagination:
+  flip:
+    - "order (1, 2, 3 → ٣, ٢, ١ conceptually; visually RTL-flowed)"
+    - "prev/next arrow icons"
+    - "page number order"
+  no_flip:
+    - "page numbers themselves (Western digits stay LTR even in Arabic)"
+
+back_button:
+  flip:
+    - "arrow icon (← becomes →)"
+  no_flip: []
+
+# ═══════════════════════════════════════════════════════════════
+# Content containers
+# ═══════════════════════════════════════════════════════════════
+
+card:
+  flip:
+    - "text alignment (start = right in RTL)"
+    - "icon/action trailing position"
+    - "chevron indicating more content"
+  no_flip:
+    - "card itself (no need to mirror the container shape)"
+    - "code blocks inside card"
+
+list_row:
+  flip:
+    - "leading icon/avatar moves to the right"
+    - "trailing chevron/action moves to the left"
+    - "swipe-to-reveal direction reverses"
+  no_flip: []
+
+table:
+  flip:
+    - "column order (first column on the right)"
+    - "header alignment"
+    - "chevron indicating sort direction"
+  no_flip:
+    - "numerical column values (digits stay LTR)"
+    - "code/ID column values"
+
+# ═══════════════════════════════════════════════════════════════
+# Forms
+# ═══════════════════════════════════════════════════════════════
+
+form_field:
+  flip:
+    - "label alignment (flush right in RTL)"
+    - "helper text / error text alignment"
+    - "trailing icon (clear X, password reveal)"
+    - "prefix/suffix swap"
+  no_flip:
+    - "input content direction follows the input's `dir` attribute (usually the data's locale)"
+    - "email, URL, code inputs stay LTR"
+
+checkbox_radio:
+  flip:
+    - "checkbox/radio on the right of label"
+  no_flip:
+    - "checkmark glyph itself (symmetrical)"
+
+select:
+  flip:
+    - "dropdown chevron on the left"
+    - "option alignment right"
+  no_flip: []
+
+search_input:
+  flip:
+    - "magnifying-glass icon typically on the right (reading direction)"
+    - "clear X on the left"
+  no_flip:
+    - "search query stays in its own locale direction"
+
+# ═══════════════════════════════════════════════════════════════
+# Buttons & actions
+# ═══════════════════════════════════════════════════════════════
+
+button:
+  flip:
+    - "leading icon + label: icon on the right of label"
+    - "trailing chevron arrow"
+  no_flip:
+    - "button shape/fill"
+    - "loading spinner (rotates the same way; spin direction is aesthetic)"
+
+icon_button:
+  flip:
+    - "directional glyphs (arrows, chevrons, back/forward, skip)"
+    - "undo → redo swaps"
+  no_flip:
+    - "home, gear, bell, user, search, menu (hamburger)"
+    - "play, pause, stop (universal)"
+    - "volume, mute"
+
+# ═══════════════════════════════════════════════════════════════
+# Feedback & status
+# ═══════════════════════════════════════════════════════════════
+
+toast:
+  flip:
+    - "position (bottom-left instead of bottom-right on desktop)"
+    - "icon leading position"
+    - "action button trailing position"
+  no_flip:
+    - "severity icons (✓, ⚠, ✕) — symmetrical"
+
+progress_bar:
+  flip:
+    - "fill direction (right → left)"
+    - "percentage label position"
+  no_flip:
+    - "percentage number itself"
+
+progress_spinner:
+  flip: []
+  no_flip:
+    - "spinner rotation direction (clockwise universally)"
+
+badge:
+  flip:
+    - "badge position on an icon (top-left corner instead of top-right)"
+  no_flip:
+    - "badge count number"
+
+# ═══════════════════════════════════════════════════════════════
+# Data visualization
+# ═══════════════════════════════════════════════════════════════
+
+bar_chart:
+  depends:
+    - "horizontal bar charts: consult locale. Some RTL locales bar from the right; others keep LTR for conventions with Western data sources."
+  no_flip:
+    - "vertical bars (no horizontal directionality)"
+    - "axis values (numbers stay LTR)"
+
+line_chart:
+  depends:
+    - "time-series: Arabic/Hebrew charts often still flow left-to-right to match data conventions. Ask the user."
+  no_flip:
+    - "numeric axis labels"
+
+timeline:
+  flip:
+    - "chronological order (earliest on the right, latest on the left) when content is locale-native"
+  depends:
+    - "if timeline represents something universally LTR (software version history), keep LTR"
+
+# ═══════════════════════════════════════════════════════════════
+# Media
+# ═══════════════════════════════════════════════════════════════
+
+video_player:
+  no_flip:
+    - "play, pause, stop, volume (universal media controls)"
+    - "progress bar DIRECTION stays LTR (time flows forward)"
+  flip:
+    - "captions text (Arabic captions render RTL within their container)"
+
+carousel:
+  flip:
+    - "next/prev arrow directions"
+    - "slide transition direction (swipe right shows previous in RTL)"
+    - "pagination dots order"
+  no_flip:
+    - "slide content (flips individually based on its own content)"
+
+image_with_caption:
+  flip:
+    - "caption alignment"
+  no_flip:
+    - "image itself (do not mirror photography)"
+    - "image cropping behavior"
+
+# ═══════════════════════════════════════════════════════════════
+# Overlays
+# ═══════════════════════════════════════════════════════════════
+
+modal:
+  flip:
+    - "close X typically top-left in RTL (was top-right)"
+    - "footer action order (primary CTA on the left)"
+  no_flip:
+    - "modal shape"
+    - "backdrop"
+
+drawer:
+  flip:
+    - "drawer slides in from the right (was left)"
+  no_flip: []
+
+tooltip:
+  flip:
+    - "tooltip arrow points from the appropriate side based on anchor"
+  no_flip:
+    - "tooltip text content flows per its own locale"
+
+# ═══════════════════════════════════════════════════════════════
+# Content that NEVER flips (reminders)
+# ═══════════════════════════════════════════════════════════════
+
+never_flip:
+  - "brand logos and wordmarks"
+  - "URLs, email addresses, file paths"
+  - "code blocks and syntax-highlighted snippets"
+  - "phone numbers (conventionally LTR)"
+  - "formulas and mathematical expressions"
+  - "musical notation"
+  - "chemical formulas"
+  - "product SKUs and internal IDs"
+
+# ═══════════════════════════════════════════════════════════════
+# Implementation guidance
+# ═══════════════════════════════════════════════════════════════
+
+implementation:
+  web: |
+    1. Set <html dir="rtl" lang="ar"> (or lang="he")
+    2. Use logical CSS properties everywhere:
+       - padding-inline-start/end instead of padding-left/right
+       - margin-inline-start/end instead of margin-left/right
+       - border-inline-start/end
+       - inset-inline-start/end for positioning
+    3. For directional icons, use CSS:
+       .icon-arrow { transform: scaleX(var(--rtl-flip, 1)); }
+       [dir="rtl"] .icon-arrow { --rtl-flip: -1; }
+    4. For embedded LTR content (URLs, emails), use <bdi> or:
+       .ltr-inline { unicode-bidi: isolate; direction: ltr; }
+    5. Test with real translations, not just `dir="rtl"` on English copy
+
+  ios: |
+    1. SwiftUI auto-flips with LayoutDirection environment:
+       .environment(\\.layoutDirection, .rightToLeft)
+    2. Use .leading/.trailing (logical), not .left/.right
+    3. For directional icons: Image(systemName: "arrow.backward")
+       SF Symbols ending in "forward"/"backward" auto-mirror
+    4. NSLocalizedString for all UI strings
+    5. Test in Xcode: Scheme → Options → Application Language: Arabic
+
+  android: |
+    1. Set RTL support: android:supportsRtl="true" in manifest
+    2. Use start/end in layouts, not left/right:
+       - paddingStart/paddingEnd instead of paddingLeft/paddingRight
+       - Modifier.padding(start = 16.dp) in Compose
+    3. Icons that need mirroring: android:autoMirrored="true" on VectorDrawable
+    4. LocalLayoutDirection.current for manual reads in Compose
+    5. Test with RTL pseudo-locale (Settings → Developer → Force RTL)

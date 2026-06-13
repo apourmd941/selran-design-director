@@ -1,0 +1,120 @@
+<style>
+  .c-ed-spin {
+    font-family: inherit;
+    color: var(--fg);
+  }
+
+  .c-ed-spin--full {
+    min-height: 70vh;
+    display: grid;
+    place-items: center;
+    padding: 40px;
+  }
+  .c-ed-spin__inner {
+    text-align: center;
+    max-width: 360px;
+  }
+  .c-ed-spin--full .c-ed-spin__eyebrow {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .c-ed-spin__ring {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 20px;
+    color: var(--accent);
+  }
+  .c-ed-spin__ring-track {
+    stroke: var(--border);
+    fill: none;
+    stroke-width: 1;
+  }
+  .c-ed-spin__ring-arc {
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1;
+    stroke-linecap: round;
+    transform-origin: 22px 22px;
+    animation: c-ed-spin-rotate 1100ms linear infinite;
+  }
+  @keyframes c-ed-spin-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .c-ed-spin__label {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.3;
+    color: var(--fg);
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+  .c-ed-spin__label--ellipsis::after {
+    content: '…';
+  }
+  .c-ed-spin__sub {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    margin: 0;
+  }
+
+  .c-ed-spin--inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    color: var(--fg-muted);
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-style: italic;
+    font-size: 15px;
+  }
+  .c-ed-spin--inline .c-ed-spin__ring {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+  }
+  .c-ed-spin--inline .c-ed-spin__ring-track {
+    stroke-width: 1.2;
+  }
+  .c-ed-spin--inline .c-ed-spin__ring-arc {
+    stroke-width: 1.2;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-ed-spin__ring-arc { animation: none; opacity: 0.5; }
+    .c-ed-spin__label--ellipsis::after { content: ''; }
+  }
+</style>
+
+<!-- Variant: full-screen -->
+<section class="c-ed-spin c-ed-spin--full" role="status" aria-live="polite">
+  <div class="c-ed-spin__inner">
+    <span class="c-ed-spin__eyebrow">{Brand} · Fetching</span>
+    <svg class="c-ed-spin__ring" viewBox="0 0 44 44" aria-hidden="true">
+      <circle class="c-ed-spin__ring-track" cx="22" cy="22" r="18"/>
+      <path class="c-ed-spin__ring-arc" d="M22 4 a18 18 0 0 1 15.6 9"/>
+    </svg>
+    <p class="c-ed-spin__label c-ed-spin__label--ellipsis">Loading</p>
+    <p class="c-ed-spin__sub">Pulling the current issue from the archive. This should only take a moment.</p>
+  </div>
+</section>
+
+<!-- Variant: inline -->
+<span class="c-ed-spin c-ed-spin--inline" role="status" aria-live="polite">
+  <svg class="c-ed-spin__ring" viewBox="0 0 44 44" aria-hidden="true">
+    <circle class="c-ed-spin__ring-track" cx="22" cy="22" r="18"/>
+    <path class="c-ed-spin__ring-arc" d="M22 4 a18 18 0 0 1 15.6 9"/>
+  </svg>
+  <span class="c-ed-spin__label--ellipsis">Loading</span>
+</span>

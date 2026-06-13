@@ -1,0 +1,197 @@
+<style>
+  .c-dp-ok {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 32px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: inherit;
+    isolation: isolate;
+    text-align: center;
+  }
+  .c-dp-ok::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(48% 48% at 50% 42%,
+      color-mix(in oklab, var(--accent) 18%, transparent) 0%,
+      transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .c-dp-ok__inner {
+    max-width: 520px;
+    width: 100%;
+  }
+
+  .c-dp-ok__ring {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 40px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in oklab, var(--accent) 40%, var(--border));
+    background: var(--bg-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    position: relative;
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--accent) 25%, transparent),
+      0 0 60px -8px color-mix(in oklab, var(--accent) 40%, transparent);
+    animation: c-dp-ok-rise 500ms cubic-bezier(0.19, 1, 0.22, 1) both;
+  }
+  .c-dp-ok__ring::after {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in oklab, var(--accent) 20%, transparent);
+    opacity: 0.7;
+  }
+  .c-dp-ok__ring svg {
+    width: 36px; height: 36px;
+    animation: c-dp-ok-check 600ms cubic-bezier(0.19, 1, 0.22, 1) 150ms both;
+  }
+  @keyframes c-dp-ok-rise {
+    from { opacity: 0; transform: translateY(8px) scale(0.92); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes c-dp-ok-check {
+    from { opacity: 0; transform: scale(0.6); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .c-dp-ok__eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--fg-muted);
+    margin-bottom: 18px;
+  }
+  .c-dp-ok__eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px color-mix(in oklab, var(--accent) 80%, transparent);
+  }
+
+  .c-dp-ok__headline {
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 16px;
+  }
+  .c-dp-ok__headline em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .c-dp-ok__body {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--fg-muted);
+    margin: 0 auto 20px;
+    max-width: 44ch;
+  }
+
+  .c-dp-ok__receipt {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    margin-bottom: 36px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-2);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--fg-muted);
+  }
+  .c-dp-ok__receipt strong { color: var(--fg); font-weight: 500; }
+
+  .c-dp-ok__cta {
+    display: inline-flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .c-dp-ok__btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px;
+    font-size: 14px; font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 220ms cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 220ms cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-ok__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    box-shadow: 0 0 24px -6px color-mix(in oklab, var(--accent) 50%, transparent);
+  }
+  .c-dp-ok__btn--primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 30px -8px color-mix(in oklab, var(--accent) 60%, transparent);
+  }
+  .c-dp-ok__btn--primary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+  .c-dp-ok__btn--ghost {
+    background: transparent;
+    color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-dp-ok__btn--ghost:hover { background: var(--bg-2); border-color: var(--accent); }
+  .c-dp-ok__btn--ghost:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-dp-ok__ring,
+    .c-dp-ok__ring svg { animation: none; }
+  }
+  @media (max-width: 900px) {
+    .c-dp-ok { padding: 60px 20px; }
+    .c-dp-ok__ring { width: 72px; height: 72px; margin-bottom: 28px; }
+    .c-dp-ok__ring svg { width: 28px; height: 28px; }
+  }
+</style>
+
+<section class="c-dp-ok" role="status" aria-live="polite">
+  <div class="c-dp-ok__inner">
+    <div class="c-dp-ok__ring" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="c-dp-ok__eyebrow">
+      <span class="dot" aria-hidden="true"></span>
+      <span>SETTLEMENT CONFIRMED</span>
+    </div>
+    <h1 class="c-dp-ok__headline">Your wire is <em>on the ledger.</em></h1>
+    <p class="c-dp-ok__body">$2,400,000.00 cleared Reserve-A at 09:42 UTC. The next rebalance window opens Apr 28; your allocations remain unlocked until then.</p>
+    <div class="c-dp-ok__receipt">
+      <span>RECEIPT</span>
+      <strong>MC-4208-APR</strong>
+    </div>
+    <div class="c-dp-ok__cta">
+      <a href="#" class="c-dp-ok__btn c-dp-ok__btn--primary">Allocate funds &rarr;</a>
+      <a href="#" class="c-dp-ok__btn c-dp-ok__btn--ghost">Back to vault</a>
+    </div>
+  </div>
+</section>

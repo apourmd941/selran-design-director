@@ -1,0 +1,99 @@
+<style>
+  .c-ed-crumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0;
+    padding: 18px 32px;
+    font-family: inherit;
+    color: var(--fg-muted);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .c-ed-crumb__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0;
+  }
+  .c-ed-crumb__item {
+    display: inline-flex;
+    align-items: baseline;
+  }
+  .c-ed-crumb__link {
+    color: var(--fg-muted);
+    text-decoration: none;
+    padding: 2px 0;
+    border-bottom: 1px solid transparent;
+    transition: color 250ms ease, border-color 250ms ease;
+  }
+  .c-ed-crumb__link:hover {
+    color: var(--fg);
+    border-bottom-color: var(--fg);
+  }
+  .c-ed-crumb__link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .c-ed-crumb__sep {
+    margin: 0 14px;
+    color: var(--fg-muted);
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+  }
+  .c-ed-crumb__current {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-style: italic;
+    color: var(--fg);
+  }
+  .c-ed-crumb__current em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .c-ed-crumb__meta {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+  }
+
+  @media (max-width: 900px) {
+    .c-ed-crumb { padding: 14px 20px; font-size: 14px; }
+    .c-ed-crumb__meta { display: none; }
+    .c-ed-crumb__sep { margin: 0 10px; }
+    .c-ed-crumb__item--hide-narrow { display: none; }
+    .c-ed-crumb__item--ellipsis { display: inline-flex; }
+  }
+  @media (min-width: 901px) {
+    .c-ed-crumb__item--ellipsis { display: none; }
+  }
+</style>
+
+<nav class="c-ed-crumb" aria-label="Breadcrumb">
+  <ol class="c-ed-crumb__list">
+    <li class="c-ed-crumb__item">
+      <a class="c-ed-crumb__link" href="#">Library</a>
+    </li>
+    <li class="c-ed-crumb__item c-ed-crumb__item--hide-narrow" aria-hidden="false">
+      <span class="c-ed-crumb__sep" aria-hidden="true">—</span>
+      <a class="c-ed-crumb__link" href="#">Essays</a>
+    </li>
+    <li class="c-ed-crumb__item c-ed-crumb__item--ellipsis" aria-hidden="true">
+      <span class="c-ed-crumb__sep" aria-hidden="true">—</span>
+      <span>…</span>
+    </li>
+    <li class="c-ed-crumb__item c-ed-crumb__item--hide-narrow">
+      <span class="c-ed-crumb__sep" aria-hidden="true">—</span>
+      <a class="c-ed-crumb__link" href="#">Issue IV</a>
+    </li>
+    <li class="c-ed-crumb__item" aria-current="page">
+      <span class="c-ed-crumb__sep" aria-hidden="true">—</span>
+      <span class="c-ed-crumb__current">On the virtue of <em>slow software</em></span>
+    </li>
+  </ol>
+  <span class="c-ed-crumb__meta" aria-hidden="true">14 MIN READ</span>
+</nav>

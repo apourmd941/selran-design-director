@@ -1,0 +1,108 @@
+<style>
+  .c-bd-botnav {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .c-bd-botnav {
+      display: block;
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      background: var(--bg);
+      border-top: 2px solid var(--fg);
+      padding-bottom: env(safe-area-inset-bottom, 0);
+      font-family: inherit;
+      color: var(--fg);
+      z-index: 50;
+    }
+    .c-bd-botnav__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .c-bd-botnav__item { display: flex; }
+    .c-bd-botnav__link {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 4px 10px;
+      color: var(--fg-muted);
+      text-decoration: none;
+      min-height: 56px;
+      position: relative;
+      transition: color 220ms ease;
+    }
+    .c-bd-botnav__link:hover { color: var(--fg); }
+    .c-bd-botnav__link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -4px;
+    }
+    .c-bd-botnav__icon {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+    .c-bd-botnav__label {
+      font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+      font-style: italic;
+      font-size: 13px;
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+    .c-bd-botnav__link[aria-current="page"] {
+      color: var(--fg);
+    }
+    .c-bd-botnav__link[aria-current="page"]::after {
+      content: "";
+      position: absolute;
+      left: 12px; right: 12px;
+      bottom: 0;
+      height: 6px;
+      background: var(--accent);
+    }
+  }
+</style>
+
+<nav class="c-bd-botnav" aria-label="Primary">
+  <ul class="c-bd-botnav__list">
+    <li class="c-bd-botnav__item">
+      <a class="c-bd-botnav__link" href="#" aria-current="page">
+        <svg class="c-bd-botnav__icon" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <path d="M3 5h16M3 11h16M3 17h10" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span class="c-bd-botnav__label">Read</span>
+      </a>
+    </li>
+    <li class="c-bd-botnav__item">
+      <a class="c-bd-botnav__link" href="#">
+        <svg class="c-bd-botnav__icon" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <path d="M5 3h9l4 4v12H5z" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8 9h6M8 13h6M8 17h4" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span class="c-bd-botnav__label">Issues</span>
+      </a>
+    </li>
+    <li class="c-bd-botnav__item">
+      <a class="c-bd-botnav__link" href="#">
+        <svg class="c-bd-botnav__icon" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <path d="M6 3v16l5-3 5 3V3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <span class="c-bd-botnav__label">Saved</span>
+      </a>
+    </li>
+    <li class="c-bd-botnav__item">
+      <a class="c-bd-botnav__link" href="#">
+        <svg class="c-bd-botnav__icon" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <circle cx="11" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M3 19c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span class="c-bd-botnav__label">Profile</span>
+      </a>
+    </li>
+  </ul>
+</nav>

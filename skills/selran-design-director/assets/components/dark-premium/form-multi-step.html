@@ -1,0 +1,214 @@
+<style>
+  .c-dp-mstep {
+    position: relative;
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 44px 40px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    font-family: inherit;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .c-dp-mstep::before {
+    content: '';
+    position: absolute;
+    inset: -30% -10% auto -10%;
+    height: 50%;
+    background: radial-gradient(
+      50% 50% at 50% 0%,
+      color-mix(in oklab, var(--accent) 18%, transparent) 0%,
+      transparent 72%
+    );
+    z-index: -1;
+    pointer-events: none;
+  }
+  .c-dp-mstep__eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg);
+    margin-bottom: 16px;
+  }
+  .c-dp-mstep__eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px color-mix(in oklab, var(--accent) 80%, transparent); }
+  .c-dp-mstep__eyebrow .mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--fg-muted);
+  }
+  .c-dp-mstep__title {
+    font-size: 28px; letter-spacing: -0.02em; font-weight: 500;
+    color: var(--fg); margin: 0 0 8px;
+  }
+  .c-dp-mstep__title em { font-style: normal; color: var(--accent); }
+  .c-dp-mstep__lead {
+    font-size: 15px; line-height: 1.55;
+    color: var(--fg-muted);
+    margin: 0 0 32px;
+  }
+  .c-dp-mstep__stepper {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .c-dp-mstep__node {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--fg-muted);
+  }
+  .c-dp-mstep__node .num {
+    width: 26px; height: 26px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--bg);
+    font-size: 12px;
+  }
+  .c-dp-mstep__node[data-state="done"] { color: var(--fg); }
+  .c-dp-mstep__node[data-state="done"] .num { border-color: var(--accent); color: var(--accent); }
+  .c-dp-mstep__node[data-state="active"] { color: var(--fg); }
+  .c-dp-mstep__node[data-state="active"] .num {
+    background: var(--accent); color: var(--bg); border-color: var(--accent);
+    box-shadow: 0 0 14px color-mix(in oklab, var(--accent) 50%, transparent);
+  }
+  .c-dp-mstep__rule {
+    flex: 1; height: 1px; background: var(--border);
+  }
+  .c-dp-mstep__step[hidden] { display: none; }
+  .c-dp-mstep__field { margin-bottom: 16px; }
+  .c-dp-mstep__label {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-bottom: 8px;
+  }
+  .c-dp-mstep__input,
+  .c-dp-mstep__select {
+    width: 100%; box-sizing: border-box;
+    padding: 12px 14px;
+    font-size: 14px; font-family: inherit;
+    color: var(--fg); background: var(--bg);
+    border: 1px solid var(--border);
+    border-top-color: color-mix(in oklab, var(--fg) 20%, var(--border));
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 300ms cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-mstep__input:focus-visible,
+  .c-dp-mstep__select:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent),
+                0 0 22px -2px color-mix(in oklab, var(--accent) 50%, transparent);
+  }
+  .c-dp-mstep__actions {
+    display: flex; justify-content: space-between; gap: 12px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .c-dp-mstep__btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 11px 20px;
+    font-size: 14px; font-weight: 500;
+    font-family: inherit;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 300ms cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 300ms cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-mstep__btn--ghost {
+    background: var(--bg); color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-dp-mstep__btn--ghost:hover:not(:disabled) { border-color: var(--accent); }
+  .c-dp-mstep__btn--primary {
+    background: var(--accent); color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-dp-mstep__btn--primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 30px -8px color-mix(in oklab, var(--accent) 60%, transparent);
+  }
+  .c-dp-mstep__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg-2), 0 0 0 4px var(--accent);
+  }
+  .c-dp-mstep__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  @media (max-width: 900px) {
+    .c-dp-mstep { max-width: none; padding: 36px 24px; border-radius: 0; border-left: 0; border-right: 0; }
+    .c-dp-mstep__stepper { flex-wrap: wrap; }
+  }
+</style>
+
+<form class="c-dp-mstep" novalidate aria-label="Open account, step 2 of 3">
+  <div class="c-dp-mstep__eyebrow">
+    <span class="dot" aria-hidden="true"></span>
+    <span class="mono">{BRAND} · New account · 02 of 03</span>
+  </div>
+  <h1 class="c-dp-mstep__title">Your <em>treasury</em>.</h1>
+  <p class="c-dp-mstep__lead">Tell us how funds should move. You can edit these later without closing the account.</p>
+
+  <div class="c-dp-mstep__stepper" aria-hidden="true">
+    <span class="c-dp-mstep__node" data-state="done"><span class="num">1</span> Identity</span>
+    <span class="c-dp-mstep__rule"></span>
+    <span class="c-dp-mstep__node" data-state="active"><span class="num">2</span> Treasury</span>
+    <span class="c-dp-mstep__rule"></span>
+    <span class="c-dp-mstep__node" data-state="pending"><span class="num">3</span> Review</span>
+  </div>
+
+  <section class="c-dp-mstep__step" hidden aria-hidden="true">
+    <div class="c-dp-mstep__field">
+      <label class="c-dp-mstep__label" for="dp-ms-name">Legal name</label>
+      <input class="c-dp-mstep__input" id="dp-ms-name" name="name" type="text" placeholder="Alex Chen">
+    </div>
+    <div class="c-dp-mstep__field">
+      <label class="c-dp-mstep__label" for="dp-ms-email">Email</label>
+      <input class="c-dp-mstep__input" id="dp-ms-email" name="email" type="email" placeholder="alex@company.com">
+    </div>
+  </section>
+
+  <section class="c-dp-mstep__step">
+    <div class="c-dp-mstep__field">
+      <label class="c-dp-mstep__label" for="dp-ms-entity">Entity</label>
+      <input class="c-dp-mstep__input" id="dp-ms-entity" name="entity" type="text" placeholder="Meridian Capital, LLC">
+    </div>
+    <div class="c-dp-mstep__field">
+      <label class="c-dp-mstep__label" for="dp-ms-currency">Settlement currency</label>
+      <select class="c-dp-mstep__select" id="dp-ms-currency" name="currency">
+        <option>USD · US Dollar</option>
+        <option>EUR · Euro</option>
+        <option>GBP · Pound Sterling</option>
+      </select>
+    </div>
+    <div class="c-dp-mstep__field">
+      <label class="c-dp-mstep__label" for="dp-ms-volume">Expected monthly volume</label>
+      <select class="c-dp-mstep__select" id="dp-ms-volume" name="volume">
+        <option>$0 – $250k</option>
+        <option selected>$250k – $1M</option>
+        <option>$1M – $10M</option>
+        <option>$10M+</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="c-dp-mstep__step" hidden aria-hidden="true">
+    <div class="c-dp-mstep__field">
+      <label class="c-dp-mstep__label" for="dp-ms-notes">Notes for review (optional)</label>
+      <input class="c-dp-mstep__input" id="dp-ms-notes" name="notes" type="text" placeholder="Anything we should know">
+    </div>
+  </section>
+
+  <div class="c-dp-mstep__actions">
+    <button class="c-dp-mstep__btn c-dp-mstep__btn--ghost" type="button">← Back</button>
+    <button class="c-dp-mstep__btn c-dp-mstep__btn--primary" type="button">Continue →</button>
+  </div>
+</form>

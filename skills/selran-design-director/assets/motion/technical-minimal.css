@@ -1,0 +1,136 @@
+/* ==========================================================================
+   Motion: Technical-Minimal
+   Prefix: .m-tm-*
+   Feel: fast, precise, ease-out. No drama. Keyboard-first.
+   Signature gesture: 160ms ease-out "snap" — short, single-curve, no overshoot
+   ========================================================================== */
+
+:root {
+  --m-tm-duration-fast:     var(--motion-duration-fast,   120ms);
+  --m-tm-duration-base:     var(--motion-duration,        160ms);
+  --m-tm-duration-slow:     var(--motion-duration-slow,   200ms);
+  --m-tm-easing:            var(--motion-easing,          cubic-bezier(0.2, 0, 0, 1));
+  --m-tm-easing-linear:     linear;
+
+  /* Distances: kept small — this direction doesn't travel. */
+  --m-tm-lift:              1px;
+  --m-tm-nudge:             4px;
+}
+
+/* ---------- Transitions --------------------------------------------------- */
+
+.m-tm-btn {
+  transition:
+    background-color var(--m-tm-duration-base) var(--m-tm-easing),
+    border-color     var(--m-tm-duration-base) var(--m-tm-easing),
+    color            var(--m-tm-duration-base) var(--m-tm-easing),
+    transform        var(--m-tm-duration-fast) var(--m-tm-easing);
+}
+.m-tm-btn:hover   { transform: translateY(calc(-1 * var(--m-tm-lift))); }
+.m-tm-btn:active  { transform: translateY(0); transition-duration: 80ms; }
+
+.m-tm-card {
+  transition:
+    border-color var(--m-tm-duration-base) var(--m-tm-easing),
+    background-color var(--m-tm-duration-base) var(--m-tm-easing);
+}
+.m-tm-card:hover { border-color: var(--color-border-strong, #D4D4D8); }
+
+/* Link underline — expands from left, crisp */
+.m-tm-link {
+  position: relative;
+  text-decoration: none;
+}
+.m-tm-link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--m-tm-duration-base) var(--m-tm-easing);
+}
+.m-tm-link:hover::after,
+.m-tm-link:focus-visible::after { transform: scaleX(1); }
+
+/* Input focus — ring appears, no glow */
+.m-tm-input {
+  transition:
+    border-color var(--m-tm-duration-fast) var(--m-tm-easing),
+    box-shadow   var(--m-tm-duration-fast) var(--m-tm-easing);
+}
+.m-tm-input:focus-visible {
+  outline: none;
+  border-color: var(--color-accent, #0A7A5C);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent, #0A7A5C) 25%, transparent);
+}
+
+/* ---------- Entrance animations ------------------------------------------ */
+
+@keyframes m-tm-fade-up {
+  from { opacity: 0; transform: translateY(var(--m-tm-nudge)); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.m-tm-enter-fade-up {
+  animation: m-tm-fade-up var(--m-tm-duration-slow) var(--m-tm-easing) both;
+}
+
+/* Stagger — short, tight. Max 6 children; add more if needed. */
+.m-tm-stagger > * { animation: m-tm-fade-up var(--m-tm-duration-slow) var(--m-tm-easing) both; }
+.m-tm-stagger > *:nth-child(1) { animation-delay:   0ms; }
+.m-tm-stagger > *:nth-child(2) { animation-delay:  40ms; }
+.m-tm-stagger > *:nth-child(3) { animation-delay:  80ms; }
+.m-tm-stagger > *:nth-child(4) { animation-delay: 120ms; }
+.m-tm-stagger > *:nth-child(5) { animation-delay: 160ms; }
+.m-tm-stagger > *:nth-child(6) { animation-delay: 200ms; }
+
+/* ---------- Micro-interactions ------------------------------------------- */
+
+.m-tm-press { transition: transform 80ms var(--m-tm-easing); }
+.m-tm-press:active { transform: scale(0.98); }
+
+.m-tm-tap-scale { transition: transform var(--m-tm-duration-fast) var(--m-tm-easing); }
+.m-tm-tap-scale:active { transform: scale(0.97); }
+
+@keyframes m-tm-spin { to { transform: rotate(360deg); } }
+.m-tm-icon-spin { animation: m-tm-spin 800ms var(--m-tm-easing-linear) infinite; }
+
+/* ---------- Signature gesture: precise 160ms ease-out snap --------------- */
+/* Single property, single curve, no compound motion. This IS the direction. */
+
+.m-tm-snap {
+  transition:
+    opacity   160ms var(--m-tm-easing),
+    transform 160ms var(--m-tm-easing);
+}
+.m-tm-snap[data-state="closed"],
+.m-tm-snap.is-hidden { opacity: 0; transform: translateY(-2px); pointer-events: none; }
+.m-tm-snap[data-state="open"],
+.m-tm-snap.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ---------- Reduced motion ----------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .m-tm-btn,
+  .m-tm-card,
+  .m-tm-link::after,
+  .m-tm-input,
+  .m-tm-press,
+  .m-tm-tap-scale,
+  .m-tm-snap {
+    transition-duration: 0.01ms !important;
+  }
+  .m-tm-enter-fade-up,
+  .m-tm-stagger > *,
+  .m-tm-icon-spin {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+  }
+  .m-tm-btn:hover,
+  .m-tm-btn:active,
+  .m-tm-press:active,
+  .m-tm-tap-scale:active { transform: none; }
+}

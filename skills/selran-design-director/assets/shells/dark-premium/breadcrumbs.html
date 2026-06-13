@@ -1,0 +1,134 @@
+<style>
+  .c-dp-crumbs {
+    display: flex;
+    align-items: center;
+    padding: 14px 24px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--fg-muted);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .c-dp-crumbs::-webkit-scrollbar { display: none; }
+
+  .c-dp-crumbs__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    white-space: nowrap;
+  }
+
+  .c-dp-crumbs__item {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .c-dp-crumbs__sep {
+    color: var(--fg-muted);
+    margin: 0 10px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 13px;
+    opacity: 0.6;
+    user-select: none;
+  }
+
+  .c-dp-crumbs__link {
+    color: var(--fg-muted);
+    text-decoration: none;
+    padding: 4px 6px;
+    border-radius: 4px;
+    letter-spacing: -0.005em;
+    transition: color 220ms cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-crumbs__link:hover {
+    color: var(--fg);
+    background: var(--bg-2);
+  }
+  .c-dp-crumbs__link:focus-visible {
+    outline: none;
+    color: var(--fg);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  .c-dp-crumbs__current {
+    color: var(--accent);
+    font-weight: 500;
+    padding: 4px 6px;
+    letter-spacing: -0.005em;
+  }
+
+  .c-dp-crumbs__root-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px 4px 4px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-2);
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 12px;
+    transition: border-color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-crumbs__root-mark:hover { border-color: var(--accent); }
+  .c-dp-crumbs__root-mark-icon {
+    width: 18px; height: 18px;
+    border-radius: 4px;
+    background: linear-gradient(135deg,
+      var(--accent) 0%,
+      color-mix(in oklab, var(--accent) 60%, var(--bg)) 100%);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--bg);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px; font-weight: 600;
+    box-shadow: 0 0 10px -2px color-mix(in oklab, var(--accent) 50%, transparent);
+  }
+
+  @media (max-width: 900px) {
+    .c-dp-crumbs { padding: 12px 14px; font-size: 12px; }
+    .c-dp-crumbs__sep { margin: 0 6px; }
+    .c-dp-crumbs__truncate { display: inline-flex; }
+    .c-dp-crumbs__hide-sm { display: none; }
+  }
+</style>
+
+<nav class="c-dp-crumbs" aria-label="Breadcrumb">
+  <ol class="c-dp-crumbs__list">
+    <li class="c-dp-crumbs__item">
+      <a class="c-dp-crumbs__root-mark" href="#" aria-label="Meridian Capital home">
+        <span class="c-dp-crumbs__root-mark-icon" aria-hidden="true">M</span>
+        <span>Meridian</span>
+      </a>
+    </li>
+    <li class="c-dp-crumbs__item c-dp-crumbs__hide-sm" aria-hidden="true">
+      <span class="c-dp-crumbs__sep">&rsaquo;</span>
+    </li>
+    <li class="c-dp-crumbs__item c-dp-crumbs__hide-sm">
+      <a class="c-dp-crumbs__link" href="#">Treasury</a>
+    </li>
+    <li class="c-dp-crumbs__item" aria-hidden="true">
+      <span class="c-dp-crumbs__sep">&rsaquo;</span>
+    </li>
+    <li class="c-dp-crumbs__item">
+      <a class="c-dp-crumbs__link" href="#">Vaults</a>
+    </li>
+    <li class="c-dp-crumbs__item" aria-hidden="true">
+      <span class="c-dp-crumbs__sep">&rsaquo;</span>
+    </li>
+    <li class="c-dp-crumbs__item">
+      <a class="c-dp-crumbs__link" href="#">Reserve-A</a>
+    </li>
+    <li class="c-dp-crumbs__item" aria-hidden="true">
+      <span class="c-dp-crumbs__sep">&rsaquo;</span>
+    </li>
+    <li class="c-dp-crumbs__item">
+      <span class="c-dp-crumbs__current" aria-current="page">Transaction #MC-4208</span>
+    </li>
+  </ol>
+</nav>

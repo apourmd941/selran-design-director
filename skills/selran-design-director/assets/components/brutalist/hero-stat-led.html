@@ -1,0 +1,177 @@
+<style>
+  .c-br-hero-stat {
+    padding: 56px 0;
+    border-bottom: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', monospace);
+  }
+  .c-br-hero-stat__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .c-br-hero-stat__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 12px 0;
+    border-top: 2px solid var(--border, var(--fg));
+    border-bottom: 2px solid var(--border, var(--fg));
+    margin-bottom: 32px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fg-muted);
+  }
+  .c-br-hero-stat__bignum {
+    font-size: clamp(80px, 14vw, 200px);
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 8px;
+    border-bottom: 2px solid var(--border, var(--fg));
+    padding-bottom: 24px;
+  }
+  .c-br-hero-stat__bignum span { color: var(--accent); }
+  .c-br-hero-stat__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 0;
+    border-bottom: 2px solid var(--border, var(--fg));
+  }
+  .c-br-hero-stat__left {
+    padding: 32px 32px 32px 0;
+    border-right: 2px solid var(--border, var(--fg));
+  }
+  .c-br-hero-stat__right {
+    padding: 32px 0 32px 32px;
+  }
+  .c-br-hero-stat__label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    margin-bottom: 12px;
+  }
+  .c-br-hero-stat__headline {
+    font-size: clamp(28px, 3.2vw, 40px);
+    font-weight: 700;
+    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin-bottom: 24px;
+  }
+  .c-br-hero-stat__headline em {
+    font-style: normal;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 2px 6px;
+  }
+  .c-br-hero-stat__lead {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin-bottom: 24px;
+    max-width: 56ch;
+  }
+  .c-br-hero-stat__cta {
+    display: flex; gap: 0; flex-wrap: wrap;
+  }
+  .c-br-hero-stat__btn {
+    padding: 14px 20px;
+    font-family: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 14px;
+    border: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+    color: var(--fg);
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: -2px;
+  }
+  .c-br-hero-stat__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-br-hero-stat__btn--primary:hover {
+    background: var(--fg);
+    color: var(--accent);
+    border-color: var(--fg);
+  }
+  .c-br-hero-stat__btn:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  .c-br-hero-stat__list {
+    list-style: none;
+    padding: 0; margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .c-br-hero-stat__list li {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border, var(--fg));
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .c-br-hero-stat__list li:last-child { border-bottom: none; }
+  .c-br-hero-stat__list strong { color: var(--accent); font-weight: 700; }
+
+  @media (max-width: 900px) {
+    .c-br-hero-stat__grid { grid-template-columns: 1fr; border-right: none; }
+    .c-br-hero-stat__left {
+      border-right: none;
+      border-bottom: 2px solid var(--border, var(--fg));
+      padding: 24px 0;
+    }
+    .c-br-hero-stat__right { padding: 24px 0; }
+  }
+</style>
+
+<section class="c-br-hero-stat">
+  <div class="c-br-hero-stat__inner">
+    <div class="c-br-hero-stat__meta">
+      <span>{Brand} // catalog report // Q1 2026</span>
+      <span>last updated 2026-04-20 08:14 UTC</span>
+      <span>filetype: html / size: 4.2kb</span>
+    </div>
+    <div class="c-br-hero-stat__bignum">142<span>.</span></div>
+    <div class="c-br-hero-stat__grid">
+      <div class="c-br-hero-stat__left">
+        <div class="c-br-hero-stat__label">// releases since 2014</div>
+        <h1 class="c-br-hero-stat__headline">
+          A record label for people <em>who still read liner notes.</em>
+        </h1>
+        <p class="c-br-hero-stat__lead">
+          {Brand} presses 300 copies of every record. We pay our artists fairly. We do not sign exclusivity deals. We do not accept sponsored posts. If you buy one of our records we will probably meet you at a show.
+        </p>
+        <div class="c-br-hero-stat__cta">
+          <a href="#" class="c-br-hero-stat__btn c-br-hero-stat__btn--primary">Browse catalog →</a>
+          <a href="#" class="c-br-hero-stat__btn">Read the zine</a>
+        </div>
+      </div>
+      <aside class="c-br-hero-stat__right">
+        <div class="c-br-hero-stat__label">// by the numbers</div>
+        <ul class="c-br-hero-stat__list">
+          <li>artists signed <strong>38</strong></li>
+          <li>vinyl pressings <strong>112</strong></li>
+          <li>cassette runs <strong>44</strong></li>
+          <li>zine issues <strong>22</strong></li>
+          <li>shows booked <strong>86</strong></li>
+          <li>money to artists <strong>68%</strong></li>
+          <li>sponsored posts <strong>0</strong></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>

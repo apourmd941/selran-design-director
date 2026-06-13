@@ -1,0 +1,124 @@
+<style>
+  .c-br-cta {
+    border-top: 2px solid var(--border, var(--fg));
+    border-bottom: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', monospace);
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .c-br-cta__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 64px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: end;
+  }
+  .c-br-cta__label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--bg);
+    display: block;
+  }
+  .c-br-cta__headline {
+    font-size: clamp(40px, 6vw, 88px);
+    font-weight: 700;
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  .c-br-cta__headline em {
+    font-style: normal;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 0 10px;
+  }
+  .c-br-cta__lead {
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: 52ch;
+    opacity: 0.9;
+  }
+  .c-br-cta__right {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-width: 260px;
+  }
+  .c-br-cta__btn {
+    padding: 18px 24px;
+    font-family: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 15px;
+    border: 2px solid var(--bg);
+    background: var(--bg);
+    color: var(--fg);
+    text-decoration: none;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: -2px;
+  }
+  .c-br-cta__btn::after { content: '→'; }
+  .c-br-cta__btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-br-cta__btn--ghost {
+    background: transparent;
+    color: var(--bg);
+  }
+  .c-br-cta__btn--ghost:hover {
+    background: var(--bg);
+    color: var(--fg);
+  }
+  .c-br-cta__meta {
+    padding-top: 14px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.65;
+    border-top: 1px dashed var(--bg);
+    margin-top: 14px;
+  }
+
+  @media (max-width: 900px) {
+    .c-br-cta__inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 48px 20px;
+    }
+  }
+</style>
+
+<section class="c-br-cta">
+  <div class="c-br-cta__inner">
+    <div>
+      <span class="c-br-cta__label">// get involved</span>
+      <h2 class="c-br-cta__headline">
+        Buy a record. <em>Read the zine.</em> Come to a show.
+      </h2>
+      <p class="c-br-cta__lead">
+        {Brand} is run by three people out of a warehouse in Brooklyn. We answer the email. We pack the orders. We book the shows. If you want in, we'll make room.
+      </p>
+    </div>
+    <div class="c-br-cta__right">
+      <a href="#" class="c-br-cta__btn">Mail order</a>
+      <a href="#" class="c-br-cta__btn c-br-cta__btn--ghost">Zine subscription</a>
+      <a href="#" class="c-br-cta__btn c-br-cta__btn--ghost">Show calendar</a>
+      <div class="c-br-cta__meta">no newsletter, no tracking, no algorithm</div>
+    </div>
+  </div>
+</section>

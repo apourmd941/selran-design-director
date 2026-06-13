@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>{{og.title}} — OG image</title>
+<style>
+  @page { size: 1200px 630px; margin: 0; }
+  html, body { margin: 0; padding: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: {{color.bg_primary}};
+    color: {{color.fg_primary}};
+    font-family: "{{type.body}}", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 96px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  /* Soft accent glow — one hero moment */
+  body::before {
+    content: "";
+    position: absolute;
+    top: -20%; right: -10%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle at center, {{color.accent}} 0%, transparent 60%);
+    opacity: 0.22;
+    filter: blur(40px);
+  }
+  .logo {
+    font-family: "{{type.mono}}", ui-monospace, monospace;
+    font-size: 14px;
+    letter-spacing: {{type.tracking.caps}}em;
+    text-transform: uppercase;
+    color: {{color.fg_muted}};
+    position: relative;
+  }
+  h1 {
+    font-family: "{{type.display}}", Georgia, serif;
+    font-size: 96px;
+    font-weight: 500;
+    line-height: {{type.leading.display}};
+    letter-spacing: {{type.tracking.display}}em;
+    color: {{color.fg_primary}};
+    margin: 0;
+    max-width: 920px;
+    position: relative;
+  }
+  h1::after {
+    content: "";
+    display: block;
+    width: 80px; height: 2px;
+    background: {{color.accent}};
+    margin-top: 32px;
+  }
+  .subtitle {
+    font-size: 24px;
+    line-height: 1.5;
+    color: {{color.fg_secondary}};
+    max-width: 720px;
+    margin-top: 28px;
+    position: relative;
+  }
+  .bottom {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: "{{type.mono}}", ui-monospace, monospace;
+    font-size: 14px;
+    color: {{color.fg_muted}};
+    letter-spacing: {{type.tracking.caps}}em;
+    text-transform: uppercase;
+    position: relative;
+  }
+</style>
+</head>
+<body>
+  <div class="logo">{{og.logo}}</div>
+  <div>
+    <h1>{{og.title}}</h1>
+    <div class="subtitle">{{og.subtitle}}</div>
+  </div>
+  <div class="bottom">
+    <span>—</span>
+    <span>v{{meta.version}}</span>
+  </div>
+</body>
+</html>

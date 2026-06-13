@@ -1,0 +1,199 @@
+<style>
+  .c-ed-login {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 56px 40px;
+    font-family: inherit;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-login__byline {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    display: flex; gap: 14px;
+    padding-bottom: 14px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-login__byline em {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-style: italic;
+    color: var(--fg);
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: 13px;
+  }
+  .c-ed-login__headline {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 12px;
+  }
+  .c-ed-login__headline em { font-style: italic; color: var(--accent); }
+  .c-ed-login__lead {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--fg-muted);
+    margin: 0 0 28px;
+  }
+  .c-ed-login__field { margin-bottom: 20px; }
+  .c-ed-login__label {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-bottom: 6px;
+  }
+  .c-ed-login__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 0;
+    font-size: 17px;
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    color: var(--fg);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    outline: none;
+    transition: border-color 250ms ease-out, border-width 250ms ease-out;
+  }
+  .c-ed-login__input::placeholder {
+    color: var(--fg-muted);
+    font-style: italic;
+  }
+  .c-ed-login__input:hover { border-bottom-color: var(--fg-muted); }
+  .c-ed-login__input:focus-visible {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 7px;
+  }
+  .c-ed-login__row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .c-ed-login__forgot {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--accent);
+    text-decoration: none;
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+  }
+  .c-ed-login__forgot:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .c-ed-login__btn {
+    display: block;
+    width: 100%;
+    margin-top: 28px;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 500;
+    background: var(--fg);
+    color: var(--bg);
+    border: 0;
+    border-radius: 2px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background-color 250ms ease-out;
+  }
+  .c-ed-login__btn:hover { background: var(--accent); }
+  .c-ed-login__btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .c-ed-login__divider {
+    display: flex; align-items: center; gap: 14px;
+    margin: 32px 0 20px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--fg-muted);
+  }
+  .c-ed-login__divider::before,
+  .c-ed-login__divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+  .c-ed-login__oauth { display: flex; flex-direction: column; gap: 10px; }
+  .c-ed-login__oauth-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 10px;
+    padding: 12px 18px;
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--fg);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 250ms ease-out, color 250ms ease-out;
+  }
+  .c-ed-login__oauth-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .c-ed-login__oauth-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .c-ed-login__oauth-btn svg { width: 15px; height: 15px; }
+  .c-ed-login__foot {
+    margin-top: 28px;
+    font-size: 13px;
+    color: var(--fg-muted);
+    text-align: center;
+    font-style: italic;
+  }
+  .c-ed-login__foot a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 900px) {
+    .c-ed-login { padding: 40px 24px; border: 0; }
+    .c-ed-login__headline { font-size: 32px; }
+  }
+</style>
+
+<form class="c-ed-login" novalidate>
+  <div class="c-ed-login__byline">
+    <span>Issue No. 04</span>
+    <span>Members Only</span>
+    <em>Reader sign-in</em>
+  </div>
+  <h1 class="c-ed-login__headline">Return to <em>the reading room.</em></h1>
+  <p class="c-ed-login__lead">Back issues, pull-quotes, and the weekly dispatch — waiting where you left them.</p>
+
+  <div class="c-ed-login__field">
+    <label class="c-ed-login__label" for="ed-email">Email address</label>
+    <input class="c-ed-login__input" id="ed-email" name="email" type="email" autocomplete="email" placeholder="reader@inbox.com" required>
+  </div>
+
+  <div class="c-ed-login__field">
+    <div class="c-ed-login__row">
+      <label class="c-ed-login__label" for="ed-password">Password</label>
+      <a class="c-ed-login__forgot" href="#forgot">Forgot?</a>
+    </div>
+    <input class="c-ed-login__input" id="ed-password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+  </div>
+
+  <button class="c-ed-login__btn" type="submit">Sign in</button>
+
+  <div class="c-ed-login__divider">or continue with</div>
+
+  <div class="c-ed-login__oauth">
+    <a class="c-ed-login__oauth-btn" href="#google">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.35 11.1H12v3.8h5.35c-.23 1.23-1.44 3.6-5.35 3.6-3.22 0-5.85-2.67-5.85-5.95S8.78 6.6 12 6.6c1.83 0 3.06.78 3.77 1.45l2.57-2.48C16.7 4.1 14.55 3.2 12 3.2 7.06 3.2 3 7.25 3 12.2s4.06 9 9 9c5.2 0 8.65-3.65 8.65-8.8 0-.6-.06-1.05-.15-1.5z"/></svg>
+      Google
+    </a>
+    <a class="c-ed-login__oauth-btn" href="#github">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.7.11 2.5.33 1.9-1.29 2.74-1.02 2.74-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.33 4.69-4.56 4.94.36.31.68.91.68 1.85l-.01 2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+      GitHub
+    </a>
+  </div>
+
+  <p class="c-ed-login__foot">Not yet a subscriber? <a href="#sub">Begin your membership</a>.</p>
+</form>

@@ -1,0 +1,107 @@
+<style>
+  .c-bd-err {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 28px 28px 28px 36px;
+    background: var(--bg);
+    border-top: 2px solid var(--fg);
+    border-bottom: 2px solid var(--fg);
+    font-family: inherit;
+    color: var(--fg);
+    position: relative;
+  }
+  .c-bd-err::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 8px;
+    background: var(--accent);
+  }
+  .c-bd-err__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 14px;
+  }
+  .c-bd-err__marker {
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .c-bd-err__headline {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(28px, 3.2vw, 40px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--fg);
+    margin: 0 0 10px;
+  }
+  .c-bd-err__headline em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .c-bd-err__body {
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0 0 18px;
+    max-width: 56ch;
+  }
+  .c-bd-err__actions {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+  .c-bd-err__link {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--fg);
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--accent);
+    transition: color 220ms ease;
+  }
+  .c-bd-err__link:hover { color: var(--accent); }
+  .c-bd-err__link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .c-bd-err__link--muted {
+    color: var(--fg-muted);
+    text-decoration-color: var(--fg-muted);
+  }
+  .c-bd-err__link--muted:hover { color: var(--fg); }
+
+  @media (max-width: 900px) {
+    .c-bd-err { padding: 22px 22px 22px 28px; }
+  }
+</style>
+
+<div class="c-bd-err" role="alert" aria-live="assertive">
+  <div class="c-bd-err__meta">
+    <span class="c-bd-err__marker">Error &middot; E07-211</span>
+    <span>Reader client</span>
+  </div>
+  <h3 class="c-bd-err__headline">Something's <em>not right.</em></h3>
+  <p class="c-bd-err__body">
+    We couldn't load the essays for issue 07 just now &mdash; the archive service isn't answering. Your annotations are safe, and nothing you've saved has been lost. Try once more; if it holds, we'll show you why.
+  </p>
+  <div class="c-bd-err__actions">
+    <button class="c-bd-err__link" type="button">Try again</button>
+    <a class="c-bd-err__link c-bd-err__link--muted" href="#">Contact the desk</a>
+  </div>
+</div>

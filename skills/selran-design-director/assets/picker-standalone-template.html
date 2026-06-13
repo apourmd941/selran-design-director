@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pick a design direction</title>
+<!--
+  picker-standalone-template.html — capability-ladder rung 3 (browser-tab picker).
+
+  Self-contained: inline styles + one inline script, NO network EXCEPT an
+  optional POST to a loopback URL the local picker server injects (see below).
+  Works two ways from the SAME file:
+
+  A) SERVED by assets/picker-serve.py (recommended, no Hub needed):
+     clicking an option POSTs the choice to the loopback server, which prints it
+     and exits — a real click-returns-to-skill loop. The server replaces the
+     <!--SELRAN_PICKER_CONFIG--> marker with the post URL.
+  B) Opened as a bare file:// (no server): clicking highlights the option and
+     shows "tell Claude: number N" with a copy button — the original fallback.
+
+  Either way: click a card, or press its number (1-9), or arrow + Enter.
+
+  HOW TO INSTANTIATE (the skill does this):
+  1. Duplicate the block between CARD-START and CARD-END once per option.
+  2. Fill per-card placeholders from assets/direction-starters/<direction>.md:
+       {{N}}  {{CHOICE}}  {{DIRECTION_NAME}}  {{FEEL_LINE}}
+       {{BG}} {{BG2}} {{FG}} {{FG_MUTED}} {{ACCENT}} {{ACCENT_FG}} {{BORDER}} {{RADIUS}}
+       {{DISPLAY_STACK}}  {{BODY_STACK}}  {{SAMPLE_HEADLINE}}  {{SAMPLE_BODY}}  {{SAMPLE_CTA}}
+     {{CHOICE}} is the value returned to the skill, e.g. "3: warm-approachable".
+  3. Replace {{PROJECT_NAME}} in the header.
+  4. Either run `python3 assets/picker-serve.py .design/picker.html` (mode A),
+     or write to .design/picker.html and open with the platform opener (mode B).
+-->
+<style>
+  :root {
+    --pg-bg: #101014; --pg-fg: #e8e8ec; --pg-muted: #9b9ba6;
+    --pg-surface: #16161c; --pg-line: #2a2a33; --pg-chip: #1b1b22; --pg-accent: #6aa6ff;
+  }
+  @media (prefers-color-scheme: light) {
+    :root { --pg-bg: #FBFBFA; --pg-fg: #1A1C1A; --pg-muted: #646A64;
+            --pg-surface: #fff; --pg-line: #E4E4DE; --pg-chip: #F4F4F1; --pg-accent: #1F6FE0; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--pg-bg); color: var(--pg-fg);
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 40px 24px 96px; }
+  .page-head { max-width: 1180px; margin: 0 auto 8px; }
+  .page-head h1 { font-size: 26px; font-weight: 650; letter-spacing: -0.01em; }
+  .page-head p  { color: var(--pg-muted); margin-top: 6px; font-size: 15px; }
+  .page-head .how { display: inline-block; margin-top: 14px; padding: 10px 14px;
+    background: var(--pg-chip); border: 1px solid var(--pg-line); border-radius: 8px; color: var(--pg-fg); font-size: 14.5px; }
+  .grid { max-width: 1180px; margin: 28px auto 0; display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 22px; }
+  .card { background: var(--pg-surface); border: 1px solid var(--pg-line); border-radius: 12px;
+    overflow: hidden; transition: border-color .15s, transform .15s, box-shadow .15s; cursor: pointer; }
+  .card:hover, .card:focus-visible { border-color: var(--pg-accent); transform: translateY(-2px); outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--pg-accent) 30%, transparent); }
+  .card[aria-pressed="true"] { border-color: var(--pg-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--pg-accent) 45%, transparent); }
+  .card .meta { padding: 14px 16px 16px; display: flex; gap: 12px; align-items: baseline; }
+  .card .num { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--pg-line); color: var(--pg-fg);
+    font-weight: 700; font-size: 15px; display: inline-flex; align-items: center; justify-content: center; transform: translateY(4px); }
+  .card .name { font-size: 17px; font-weight: 650; }
+  .card .feel { color: var(--pg-muted); font-size: 13.5px; margin-top: 3px; }
+  .mock { padding: 26px 24px 24px; min-height: 210px; }
+  .mock .eyebrow { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .65; margin-bottom: 10px; }
+  .mock h2 { font-size: 24px; line-height: 1.15; margin-bottom: 8px; font-weight: 700; }
+  .mock p  { font-size: 13.5px; line-height: 1.5; opacity: .8; max-width: 36ch; }
+  .mock .row { display: flex; gap: 10px; margin-top: 16px; align-items: center; }
+  .mock .btn { font-size: 13px; font-weight: 600; padding: 9px 16px; display: inline-block; }
+  .mock .chip { font-size: 12px; padding: 7px 12px; display: inline-block; }
+  /* confirmation banner (both modes) */
+  #banner { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(120%);
+    background: var(--pg-surface); border: 1px solid var(--pg-accent); border-radius: 10px; padding: 14px 18px;
+    max-width: 92vw; box-shadow: 0 12px 40px rgba(0,0,0,.3); transition: transform .2s; z-index: 50; font-size: 14.5px; }
+  #banner.show { transform: translateX(-50%) translateY(0); }
+  #banner b { color: var(--pg-accent); }
+  #banner button { margin-left: 12px; font: inherit; font-size: 13px; padding: 5px 10px; border: 1px solid var(--pg-line);
+    border-radius: 6px; background: var(--pg-chip); color: var(--pg-fg); cursor: pointer; }
+</style>
+</head>
+<body data-picker>
+  <!--SELRAN_PICKER_CONFIG-->
+  <div class="page-head">
+    <h1>How should {{PROJECT_NAME}} feel?</h1>
+    <p>Each one is a tiny live sample — same content, different soul. Click it, press its number, or arrow + Enter.</p>
+    <span class="how" id="hint">👉 Pick the one you like — your choice goes straight back to Claude.</span>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <!-- CARD-START -->
+    <div class="card" data-choice="{{CHOICE}}" tabindex="0" role="button" aria-pressed="false" aria-label="Option {{N}}: {{DIRECTION_NAME}} — {{FEEL_LINE}}">
+      <div class="mock" style="background: {{BG}}; color: {{FG}}; font-family: {{BODY_STACK}};">
+        <div class="eyebrow" style="color: {{FG_MUTED}};">{{DIRECTION_NAME}}</div>
+        <h2 style="font-family: {{DISPLAY_STACK}}; color: {{FG}};">{{SAMPLE_HEADLINE}}</h2>
+        <p style="color: {{FG_MUTED}};">{{SAMPLE_BODY}}</p>
+        <div class="row">
+          <span class="btn" style="background: {{ACCENT}}; color: {{ACCENT_FG}}; border-radius: {{RADIUS}}px;">{{SAMPLE_CTA}}</span>
+          <span class="chip" style="border: 1px solid {{BORDER}}; color: {{FG_MUTED}}; background: {{BG2}}; border-radius: {{RADIUS}}px;">Learn more</span>
+        </div>
+      </div>
+      <div class="meta">
+        <span class="num">{{N}}</span>
+        <span><span class="name">{{DIRECTION_NAME}}</span><div class="feel">{{FEEL_LINE}}</div></span>
+      </div>
+    </div>
+    <!-- CARD-END -->
+
+  </div>
+
+  <div id="banner" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".card[data-choice]"));
+  var post = window.__SELRAN_POST || null;   // injected by picker-serve.py in served mode
+  var banner = document.getElementById("banner");
+  var done = false;
+  if (cards[0]) cards[0].focus();
+
+  function show(html) { banner.innerHTML = html; banner.classList.add("show"); }
+
+  function pick(card) {
+    if (done || !card) return;
+    var choice = card.getAttribute("data-choice");
+    cards.forEach(function (c) { c.setAttribute("aria-pressed", c === card ? "true" : "false"); });
+    if (post) {
+      done = true;
+      fetch(post, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ choice: choice }) })
+        .then(function () { show("<b>Sent.</b> Back to Claude — you can close this tab."); })
+        .catch(function () { done = false; fallback(choice); });
+    } else {
+      fallback(choice);
+    }
+  }
+
+  function fallback(choice) {
+    var n = (choice.split(":")[0] || "").trim();
+    show('<b>Selected ' + choice.replace(/&/g,"&amp;").replace(/</g,"&lt;") + '.</b> Tell Claude: “number ' + n + '”' +
+         '<button id="cp">Copy</button>');
+    var cp = document.getElementById("cp");
+    if (cp) cp.onclick = function () { try { navigator.clipboard.writeText("number " + n); cp.textContent = "Copied"; } catch (e) {} };
+  }
+
+  cards.forEach(function (card) { card.addEventListener("click", function () { pick(card); }); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key >= "1" && e.key <= "9") { pick(cards[parseInt(e.key, 10) - 1]); return; }
+    var i = cards.indexOf(document.activeElement);
+    if (e.key === "Enter" && i >= 0) { pick(cards[i]); e.preventDefault(); }
+    if ((e.key === "ArrowRight" || e.key === "ArrowDown") && i >= 0 && cards[i + 1]) { cards[i + 1].focus(); e.preventDefault(); }
+    if ((e.key === "ArrowLeft" || e.key === "ArrowUp") && i > 0) { cards[i - 1].focus(); e.preventDefault(); }
+  });
+})();
+</script>
+</body>
+</html>

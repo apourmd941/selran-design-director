@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: warm-approachable
+  use: 404 page-not-found
+  variables: var(fg), var(bg), var(accent)
+  notes: a folded paper map with a kind "you're a bit off the trail" feel; soft shapes; NOT a sad face
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Off the path">
+  <style>
+    .wa-stroke { stroke: var(--fg, #2D1B0F); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+    .wa-thin   { stroke: var(--fg, #2D1B0F); fill: none; stroke-width: 1.5; stroke-linecap: round; opacity: .5; vector-effect: non-scaling-stroke; }
+    .wa-accent-fill { fill: var(--accent, #B04A2C); }
+    .wa-accent-soft { fill: var(--accent, #B04A2C); opacity: .2; }
+    .wa-sage-soft   { fill: #A8B88A; opacity: .65; }
+    .wa-blush-soft  { fill: #E8B39A; opacity: .7; }
+    .wa-serif-it { font-family: "Fraunces", "Crimson Pro", Georgia, serif; font-style: italic; fill: var(--fg, #2D1B0F); opacity: .7; }
+  </style>
+
+  <!-- ground shadow -->
+  <ellipse cx="200" cy="326" rx="130" ry="10" class="wa-blush-soft"/>
+
+  <!-- folded map: soft rounded rectangle with gentle creases -->
+  <g transform="translate(200 200)">
+    <!-- the map panel (slightly tilted) -->
+    <g transform="rotate(-6)">
+      <path fill="var(--bg, #FAF3E7)" class="wa-stroke"
+            d="M -130 -90 Q -130 -96 -124 -96 L 124 -96 Q 130 -96 130 -90 L 130 90 Q 130 96 124 96 L -124 96 Q -130 96 -130 90 Z"/>
+
+      <!-- fold crease lines -->
+      <line class="wa-thin" x1="-42" y1="-96" x2="-42" y2="96"/>
+      <line class="wa-thin" x1="42"  y1="-96" x2="42"  y2="96"/>
+
+      <!-- sage landmass blob -->
+      <path class="wa-sage-soft" d="M -100 -60 Q -60 -80 -20 -60 Q 20 -40 50 -60 Q 80 -78 110 -50 Q 100 -20 70 -10 Q 40 0 10 -10 Q -40 -20 -80 -10 Q -100 -30 -100 -60 Z"/>
+
+      <!-- wandering dashed path (the trail) -->
+      <path class="wa-thin" stroke-width="2" stroke-dasharray="4 5"
+            d="M -100 60 Q -50 40 -20 50 Q 20 60 60 30 Q 100 0 80 -30"/>
+
+      <!-- accent "you are here" pin off-trail -->
+      <circle cx="-40" cy="70" r="6" class="wa-accent-fill"/>
+      <circle cx="-40" cy="70" r="14" class="wa-accent-soft"/>
+      <line class="wa-stroke" stroke-width="2" x1="-40" y1="70" x2="-40" y2="58"/>
+    </g>
+  </g>
+
+  <!-- italic caption -->
+  <text x="200" y="352" text-anchor="middle" font-size="18" class="wa-serif-it">a little off the path.</text>
+  <text x="200" y="376" text-anchor="middle" font-size="12"
+        font-family="Commissioner, Instrument Sans, ui-sans-serif, sans-serif"
+        fill="var(--fg, #2D1B0F)" opacity=".55" letter-spacing="0.1em">404</text>
+</svg>

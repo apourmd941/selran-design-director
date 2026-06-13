@@ -1,0 +1,174 @@
+<style>
+  .c-vp-validate {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 44px 40px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg, 20px);
+    box-shadow: 0 20px 40px -20px rgba(0,0,0,0.1);
+    font-family: inherit;
+  }
+  .c-vp-validate__title {
+    font-size: 26px; letter-spacing: -0.02em; font-weight: 700;
+    color: var(--fg); margin: 0 0 6px;
+  }
+  .c-vp-validate__sub {
+    font-size: 15px; color: var(--fg-muted);
+    margin: 0 0 28px;
+  }
+  .c-vp-validate__field { margin-bottom: 18px; }
+  .c-vp-validate__label {
+    display: block;
+    font-size: 13px; font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 6px;
+  }
+  .c-vp-validate__input-wrap { position: relative; }
+  .c-vp-validate__input {
+    width: 100%; box-sizing: border-box;
+    padding: 12px 40px 12px 14px;
+    font-size: 14px; font-family: inherit; font-weight: 500;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border-strong, var(--border));
+    border-radius: var(--radius-md, 12px);
+    outline: none;
+    transition: border-color 280ms cubic-bezier(0.34, 1.1, 0.64, 1),
+                box-shadow 280ms cubic-bezier(0.34, 1.1, 0.64, 1);
+  }
+  .c-vp-validate__input:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 24%, transparent);
+  }
+  .c-vp-validate__field[data-state="valid"] .c-vp-validate__input {
+    border-color: var(--p2, var(--semantic-success, #10B981));
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--p2, #10B981) 22%, transparent);
+  }
+  .c-vp-validate__field[data-state="invalid"] .c-vp-validate__input {
+    border-color: var(--semantic-error, #E86A5C);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--semantic-error, #E86A5C) 22%, transparent);
+  }
+  .c-vp-validate__field[data-state="disabled"] .c-vp-validate__input {
+    background: var(--bg-2);
+    color: var(--fg-muted);
+    cursor: not-allowed;
+  }
+  .c-vp-validate__icon {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    width: 22px; height: 22px; display: none;
+    align-items: center; justify-content: center;
+    border-radius: 50%;
+    color: var(--bg);
+    pointer-events: none;
+  }
+  .c-vp-validate__field[data-state="valid"] .c-vp-validate__icon--ok {
+    display: flex;
+    background: var(--p2, var(--semantic-success, #10B981));
+  }
+  .c-vp-validate__field[data-state="invalid"] .c-vp-validate__icon--err {
+    display: flex;
+    background: var(--semantic-error, #E86A5C);
+  }
+  .c-vp-validate__icon svg { width: 12px; height: 12px; }
+  .c-vp-validate__msg {
+    display: none;
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    align-items: center; gap: 6px;
+  }
+  .c-vp-validate__field[data-state="valid"] .c-vp-validate__msg--ok {
+    display: flex;
+    color: var(--p2, var(--semantic-success, #10B981));
+  }
+  .c-vp-validate__field[data-state="invalid"] .c-vp-validate__msg--err {
+    display: flex;
+    color: var(--semantic-error, #E86A5C);
+  }
+  .c-vp-validate__field[data-state="disabled"] .c-vp-validate__msg--note {
+    display: flex;
+    color: var(--fg-muted);
+    font-weight: 400;
+  }
+  .c-vp-validate__actions {
+    margin-top: 28px; padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: flex-end;
+  }
+  .c-vp-validate__btn {
+    padding: 12px 24px;
+    font-size: 15px; font-weight: 500;
+    font-family: inherit;
+    background: var(--accent); color: var(--bg);
+    border: 0; border-radius: var(--radius-md, 12px);
+    cursor: pointer;
+    transition: transform 280ms cubic-bezier(0.34, 1.1, 0.64, 1),
+                box-shadow 280ms cubic-bezier(0.34, 1.1, 0.64, 1);
+  }
+  .c-vp-validate__btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px color-mix(in oklab, var(--accent) 40%, transparent);
+  }
+  .c-vp-validate__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent);
+  }
+  .c-vp-validate__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  @media (max-width: 900px) {
+    .c-vp-validate { max-width: none; box-shadow: none; padding: 36px 24px; border-radius: 0; border-left: 0; border-right: 0; }
+  }
+</style>
+
+<form class="c-vp-validate" novalidate>
+  <h2 class="c-vp-validate__title">Project settings</h2>
+  <p class="c-vp-validate__sub">Four fields, five states — so you can see every flavor at once.</p>
+
+  <div class="c-vp-validate__field" data-state="default">
+    <label class="c-vp-validate__label" for="vp-v-project">Project name</label>
+    <div class="c-vp-validate__input-wrap">
+      <input class="c-vp-validate__input" id="vp-v-project" name="project" type="text" placeholder="Third Draft">
+    </div>
+  </div>
+
+  <div class="c-vp-validate__field" data-state="valid">
+    <label class="c-vp-validate__label" for="vp-v-handle">Workspace handle</label>
+    <div class="c-vp-validate__input-wrap">
+      <input class="c-vp-validate__input" id="vp-v-handle" name="handle" type="text" value="third-draft" aria-describedby="vp-v-handle-ok">
+      <span class="c-vp-validate__icon c-vp-validate__icon--ok" aria-hidden="true">
+        <svg viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M3 8.5l3.2 3L13 5"/></svg>
+      </span>
+    </div>
+    <div class="c-vp-validate__msg c-vp-validate__msg--ok" id="vp-v-handle-ok">
+      <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M3 8.5l3.2 3L13 5"/></svg>
+      Nice — thirddraft.so/third-draft is yours.
+    </div>
+  </div>
+
+  <div class="c-vp-validate__field" data-state="invalid">
+    <label class="c-vp-validate__label" for="vp-v-email">Notifications email</label>
+    <div class="c-vp-validate__input-wrap">
+      <input class="c-vp-validate__input" id="vp-v-email" name="email" type="email" value="jules@studio" aria-invalid="true" aria-describedby="vp-v-email-err">
+      <span class="c-vp-validate__icon c-vp-validate__icon--err" aria-hidden="true">
+        <svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </span>
+    </div>
+    <div class="c-vp-validate__msg c-vp-validate__msg--err" id="vp-v-email-err">
+      <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4v5M8 11v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      Missing the dot-something — try jules@studio.com.
+    </div>
+  </div>
+
+  <div class="c-vp-validate__field" data-state="disabled">
+    <label class="c-vp-validate__label" for="vp-v-plan">Plan</label>
+    <div class="c-vp-validate__input-wrap">
+      <input class="c-vp-validate__input" id="vp-v-plan" name="plan" type="text" value="Team · $12/seat/mo" disabled>
+    </div>
+    <div class="c-vp-validate__msg c-vp-validate__msg--note">Managed on the Billing page — no touching from here.</div>
+  </div>
+
+  <div class="c-vp-validate__actions">
+    <button class="c-vp-validate__btn" type="submit" disabled>Save project</button>
+  </div>
+</form>

@@ -1,0 +1,165 @@
+<style>
+  .c-br-hero-split {
+    padding: 48px 0;
+    border-bottom: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', monospace);
+  }
+  .c-br-hero-split__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 2px solid var(--border, var(--fg));
+  }
+  .c-br-hero-split__left,
+  .c-br-hero-split__right {
+    padding: 40px;
+  }
+  .c-br-hero-split__left {
+    border-right: 2px solid var(--border, var(--fg));
+  }
+  .c-br-hero-split__tag {
+    display: inline-block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 4px 8px;
+    border: 2px solid var(--border, var(--fg));
+    margin-bottom: 20px;
+  }
+  .c-br-hero-split__tag--hot {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-br-hero-split__headline {
+    font-size: clamp(28px, 3.4vw, 42px);
+    font-weight: 700;
+    line-height: 1.08;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin-bottom: 20px;
+  }
+  .c-br-hero-split__headline em {
+    font-style: normal;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 0 6px;
+  }
+  .c-br-hero-split__lead {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin-bottom: 24px;
+  }
+  .c-br-hero-split__cta { display: flex; flex-wrap: wrap; }
+  .c-br-hero-split__btn {
+    padding: 12px 18px;
+    font-family: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 13px;
+    border: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+    color: var(--fg);
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: -2px;
+  }
+  .c-br-hero-split__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-br-hero-split__btn:hover { background: var(--fg); color: var(--bg); }
+  .c-br-hero-split__btn--primary:hover {
+    background: var(--fg);
+    color: var(--accent);
+    border-color: var(--fg);
+  }
+
+  .c-br-hero-split__release {
+    border: 2px solid var(--border, var(--fg));
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .c-br-hero-split__release:last-child { margin-bottom: 0; }
+  .c-br-hero-split__release-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fg-muted);
+  }
+  .c-br-hero-split__release-title {
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .c-br-hero-split__release-artist {
+    font-size: 13px;
+    color: var(--fg);
+  }
+  .c-br-hero-split__release-artist strong { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .c-br-hero-split__inner { grid-template-columns: 1fr; }
+    .c-br-hero-split__left {
+      border-right: none;
+      border-bottom: 2px solid var(--border, var(--fg));
+    }
+    .c-br-hero-split__left, .c-br-hero-split__right { padding: 28px; }
+  }
+</style>
+
+<section class="c-br-hero-split">
+  <div class="c-br-hero-split__inner">
+    <div class="c-br-hero-split__left">
+      <span class="c-br-hero-split__tag c-br-hero-split__tag--hot">// new this week</span>
+      <h1 class="c-br-hero-split__headline">
+        A record pressed by hand, <em>mailed by humans,</em> priced for listeners.
+      </h1>
+      <p class="c-br-hero-split__lead">
+        {Brand} releases one vinyl and one cassette every month. 300 copies each. Numbered. Signed by the artist if you ask. No digital-only exclusives. No NFTs. No algorithm.
+      </p>
+      <div class="c-br-hero-split__cta">
+        <a href="#" class="c-br-hero-split__btn c-br-hero-split__btn--primary">Pre-order →</a>
+        <a href="#" class="c-br-hero-split__btn">Full catalog</a>
+      </div>
+    </div>
+    <div class="c-br-hero-split__right">
+      <div class="c-br-hero-split__release">
+        <div class="c-br-hero-split__release-top">
+          <span>PE-142 // 12" LP</span>
+          <span>300 pressed / 214 left</span>
+        </div>
+        <div class="c-br-hero-split__release-title">LOW TERRAIN</div>
+        <div class="c-br-hero-split__release-artist"><strong>Mira Halász</strong> — ships 2026-05-02 — $26</div>
+      </div>
+      <div class="c-br-hero-split__release">
+        <div class="c-br-hero-split__release-top">
+          <span>PE-141 // C60 TAPE</span>
+          <span>200 pressed / SOLD OUT</span>
+        </div>
+        <div class="c-br-hero-split__release-title">EVERY ROOM IS A ROOM</div>
+        <div class="c-br-hero-split__release-artist"><strong>Fen Chorus</strong> — repress TBA — $12</div>
+      </div>
+      <div class="c-br-hero-split__release">
+        <div class="c-br-hero-split__release-top">
+          <span>PE-140 // 7" EP</span>
+          <span>300 pressed / 41 left</span>
+        </div>
+        <div class="c-br-hero-split__release-title">GRID WEATHER</div>
+        <div class="c-br-hero-split__release-artist"><strong>Oleg P.</strong> — now shipping — $14</div>
+      </div>
+    </div>
+  </div>
+</section>

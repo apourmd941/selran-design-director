@@ -1,0 +1,120 @@
+<style>
+  .c-ed-hero {
+    padding: 120px 0 96px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-hero__inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .c-ed-hero__byline {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .c-ed-hero__byline .mono { font-family: inherit; color: inherit; letter-spacing: inherit; }
+  .c-ed-hero__byline em { font-style: italic; color: var(--fg); text-transform: none; letter-spacing: 0; font-size: 12px; }
+  .c-ed-hero__headline {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: clamp(48px, 6.4vw, 84px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 40px;
+  }
+  .c-ed-hero__headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .c-ed-hero__intro {
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--fg);
+    max-width: 62ch;
+  }
+  .c-ed-hero__intro::first-letter {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 68px;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .c-ed-hero__side {
+    position: sticky;
+    top: 48px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .c-ed-hero__side .mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    display: block;
+    margin: 16px 0 8px;
+  }
+  .c-ed-hero__side p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--fg);
+    margin-bottom: 20px;
+  }
+  .c-ed-hero__pullquote {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--fg);
+    border-left: 2px solid var(--accent);
+    padding-left: 18px;
+    margin-top: 32px;
+  }
+
+  @media (max-width: 900px) {
+    .c-ed-hero { padding: 80px 0 60px; }
+    .c-ed-hero__inner { grid-template-columns: 1fr; gap: 48px; }
+    .c-ed-hero__side { position: static; border-top: 1px solid var(--border); padding-top: 24px; }
+  }
+</style>
+
+<section class="c-ed-hero">
+  <div class="c-ed-hero__inner">
+    <div>
+      <div class="c-ed-hero__byline">
+        <span class="mono">Issue No. 04</span>
+        <span class="mono">Spring 2026</span>
+        <em>Reported by the {Brand} editors</em>
+      </div>
+      <h1 class="c-ed-hero__headline">
+        A quieter case for<br/><em>finance done well.</em>
+      </h1>
+      <p class="c-ed-hero__intro">
+        Somewhere between the spreadsheet and the quarterly review, a habit hardened: treat the ledger as a chore, the close as a crisis, and the numbers as something to be reshaped after the fact. {Brand} argues for the opposite — that the books should be correct as they happen, and that trust in the numbers is the first product of a finance function worth keeping.
+      </p>
+    </div>
+    <aside class="c-ed-hero__side">
+      <span class="mono">In this issue</span>
+      <p>A conversation with three operators who stopped waiting for month-end to know where they stand — and what they learned about pace, posture, and pricing in the process.</p>
+      <div class="c-ed-hero__pullquote">
+        “The close was never the problem. The month was.”
+      </div>
+    </aside>
+  </div>
+</section>

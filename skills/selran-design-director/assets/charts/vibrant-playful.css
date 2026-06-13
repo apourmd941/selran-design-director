@@ -1,0 +1,157 @@
+/* Vibrant-Playful — chart utilities
+ * DIRECT PALETTE MAPPING. Series 0–4 pull color.palette in order;
+ * series 5–7 extend palette[0..2] with +12% lightness tonal steps.
+ */
+
+.dv-vp-root {
+  /* Series 1–5: direct palette map (light mode) */
+  --chart-series-1: #C44A2E;   /* palette[0] — also primary accent */
+  --chart-series-2: #1F6B88;   /* palette[1] */
+  --chart-series-3: #9C6014;   /* palette[2] */
+  --chart-series-4: #553E5A;   /* palette[3] */
+  --chart-series-5: #2A7B60;   /* palette[4] */
+  /* Series 6–8: tonal extension of palette[0..2] */
+  --chart-series-6: #D97259;   /* lighten(palette[0], 12%) */
+  --chart-series-7: #4F8FA8;   /* lighten(palette[1], 12%) */
+  --chart-series-8: #B78439;   /* lighten(palette[2], 12%) */
+
+  --chart-axis-color: #3F3F3F;
+  --chart-gridline: rgba(232, 223, 201, 0.8);
+  --chart-tick-color: #6A6A6A;
+  --chart-bg: #FFFBF5;
+  --chart-fg: #1A1A1A;
+  --chart-border: #E8DFC9;
+  --chart-border-strong: #D1BF9E;
+
+  background: var(--chart-bg);
+  color: var(--chart-fg);
+  font-family: "Satoshi", "Inter", system-ui, sans-serif;
+}
+
+.dv-vp-root.dv-vp-dark {
+  /* Dark mode palette from vibrant-playful.md */
+  --chart-series-1: #FF6B50;
+  --chart-series-2: #4A9BC4;
+  --chart-series-3: #E09940;
+  --chart-series-4: #9578A1;
+  --chart-series-5: #5FBA9C;
+  --chart-series-6: #FF8E78;
+  --chart-series-7: #74B5D3;
+  --chart-series-8: #EBB067;
+  --chart-axis-color: #D4CCBF;
+  --chart-gridline: rgba(51, 44, 34, 0.8);
+  --chart-tick-color: #998E7D;
+  --chart-bg: #1A1613;
+  --chart-fg: #FFFBF5;
+  --chart-border: #332C22;
+  --chart-border-strong: #4A4030;
+}
+
+/* Title / subtitle */
+.dv-vp-title {
+  font-family: "Satoshi", "Inter", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--chart-fg);
+  margin: 0 0 4px 0;
+}
+.dv-vp-subtitle {
+  font-family: "Satoshi", "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--chart-tick-color);
+  margin: 0 0 20px 0;
+}
+
+/* Axis */
+.dv-vp-axis {
+  stroke: var(--chart-border);
+  stroke-width: 1;
+  fill: none;
+}
+.dv-vp-gridline {
+  stroke: var(--chart-gridline);
+  stroke-width: 1;
+  fill: none;
+}
+.dv-vp-tick {
+  fill: var(--chart-tick-color);
+  font-family: "Satoshi", "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.dv-vp-axis-label {
+  fill: var(--chart-axis-color);
+  font-family: "Satoshi", "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Legend — top-left, friendly */
+.dv-vp-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: "Satoshi", "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--chart-fg);
+  padding: 0 0 12px 0;
+}
+.dv-vp-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.dv-vp-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dv-vp-legend-item[data-active="true"] .dv-vp-legend-dot {
+  box-shadow: 0 0 0 2px var(--chart-bg), 0 0 0 4px currentColor;
+}
+
+/* Tooltip — soft white card */
+.dv-vp-tooltip {
+  background: var(--chart-bg);
+  border: 1px solid var(--chart-border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-family: "Satoshi", "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--chart-fg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+.dv-vp-tooltip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  box-shadow: 0 0 0 2px var(--chart-bg);
+}
+
+/* Annotation */
+.dv-vp-annotation {
+  font-family: "Satoshi", "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  fill: var(--chart-fg);
+}
+.dv-vp-annotation-line {
+  stroke: var(--chart-border-strong);
+  stroke-width: 1;
+  fill: none;
+}
+
+/* Bars get rounded corners in this direction */
+.dv-vp-root rect.bar,
+.dv-vp-root .bar {
+  rx: 6;
+  ry: 6;
+}

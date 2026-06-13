@@ -1,0 +1,208 @@
+<style>
+  .c-wa-skel {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 64px 32px;
+  }
+  .c-wa-skel__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .c-wa-skel__eyebrow {
+    font-family: var(--ff-display, 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--accent);
+  }
+  .c-wa-skel__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .c-wa-skel__card {
+    background: var(--bg-2);
+    border-radius: var(--radius-lg, 24px);
+    padding: 28px;
+    box-shadow: 0 6px 24px rgba(61, 40, 23, 0.06);
+  }
+  .c-wa-skel__thumb {
+    height: 140px;
+    background: var(--bg);
+    border-radius: var(--radius-lg, 24px);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .c-wa-skel__thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.55) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: c-wa-skel-sweep 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  .c-wa-skel__bar {
+    height: 12px;
+    border-radius: 999px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .c-wa-skel__bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.55) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: c-wa-skel-sweep 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  .c-wa-skel__bar + .c-wa-skel__bar { margin-top: 10px; }
+  .c-wa-skel__bar--title { height: 16px; width: 70%; margin-bottom: 14px; }
+  .c-wa-skel__bar--long  { width: 100%; }
+  .c-wa-skel__bar--mid   { width: 78%; }
+  .c-wa-skel__bar--short { width: 40%; }
+  .c-wa-skel__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+  }
+  .c-wa-skel__price {
+    width: 72px; height: 18px;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--accent) 22%, var(--bg));
+    position: relative; overflow: hidden;
+  }
+  .c-wa-skel__price::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: c-wa-skel-sweep 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  .c-wa-skel__pill {
+    width: 56px; height: 22px;
+    border-radius: 999px;
+    background: var(--bg);
+    position: relative; overflow: hidden;
+  }
+  .c-wa-skel__pill::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.55) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: c-wa-skel-sweep 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  .c-wa-skel__card:nth-child(2) [class*="after"],
+  .c-wa-skel__card:nth-child(2) .c-wa-skel__thumb::after,
+  .c-wa-skel__card:nth-child(2) .c-wa-skel__bar::after,
+  .c-wa-skel__card:nth-child(2) .c-wa-skel__price::after,
+  .c-wa-skel__card:nth-child(2) .c-wa-skel__pill::after { animation-delay: 180ms; }
+  .c-wa-skel__card:nth-child(3) .c-wa-skel__thumb::after,
+  .c-wa-skel__card:nth-child(3) .c-wa-skel__bar::after,
+  .c-wa-skel__card:nth-child(3) .c-wa-skel__price::after,
+  .c-wa-skel__card:nth-child(3) .c-wa-skel__pill::after { animation-delay: 360ms; }
+  .c-wa-skel__card:nth-child(4) .c-wa-skel__thumb::after,
+  .c-wa-skel__card:nth-child(4) .c-wa-skel__bar::after,
+  .c-wa-skel__card:nth-child(4) .c-wa-skel__price::after,
+  .c-wa-skel__card:nth-child(4) .c-wa-skel__pill::after { animation-delay: 540ms; }
+  .c-wa-skel__card:nth-child(5) .c-wa-skel__thumb::after,
+  .c-wa-skel__card:nth-child(5) .c-wa-skel__bar::after,
+  .c-wa-skel__card:nth-child(5) .c-wa-skel__price::after,
+  .c-wa-skel__card:nth-child(5) .c-wa-skel__pill::after { animation-delay: 720ms; }
+  .c-wa-skel__card:nth-child(6) .c-wa-skel__thumb::after,
+  .c-wa-skel__card:nth-child(6) .c-wa-skel__bar::after,
+  .c-wa-skel__card:nth-child(6) .c-wa-skel__price::after,
+  .c-wa-skel__card:nth-child(6) .c-wa-skel__pill::after { animation-delay: 900ms; }
+
+  @keyframes c-wa-skel-sweep {
+    0%   { transform: translateX(-100%); }
+    60%  { transform: translateX(100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @media (max-width: 900px) {
+    .c-wa-skel__grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-wa-skel__thumb::after,
+    .c-wa-skel__bar::after,
+    .c-wa-skel__price::after,
+    .c-wa-skel__pill::after { animation: none; display: none; }
+  }
+</style>
+
+<section class="c-wa-skel" aria-busy="true" aria-label="Loading shop">
+  <div class="c-wa-skel__header">
+    <span class="c-wa-skel__eyebrow">Bringing in the new season&hellip;</span>
+  </div>
+  <div class="c-wa-skel__grid">
+    <div class="c-wa-skel__card">
+      <div class="c-wa-skel__thumb"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--title"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--long"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--mid"></div>
+      <div class="c-wa-skel__row"><div class="c-wa-skel__price"></div><div class="c-wa-skel__pill"></div></div>
+    </div>
+    <div class="c-wa-skel__card">
+      <div class="c-wa-skel__thumb"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--title"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--long"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--short"></div>
+      <div class="c-wa-skel__row"><div class="c-wa-skel__price"></div><div class="c-wa-skel__pill"></div></div>
+    </div>
+    <div class="c-wa-skel__card">
+      <div class="c-wa-skel__thumb"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--title"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--mid"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--long"></div>
+      <div class="c-wa-skel__row"><div class="c-wa-skel__price"></div><div class="c-wa-skel__pill"></div></div>
+    </div>
+    <div class="c-wa-skel__card">
+      <div class="c-wa-skel__thumb"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--title"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--long"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--mid"></div>
+      <div class="c-wa-skel__row"><div class="c-wa-skel__price"></div><div class="c-wa-skel__pill"></div></div>
+    </div>
+    <div class="c-wa-skel__card">
+      <div class="c-wa-skel__thumb"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--title"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--short"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--long"></div>
+      <div class="c-wa-skel__row"><div class="c-wa-skel__price"></div><div class="c-wa-skel__pill"></div></div>
+    </div>
+    <div class="c-wa-skel__card">
+      <div class="c-wa-skel__thumb"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--title"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--mid"></div>
+      <div class="c-wa-skel__bar c-wa-skel__bar--short"></div>
+      <div class="c-wa-skel__row"><div class="c-wa-skel__price"></div><div class="c-wa-skel__pill"></div></div>
+    </div>
+  </div>
+</section>

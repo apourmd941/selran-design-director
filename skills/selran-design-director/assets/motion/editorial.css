@@ -1,0 +1,143 @@
+/* ==========================================================================
+   Motion: Editorial
+   Prefix: .m-ed-*
+   Feel: quiet confidence. Fades only. No bouncing, no parallax.
+   Signature gesture: page-turn reveal via clip-path — typography, not toys.
+   ========================================================================== */
+
+:root {
+  --m-ed-duration-fast:     var(--motion-duration-fast,   180ms);
+  --m-ed-duration-base:     var(--motion-duration,        250ms);
+  --m-ed-duration-slow:     var(--motion-duration-slow,   400ms);
+  --m-ed-duration-reveal:   600ms;
+  --m-ed-easing:            var(--motion-easing,          cubic-bezier(0.2, 0, 0, 1));
+  --m-ed-easing-dramatic:   cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* ---------- Transitions --------------------------------------------------- */
+
+.m-ed-btn {
+  transition:
+    background-color var(--m-ed-duration-base) var(--m-ed-easing),
+    color            var(--m-ed-duration-base) var(--m-ed-easing),
+    border-color     var(--m-ed-duration-base) var(--m-ed-easing);
+}
+
+.m-ed-card {
+  transition:
+    opacity      var(--m-ed-duration-base) var(--m-ed-easing),
+    border-color var(--m-ed-duration-base) var(--m-ed-easing);
+}
+.m-ed-card:hover { opacity: 0.92; }
+
+/* Link underline — ink-wipe from left, slower and more deliberate than tech */
+.m-ed-link {
+  position: relative;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: left 92%;
+  transition: background-size var(--m-ed-duration-slow) var(--m-ed-easing);
+}
+.m-ed-link:hover,
+.m-ed-link:focus-visible { background-size: 100% 1px; }
+
+.m-ed-input {
+  transition:
+    border-color var(--m-ed-duration-base) var(--m-ed-easing),
+    background-color var(--m-ed-duration-base) var(--m-ed-easing);
+}
+.m-ed-input:focus-visible {
+  outline: none;
+  border-color: var(--color-fg-primary, #1A1A1A);
+  background-color: var(--color-bg-secondary, #EEE8DC);
+}
+
+/* ---------- Entrance animations ------------------------------------------ */
+
+@keyframes m-ed-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.m-ed-enter-fade-up {
+  animation: m-ed-fade-up var(--m-ed-duration-slow) var(--m-ed-easing) both;
+}
+
+/* Stagger — considered pace, like a page settling */
+.m-ed-stagger > * { animation: m-ed-fade-up var(--m-ed-duration-slow) var(--m-ed-easing) both; }
+.m-ed-stagger > *:nth-child(1) { animation-delay:   0ms; }
+.m-ed-stagger > *:nth-child(2) { animation-delay:  90ms; }
+.m-ed-stagger > *:nth-child(3) { animation-delay: 180ms; }
+.m-ed-stagger > *:nth-child(4) { animation-delay: 270ms; }
+.m-ed-stagger > *:nth-child(5) { animation-delay: 360ms; }
+.m-ed-stagger > *:nth-child(6) { animation-delay: 450ms; }
+
+/* ---------- Micro-interactions ------------------------------------------- */
+
+.m-ed-press { transition: opacity var(--m-ed-duration-fast) var(--m-ed-easing); }
+.m-ed-press:active { opacity: 0.7; }
+
+.m-ed-tap-scale { transition: transform var(--m-ed-duration-base) var(--m-ed-easing); }
+.m-ed-tap-scale:active { transform: scale(0.99); }
+
+/* Icon rotate — slower than technical, never infinite unless loading */
+@keyframes m-ed-spin { to { transform: rotate(360deg); } }
+.m-ed-icon-spin { animation: m-ed-spin 1200ms linear infinite; }
+
+/* ---------- Signature gesture: page-turn reveal --------------------------- */
+/* clip-path wipe from left — like a page settling or a letterpress print */
+
+@keyframes m-ed-page-turn {
+  0%   { clip-path: inset(0 100% 0 0); opacity: 0; }
+  40%  { opacity: 1; }
+  100% { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+
+.m-ed-page-turn {
+  animation: m-ed-page-turn var(--m-ed-duration-reveal) var(--m-ed-easing-dramatic) both;
+}
+
+/* Pull-quote entrance — combines page-turn with a faint settle */
+@keyframes m-ed-quote-in {
+  0%   { clip-path: inset(0 100% 0 0); transform: translateY(6px); opacity: 0; }
+  100% { clip-path: inset(0 0 0 0);    transform: translateY(0);   opacity: 1; }
+}
+.m-ed-quote-in {
+  animation: m-ed-quote-in 700ms var(--m-ed-easing-dramatic) both;
+}
+
+/* Rule-line draw — horizontal divider draws in from left */
+@keyframes m-ed-rule-draw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.m-ed-rule {
+  transform-origin: left center;
+  animation: m-ed-rule-draw var(--m-ed-duration-slow) var(--m-ed-easing) both;
+}
+
+/* ---------- Reduced motion ----------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .m-ed-btn,
+  .m-ed-card,
+  .m-ed-link,
+  .m-ed-input,
+  .m-ed-press,
+  .m-ed-tap-scale {
+    transition-duration: 0.01ms !important;
+  }
+  .m-ed-enter-fade-up,
+  .m-ed-stagger > *,
+  .m-ed-page-turn,
+  .m-ed-quote-in,
+  .m-ed-rule,
+  .m-ed-icon-spin {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    clip-path: none !important;
+  }
+  .m-ed-tap-scale:active { transform: none; }
+}

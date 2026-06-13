@@ -1,0 +1,240 @@
+<style>
+  .c-ed-cmd {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 17, 13, 0.35);
+    display: grid;
+    place-items: start center;
+    padding: 12vh 20px 20px;
+    z-index: 60;
+    font-family: inherit;
+  }
+  .c-ed-cmd[hidden] { display: none; }
+  .c-ed-cmd__panel {
+    width: 100%;
+    max-width: 620px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    animation: c-ed-cmd-in 250ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  @keyframes c-ed-cmd-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .c-ed-cmd__panel { animation: none; }
+  }
+
+  .c-ed-cmd__header {
+    padding: 28px 28px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-cmd__eyebrow {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-bottom: 10px;
+  }
+  .c-ed-cmd__headline {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin: 0 0 16px;
+  }
+  .c-ed-cmd__headline em { font-style: italic; color: var(--accent); }
+  .c-ed-cmd__input {
+    width: 100%;
+    box-sizing: border-box;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+    font-size: 18px;
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-style: italic;
+    color: var(--fg);
+    outline: none;
+    transition: border-color 250ms ease;
+  }
+  .c-ed-cmd__input::placeholder { color: var(--fg-muted); }
+  .c-ed-cmd__input:focus-visible { border-bottom-color: var(--accent); }
+
+  .c-ed-cmd__body {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  .c-ed-cmd__group { padding: 18px 28px; }
+  .c-ed-cmd__group + .c-ed-cmd__group { border-top: 1px solid var(--border); }
+  .c-ed-cmd__group-title {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .c-ed-cmd__roman {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 18px;
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .c-ed-cmd__group-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 11px;
+    color: var(--fg-muted);
+  }
+  .c-ed-cmd__list { list-style: none; margin: 0; padding: 0; }
+  .c-ed-cmd__row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 8px;
+    border-radius: 2px;
+    cursor: pointer;
+    color: var(--fg);
+    font-size: 15px;
+    line-height: 1.5;
+    transition: background-color 250ms ease;
+  }
+  .c-ed-cmd__row[aria-selected="true"], .c-ed-cmd__row:hover {
+    background: var(--bg-2);
+  }
+  .c-ed-cmd__row[aria-selected="true"] .c-ed-cmd__row-title {
+    color: var(--accent);
+    font-style: italic;
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+  }
+  .c-ed-cmd__row-title { flex: 1; }
+  .c-ed-cmd__row-meta {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+  }
+  .c-ed-cmd__glyph {
+    color: var(--fg-muted);
+    flex: none;
+  }
+
+  .c-ed-cmd__footer {
+    padding: 14px 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 24px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .c-ed-cmd__footer em {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--fg);
+    margin-left: 6px;
+    font-size: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .c-ed-cmd { padding: 0; }
+    .c-ed-cmd__panel { max-width: none; height: 100%; border: 0; border-radius: 0; }
+    .c-ed-cmd__body { max-height: none; }
+  }
+</style>
+
+<div class="c-ed-cmd" role="dialog" aria-modal="true" aria-labelledby="c-ed-cmd-title">
+  <div class="c-ed-cmd__panel">
+    <div class="c-ed-cmd__header">
+      <span class="c-ed-cmd__eyebrow">{Brand} · Index</span>
+      <h2 id="c-ed-cmd-title" class="c-ed-cmd__headline">Find <em>anything</em>.</h2>
+      <input class="c-ed-cmd__input" type="search" placeholder="Type a title, author, or command…" autofocus>
+    </div>
+
+    <div class="c-ed-cmd__body" role="listbox" aria-label="Results">
+      <section class="c-ed-cmd__group">
+        <div class="c-ed-cmd__group-title">
+          <span class="c-ed-cmd__roman">I.</span>
+          <span class="c-ed-cmd__group-label">Navigate</span>
+        </div>
+        <ul class="c-ed-cmd__list">
+          <li class="c-ed-cmd__row" role="option" aria-selected="true">
+            <svg class="c-ed-cmd__glyph" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2h10v10H2z" stroke="currentColor" stroke-width="1"/></svg>
+            <span class="c-ed-cmd__row-title">Today's issue</span>
+            <span class="c-ed-cmd__row-meta">G → T</span>
+          </li>
+          <li class="c-ed-cmd__row" role="option">
+            <svg class="c-ed-cmd__glyph" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 2v10l4-2 4 2V2z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/></svg>
+            <span class="c-ed-cmd__row-title">Saved essays</span>
+            <span class="c-ed-cmd__row-meta">G → S</span>
+          </li>
+          <li class="c-ed-cmd__row" role="option">
+            <svg class="c-ed-cmd__glyph" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2h4v10H2zM8 2h4v10H8z" stroke="currentColor" stroke-width="1"/></svg>
+            <span class="c-ed-cmd__row-title">Archive</span>
+            <span class="c-ed-cmd__row-meta">G → A</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="c-ed-cmd__group">
+        <div class="c-ed-cmd__group-title">
+          <span class="c-ed-cmd__roman">II.</span>
+          <span class="c-ed-cmd__group-label">Actions</span>
+        </div>
+        <ul class="c-ed-cmd__list">
+          <li class="c-ed-cmd__row" role="option">
+            <svg class="c-ed-cmd__glyph" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1"/></svg>
+            <span class="c-ed-cmd__row-title">Start a new note</span>
+            <span class="c-ed-cmd__row-meta">⌘N</span>
+          </li>
+          <li class="c-ed-cmd__row" role="option">
+            <svg class="c-ed-cmd__glyph" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 3h8v8H3z" stroke="currentColor" stroke-width="1"/><path d="M3 3l4 4 4-4" stroke="currentColor" stroke-width="1"/></svg>
+            <span class="c-ed-cmd__row-title">Send this to Kindle</span>
+            <span class="c-ed-cmd__row-meta">⌘E</span>
+          </li>
+          <li class="c-ed-cmd__row" role="option">
+            <svg class="c-ed-cmd__glyph" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 4h6v6H4z" stroke="currentColor" stroke-width="1"/><path d="M6 6h2v2H6z" fill="currentColor"/></svg>
+            <span class="c-ed-cmd__row-title">Toggle reader mode</span>
+            <span class="c-ed-cmd__row-meta">⌘R</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="c-ed-cmd__group">
+        <div class="c-ed-cmd__group-title">
+          <span class="c-ed-cmd__roman">III.</span>
+          <span class="c-ed-cmd__group-label">Recent</span>
+        </div>
+        <ul class="c-ed-cmd__list">
+          <li class="c-ed-cmd__row" role="option">
+            <svg class="c-ed-cmd__glyph" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1"/><path d="M7 4v3l2 1.5" stroke="currentColor" stroke-width="1"/></svg>
+            <span class="c-ed-cmd__row-title">On the virtue of slow software — Emma Fallon</span>
+            <span class="c-ed-cmd__row-meta">2h</span>
+          </li>
+          <li class="c-ed-cmd__row" role="option">
+            <svg class="c-ed-cmd__glyph" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1"/><path d="M7 4v3l2 1.5" stroke="currentColor" stroke-width="1"/></svg>
+            <span class="c-ed-cmd__row-title">A quieter case for finance done well</span>
+            <span class="c-ed-cmd__row-meta">Yesterday</span>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="c-ed-cmd__footer">
+      <span>Select<em>Return</em></span>
+      <span>Navigate<em>↑ ↓</em></span>
+      <span>Dismiss<em>Esc</em></span>
+    </div>
+  </div>
+</div>

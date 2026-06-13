@@ -1,0 +1,154 @@
+/* Warm-Approachable — chart utilities
+ * Tonal stepping from accent #B04A2C (terracotta) with warm neutrals.
+ * Rounded caps, soft shadows, humanist sans.
+ */
+
+.dv-wa-root {
+  /* Series — terracotta ramp + warm neutrals */
+  --chart-series-1: #B04A2C;   /* accent */
+  --chart-series-2: #D27253;   /* accent lightened */
+  --chart-series-3: #7A2F18;   /* accent darkened */
+  --chart-series-4: #E89C7D;   /* accent soft */
+  --chart-series-5: #7A6250;   /* warm gray anchor */
+  --chart-series-6: #A89478;   /* warm gray light */
+  --chart-series-7: #4A1A08;   /* accent near-black */
+  --chart-series-8: #5A4332;   /* warm gray deep */
+
+  --chart-axis-color: #5A4332;
+  --chart-gridline: rgba(224, 206, 176, 0.7);
+  --chart-tick-color: #7A6250;
+  --chart-bg: #FAF3E7;
+  --chart-fg: #2D1B0F;
+  --chart-border: #E0CEB0;
+  --chart-border-strong: #C9B18C;
+  --chart-shadow: 0 8px 24px rgba(45, 27, 15, 0.12);
+
+  background: var(--chart-bg);
+  color: var(--chart-fg);
+  font-family: "Commissioner", "Inter", system-ui, sans-serif;
+}
+
+.dv-wa-root.dv-wa-dark {
+  --chart-series-1: #E87040;
+  --chart-series-2: #F48856;
+  --chart-series-3: #B04A2C;
+  --chart-series-4: #F7A684;
+  --chart-series-5: #A89478;
+  --chart-series-6: #D4C2A5;
+  --chart-series-7: #8E381A;
+  --chart-series-8: #7A6250;
+  --chart-axis-color: #D4C2A5;
+  --chart-gridline: rgba(58, 43, 33, 0.8);
+  --chart-tick-color: #A89478;
+  --chart-bg: #1F1612;
+  --chart-fg: #F5E8D3;
+  --chart-border: #3A2B21;
+  --chart-border-strong: #4F3D2E;
+}
+
+/* Title / subtitle */
+.dv-wa-title {
+  font-family: "Fraunces", "Georgia", serif;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--chart-fg);
+  margin: 0 0 8px 0;
+}
+.dv-wa-subtitle {
+  font-family: "Commissioner", "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--chart-tick-color);
+  margin: 0 0 20px 0;
+}
+
+/* Axis */
+.dv-wa-axis {
+  stroke: var(--chart-border-strong);
+  stroke-width: 1;
+  fill: none;
+}
+.dv-wa-gridline {
+  stroke: var(--chart-gridline);
+  stroke-width: 1;
+  fill: none;
+}
+.dv-wa-tick {
+  fill: var(--chart-tick-color);
+  font-family: "Commissioner", "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+.dv-wa-axis-label {
+  fill: var(--chart-axis-color);
+  font-family: "Commissioner", "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Legend — friendly top-left */
+.dv-wa-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: "Commissioner", "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--chart-fg);
+  padding: 0 0 12px 0;
+}
+.dv-wa-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.dv-wa-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Tooltip — cream card, soft warm shadow */
+.dv-wa-tooltip {
+  background: var(--chart-bg);
+  border: none;
+  border-radius: 16px;
+  padding: 12px 16px;
+  font-family: "Commissioner", "Inter", sans-serif;
+  font-size: 14px;
+  color: var(--chart-fg);
+  box-shadow: var(--chart-shadow);
+}
+.dv-wa-tooltip-value {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Annotation */
+.dv-wa-annotation {
+  font-family: "Fraunces", serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  fill: var(--chart-fg);
+}
+.dv-wa-annotation-line {
+  stroke: var(--chart-border-strong);
+  stroke-width: 1;
+  fill: none;
+  stroke-linecap: round;
+}
+
+/* Optional — paths get rounded joins by default in this direction */
+.dv-wa-root path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

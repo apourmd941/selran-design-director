@@ -1,0 +1,142 @@
+<style>
+  .c-br-footer {
+    border-top: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', monospace);
+    font-size: 13px;
+    background: var(--bg);
+  }
+  .c-br-footer__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 32px;
+    border-bottom: 2px solid var(--border, var(--fg));
+  }
+  .c-br-footer__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fg);
+    text-decoration: none;
+    margin-bottom: 12px;
+  }
+  .c-br-footer__mark {
+    width: 18px; height: 18px;
+    background: var(--fg);
+  }
+  .c-br-footer__tag {
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--fg);
+    max-width: 34ch;
+  }
+  .c-br-footer__tag strong {
+    display: block;
+    margin-top: 8px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .c-br-footer__col h4 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border, var(--fg));
+    font-weight: 700;
+  }
+  .c-br-footer__col ul {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .c-br-footer__col a {
+    color: var(--fg);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .c-br-footer__col a:hover { background: var(--accent); color: var(--bg); text-decoration: none; }
+
+  .c-br-footer__bottom {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 11px;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 900px) {
+    .c-br-footer__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .c-br-footer__brand-col { grid-column: span 2; }
+  }
+</style>
+
+<footer class="c-br-footer">
+  <div class="c-br-footer__inner">
+    <div class="c-br-footer__brand-col">
+      <a class="c-br-footer__brand" href="#">
+        <span class="c-br-footer__mark"></span>{Brand}
+      </a>
+      <p class="c-br-footer__tag">
+        Independent record label and zine. Brooklyn, NY. Since 2014.
+        <strong>// site size: 11.4kb / built by hand</strong>
+      </p>
+    </div>
+    <div class="c-br-footer__col">
+      <h4>// catalog</h4>
+      <ul>
+        <li><a href="#">Releases</a></li>
+        <li><a href="#">Pre-orders</a></li>
+        <li><a href="#">Repressings</a></li>
+        <li><a href="#">Tapes</a></li>
+      </ul>
+    </div>
+    <div class="c-br-footer__col">
+      <h4>// read</h4>
+      <ul>
+        <li><a href="#">Zine archive</a></li>
+        <li><a href="#">Manifesto</a></li>
+        <li><a href="#">2025 ledger</a></li>
+      </ul>
+    </div>
+    <div class="c-br-footer__col">
+      <h4>// attend</h4>
+      <ul>
+        <li><a href="#">Show calendar</a></li>
+        <li><a href="#">Booking</a></li>
+        <li><a href="#">Demo submissions</a></li>
+      </ul>
+    </div>
+    <div class="c-br-footer__col">
+      <h4>// contact</h4>
+      <ul>
+        <li><a href="#">mail@{Brand}</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Bandcamp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="c-br-footer__bottom">
+    <span>&copy; 2014—2026 {Brand} // all rights reserved to the artists</span>
+    <span>privacy // terms // no cookies, no scripts</span>
+  </div>
+</footer>

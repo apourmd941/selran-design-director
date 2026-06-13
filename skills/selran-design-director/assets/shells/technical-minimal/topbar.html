@@ -1,0 +1,250 @@
+<style>
+  .c-tm-topbar {
+    display: flex; align-items: center; gap: 16px;
+    height: 56px;
+    padding: 0 20px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    font-family: inherit;
+    color: var(--fg);
+    position: sticky; top: 0; z-index: 20;
+    box-sizing: border-box;
+  }
+  .c-tm-topbar__ws {
+    position: relative;
+  }
+  .c-tm-topbar__ws-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 10px 6px 8px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--fg);
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                border-color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-topbar__ws-btn:hover { background: var(--bg-2); }
+  .c-tm-topbar__ws-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+  .c-tm-topbar__ws-initial {
+    width: 22px; height: 22px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 5px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .c-tm-topbar__ws-name { max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .c-tm-topbar__ws-caret { color: var(--fg-muted); }
+  .c-tm-topbar__ws-menu {
+    position: absolute; top: calc(100% + 6px); left: 0;
+    width: 260px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px;
+    display: none;
+    z-index: 30;
+  }
+  .c-tm-topbar__ws[data-open="true"] .c-tm-topbar__ws-menu { display: block; }
+  .c-tm-topbar__ws-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--fg);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .c-tm-topbar__ws-item:hover { background: var(--bg-2); }
+  .c-tm-topbar__ws-item-meta {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--fg-muted);
+  }
+  .c-tm-topbar__ws-sep { height: 1px; background: var(--border); margin: 6px 0; }
+  .c-tm-topbar__search {
+    flex: 1 1 auto;
+    max-width: 480px;
+    position: relative;
+  }
+  .c-tm-topbar__search-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 12px 8px 34px;
+    font: inherit;
+    font-size: 13px;
+    color: var(--fg);
+    background: var(--bg-2);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                box-shadow 200ms cubic-bezier(0.2, 0, 0, 1),
+                background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-topbar__search-input::placeholder { color: var(--fg-muted); }
+  .c-tm-topbar__search-input:hover { border-color: var(--border); }
+  .c-tm-topbar__search-input:focus-visible {
+    background: var(--bg);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent) 30%, transparent);
+  }
+  .c-tm-topbar__search-icon {
+    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+    color: var(--fg-muted);
+    pointer-events: none;
+  }
+  .c-tm-topbar__search-kbd {
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    display: inline-flex; gap: 2px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    color: var(--fg-muted);
+    pointer-events: none;
+  }
+  .c-tm-topbar__search-kbd kbd {
+    font: inherit;
+    padding: 2px 5px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  .c-tm-topbar__actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+  .c-tm-topbar__icon-btn {
+    position: relative;
+    width: 34px; height: 34px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: var(--fg-muted);
+    cursor: pointer;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                color 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .c-tm-topbar__icon-btn:hover { background: var(--bg-2); color: var(--fg); }
+  .c-tm-topbar__icon-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+  .c-tm-topbar__dot {
+    position: absolute; top: 8px; right: 8px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .c-tm-topbar__user {
+    position: relative;
+    margin-left: 4px;
+  }
+  .c-tm-topbar__avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--fg);
+    cursor: pointer;
+    padding: 0;
+  }
+  .c-tm-topbar__avatar:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  }
+  .c-tm-topbar__user-menu {
+    position: absolute; top: calc(100% + 6px); right: 0;
+    width: 220px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px;
+    display: none;
+    z-index: 30;
+  }
+  .c-tm-topbar__user[data-open="true"] .c-tm-topbar__user-menu { display: block; }
+  .c-tm-topbar__user-meta {
+    padding: 8px 10px;
+    font-size: 12px;
+    color: var(--fg-muted);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 6px;
+  }
+  .c-tm-topbar__user-meta strong { display: block; color: var(--fg); font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+  .c-tm-topbar__user-item {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--fg);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .c-tm-topbar__user-item:hover { background: var(--bg-2); }
+
+  @media (max-width: 900px) {
+    .c-tm-topbar { padding: 0 12px; gap: 8px; }
+    .c-tm-topbar__ws-name { display: none; }
+    .c-tm-topbar__search-kbd { display: none; }
+  }
+</style>
+
+<header class="c-tm-topbar" role="banner">
+  <div class="c-tm-topbar__ws" data-open="false">
+    <button class="c-tm-topbar__ws-btn" type="button" aria-haspopup="menu" aria-expanded="false">
+      <span class="c-tm-topbar__ws-initial" aria-hidden="true">M</span>
+      <span class="c-tm-topbar__ws-name">Meridian Capital</span>
+      <svg class="c-tm-topbar__ws-caret" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3l3 3 3-3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="c-tm-topbar__ws-menu" role="menu" aria-label="Workspaces">
+      <a class="c-tm-topbar__ws-item" href="#" role="menuitem"><span class="c-tm-topbar__ws-initial" aria-hidden="true">M</span>Meridian Capital<span class="c-tm-topbar__ws-item-meta">Current</span></a>
+      <a class="c-tm-topbar__ws-item" href="#" role="menuitem"><span class="c-tm-topbar__ws-initial" aria-hidden="true" style="background: var(--fg-muted);">A</span>Axis Treasury</a>
+      <a class="c-tm-topbar__ws-item" href="#" role="menuitem"><span class="c-tm-topbar__ws-initial" aria-hidden="true" style="background: var(--fg-muted);">N</span>Northwind Finance</a>
+      <div class="c-tm-topbar__ws-sep" role="separator"></div>
+      <a class="c-tm-topbar__ws-item" href="#" role="menuitem">Create workspace</a>
+    </div>
+  </div>
+
+  <div class="c-tm-topbar__search" role="search">
+    <svg class="c-tm-topbar__search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.25" stroke="currentColor" stroke-width="1.25"/><path d="M9.2 9.2L12 12" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+    <input class="c-tm-topbar__search-input" type="search" placeholder="Search ledgers, transactions, members…" aria-label="Search">
+    <span class="c-tm-topbar__search-kbd" aria-hidden="true"><kbd>⌘</kbd><kbd>K</kbd></span>
+  </div>
+
+  <div class="c-tm-topbar__actions">
+    <button class="c-tm-topbar__icon-btn" type="button" aria-label="Notifications (3 unread)">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6.5a4 4 0 0 1 8 0v3l1 2H3l1-2v-3zM6.5 13.5a1.5 1.5 0 0 0 3 0" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/></svg>
+      <span class="c-tm-topbar__dot" aria-hidden="true"></span>
+    </button>
+    <button class="c-tm-topbar__icon-btn" type="button" aria-label="Help">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.25"/><path d="M8 11.5v-.5M6.5 6.5a1.5 1.5 0 1 1 2.5 1.3c-.5.3-1 .7-1 1.4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+    </button>
+
+    <div class="c-tm-topbar__user" data-open="false">
+      <button class="c-tm-topbar__avatar" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Account menu">AC</button>
+      <div class="c-tm-topbar__user-menu" role="menu" aria-label="Account">
+        <div class="c-tm-topbar__user-meta">
+          <strong>Alex Chen</strong>
+          alex@meridian.co
+        </div>
+        <a class="c-tm-topbar__user-item" href="#" role="menuitem">Profile</a>
+        <a class="c-tm-topbar__user-item" href="#" role="menuitem">Preferences</a>
+        <a class="c-tm-topbar__user-item" href="#" role="menuitem">Billing</a>
+        <div class="c-tm-topbar__ws-sep" role="separator"></div>
+        <a class="c-tm-topbar__user-item" href="#" role="menuitem">Sign out</a>
+      </div>
+    </div>
+  </div>
+</header>

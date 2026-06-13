@@ -1,0 +1,175 @@
+<style>
+  .c-vp-step {
+    --ease: cubic-bezier(0.34, 1.1, 0.64, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: inherit;
+    color: var(--fg);
+  }
+  .c-vp-step__list {
+    list-style: none;
+    margin: 0;
+    padding: 6px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    counter-reset: c-vp-step;
+  }
+  .c-vp-step__item {
+    counter-increment: c-vp-step;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--fg-muted);
+    transition: background-color 280ms var(--ease),
+                color 280ms var(--ease);
+    min-width: 0;
+  }
+  .c-vp-step__item[data-cat="1"] { --cat: var(--p1, var(--accent)); }
+  .c-vp-step__item[data-cat="2"] { --cat: var(--p2, var(--accent)); }
+  .c-vp-step__item[data-cat="3"] { --cat: var(--p3, var(--accent)); }
+  .c-vp-step__item[data-cat="4"] { --cat: var(--p4, var(--accent)); }
+
+  .c-vp-step__item[data-state="done"] {
+    background: color-mix(in oklab, var(--cat, var(--accent)) 14%, var(--bg));
+    color: var(--cat, var(--accent));
+  }
+  .c-vp-step__item[aria-current="step"] {
+    background: var(--bg);
+    color: var(--cat, var(--accent));
+    box-shadow: 0 4px 12px -4px color-mix(in oklab, var(--cat, var(--accent)) 45%, transparent),
+                inset 0 0 0 1px color-mix(in oklab, var(--cat, var(--accent)) 40%, var(--border));
+    font-weight: 500;
+  }
+  .c-vp-step__item[data-state="pending"] {
+    background: transparent;
+    color: var(--fg-muted);
+  }
+
+  .c-vp-step__mark {
+    flex: 0 0 auto;
+    width: 28px; height: 28px;
+    border-radius: 9999px;
+    background: var(--bg);
+    border: 1.5px solid color-mix(in oklab, var(--cat, var(--accent)) 40%, var(--border));
+    color: var(--cat, var(--accent));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace);
+    transition: background-color 280ms var(--ease),
+                color 280ms var(--ease),
+                transform 280ms var(--ease);
+  }
+  .c-vp-step__mark::before { content: counter(c-vp-step, decimal-leading-zero); }
+
+  .c-vp-step__item[aria-current="step"] .c-vp-step__mark {
+    background: var(--cat, var(--accent));
+    color: var(--bg);
+    border-color: var(--cat, var(--accent));
+    transform: scale(1.08);
+  }
+  .c-vp-step__item[data-state="done"] .c-vp-step__mark {
+    background: var(--cat, var(--accent));
+    color: var(--bg);
+    border-color: var(--cat, var(--accent));
+  }
+  .c-vp-step__item[data-state="done"] .c-vp-step__mark::before { content: ""; }
+  .c-vp-step__item[data-state="done"] .c-vp-step__mark::after {
+    content: "";
+    width: 10px; height: 6px;
+    border-left: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg) translate(1px, -1px);
+  }
+  .c-vp-step__item[data-state="pending"] .c-vp-step__mark {
+    border-color: var(--border);
+    color: var(--fg-muted);
+  }
+
+  .c-vp-step__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+  .c-vp-step__eyebrow {
+    font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    line-height: 1;
+  }
+  .c-vp-step__label {
+    font-size: 13px;
+    font-weight: 500;
+    color: inherit;
+    line-height: 1.25;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .c-vp-step__summary {
+    font-size: 12px;
+    font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace);
+    color: var(--fg-muted);
+    padding: 0 8px;
+  }
+  .c-vp-step__summary strong { color: var(--fg); font-weight: 500; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-vp-step__item, .c-vp-step__mark { transition: none; }
+    .c-vp-step__item[aria-current="step"] .c-vp-step__mark { transform: none; }
+  }
+
+  @media (max-width: 900px) {
+    .c-vp-step__list { grid-template-columns: 1fr; }
+    .c-vp-step__item:not([aria-current="step"]):not([data-state="done"]) { display: none; }
+    .c-vp-step__summary { display: block; }
+  }
+</style>
+
+<nav class="c-vp-step" aria-label="Setup progress">
+  <ol class="c-vp-step__list" role="list">
+    <li class="c-vp-step__item" data-cat="1" data-state="done">
+      <span class="c-vp-step__mark" aria-hidden="true"></span>
+      <span class="c-vp-step__meta">
+        <span class="c-vp-step__eyebrow">Step 1</span>
+        <span class="c-vp-step__label">Your account</span>
+      </span>
+    </li>
+    <li class="c-vp-step__item" data-cat="2" aria-current="step">
+      <span class="c-vp-step__mark" aria-hidden="true"></span>
+      <span class="c-vp-step__meta">
+        <span class="c-vp-step__eyebrow">Step 2</span>
+        <span class="c-vp-step__label">Workspace vibe</span>
+      </span>
+    </li>
+    <li class="c-vp-step__item" data-cat="3" data-state="pending">
+      <span class="c-vp-step__mark" aria-hidden="true"></span>
+      <span class="c-vp-step__meta">
+        <span class="c-vp-step__eyebrow">Step 3</span>
+        <span class="c-vp-step__label">Invite team</span>
+      </span>
+    </li>
+    <li class="c-vp-step__item" data-cat="4" data-state="pending">
+      <span class="c-vp-step__mark" aria-hidden="true"></span>
+      <span class="c-vp-step__meta">
+        <span class="c-vp-step__eyebrow">Step 4</span>
+        <span class="c-vp-step__label">Review</span>
+      </span>
+    </li>
+  </ol>
+  <p class="c-vp-step__summary" aria-hidden="true">Step <strong>2</strong> of 4 &middot; about 2 minutes left</p>
+</nav>

@@ -1,0 +1,161 @@
+/* Bold-Distinctive — chart utilities
+ * Tonal stepping from accent #C72500 (hot red). Editorial-scale numerics,
+ * italic annotation lines, one hero value per chart.
+ */
+
+.dv-bd-root {
+  /* Series — red ramp + stark neutrals */
+  --chart-series-1: #C72500;   /* accent */
+  --chart-series-2: #E85539;   /* accent lightened */
+  --chart-series-3: #8C1A00;   /* accent darkened */
+  --chart-series-4: #F38570;   /* accent soft */
+  --chart-series-5: #0A0A0B;   /* near-black anchor */
+  --chart-series-6: #5F5F5F;   /* mid gray */
+  --chart-series-7: #4D0E00;   /* accent near-black */
+  --chart-series-8: #2B2B2B;   /* deep gray */
+
+  --chart-axis-color: #0A0A0B;
+  --chart-gridline: rgba(10, 10, 11, 0.12);
+  --chart-tick-color: #5F5F5F;
+  --chart-bg: #F5F0E8;
+  --chart-fg: #0A0A0B;
+  --chart-border: #0A0A0B;
+  --chart-border-strong: #0A0A0B;
+
+  background: var(--chart-bg);
+  color: var(--chart-fg);
+  font-family: "General Sans", "Inter", system-ui, sans-serif;
+}
+
+.dv-bd-root.dv-bd-dark {
+  --chart-series-1: #FF5530;
+  --chart-series-2: #FF7755;
+  --chart-series-3: #C72500;
+  --chart-series-4: #FFA589;
+  --chart-series-5: #F5F0E8;
+  --chart-series-6: #9F9880;
+  --chart-series-7: #991C00;
+  --chart-series-8: #D4CEB8;
+  --chart-axis-color: #F5F0E8;
+  --chart-gridline: rgba(245, 240, 232, 0.12);
+  --chart-tick-color: #9F9880;
+  --chart-bg: #0A0A0B;
+  --chart-fg: #F5F0E8;
+  --chart-border: #F5F0E8;
+  --chart-border-strong: #F5F0E8;
+}
+
+/* Title / subtitle — display-scale */
+.dv-bd-title {
+  font-family: "PP Editorial New", "Fraunces", serif;
+  font-size: 56px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: var(--chart-fg);
+  margin: 0 0 8px 0;
+}
+.dv-bd-subtitle {
+  font-family: "General Sans", "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--chart-tick-color);
+  margin: 0 0 32px 0;
+}
+
+/* Hero number — the signature move */
+.dv-bd-hero-number {
+  font-family: "PP Editorial New", "Fraunces", serif;
+  font-size: 120px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--chart-fg);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Axis — minimal; a single 2px rule at zero */
+.dv-bd-axis {
+  stroke: var(--chart-fg);
+  stroke-width: 2;
+  fill: none;
+}
+.dv-bd-gridline {
+  stroke: var(--chart-gridline);
+  stroke-width: 1;
+  fill: none;
+}
+.dv-bd-tick {
+  fill: var(--chart-tick-color);
+  font-family: "General Sans", "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.dv-bd-axis-label {
+  fill: var(--chart-fg);
+  font-family: "General Sans", "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+/* Anchor tick — the 0 and the max are display-scale */
+.dv-bd-tick-anchor {
+  font-family: "PP Editorial New", serif;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+/* Legend — usually suppressed; when needed, minimal */
+.dv-bd-legend {
+  display: flex;
+  gap: 24px;
+  font-family: "General Sans", "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--chart-fg);
+  padding: 0 0 16px 0;
+}
+.dv-bd-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.dv-bd-legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 0;
+  display: inline-block;
+}
+
+/* Tooltip — stamp aesthetic */
+.dv-bd-tooltip {
+  background: var(--chart-fg);
+  color: var(--chart-bg);
+  border: none;
+  border-radius: 0;
+  padding: 10px 14px;
+  font-family: "General Sans", "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  box-shadow: none;
+}
+
+/* Annotation — the signature italic call-out */
+.dv-bd-annotation {
+  font-family: "PP Editorial New", "Fraunces", serif;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 500;
+  fill: var(--chart-fg);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.dv-bd-annotation-line {
+  stroke: var(--chart-fg);
+  stroke-width: 1;
+  fill: none;
+}

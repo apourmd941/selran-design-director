@@ -1,0 +1,86 @@
+<style>
+  .c-ed-tabs {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    font-family: inherit;
+  }
+  .c-ed-tabs::-webkit-scrollbar { display: none; }
+  .c-ed-tabs[role="tablist"] { list-style: none; margin: 0; }
+
+  .c-ed-tabs__tab {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    padding: 20px 4px 18px;
+    margin: 0 20px 0 0;
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--fg-muted);
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    transition: color 250ms ease, font-style 250ms ease;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .c-ed-tabs__tab:last-child { margin-right: 0; }
+  .c-ed-tabs__tab:hover { color: var(--fg); font-style: italic; }
+  .c-ed-tabs__tab:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  .c-ed-tabs__tab[aria-selected="true"] {
+    color: var(--fg);
+  }
+  .c-ed-tabs__tab[aria-selected="true"]::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 1px;
+    background: var(--fg);
+  }
+  .c-ed-tabs__count {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    font-weight: 400;
+  }
+  .c-ed-tabs__tab[aria-selected="true"] .c-ed-tabs__count { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .c-ed-tabs { padding: 0 20px; }
+    .c-ed-tabs__tab { font-size: 15px; padding: 16px 4px 14px; margin-right: 16px; }
+  }
+</style>
+
+<div class="c-ed-tabs" role="tablist" aria-label="Library views">
+  <button class="c-ed-tabs__tab" role="tab" aria-selected="true" type="button">
+    All reading
+    <span class="c-ed-tabs__count">48</span>
+  </button>
+  <button class="c-ed-tabs__tab" role="tab" aria-selected="false" type="button">
+    Essays
+    <span class="c-ed-tabs__count">22</span>
+  </button>
+  <button class="c-ed-tabs__tab" role="tab" aria-selected="false" type="button">
+    Notes
+    <span class="c-ed-tabs__count">14</span>
+  </button>
+  <button class="c-ed-tabs__tab" role="tab" aria-selected="false" type="button">
+    Interviews
+    <span class="c-ed-tabs__count">08</span>
+  </button>
+  <button class="c-ed-tabs__tab" role="tab" aria-selected="false" type="button">
+    Archive
+    <span class="c-ed-tabs__count">116</span>
+  </button>
+</div>

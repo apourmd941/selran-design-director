@@ -1,0 +1,173 @@
+<style>
+  /* SUBSTITUTION: Brutalist replaces pricing-3tier with a MANIFESTO block.
+     A pricing table feels off-brand for an indie record label / zine.
+     Structural purpose (a single headline statement + supporting list) is preserved. */
+  .c-br-manifesto {
+    padding: 64px 0;
+    border-top: 2px solid var(--border, var(--fg));
+    border-bottom: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', monospace);
+    background: var(--bg);
+  }
+  .c-br-manifesto__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 0;
+    border: 2px solid var(--border, var(--fg));
+  }
+  .c-br-manifesto__left {
+    padding: 48px;
+    border-right: 2px solid var(--border, var(--fg));
+    background: var(--accent);
+    color: var(--bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .c-br-manifesto__label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  .c-br-manifesto__headline {
+    font-size: clamp(36px, 4.6vw, 64px);
+    font-weight: 700;
+    line-height: 0.98;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+  .c-br-manifesto__signature {
+    padding-top: 24px;
+    margin-top: 24px;
+    border-top: 2px solid var(--bg);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .c-br-manifesto__right {
+    padding: 48px;
+  }
+  .c-br-manifesto__right h3 {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fg);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border, var(--fg));
+  }
+  .c-br-manifesto__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: rule;
+  }
+  .c-br-manifesto__list li {
+    counter-increment: rule;
+    padding: 18px 0 18px 56px;
+    position: relative;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--fg);
+    border-bottom: 1px dashed var(--border, var(--fg));
+  }
+  .c-br-manifesto__list li:last-child { border-bottom: none; }
+  .c-br-manifesto__list li::before {
+    counter(rule, decimal-leading-zero);
+    content: counter(rule, decimal-leading-zero) '.';
+    position: absolute;
+    left: 0; top: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 15px;
+    width: 40px;
+  }
+  .c-br-manifesto__list strong {
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .c-br-manifesto__cta {
+    padding-top: 24px;
+    margin-top: 24px;
+    border-top: 2px solid var(--border, var(--fg));
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  .c-br-manifesto__btn {
+    padding: 14px 20px;
+    font-family: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 13px;
+    border: 2px solid var(--border, var(--fg));
+    background: var(--bg);
+    color: var(--fg);
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: -2px;
+  }
+  .c-br-manifesto__btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .c-br-manifesto__btn:hover { background: var(--fg); color: var(--bg); }
+  .c-br-manifesto__btn--primary:hover {
+    background: var(--fg);
+    color: var(--accent);
+    border-color: var(--fg);
+  }
+
+  @media (max-width: 900px) {
+    .c-br-manifesto__inner { grid-template-columns: 1fr; }
+    .c-br-manifesto__left {
+      border-right: none;
+      border-bottom: 2px solid var(--border, var(--fg));
+      padding: 32px;
+    }
+    .c-br-manifesto__right { padding: 32px; }
+  }
+</style>
+
+<section class="c-br-manifesto">
+  <div class="c-br-manifesto__inner">
+    <div class="c-br-manifesto__left">
+      <div>
+        <div class="c-br-manifesto__label">// manifesto / v4</div>
+        <h2 class="c-br-manifesto__headline">A label, not a product.</h2>
+      </div>
+      <div class="c-br-manifesto__signature">
+        <span>{Brand} // Brooklyn, NY</span>
+        <span>first written 2014 / last revised 2025-11-03</span>
+      </div>
+    </div>
+    <div class="c-br-manifesto__right">
+      <h3>// seven rules, signed by all of us</h3>
+      <ul class="c-br-manifesto__list">
+        <li><strong>Artists get paid first.</strong> 68% of every sale, before rent, before printing, before us.</li>
+        <li><strong>300 copies per run.</strong> Never more, never less. Scarcity is a byproduct, not a gimmick.</li>
+        <li><strong>No exclusivity deals.</strong> Artists own their masters. They can walk tomorrow. We earn the next record.</li>
+        <li><strong>No sponsored posts.</strong> Ever. Write us if you disagree.</li>
+        <li><strong>No algorithm-led releases.</strong> We release what we like. We like what we release.</li>
+        <li><strong>Zine on paper.</strong> Four issues a year, mailed on newsprint. The web version lags by a month on purpose.</li>
+        <li><strong>Open ledger.</strong> 2025 books published every January 14, whether anyone reads them or not.</li>
+      </ul>
+      <div class="c-br-manifesto__cta">
+        <a href="#" class="c-br-manifesto__btn c-br-manifesto__btn--primary">Subscribe to the zine →</a>
+        <a href="#" class="c-br-manifesto__btn">Read the ledger</a>
+      </div>
+    </div>
+  </div>
+</section>

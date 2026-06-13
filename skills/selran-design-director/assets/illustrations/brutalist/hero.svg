@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: brutalist
+  use: marketing hero, zine cover
+  variables: var(fg) (black), var(bg) (white), var(accent) (safety orange)
+  notes: raw photocopy aesthetic — halftone dot pattern, hard edges, intentional registration offset,
+         monospace metadata, black + single accent (no smoothing, no curves)
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-label="Brutalist hero">
+  <style>
+    .br-bg       { fill: var(--bg, #FFFFFF); }
+    .br-fg-fill  { fill: var(--fg, #000000); }
+    .br-fg-stroke{ stroke: var(--fg, #000000); fill: none; stroke-width: 2; vector-effect: non-scaling-stroke; }
+    .br-accent-fill { fill: var(--accent, #B84400); }
+    .br-accent-stroke { stroke: var(--accent, #B84400); fill: none; stroke-width: 2; vector-effect: non-scaling-stroke; }
+    .br-mono     { font-family: "Space Mono", "JetBrains Mono", "Courier New", ui-monospace, monospace; fill: var(--fg, #000000); }
+  </style>
+
+  <defs>
+    <!-- halftone dot grid for shaded regions -->
+    <pattern id="br-halftone" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="2.2" fill="var(--fg, #000000)"/>
+    </pattern>
+    <pattern id="br-halftone-fine" width="5" height="5" patternUnits="userSpaceOnUse">
+      <circle cx="2.5" cy="2.5" r="1.1" fill="var(--fg, #000000)"/>
+    </pattern>
+    <pattern id="br-halftone-accent" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.5" fill="var(--accent, #B84400)"/>
+    </pattern>
+  </defs>
+
+  <rect class="br-bg" width="1200" height="600"/>
+
+  <!-- top border rule (thick) -->
+  <rect class="br-fg-fill" x="0" y="0" width="1200" height="12"/>
+
+  <!-- top metadata row (monospace, tight) -->
+  <text x="24" y="36" class="br-mono" font-size="11" letter-spacing="0.1em">SELRAN/ZINE#007</text>
+  <text x="600" y="36" text-anchor="middle" class="br-mono" font-size="11" letter-spacing="0.1em">FILE: hero.svg · 1200x600px · RAW</text>
+  <text x="1176" y="36" text-anchor="end" class="br-mono" font-size="11" letter-spacing="0.1em">2026/04/21</text>
+
+  <!-- rule below metadata -->
+  <rect class="br-fg-fill" x="0" y="48" width="1200" height="2"/>
+
+  <!-- LEFT PANEL: halftone circle (the "subject") -->
+  <g>
+    <!-- black base with halftone shading at the edges -->
+    <circle cx="330" cy="330" r="180" fill="url(#br-halftone)"/>
+    <!-- black core overlay -->
+    <circle cx="330" cy="330" r="110" class="br-fg-fill"/>
+    <!-- intentional registration offset — black ring slightly shifted -->
+    <circle cx="324" cy="326" r="110" class="br-fg-stroke" stroke-width="2"/>
+  </g>
+
+  <!-- MIDDLE: pixelated rectangle stack (layered boxes, hard edges) -->
+  <g transform="translate(560 130)">
+    <!-- back box: halftone fill -->
+    <rect x="0" y="0" width="280" height="360" fill="url(#br-halftone-fine)"/>
+    <!-- middle box: solid black -->
+    <rect x="-14" y="16" width="280" height="360" class="br-fg-fill"/>
+    <!-- front box: accent fill with intentional offset border -->
+    <rect x="-28" y="32" width="280" height="360" class="br-accent-fill"/>
+    <rect x="-32" y="28" width="280" height="360" class="br-fg-stroke"/>
+    <!-- label on front -->
+    <text x="-14" y="76" class="br-mono" font-size="12" letter-spacing="0.2em" fill="var(--fg, #000000)">BLOCK.03</text>
+    <text x="-14" y="368" class="br-mono" font-size="10" letter-spacing="0.2em" fill="var(--fg, #000000)">280 × 360 · PX</text>
+  </g>
+
+  <!-- RIGHT: big display numeral (accent) -->
+  <text x="1064" y="440"
+        text-anchor="end"
+        font-family="Courier New, Space Mono, JetBrains Mono, ui-monospace, monospace"
+        font-weight="700"
+        font-size="340"
+        letter-spacing="-20"
+        class="br-accent-fill">007</text>
+  <!-- offset black version behind (registration-offset feel) -->
+  <text x="1060" y="444"
+        text-anchor="end"
+        font-family="Courier New, Space Mono, JetBrains Mono, ui-monospace, monospace"
+        font-weight="700"
+        font-size="340"
+        letter-spacing="-20"
+        fill="var(--fg, #000000)" opacity="1"
+        filter=""
+        stroke="var(--fg, #000000)"
+        stroke-width="0"
+        >007</text>
+  <!-- actually: render the accent version on top of the black -->
+  <text x="1064" y="440"
+        text-anchor="end"
+        font-family="Courier New, Space Mono, JetBrains Mono, ui-monospace, monospace"
+        font-weight="700"
+        font-size="340"
+        letter-spacing="-20"
+        class="br-accent-fill">007</text>
+
+  <!-- footer rule -->
+  <rect class="br-fg-fill" x="0" y="548" width="1200" height="2"/>
+
+  <!-- footer metadata row -->
+  <text x="24" y="578" class="br-mono" font-size="11" letter-spacing="0.1em">GRID: NONE</text>
+  <text x="600" y="578" text-anchor="middle" class="br-mono" font-size="11" letter-spacing="0.1em">PRESS · CMD+P TO PRINT · OR DON'T</text>
+  <text x="1176" y="578" text-anchor="end" class="br-mono" font-size="11" letter-spacing="0.1em">EDITION/07</text>
+
+  <!-- bottom rule (thick) -->
+  <rect class="br-fg-fill" x="0" y="590" width="1200" height="10"/>
+</svg>

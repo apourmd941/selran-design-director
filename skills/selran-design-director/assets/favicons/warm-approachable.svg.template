@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- {{meta.project}} — warm-approachable favicon. Rounded shape, soft warm accent. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
+  <rect width="24" height="24" rx="7" fill="{{color.accent}}"/>
+  <text x="12" y="16.5" text-anchor="middle"
+        font-family="{{type.display}}, Georgia, serif"
+        font-size="14" font-weight="500"
+        fill="{{color.bg_primary}}">{{FAVICON_GLYPH}}</text>
+</svg>

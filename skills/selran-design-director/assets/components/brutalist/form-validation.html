@@ -1,0 +1,199 @@
+<style>
+  .c-br-validate {
+    max-width: 620px;
+    margin: 0 auto;
+    background: var(--bg);
+    border: 2px solid var(--border, var(--fg));
+    font-family: var(--ff-mono, 'Space Mono', 'Courier New', monospace);
+    color: var(--fg);
+  }
+  .c-br-validate__head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 14px 20px;
+    border-bottom: 2px solid var(--border, var(--fg));
+    background: var(--fg); color: var(--bg);
+    font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .c-br-validate__body { padding: 24px 20px 8px; }
+  .c-br-validate__title {
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0 0 6px;
+  }
+  .c-br-validate__sub {
+    font-size: 13px; color: var(--fg-muted);
+    text-transform: uppercase; letter-spacing: 0.04em;
+    margin: 0 0 24px;
+  }
+  .c-br-validate__field {
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 2px dashed var(--border, var(--fg));
+  }
+  .c-br-validate__field:last-of-type { border-bottom: 0; }
+  .c-br-validate__field[data-state="valid"] {
+    border-left: 6px solid var(--accent);
+    padding-left: 12px;
+  }
+  .c-br-validate__field[data-state="invalid"] {
+    border-left: 6px solid var(--fg);
+    padding-left: 12px;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 8px,
+      color-mix(in oklab, var(--fg) 6%, transparent) 8px,
+      color-mix(in oklab, var(--fg) 6%, transparent) 10px
+    );
+  }
+  .c-br-validate__field[data-state="disabled"] {
+    opacity: 0.55;
+  }
+  .c-br-validate__row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .c-br-validate__label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .c-br-validate__tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: 2px 6px;
+    border: 2px solid var(--border, var(--fg));
+  }
+  .c-br-validate__field[data-state="valid"] .c-br-validate__tag { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .c-br-validate__field[data-state="invalid"] .c-br-validate__tag { background: var(--fg); color: var(--bg); }
+  .c-br-validate__field[data-state="disabled"] .c-br-validate__tag { color: var(--fg-muted); }
+  .c-br-validate__field[data-state="default"] .c-br-validate__tag { color: var(--fg-muted); }
+  .c-br-validate__input {
+    width: 100%; box-sizing: border-box;
+    padding: 11px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 2px solid var(--border, var(--fg));
+    border-radius: 0;
+    outline: none;
+  }
+  .c-br-validate__input:focus-visible {
+    outline: 4px solid var(--accent);
+  }
+  .c-br-validate__field[data-state="disabled"] .c-br-validate__input {
+    background: var(--bg-2);
+    cursor: not-allowed;
+  }
+  .c-br-validate__msg {
+    display: none;
+    margin-top: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .c-br-validate__field[data-state="valid"] .c-br-validate__msg--ok {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--fg);
+  }
+  .c-br-validate__field[data-state="invalid"] .c-br-validate__msg--err {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--fg);
+    font-weight: 700;
+  }
+  .c-br-validate__field[data-state="disabled"] .c-br-validate__msg--note {
+    display: block;
+    color: var(--fg-muted);
+  }
+  .c-br-validate__marker {
+    display: inline-block;
+    width: 14px; text-align: center;
+    font-weight: 700;
+  }
+  .c-br-validate__actions {
+    display: flex;
+    border-top: 2px solid var(--border, var(--fg));
+  }
+  .c-br-validate__btn {
+    flex: 1;
+    padding: 16px 20px;
+    font-family: inherit;
+    font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    background: var(--accent); color: var(--bg);
+    border: 0;
+    cursor: pointer;
+  }
+  .c-br-validate__btn:hover:not(:disabled) { background: var(--fg); color: var(--accent); }
+  .c-br-validate__btn:focus-visible {
+    outline: 4px solid var(--accent);
+    outline-offset: -4px;
+  }
+  .c-br-validate__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  @media (max-width: 900px) {
+    .c-br-validate { border-left: 0; border-right: 0; }
+  }
+</style>
+
+<form class="c-br-validate" novalidate>
+  <div class="c-br-validate__head">
+    <span>// FORM.VALIDATE — 4 FIELDS / 5 STATES</span>
+    <span>{BRAND} · 0.5kb</span>
+  </div>
+
+  <div class="c-br-validate__body">
+    <h2 class="c-br-validate__title">Artist intake</h2>
+    <p class="c-br-validate__sub">4 fields. 5 states. no trickery.</p>
+
+    <div class="c-br-validate__field" data-state="default">
+      <div class="c-br-validate__row">
+        <span class="c-br-validate__label">[ ARTIST NAME ]</span>
+        <span class="c-br-validate__tag">DEFAULT</span>
+      </div>
+      <input class="c-br-validate__input" type="text" placeholder="BAND / PROJECT NAME" aria-label="Artist name">
+    </div>
+
+    <div class="c-br-validate__field" data-state="valid">
+      <div class="c-br-validate__row">
+        <span class="c-br-validate__label">[ CATALOG SLUG ]</span>
+        <span class="c-br-validate__tag">VALID</span>
+      </div>
+      <input class="c-br-validate__input" type="text" value="{brand}-143" aria-describedby="br-v-slug-ok" aria-label="Catalog slug">
+      <div class="c-br-validate__msg c-br-validate__msg--ok" id="br-v-slug-ok">
+        <span class="c-br-validate__marker">[✓]</span> Slot available. next release: 143.
+      </div>
+    </div>
+
+    <div class="c-br-validate__field" data-state="invalid">
+      <div class="c-br-validate__row">
+        <span class="c-br-validate__label">[ CONTACT EMAIL ]</span>
+        <span class="c-br-validate__tag">ERROR</span>
+      </div>
+      <input class="c-br-validate__input" type="email" value="booking(at)label" aria-invalid="true" aria-describedby="br-v-email-err" aria-label="Contact email">
+      <div class="c-br-validate__msg c-br-validate__msg--err" id="br-v-email-err">
+        <span class="c-br-validate__marker">[!]</span> parse error. expected name@domain.tld.
+      </div>
+    </div>
+
+    <div class="c-br-validate__field" data-state="disabled">
+      <div class="c-br-validate__row">
+        <span class="c-br-validate__label">[ PRESS RUN ]</span>
+        <span class="c-br-validate__tag">LOCKED</span>
+      </div>
+      <input class="c-br-validate__input" type="text" value="300 COPIES · STANDARD" disabled aria-label="Press run">
+      <div class="c-br-validate__msg c-br-validate__msg--note">// set at the plant. not editable from here.</div>
+    </div>
+  </div>
+
+  <div class="c-br-validate__actions">
+    <button class="c-br-validate__btn" type="submit" disabled>SUBMIT INTAKE →</button>
+  </div>
+</form>

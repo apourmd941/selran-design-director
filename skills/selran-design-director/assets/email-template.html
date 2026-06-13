@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="supported-color-schemes" content="light dark" />
+  <title>{{PROJECT_NAME}} — {{EMAIL_SUBJECT}}</title>
+
+  <!--[if !mso]><!-->
+  <!-- Web font loading: skipped by Outlook (which uses fallback stack in every inline style).
+       The render step replaces {{FONT_LINKS}} with a Google Fonts <link>, or an empty comment
+       if the chosen faces aren't available. -->
+  {{FONT_LINKS}}
+  <!--<![endif]-->
+
+  <!--[if mso]>
+  <xml>
+    <o:OfficeDocumentSettings>
+      <o:AllowPNG/>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+  </xml>
+  <style type="text/css">
+    table, td, div, h1, h2, h3, p, a { font-family: Arial, Helvetica, sans-serif !important; }
+  </style>
+  <![endif]-->
+
+  <style type="text/css">
+    /* Reset — stripped by some clients but harmless when honored */
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+    table { border-collapse: collapse !important; }
+    body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+    a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
+
+    /* Mobile — stacks 2-column to 1-column under 600px */
+    @media screen and (max-width: 600px) {
+      .container { width: 100% !important; max-width: 100% !important; }
+      .stack { display: block !important; width: 100% !important; max-width: 100% !important; }
+      .stack-pad { padding-top: 24px !important; }
+      .px-mobile { padding-left: 24px !important; padding-right: 24px !important; }
+      .hero-h1 { font-size: 28px !important; line-height: 1.15 !important; }
+    }
+
+    /* Dark-mode swap for iOS Mail / Apple Mail only */
+    @media (prefers-color-scheme: dark) {
+      .body-bg { background-color: #0A0A0B !important; }
+      .content-bg { background-color: #18181B !important; }
+      .text-fg { color: #F4F4F5 !important; }
+      .text-muted { color: #A1A1AA !important; }
+      .border-hairline { border-color: #27272A !important; }
+      .logo-light { display: none !important; }
+      .logo-dark { display: inline-block !important; }
+    }
+
+    /* Outlook.com / Outlook mobile dark-mode hook */
+    [data-ogsc] .text-fg { color: #F4F4F5 !important; }
+    [data-ogsc] .text-muted { color: #A1A1AA !important; }
+    [data-ogsc] .body-bg { background-color: #0A0A0B !important; }
+    [data-ogsc] .content-bg { background-color: #18181B !important; }
+  </style>
+</head>
+
+<body class="body-bg" style="margin:0; padding:0; width:100%; background-color:{{color.bg_primary}}; color:{{color.fg_primary}}; font-family:'{{type.body}}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;" bgcolor="{{color.bg_primary}}">
+
+  <!-- Preheader: shows in inbox preview, hidden in body -->
+  <div style="display:none; font-size:1px; color:{{color.bg_primary}}; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden; mso-hide:all;">
+    {{PREHEADER_TEXT}} &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+  </div>
+
+  <!-- Outer 100%-width table (background color) -->
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="body-bg" bgcolor="{{color.bg_primary}}" style="background-color:{{color.bg_primary}};">
+    <tr>
+      <td align="center" style="padding:24px 12px;">
+
+        <!-- Inner 600px content table -->
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" class="container content-bg" bgcolor="{{color.bg_secondary}}" style="width:600px; max-width:600px; background-color:{{color.bg_secondary}}; border-radius:{{spacing.radius.md}}px;">
+
+          <!-- Header: logo -->
+          <tr>
+            <td align="left" class="px-mobile" style="padding:32px 40px 24px 40px;">
+              <img class="logo-light" src="{{LOGO_URL}}" alt="{{PROJECT_NAME}}" width="120" height="32" style="display:block; width:120px; height:32px; border:0; outline:none;" />
+              <!--[if !mso]><!-->
+              <img class="logo-dark" src="{{LOGO_URL_DARK}}" alt="{{PROJECT_NAME}}" width="120" height="32" style="display:none; width:120px; height:32px; border:0; outline:none;" />
+              <!--<![endif]-->
+            </td>
+          </tr>
+
+          <!-- Hero: eyebrow + headline + subhead -->
+          <tr>
+            <td class="px-mobile" style="padding:16px 40px 8px 40px;">
+              <p class="text-muted" style="margin:0 0 12px 0; font-family:'{{type.mono}}', 'Courier New', monospace; font-size:{{type.scale.xs}}px; line-height:1.4; letter-spacing:{{type.tracking.caps}}em; text-transform:uppercase; color:{{color.fg_secondary}};">
+                {{EYEBROW_LABEL}}
+              </p>
+              <h1 class="hero-h1 text-fg" style="margin:0 0 16px 0; font-family:'{{type.display}}', Georgia, 'Times New Roman', serif; font-size:36px; line-height:1.1; font-weight:600; color:{{color.fg_primary}}; letter-spacing:{{type.tracking.display}}em;">
+                {{HERO_HEADLINE}}
+              </h1>
+              <p class="text-muted" style="margin:0; font-family:'{{type.body}}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size:{{type.scale.lg}}px; line-height:{{type.leading.body}}; color:{{color.fg_secondary}};">
+                {{HERO_SUBHEAD}}
+              </p>
+            </td>
+          </tr>
+
+          <!-- Single-column body -->
+          <tr>
+            <td class="px-mobile" style="padding:24px 40px 8px 40px;">
+              <p class="text-fg" style="margin:0 0 16px 0; font-family:'{{type.body}}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size:{{type.scale.base}}px; line-height:{{type.leading.body}}; color:{{color.fg_primary}};">
+                {{BODY_PARAGRAPH_1}}
+              </p>
+              <p class="text-fg" style="margin:0 0 16px 0; font-family:'{{type.body}}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size:{{type.scale.base}}px; line-height:{{type.leading.body}}; color:{{color.fg_primary}};">
+                {{BODY_PARAGRAPH_2}}
+              </p>
+            </td>
+          </tr>
+
+          <!-- CTA: bulletproof button with VML fallback for Outlook -->
+          <tr>
+            <td align="left" class="px-mobile" style="padding:16px 40px 32px 40px;">
+              <!--[if mso]>
+              <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{CTA_URL}}" style="height:48px; v-text-anchor:middle; width:220px;" arcsize="{{spacing.radius.sm}}%" stroke="f" fillcolor="{{color.accent}}">
+                <w:anchorlock/>
+                <center style="color:{{color.bg_primary}}; font-family:Arial, sans-serif; font-size:15px; font-weight:500;">{{CTA_LABEL}}</center>
+              </v:roundrect>
+              <![endif]-->
+              <!--[if !mso]><!-->
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-collapse:separate;">
+                <tr>
+                  <td align="center" bgcolor="{{color.accent}}" style="background-color:{{color.accent}}; border-radius:{{spacing.radius.sm}}px; mso-padding-alt:14px 28px;">
+                    <a href="{{CTA_URL}}" target="_blank" style="display:inline-block; padding:14px 28px; font-family:'{{type.body}}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size:15px; font-weight:500; line-height:1; color:{{color.bg_primary}}; text-decoration:none; border-radius:{{spacing.radius.sm}}px;">
+                      {{CTA_LABEL}}
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              <!--<![endif]-->
+            </td>
+          </tr>
+
+          <!-- Divider -->
+          <tr>
+            <td class="px-mobile" style="padding:0 40px;">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td class="border-hairline" style="border-top:1px solid {{color.border}}; font-size:0; line-height:0; height:1px;">&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Two-column section (stacks on mobile) -->
+          <tr>
+            <td class="px-mobile" style="padding:32px 40px;">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td class="stack" width="50%" valign="top" style="width:50%; padding-right:12px;">
+                    <h2 class="text-fg" style="margin:0 0 8px 0; font-family:'{{type.display}}', Georgia, 'Times New Roman', serif; font-size:{{type.scale.lg}}px; line-height:1.2; font-weight:600; color:{{color.fg_primary}};">
+                      {{COL_1_HEADING}}
+                    </h2>
+                    <p class="text-muted" style="margin:0; font-family:'{{type.body}}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size:{{type.scale.sm}}px; line-height:{{type.leading.body}}; color:{{color.fg_secondary}};">
+                      {{COL_1_BODY}}
+                    </p>
+                  </td>
+                  <td class="stack stack-pad" width="50%" valign="top" style="width:50%; padding-left:12px;">
+                    <h2 class="text-fg" style="margin:0 0 8px 0; font-family:'{{type.display}}', Georgia, 'Times New Roman', serif; font-size:{{type.scale.lg}}px; line-height:1.2; font-weight:600; color:{{color.fg_primary}};">
+                      {{COL_2_HEADING}}
+                    </h2>
+                    <p class="text-muted" style="margin:0; font-family:'{{type.body}}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size:{{type.scale.sm}}px; line-height:{{type.leading.body}}; color:{{color.fg_secondary}};">
+                      {{COL_2_BODY}}
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Divider -->
+          <tr>
+            <td class="px-mobile" style="padding:0 40px;">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td class="border-hairline" style="border-top:1px solid {{color.border}}; font-size:0; line-height:0; height:1px;">&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td class="px-mobile" style="padding:24px 40px 32px 40px;">
+              <p class="text-muted" style="margin:0 0 8px 0; font-family:'{{type.body}}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size:{{type.scale.xs}}px; line-height:1.5; color:{{color.fg_muted}};">
+                {{COMPANY_NAME}} &middot; {{COMPANY_ADDRESS}}
+              </p>
+              <p class="text-muted" style="margin:0 0 8px 0; font-family:'{{type.body}}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size:{{type.scale.xs}}px; line-height:1.5; color:{{color.fg_muted}};">
+                <a href="{{UNSUBSCRIBE_URL}}" style="color:{{color.fg_muted}}; text-decoration:underline;">Unsubscribe</a>
+                &nbsp;&middot;&nbsp;
+                <a href="{{PREFERENCES_URL}}" style="color:{{color.fg_muted}}; text-decoration:underline;">Email preferences</a>
+                &nbsp;&middot;&nbsp;
+                <a href="{{VIEW_IN_BROWSER_URL}}" style="color:{{color.fg_muted}}; text-decoration:underline;">View in browser</a>
+              </p>
+              <p class="text-muted" style="margin:0; font-family:'{{type.body}}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size:{{type.scale.xs}}px; line-height:1.5; color:{{color.fg_muted}};">
+                &copy; {{YEAR}} {{COMPANY_NAME}}. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+        <!-- / 600px content table -->
+
+      </td>
+    </tr>
+  </table>
+  <!-- / outer table -->
+
+</body>
+</html>

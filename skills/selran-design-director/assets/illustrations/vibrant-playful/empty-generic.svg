@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  direction: vibrant-playful
+  use: empty state
+  variables: var(fg), var(bg), var(accent), var(palette-2)..5
+  notes: asymmetric composition of filled shapes with a dotted "waiting to fill" area; pattern fill for texture
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Nothing here yet">
+  <style>
+    .vp-accent { fill: var(--accent, #C44A2E); }
+    .vp-p2     { fill: var(--palette-2, #1F6B88); }
+    .vp-p3     { fill: var(--palette-3, #9C6014); }
+    .vp-p5     { fill: var(--palette-5, #2A7B60); }
+    .vp-fg-stroke { stroke: var(--fg, #1A1A1A); fill: none; stroke-width: 3; vector-effect: non-scaling-stroke; }
+    .vp-accent-stroke { stroke: var(--accent, #C44A2E); fill: none; stroke-width: 3; stroke-dasharray: 8 6; vector-effect: non-scaling-stroke; }
+  </style>
+
+  <defs>
+    <pattern id="vpe-dots" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="6" cy="6" r="1.6" fill="var(--fg, #1A1A1A)"/>
+    </pattern>
+  </defs>
+
+  <!-- big dashed rounded rectangle — "the container, empty" -->
+  <rect x="80" y="110" width="240" height="180" rx="20"
+        fill="var(--bg, #FFFBF5)" class="vp-accent-stroke" stroke-width="3.5"/>
+
+  <!-- dot-fill patch inside, lower-left — pattern to add texture -->
+  <rect x="100" y="240" width="60" height="30" rx="15" fill="url(#vpe-dots)"/>
+
+  <!-- teal filled circle top-right overlapping container corner -->
+  <circle cx="310" cy="105" r="34" class="vp-p2"/>
+  <circle cx="310" cy="105" r="34" class="vp-fg-stroke"/>
+
+  <!-- amber wedge bottom-right corner -->
+  <path class="vp-p3" d="M 260 300 L 340 290 L 330 330 Z"/>
+
+  <!-- green squiggle -->
+  <path class="vp-accent-stroke" stroke-width="3.5" stroke-dasharray="0" fill="none"
+        stroke="var(--palette-5, #2A7B60)"
+        d="M 120 170 C 140 160 160 185 180 175 C 200 165 220 185 240 175"/>
+
+  <!-- accent dot (bullseye) offset -->
+  <circle cx="210" cy="200" r="12" class="vp-accent"/>
+
+  <!-- caption -->
+  <text x="200" y="340"
+        text-anchor="middle"
+        font-family="Satoshi, General Sans, Söhne, DM Sans, ui-sans-serif, sans-serif"
+        font-weight="600"
+        font-size="18"
+        letter-spacing="-0.01em"
+        fill="var(--fg, #1A1A1A)">Nothing here yet!</text>
+  <text x="200" y="364"
+        text-anchor="middle"
+        font-family="Satoshi, General Sans, Söhne, DM Sans, ui-sans-serif, sans-serif"
+        font-weight="500"
+        font-size="12"
+        fill="var(--fg, #1A1A1A)" opacity=".6">Let's fill this in.</text>
+</svg>

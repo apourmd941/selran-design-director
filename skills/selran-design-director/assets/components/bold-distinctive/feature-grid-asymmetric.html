@@ -1,0 +1,186 @@
+<style>
+  .c-bd-feat {
+    padding: 96px 0 120px;
+    border-bottom: 2px solid var(--fg);
+  }
+  .c-bd-feat__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .c-bd-feat__head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: end;
+    padding-bottom: 40px;
+    border-bottom: 2px solid var(--fg);
+    margin-bottom: 48px;
+  }
+  .c-bd-feat__marker {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(80px, 14vw, 160px);
+    line-height: 0.9;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--fg);
+  }
+  .c-bd-feat__marker em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .c-bd-feat__head-meta {
+    padding-left: 32px;
+    border-left: 2px solid var(--fg);
+  }
+  .c-bd-feat__head-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted, var(--fg-secondary, var(--fg)));
+    margin-bottom: 12px;
+  }
+  .c-bd-feat__head h2 {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: clamp(32px, 4vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--fg);
+  }
+  .c-bd-feat__head h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .c-bd-feat__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0;
+    border: 2px solid var(--fg);
+  }
+  .c-bd-feat__tile {
+    padding: 36px;
+    border-right: 2px solid var(--fg);
+    border-bottom: 2px solid var(--fg);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--bg);
+  }
+  .c-bd-feat__tile--big {
+    grid-row: span 2;
+    padding: 48px;
+    background: var(--fg);
+    color: var(--bg);
+    border-bottom: none;
+  }
+  .c-bd-feat__tile--hot {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .c-bd-feat__tile:nth-child(3) { border-right: none; }
+  .c-bd-feat__tile:nth-child(4), .c-bd-feat__tile:nth-child(5) { border-bottom: none; }
+  .c-bd-feat__tile:last-child { border-right: none; }
+
+  .c-bd-feat__num {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    padding-bottom: 10px;
+    border-bottom: 2px solid currentColor;
+    width: fit-content;
+    display: inline-block;
+  }
+  .c-bd-feat__tile h3 {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 24px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+  }
+  .c-bd-feat__tile--big h3 {
+    font-size: clamp(36px, 4vw, 52px);
+    line-height: 1.02;
+  }
+  .c-bd-feat__tile--big h3 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .c-bd-feat__tile p {
+    font-size: 15px;
+    line-height: 1.55;
+    opacity: 0.92;
+  }
+  .c-bd-feat__byline {
+    margin-top: auto;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    opacity: 0.85;
+    padding-top: 14px;
+    border-top: 1px solid currentColor;
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-feat__inner { padding: 0 24px; }
+    .c-bd-feat__head { grid-template-columns: 1fr; gap: 24px; }
+    .c-bd-feat__head-meta { padding-left: 0; border-left: none; }
+    .c-bd-feat__grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .c-bd-feat__tile {
+      grid-row: auto;
+      border-right: none;
+      border-bottom: 2px solid var(--fg);
+    }
+    .c-bd-feat__tile:last-child { border-bottom: none; }
+    .c-bd-feat__tile--big { padding: 32px; }
+  }
+</style>
+
+<section class="c-bd-feat">
+  <div class="c-bd-feat__inner">
+    <div class="c-bd-feat__head">
+      <div class="c-bd-feat__marker">05<em>.</em></div>
+      <div class="c-bd-feat__head-meta">
+        <div class="c-bd-feat__head-label">Inside this issue</div>
+        <h2>Five pieces that argue, <em>quietly,</em> for a different internet.</h2>
+      </div>
+    </div>
+    <div class="c-bd-feat__grid">
+      <div class="c-bd-feat__tile c-bd-feat__tile--big">
+        <span class="c-bd-feat__num">Cover · 01</span>
+        <h3>What we <em>lost</em> when the feed learned to read us back.</h3>
+        <p>A year offline and a year on: Iris Park's 6,400-word cover essay is the best argument we've run for the case that attention is a civic resource, not a personal failing.</p>
+        <div class="c-bd-feat__byline">By Iris Park · 28 min read</div>
+      </div>
+      <div class="c-bd-feat__tile c-bd-feat__tile--hot">
+        <span class="c-bd-feat__num">Essay · 02</span>
+        <h3>The committee that runs your homepage</h3>
+        <p>Who is actually designing the default screen of your life? A brief anthropology.</p>
+        <div class="c-bd-feat__byline">By Nuno Abreu · 14 min</div>
+      </div>
+      <div class="c-bd-feat__tile">
+        <span class="c-bd-feat__num">Reported · 03</span>
+        <h3>Letters from a quieter web</h3>
+        <p>Three writers who moved their work to newsletters, RSS, and the post office.</p>
+        <div class="c-bd-feat__byline">By Hale Andrade · 22 min</div>
+      </div>
+      <div class="c-bd-feat__tile">
+        <span class="c-bd-feat__num">Interview · 04</span>
+        <h3>A conversation with the archivist</h3>
+        <p>On what the internet keeps, what it loses, and what it pretends never existed.</p>
+        <div class="c-bd-feat__byline">By Junie Vidal · 18 min</div>
+      </div>
+      <div class="c-bd-feat__tile">
+        <span class="c-bd-feat__num">Dispatch · 05</span>
+        <h3>Notes from a defunct timeline</h3>
+        <p>What an empty comment thread sounds like, six months after the platform closed.</p>
+        <div class="c-bd-feat__byline">By Theo Arak · 9 min</div>
+      </div>
+    </div>
+  </div>
+</section>

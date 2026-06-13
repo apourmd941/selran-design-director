@@ -1,0 +1,161 @@
+<!doctype html>
+<!-- Brand book scaffold — fill from design-system.md. See references/brand-book.md.
+     Self-contained (no network). The book is styled IN the brand's direction, so
+     it doubles as a sample of the system. Substitute the :root brand-* tokens
+     from design-system.md and replace each <!-- FILL --> block. Print: one
+     section per page. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{BRAND_NAME}} — Brand Book</title>
+<style>
+  :root {
+    /* —— substitute these from design-system.md —— */
+    --brand-bg: #FBFBFA;
+    --brand-surface: #ffffff;
+    --brand-fg: #1A1C1A;
+    --brand-muted: #6B6E76;
+    --brand-line: #E4E4DE;
+    --brand-accent: #1F7A4D;
+    --brand-accent-2: #2F6DB3;
+    --brand-display: "Fraunces", Georgia, serif;        /* display family */
+    --brand-body: ui-sans-serif, system-ui, sans-serif; /* body family */
+    --brand-mono: ui-monospace, Menlo, monospace;
+    --brand-space: 8px;       /* base unit */
+    --brand-radius: 10px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --brand-bg:#141513; --brand-surface:#1C1E1B; --brand-fg:#ECEEE8;
+            --brand-muted:#9AA09A; --brand-line:#2E322C; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--brand-bg); color: var(--brand-fg);
+    font-family: var(--brand-body); line-height: 1.6; }
+  .page { max-width: 880px; margin: 0 auto; padding: 72px 56px; border-bottom: 1px solid var(--brand-line); }
+  h1,h2,h3 { font-family: var(--brand-display); font-weight: 600; line-height: 1.1; }
+  .eyebrow { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-accent); margin: 0 0 12px; font-family: var(--brand-body); }
+  .lede { font-size: 20px; color: var(--brand-muted); max-width: 60ch; }
+  .grid { display: grid; gap: calc(var(--brand-space) * 2); }
+  .swatch { border-radius: var(--brand-radius); border: 1px solid var(--brand-line); overflow: hidden; }
+  .swatch .chip { height: 96px; } .swatch .meta { padding: 10px 12px; font-family: var(--brand-mono); font-size: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th,td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--brand-line); }
+  th { font-family: var(--brand-body); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--brand-muted); }
+  .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card { background: var(--brand-surface); border: 1px solid var(--brand-line); border-radius: var(--brand-radius); padding: 16px; }
+  .tag { display:inline-block; font-size:11px; font-weight:700; padding:2px 8px; border-radius:99px; }
+  .tag.do  { color: var(--brand-accent); background: color-mix(in srgb, var(--brand-accent) 12%, transparent); }
+  .tag.dont{ color: #B3261E; background: color-mix(in srgb, #B3261E 12%, transparent); }
+  .specimen { font-family: var(--brand-display); }
+  .clearspace { position: relative; display:inline-block; padding: calc(var(--brand-space)*3); outline: 1px dashed var(--brand-accent); }
+  @media print {
+    .page { page-break-after: always; border: 0; padding: 48px; }
+    body { background: #fff; color: #111; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 1 · COVER -->
+<section class="page" style="min-height: 60vh; display:flex; flex-direction:column; justify-content:flex-end;">
+  <p class="eyebrow">Brand Book</p>
+  <h1 style="font-size: 64px; margin: 0;">{{BRAND_NAME}}</h1>
+  <p class="lede" style="margin-top: 12px;">{{TAGLINE}}</p>
+  <!-- FILL: the direction's signature gesture as the hero visual -->
+</section>
+
+<!-- 2 · BRAND ESSENCE -->
+<section class="page">
+  <p class="eyebrow">01 · Essence</p>
+  <h2 style="font-size: 32px;">What it feels like</h2>
+  <p class="lede">{{THREE_ADJECTIVES}} — {{ONE_SENTENCE_ESSENCE}}</p>
+  <!-- FILL from design-system.md `personality` -->
+</section>
+
+<!-- 3 · LOGO -->
+<section class="page">
+  <p class="eyebrow">02 · Logo</p>
+  <h2 style="font-size: 32px;">The mark</h2>
+  <div class="clearspace"><strong style="font-family:var(--brand-display); font-size:28px;">{{WORDMARK_OR_LOGO}}</strong></div>
+  <p style="color:var(--brand-muted)">Clear space: minimum {{N}}× cap-height on all sides. Minimum size: {{MIN_PX}}px / {{MIN_MM}}mm.</p>
+  <h3 style="font-size:18px; margin-top:28px;">Misuse — never</h3>
+  <div class="grid" style="grid-template-columns: repeat(auto-fit,minmax(140px,1fr));">
+    <div class="card">✗ stretch / distort</div><div class="card">✗ recolor off-palette</div>
+    <div class="card">✗ add shadow/effects</div><div class="card">✗ rotate</div><div class="card">✗ crowd / under-space</div>
+  </div>
+  <!-- If no logo supplied: render a starter wordmark from the type system and LABEL it a starter. Never present a fabricated logo as final. -->
+</section>
+
+<!-- 4 · COLOR -->
+<section class="page">
+  <p class="eyebrow">03 · Color</p>
+  <h2 style="font-size: 32px;">Palette</h2>
+  <div class="grid" style="grid-template-columns: repeat(auto-fit,minmax(150px,1fr));">
+    <div class="swatch"><div class="chip" style="background:var(--brand-accent)"></div><div class="meta">Accent · {{ACCENT_HEX}}</div></div>
+    <div class="swatch"><div class="chip" style="background:var(--brand-accent-2)"></div><div class="meta">Secondary · {{HEX}}</div></div>
+    <div class="swatch"><div class="chip" style="background:var(--brand-fg)"></div><div class="meta">Ink · {{HEX}}</div></div>
+    <div class="swatch"><div class="chip" style="background:var(--brand-bg); border-top:1px solid var(--brand-line)"></div><div class="meta">Surface · {{HEX}}</div></div>
+  </div>
+  <h3 style="font-size:18px; margin-top:28px;">Accessible pairings (WCAG AA)</h3>
+  <table><thead><tr><th>Foreground</th><th>Background</th><th>Ratio</th><th>Pass</th></tr></thead>
+  <tbody><!-- FILL from accessibility-check.md --></tbody></table>
+</section>
+
+<!-- 5 · TYPOGRAPHY -->
+<section class="page">
+  <p class="eyebrow">04 · Typography</p>
+  <h2 style="font-size: 32px;">Type</h2>
+  <p class="specimen" style="font-size:48px; margin:8px 0;">{{DISPLAY_FAMILY}} — display</p>
+  <p style="font-size:18px;">{{BODY_FAMILY}} — body. The quick brown fox jumps over the lazy dog.</p>
+  <table style="margin-top:20px;"><thead><tr><th>Step</th><th>Size</th><th>Weight</th><th>Leading</th><th>Use</th></tr></thead>
+  <tbody><!-- FILL the type scale from design-system.md --></tbody></table>
+  <p style="color:var(--brand-muted); margin-top:16px;">Rules: never set body copy in the display face · at most two families · fallback chain {{FALLBACKS}}.</p>
+</section>
+
+<!-- 6 · SPACING & LAYOUT  (the section brand-guidelines omits) -->
+<section class="page">
+  <p class="eyebrow">05 · Spacing & layout</p>
+  <h2 style="font-size: 32px;">Rhythm</h2>
+  <p class="lede">Base unit {{BASE}}px. Scale: {{SCALE}}. Radius {{RADIUS}}px.</p>
+  <!-- FILL: a visual scale ramp + grid principles -->
+</section>
+
+<!-- 7 · VOICE & TONE  (the section brand-guidelines omits) -->
+<section class="page">
+  <p class="eyebrow">06 · Voice & tone</p>
+  <h2 style="font-size: 32px;">How it speaks</h2>
+  <!-- FILL from voice.md: sentence length, verb energy, vocabulary, headline/body/CTA patterns, forbidden phrases, tone per context -->
+  <div class="dodont" style="margin-top:16px;">
+    <div class="card"><span class="tag do">Sounds like</span><p>{{ON_VOICE_EXAMPLE}}</p></div>
+    <div class="card"><span class="tag dont">Never</span><p>{{OFF_VOICE_EXAMPLE}}</p></div>
+  </div>
+</section>
+
+<!-- 8 · IMAGERY & ICONOGRAPHY -->
+<section class="page">
+  <p class="eyebrow">07 · Imagery</p>
+  <h2 style="font-size: 32px;">Photography, illustration, icons</h2>
+  <!-- FILL from imagery.md / illustration.md: photo style, illustration voice, icon library, anti-emoji rule -->
+</section>
+
+<!-- 9 · APPLICATION EXAMPLES -->
+<section class="page">
+  <p class="eyebrow">08 · In use</p>
+  <h2 style="font-size: 32px;">Application</h2>
+  <!-- FILL: real mockups from assets/components/<direction>/ — web hero, card, button set, mobile screen, email, slide -->
+</section>
+
+<!-- 10 · DO & DON'T -->
+<section class="page">
+  <p class="eyebrow">09 · Do &amp; Don't</p>
+  <h2 style="font-size: 32px;">Keep it on-brand</h2>
+  <div class="dodont">
+    <div class="card"><span class="tag dont">Don't</span><p>Inter / Roboto everywhere; purple-on-white gradients; centered-everything; emoji as icons; Corporate Memphis illustration.</p></div>
+    <div class="card"><span class="tag do">Do</span><p>The type pairing above; the single accent used with restraint; asymmetry &amp; a real focal point; the chosen icon set; the illustration voice in §07.</p></div>
+  </div>
+  <!-- FILL specifics from anti-patterns.md -->
+</section>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<style>
+  .c-bd-topbar {
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--bg);
+    border-bottom: 2px solid var(--fg);
+    font-family: inherit;
+    color: var(--fg);
+  }
+  .c-bd-topbar__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 8px 40px;
+    border-bottom: 1px solid var(--fg);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .c-bd-topbar__meta span + span { text-align: right; }
+
+  .c-bd-topbar__inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 18px 40px;
+  }
+  .c-bd-topbar__brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--fg);
+    min-width: 0;
+  }
+  .c-bd-topbar__wordmark {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+  .c-bd-topbar__wordmark em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .c-bd-topbar__workspace {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--fg-muted);
+    padding-left: 14px;
+    border-left: 2px solid var(--fg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .c-bd-topbar__search {
+    flex: 1;
+    max-width: 520px;
+    margin-left: auto;
+    position: relative;
+  }
+  .c-bd-topbar__search-input {
+    width: 100%;
+    box-sizing: border-box;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid var(--fg);
+    padding: 10px 60px 10px 0;
+    font-size: 16px;
+    font-family: inherit;
+    color: var(--fg);
+    outline: none;
+    transition: border-color 220ms ease;
+  }
+  .c-bd-topbar__search-input::placeholder {
+    color: var(--fg-muted);
+    font-style: italic;
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+  }
+  .c-bd-topbar__search-input:focus {
+    border-bottom-color: var(--accent);
+    border-bottom-width: 4px;
+    padding-bottom: 8px;
+  }
+  .c-bd-topbar__search-kbd {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  .c-bd-topbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .c-bd-topbar__icon-btn {
+    appearance: none;
+    background: transparent;
+    border: 2px solid transparent;
+    color: var(--fg);
+    width: 40px; height: 40px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    position: relative;
+    transition: border-color 220ms ease, background-color 220ms ease;
+  }
+  .c-bd-topbar__icon-btn:hover { border-color: var(--fg); }
+  .c-bd-topbar__icon-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .c-bd-topbar__icon-btn[data-has-badge="true"]::after {
+    content: "";
+    position: absolute;
+    top: 6px; right: 6px;
+    width: 6px; height: 6px;
+    background: var(--accent);
+  }
+
+  .c-bd-topbar__user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 16px;
+    border-left: 2px solid var(--fg);
+  }
+  .c-bd-topbar__avatar {
+    width: 36px; height: 36px;
+    background: var(--fg);
+    color: var(--bg);
+    display: grid;
+    place-items: center;
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 15px;
+    font-weight: 500;
+    font-style: italic;
+  }
+  .c-bd-topbar__user-name {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-style: italic;
+    font-size: 15px;
+  }
+
+  @media (max-width: 900px) {
+    .c-bd-topbar__meta { padding: 8px 20px; font-size: 9px; }
+    .c-bd-topbar__inner { padding: 16px 20px; gap: 16px; flex-wrap: wrap; }
+    .c-bd-topbar__wordmark { font-size: 28px; }
+    .c-bd-topbar__workspace { display: none; }
+    .c-bd-topbar__search { order: 3; flex: 1 0 100%; max-width: none; margin-left: 0; }
+    .c-bd-topbar__search-kbd { display: none; }
+    .c-bd-topbar__user-name { display: none; }
+  }
+</style>
+
+<header class="c-bd-topbar" role="banner">
+  <div class="c-bd-topbar__meta">
+    <span>Issue No. 07 &middot; Spring 2026</span>
+    <span>Signed in &middot; 04:21 EST</span>
+  </div>
+  <div class="c-bd-topbar__inner">
+    <a class="c-bd-topbar__brand" href="#" aria-label="{Brand} home">
+      <span class="c-bd-topbar__wordmark">{Brand}<em>.</em></span>
+      <span class="c-bd-topbar__workspace">The Desk &mdash; Editorial</span>
+    </a>
+
+    <div class="c-bd-topbar__search" role="search">
+      <input
+        class="c-bd-topbar__search-input"
+        type="search"
+        placeholder="Search essays, authors, issues&hellip;"
+        aria-label="Search"
+      >
+      <span class="c-bd-topbar__search-kbd" aria-hidden="true">&#8984;K</span>
+    </div>
+
+    <div class="c-bd-topbar__actions">
+      <button class="c-bd-topbar__icon-btn" type="button" aria-label="Notifications" data-has-badge="true">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M4 7a5 5 0 0110 0v3l1.5 2.5h-13L4 10V7z" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M7.5 14.5a1.5 1.5 0 003 0" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+      </button>
+      <button class="c-bd-topbar__icon-btn" type="button" aria-label="Help">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M6.5 7a2.5 2.5 0 115 0c0 1.5-2.5 1.5-2.5 3M9 12.5v.5" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+      </button>
+
+      <div class="c-bd-topbar__user">
+        <span class="c-bd-topbar__avatar" aria-hidden="true">A</span>
+        <span class="c-bd-topbar__user-name">Amara Wole</span>
+      </div>
+    </div>
+  </div>
+</header>

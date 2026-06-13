@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>{{og.title}} — OG image</title>
+<style>
+  @page { size: 1200px 630px; margin: 0; }
+  html, body { margin: 0; padding: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: {{color.bg_primary}};
+    color: {{color.fg_primary}};
+    font-family: "{{type.body}}", Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 88px 96px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 48px;
+  }
+  .dateline {
+    font-size: 14px;
+    letter-spacing: {{type.tracking.caps}}em;
+    text-transform: uppercase;
+    color: {{color.accent}};
+    font-weight: 500;
+  }
+  .rule { height: 1px; background: {{color.border_strong}}; margin-top: 8px; width: 120px; }
+  h1 {
+    font-family: "{{type.display}}", Georgia, serif;
+    font-size: 92px;
+    font-weight: 500;
+    line-height: {{type.leading.display}};
+    letter-spacing: {{type.tracking.display}}em;
+    color: {{color.fg_primary}};
+    margin: 0;
+    max-width: 980px;
+  }
+  h1 em { font-style: italic; color: {{color.accent}}; }
+  .subtitle {
+    font-size: 26px;
+    line-height: 1.55;
+    color: {{color.fg_secondary}};
+    max-width: 820px;
+    font-style: italic;
+  }
+  .byline {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 16px;
+    color: {{color.fg_muted}};
+    letter-spacing: {{type.tracking.caps}}em;
+    text-transform: uppercase;
+    border-top: 1px solid {{color.border}};
+    padding-top: 24px;
+  }
+</style>
+</head>
+<body>
+  <div>
+    <div class="dateline">{{og.logo}}</div>
+    <div class="rule"></div>
+  </div>
+  <div>
+    <h1>{{og.title}}</h1>
+    <div class="subtitle">{{og.subtitle}}</div>
+  </div>
+  <div class="byline">
+    <span>Essay</span>
+    <span>v{{meta.version}}</span>
+  </div>
+</body>
+</html>

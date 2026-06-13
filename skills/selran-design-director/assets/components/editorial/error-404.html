@@ -1,0 +1,104 @@
+<style>
+  .c-ed-404 {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    background: var(--bg);
+  }
+  .c-ed-404__inner {
+    max-width: 680px;
+    width: 100%;
+    text-align: left;
+  }
+  .c-ed-404__byline {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-bottom: 40px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .c-ed-404__byline em {
+    font-style: italic;
+    color: var(--fg);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 13px;
+  }
+  .c-ed-404__headline {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: clamp(44px, 6.4vw, 88px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 32px;
+  }
+  .c-ed-404__headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .c-ed-404__body {
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--fg);
+    margin: 0 0 40px;
+    max-width: 58ch;
+  }
+  .c-ed-404__actions {
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .c-ed-404__link {
+    font-size: 15px;
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 500;
+    transition: color 240ms ease;
+  }
+  .c-ed-404__link:hover { color: var(--fg); }
+  .c-ed-404__link--muted {
+    color: var(--fg-muted);
+    text-decoration: none;
+    font-style: italic;
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 17px;
+  }
+  .c-ed-404__link--muted:hover { color: var(--fg); }
+
+  @media (max-width: 900px) {
+    .c-ed-404 { padding: 64px 24px; }
+  }
+</style>
+
+<main class="c-ed-404">
+  <div class="c-ed-404__inner">
+    <div class="c-ed-404__byline">
+      <span>Error 404 &middot; Page not found</span>
+      <em>Filed under: dead links</em>
+    </div>
+    <h1 class="c-ed-404__headline">
+      Not found &mdash; <em>try the archive.</em>
+    </h1>
+    <p class="c-ed-404__body">
+      The essay you followed has been moved, retitled, or retired to a later issue. Our archive is thorough, and our search forgiving &mdash; whatever you were reading, it is almost certainly still here.
+    </p>
+    <div class="c-ed-404__actions">
+      <a href="/" class="c-ed-404__link">Return to the current issue &rarr;</a>
+      <a href="/archive" class="c-ed-404__link c-ed-404__link--muted">or search the archive</a>
+    </div>
+  </div>
+</main>

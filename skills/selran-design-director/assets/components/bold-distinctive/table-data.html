@@ -1,0 +1,176 @@
+<style>
+  .c-bd-table {
+    border: 2px solid var(--fg);
+    background: var(--bg);
+    font-size: 15px;
+  }
+  .c-bd-table__caption {
+    padding: 20px 32px;
+    background: var(--fg);
+    color: var(--bg);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .c-bd-table__caption-title {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .c-bd-table__caption-title em { font-style: italic; color: var(--accent); }
+  .c-bd-table__caption-meta {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    opacity: 0.8;
+  }
+  .c-bd-table__row {
+    display: grid;
+    grid-template-columns: 60px 2fr 1fr 1fr 1fr 90px;
+    padding: 20px 32px;
+    align-items: center;
+    gap: 20px;
+    border-top: 2px solid var(--fg);
+  }
+  .c-bd-table__row--head {
+    border-top: none;
+    background: var(--bg-2);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .c-bd-table__sort { cursor: pointer; display: inline-flex; gap: 4px; color: inherit; }
+  .c-bd-table__sort::after { content: '↓'; color: var(--accent); }
+  .c-bd-table__row--body:hover { background: var(--accent); color: var(--bg); }
+
+  .c-bd-table__no {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .c-bd-table__title {
+    font-family: var(--ff-display, 'PP Editorial New', 'Fraunces', Georgia, serif);
+    font-size: 22px;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .c-bd-table__title small {
+    display: block;
+    font-family: inherit;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--fg-muted, var(--fg-secondary, var(--fg)));
+    margin-top: 4px;
+    font-weight: 400;
+  }
+  .c-bd-table__row--body:hover .c-bd-table__title small { color: var(--bg); opacity: 0.9; }
+  .c-bd-table__author {
+    font-weight: 500;
+  }
+  .c-bd-table__tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 2px solid currentColor;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+  }
+  .c-bd-table__minutes {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+  .c-bd-table__btn {
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    border: 2px solid currentColor;
+    color: inherit;
+    text-align: center;
+  }
+  .c-bd-table__row--body:hover .c-bd-table__btn { background: var(--bg); color: var(--accent); border-color: var(--bg); }
+
+  @media (max-width: 900px) {
+    .c-bd-table__row {
+      grid-template-columns: 40px 1fr 90px;
+      padding: 16px 20px;
+      font-size: 13px;
+      gap: 12px;
+    }
+    .c-bd-table__row > :nth-child(3),
+    .c-bd-table__row > :nth-child(4),
+    .c-bd-table__row > :nth-child(5) { display: none; }
+    .c-bd-table__no { font-size: 20px; }
+    .c-bd-table__title { font-size: 18px; }
+  }
+</style>
+
+<div class="c-bd-table" role="table" aria-label="Table of contents">
+  <div class="c-bd-table__caption">
+    <span class="c-bd-table__caption-title">Issue 07 &mdash; <em>Contents</em></span>
+    <span class="c-bd-table__caption-meta">32 essays · 214,000 words · published April 2026</span>
+  </div>
+  <div class="c-bd-table__row c-bd-table__row--head">
+    <div><span class="c-bd-table__sort">No.</span></div>
+    <div>Essay</div>
+    <div>Author</div>
+    <div>Form</div>
+    <div style="text-align:right;"><span class="c-bd-table__sort">Minutes</span></div>
+    <div></div>
+  </div>
+  <div class="c-bd-table__row c-bd-table__row--body">
+    <div class="c-bd-table__no">01</div>
+    <div class="c-bd-table__title">What we lost when the feed learned to read us back<small>The cover essay</small></div>
+    <div class="c-bd-table__author">Iris Park</div>
+    <div><span class="c-bd-table__tag">Essay</span></div>
+    <div class="c-bd-table__minutes">28 min</div>
+    <div style="text-align:right;"><a href="#" class="c-bd-table__btn">Read →</a></div>
+  </div>
+  <div class="c-bd-table__row c-bd-table__row--body">
+    <div class="c-bd-table__no">02</div>
+    <div class="c-bd-table__title">The committee that runs your homepage<small>A brief anthropology</small></div>
+    <div class="c-bd-table__author">Nuno Abreu</div>
+    <div><span class="c-bd-table__tag">Essay</span></div>
+    <div class="c-bd-table__minutes">14 min</div>
+    <div style="text-align:right;"><a href="#" class="c-bd-table__btn">Read →</a></div>
+  </div>
+  <div class="c-bd-table__row c-bd-table__row--body">
+    <div class="c-bd-table__no">03</div>
+    <div class="c-bd-table__title">Letters from a quieter web<small>Three writers, three exits</small></div>
+    <div class="c-bd-table__author">Hale Andrade</div>
+    <div><span class="c-bd-table__tag">Reported</span></div>
+    <div class="c-bd-table__minutes">22 min</div>
+    <div style="text-align:right;"><a href="#" class="c-bd-table__btn">Read →</a></div>
+  </div>
+  <div class="c-bd-table__row c-bd-table__row--body">
+    <div class="c-bd-table__no">04</div>
+    <div class="c-bd-table__title">A conversation with the archivist<small>Helen Bae on what the web keeps</small></div>
+    <div class="c-bd-table__author">Junie Vidal</div>
+    <div><span class="c-bd-table__tag">Interview</span></div>
+    <div class="c-bd-table__minutes">18 min</div>
+    <div style="text-align:right;"><a href="#" class="c-bd-table__btn">Read →</a></div>
+  </div>
+  <div class="c-bd-table__row c-bd-table__row--body">
+    <div class="c-bd-table__no">05</div>
+    <div class="c-bd-table__title">Notes from a defunct timeline<small>Field notes, six months after</small></div>
+    <div class="c-bd-table__author">Theo Arak</div>
+    <div><span class="c-bd-table__tag">Dispatch</span></div>
+    <div class="c-bd-table__minutes">9 min</div>
+    <div style="text-align:right;"><a href="#" class="c-bd-table__btn">Read →</a></div>
+  </div>
+</div>

@@ -1,0 +1,168 @@
+/* ==========================================================================
+   Motion: Dark-Premium
+   Prefix: .m-dp-*
+   Feel: cinematic, considered. Slow ease-out-expo. Restrained glow.
+   Signature gesture: slow luminous glow — hero element breathes accent light.
+   ========================================================================== */
+
+:root {
+  --m-dp-duration-fast:     var(--motion-duration-fast,   200ms);
+  --m-dp-duration-base:     var(--motion-duration,        350ms);
+  --m-dp-duration-slow:     var(--motion-duration-slow,   500ms);
+  --m-dp-duration-cinema:   800ms;
+  --m-dp-easing:            var(--motion-easing,          cubic-bezier(0.19, 1, 0.22, 1));
+  --m-dp-easing-inout:      cubic-bezier(0.4, 0, 0.2, 1);
+
+  --m-dp-accent:            var(--color-accent, #D4AF37);
+  --m-dp-glow-color:        color-mix(in srgb, var(--m-dp-accent) 45%, transparent);
+  --m-dp-glow-color-soft:   color-mix(in srgb, var(--m-dp-accent) 18%, transparent);
+}
+
+/* ---------- Transitions --------------------------------------------------- */
+
+.m-dp-btn {
+  transition:
+    background-color var(--m-dp-duration-base) var(--m-dp-easing),
+    color            var(--m-dp-duration-base) var(--m-dp-easing),
+    border-color     var(--m-dp-duration-base) var(--m-dp-easing),
+    box-shadow       var(--m-dp-duration-slow) var(--m-dp-easing),
+    transform        var(--m-dp-duration-base) var(--m-dp-easing);
+}
+.m-dp-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 24px -4px var(--m-dp-glow-color-soft);
+}
+.m-dp-btn:active { transform: translateY(0); transition-duration: 120ms; }
+
+.m-dp-card {
+  transition:
+    border-color var(--m-dp-duration-base) var(--m-dp-easing),
+    background-color var(--m-dp-duration-base) var(--m-dp-easing),
+    box-shadow   var(--m-dp-duration-slow) var(--m-dp-easing);
+}
+.m-dp-card:hover {
+  border-color: var(--color-border-strong, #3F3F46);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--m-dp-accent) 20%, transparent);
+}
+
+/* Link underline — accent-colored slide, slower and more sensual */
+.m-dp-link {
+  position: relative;
+  text-decoration: none;
+}
+.m-dp-link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -3px;
+  height: 1px;
+  background: var(--m-dp-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--m-dp-duration-slow) var(--m-dp-easing);
+}
+.m-dp-link:hover::after,
+.m-dp-link:focus-visible::after { transform: scaleX(1); }
+
+.m-dp-input {
+  transition:
+    border-color var(--m-dp-duration-base) var(--m-dp-easing),
+    box-shadow   var(--m-dp-duration-slow) var(--m-dp-easing);
+}
+.m-dp-input:focus-visible {
+  outline: none;
+  border-color: var(--m-dp-accent);
+  box-shadow: 0 0 0 1px var(--m-dp-glow-color-soft), 0 0 20px -4px var(--m-dp-glow-color-soft);
+}
+
+/* ---------- Entrance animations ------------------------------------------ */
+
+@keyframes m-dp-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.m-dp-enter-fade-up {
+  animation: m-dp-fade-up var(--m-dp-duration-cinema) var(--m-dp-easing) both;
+}
+
+/* Stagger — cinematic cadence */
+.m-dp-stagger > * { animation: m-dp-fade-up var(--m-dp-duration-cinema) var(--m-dp-easing) both; }
+.m-dp-stagger > *:nth-child(1) { animation-delay:   0ms; }
+.m-dp-stagger > *:nth-child(2) { animation-delay: 120ms; }
+.m-dp-stagger > *:nth-child(3) { animation-delay: 240ms; }
+.m-dp-stagger > *:nth-child(4) { animation-delay: 360ms; }
+.m-dp-stagger > *:nth-child(5) { animation-delay: 480ms; }
+.m-dp-stagger > *:nth-child(6) { animation-delay: 600ms; }
+
+/* ---------- Micro-interactions ------------------------------------------- */
+
+.m-dp-press { transition: transform 140ms var(--m-dp-easing), box-shadow 140ms var(--m-dp-easing); }
+.m-dp-press:active { transform: scale(0.98); }
+
+.m-dp-tap-scale { transition: transform var(--m-dp-duration-fast) var(--m-dp-easing); }
+.m-dp-tap-scale:active { transform: scale(0.97); }
+
+@keyframes m-dp-spin { to { transform: rotate(360deg); } }
+.m-dp-icon-spin { animation: m-dp-spin 1400ms linear infinite; }
+
+/* ---------- Signature gesture: slow luminous glow ------------------------ */
+/* Breathing accent light — for ONE hero element per page */
+
+@keyframes m-dp-luminous {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--m-dp-accent) 25%, transparent),
+      0 0 28px -8px var(--m-dp-glow-color-soft);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--m-dp-accent) 45%, transparent),
+      0 0 48px -4px var(--m-dp-glow-color);
+  }
+}
+
+.m-dp-glow {
+  animation: m-dp-luminous 4000ms var(--m-dp-easing-inout) infinite;
+}
+
+/* One-shot luminous entrance — hero reveal */
+@keyframes m-dp-glow-in {
+  0%   { opacity: 0; filter: brightness(0.8); box-shadow: 0 0 0 0 transparent; }
+  60%  { opacity: 1; }
+  100% {
+    opacity: 1; filter: brightness(1);
+    box-shadow: 0 0 48px -6px var(--m-dp-glow-color);
+  }
+}
+.m-dp-glow-in {
+  animation: m-dp-glow-in 1200ms var(--m-dp-easing) both;
+}
+
+/* ---------- Reduced motion ----------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .m-dp-btn,
+  .m-dp-card,
+  .m-dp-link::after,
+  .m-dp-input,
+  .m-dp-press,
+  .m-dp-tap-scale {
+    transition-duration: 0.01ms !important;
+  }
+  .m-dp-enter-fade-up,
+  .m-dp-stagger > *,
+  .m-dp-icon-spin,
+  .m-dp-glow,
+  .m-dp-glow-in {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+  }
+  .m-dp-btn:hover,
+  .m-dp-btn:active,
+  .m-dp-press:active,
+  .m-dp-tap-scale:active { transform: none; }
+  /* Keep a static glow for hero hero-moment affordance without pulsing. */
+  .m-dp-glow {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--m-dp-accent) 30%, transparent);
+  }
+}

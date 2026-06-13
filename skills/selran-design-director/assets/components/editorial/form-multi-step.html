@@ -1,0 +1,204 @@
+<style>
+  .c-ed-mstep {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 56px 40px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    font-family: inherit;
+  }
+  .c-ed-mstep__byline {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    padding-bottom: 14px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .c-ed-mstep__progress {
+    display: flex; align-items: baseline; gap: 28px;
+    margin-bottom: 36px;
+  }
+  .c-ed-mstep__roman {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--fg-muted);
+    line-height: 1;
+    position: relative;
+    padding-bottom: 6px;
+  }
+  .c-ed-mstep__roman[data-state="done"] { color: var(--fg); }
+  .c-ed-mstep__roman[data-state="active"] {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .c-ed-mstep__roman[data-state="active"]::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .c-ed-mstep__roman small {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    font-style: normal;
+    margin-top: 4px;
+    font-weight: 400;
+  }
+  .c-ed-mstep__title {
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    font-size: 36px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 10px;
+  }
+  .c-ed-mstep__title em { font-style: italic; color: var(--accent); }
+  .c-ed-mstep__lead {
+    font-size: 16px; line-height: 1.65;
+    color: var(--fg-muted);
+    margin: 0 0 28px;
+    max-width: 52ch;
+  }
+  .c-ed-mstep__step[hidden] { display: none; }
+  .c-ed-mstep__field { margin-bottom: 20px; }
+  .c-ed-mstep__label {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-bottom: 6px;
+  }
+  .c-ed-mstep__input,
+  .c-ed-mstep__select,
+  .c-ed-mstep__textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 0;
+    font-size: 17px;
+    font-family: var(--ff-display, 'Fraunces', 'Instrument Serif', Georgia, serif);
+    color: var(--fg);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    outline: none;
+    transition: border-color 250ms ease-out;
+  }
+  .c-ed-mstep__textarea { min-height: 84px; line-height: 1.5; resize: vertical; }
+  .c-ed-mstep__input:focus-visible,
+  .c-ed-mstep__select:focus-visible,
+  .c-ed-mstep__textarea:focus-visible {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 7px;
+  }
+  .c-ed-mstep__actions {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 24px;
+    margin-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .c-ed-mstep__btn {
+    padding: 12px 22px;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    border-radius: 2px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background-color 250ms ease-out, color 250ms ease-out;
+  }
+  .c-ed-mstep__btn--ghost {
+    background: transparent;
+    color: var(--fg);
+    border-color: var(--border);
+  }
+  .c-ed-mstep__btn--ghost:hover:not(:disabled) { border-color: var(--fg); }
+  .c-ed-mstep__btn--primary {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .c-ed-mstep__btn--primary:hover { background: var(--accent); }
+  .c-ed-mstep__btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .c-ed-mstep__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  @media (max-width: 900px) {
+    .c-ed-mstep { padding: 40px 24px; border: 0; }
+    .c-ed-mstep__title { font-size: 28px; }
+    .c-ed-mstep__progress { gap: 18px; }
+  }
+</style>
+
+<form class="c-ed-mstep" novalidate aria-label="Subscribe, step 2 of 3">
+  <div class="c-ed-mstep__byline">Subscription · Step II of III</div>
+
+  <div class="c-ed-mstep__progress" aria-hidden="true">
+    <div class="c-ed-mstep__roman" data-state="done">I<small>Reader</small></div>
+    <div class="c-ed-mstep__roman" data-state="active">II<small>Delivery</small></div>
+    <div class="c-ed-mstep__roman" data-state="pending">III<small>Rhythm</small></div>
+  </div>
+
+  <h2 class="c-ed-mstep__title">Where should the <em>dispatches</em> land?</h2>
+  <p class="c-ed-mstep__lead">A print copy for the shelf, a digital edition for the commute. Tell us where to send each.</p>
+
+  <section class="c-ed-mstep__step" hidden aria-hidden="true">
+    <div class="c-ed-mstep__field">
+      <label class="c-ed-mstep__label" for="ed-ms-name">Full name</label>
+      <input class="c-ed-mstep__input" id="ed-ms-name" name="name" type="text" placeholder="Iris Park">
+    </div>
+    <div class="c-ed-mstep__field">
+      <label class="c-ed-mstep__label" for="ed-ms-email">Email</label>
+      <input class="c-ed-mstep__input" id="ed-ms-email" name="email" type="email" placeholder="iris@inbox.com">
+    </div>
+  </section>
+
+  <section class="c-ed-mstep__step">
+    <div class="c-ed-mstep__field">
+      <label class="c-ed-mstep__label" for="ed-ms-address">Shipping address</label>
+      <input class="c-ed-mstep__input" id="ed-ms-address" name="address" type="text" placeholder="214 Prospect Park West, Brooklyn NY">
+    </div>
+    <div class="c-ed-mstep__field">
+      <label class="c-ed-mstep__label" for="ed-ms-country">Country</label>
+      <select class="c-ed-mstep__select" id="ed-ms-country" name="country">
+        <option>United States</option>
+        <option>Canada</option>
+        <option>United Kingdom</option>
+        <option>Elsewhere</option>
+      </select>
+    </div>
+    <div class="c-ed-mstep__field">
+      <label class="c-ed-mstep__label" for="ed-ms-notes">A note for the mailer (optional)</label>
+      <textarea class="c-ed-mstep__textarea" id="ed-ms-notes" name="notes" placeholder="Please leave with the neighbours."></textarea>
+    </div>
+  </section>
+
+  <section class="c-ed-mstep__step" hidden aria-hidden="true">
+    <div class="c-ed-mstep__field">
+      <label class="c-ed-mstep__label" for="ed-ms-cadence">Cadence</label>
+      <select class="c-ed-mstep__select" id="ed-ms-cadence" name="cadence">
+        <option>Quarterly (with the print issue)</option>
+        <option>Monthly dispatches</option>
+      </select>
+    </div>
+  </section>
+
+  <div class="c-ed-mstep__actions">
+    <button class="c-ed-mstep__btn c-ed-mstep__btn--ghost" type="button">← Back</button>
+    <button class="c-ed-mstep__btn c-ed-mstep__btn--primary" type="button">Continue</button>
+  </div>
+</form>

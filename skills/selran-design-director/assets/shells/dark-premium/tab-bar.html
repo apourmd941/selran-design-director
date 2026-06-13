@@ -1,0 +1,139 @@
+<style>
+  .c-dp-tabs {
+    display: flex;
+    align-items: stretch;
+    gap: 2px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    padding: 0 24px;
+    font-family: inherit;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .c-dp-tabs::-webkit-scrollbar { display: none; }
+
+  .c-dp-tabs__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+    gap: 2px;
+  }
+
+  .c-dp-tabs__item { display: flex; }
+
+  .c-dp-tabs__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 4px;
+    margin: 0 10px;
+    font-size: 13px;
+    letter-spacing: -0.005em;
+    color: var(--fg-muted);
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+    transition: color 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-tabs__link::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: transparent;
+    border-radius: 2px 2px 0 0;
+    transition: background-color 220ms cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 220ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .c-dp-tabs__link:hover { color: var(--fg); }
+  .c-dp-tabs__link[aria-current="page"],
+  .c-dp-tabs__link[aria-selected="true"] {
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .c-dp-tabs__link[aria-current="page"]::after,
+  .c-dp-tabs__link[aria-selected="true"]::after {
+    background: var(--accent);
+    box-shadow: 0 0 12px -2px color-mix(in oklab, var(--accent) 60%, transparent);
+  }
+  .c-dp-tabs__link:focus-visible {
+    outline: none;
+    color: var(--fg);
+  }
+  .c-dp-tabs__link:focus-visible::after {
+    background: var(--accent);
+  }
+
+  .c-dp-tabs__count {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 9999px;
+    background: var(--bg-2);
+    color: var(--fg-muted);
+    font-variant-numeric: tabular-nums;
+    border: 1px solid var(--border);
+    letter-spacing: 0.04em;
+  }
+  .c-dp-tabs__link[aria-current="page"] .c-dp-tabs__count,
+  .c-dp-tabs__link[aria-selected="true"] .c-dp-tabs__count {
+    background: color-mix(in oklab, var(--accent) 10%, var(--bg-2));
+    color: var(--fg);
+    border-color: color-mix(in oklab, var(--accent) 30%, var(--border));
+  }
+
+  @media (max-width: 900px) {
+    .c-dp-tabs { padding: 0 14px; }
+    .c-dp-tabs__link { margin: 0 6px; padding: 12px 2px; font-size: 12px; }
+  }
+</style>
+
+<nav class="c-dp-tabs" aria-label="Vault views" role="tablist">
+  <ul class="c-dp-tabs__list">
+    <li class="c-dp-tabs__item">
+      <a class="c-dp-tabs__link" role="tab" aria-selected="true" aria-current="page" href="#overview">
+        Overview
+      </a>
+    </li>
+    <li class="c-dp-tabs__item">
+      <a class="c-dp-tabs__link" role="tab" aria-selected="false" href="#positions">
+        Positions
+        <span class="c-dp-tabs__count">24</span>
+      </a>
+    </li>
+    <li class="c-dp-tabs__item">
+      <a class="c-dp-tabs__link" role="tab" aria-selected="false" href="#transactions">
+        Transactions
+        <span class="c-dp-tabs__count">248</span>
+      </a>
+    </li>
+    <li class="c-dp-tabs__item">
+      <a class="c-dp-tabs__link" role="tab" aria-selected="false" href="#yields">
+        Yields
+      </a>
+    </li>
+    <li class="c-dp-tabs__item">
+      <a class="c-dp-tabs__link" role="tab" aria-selected="false" href="#risk">
+        Risk bands
+        <span class="c-dp-tabs__count">3</span>
+      </a>
+    </li>
+    <li class="c-dp-tabs__item">
+      <a class="c-dp-tabs__link" role="tab" aria-selected="false" href="#documents">
+        Documents
+      </a>
+    </li>
+    <li class="c-dp-tabs__item">
+      <a class="c-dp-tabs__link" role="tab" aria-selected="false" href="#audit">
+        Audit trail
+      </a>
+    </li>
+  </ul>
+</nav>

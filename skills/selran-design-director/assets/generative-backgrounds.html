@@ -1,0 +1,72 @@
+<!doctype html>
+<!-- Generative background gallery — token-driven, self-contained, no network.
+     Five atmospheric surfaces that retint via --accent/--bg/--fg. Copy the one
+     that fits the direction; tune via the design-system tokens. Behind content,
+     never competing with it — re-check foreground contrast after placing.
+     See references/generative.md. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generative backgrounds</title>
+<style>
+  :root {
+    --accent: #1F7A4D;   /* substitute from design-system.md */
+    --bg: #FBFBFA; --fg: #1A1C1A; --muted: #6B6E76; --line: #E4E4DE;
+    --space: 8px; --radius: 12px;
+  }
+  @media (prefers-color-scheme: dark){ :root{ --accent:#4FB07C; --bg:#141513; --fg:#ECEEE8; --muted:#9AA09A; --line:#2E322C; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+    font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; padding:28px; }
+  h1 { font-size:18px; margin:0 0 4px; }
+  p.note { color:var(--muted); margin:0 0 24px; max-width:60ch; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
+  .tile { border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+  .surface { height:180px; position:relative; }
+  .tile .label { padding:10px 12px; font-family:ui-monospace,Menlo,monospace; font-size:12px; color:var(--muted); }
+  .tile .label b { color:var(--fg); font-family:inherit; }
+
+  /* 1 — grain / noise (SVG turbulence at low opacity) */
+  .gen-grain { background: var(--bg); }
+  .gen-grain::after { content:""; position:absolute; inset:0; opacity:.06; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+
+  /* 2 — dot-grid (technical-minimal) */
+  .gen-dots { background-color: var(--bg);
+    background-image: radial-gradient(color-mix(in srgb, var(--fg) 22%, transparent) 1px, transparent 1px);
+    background-size: 16px 16px; }
+
+  /* 3 — gradient mesh (dark-premium / vibrant) — accent tints only, one surface */
+  .gen-mesh { background:
+    radial-gradient(40% 60% at 15% 20%, color-mix(in srgb, var(--accent) 40%, transparent), transparent 70%),
+    radial-gradient(50% 50% at 85% 30%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
+    radial-gradient(60% 70% at 50% 100%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%),
+    var(--bg); }
+
+  /* 4 — contour lines (editorial / technical) — seeded SVG paths */
+  .gen-contour { background: var(--bg); }
+  .gen-contour::after { content:""; position:absolute; inset:0; opacity:.5;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='180' fill='none' stroke='%231F7A4D' stroke-opacity='0.28' stroke-width='1'><path d='M0 40 C 80 10 220 70 300 35'/><path d='M0 80 C 80 50 220 110 300 75'/><path d='M0 120 C 80 90 220 150 300 115'/><path d='M0 160 C 80 130 220 190 300 155'/></svg>");
+    background-size: cover; }
+
+  /* 5 — geometric tiling / halftone (brutalist / bold) */
+  .gen-tile { background-color: var(--bg);
+    background-image:
+      linear-gradient(45deg, color-mix(in srgb, var(--accent) 14%, transparent) 25%, transparent 25%),
+      linear-gradient(-45deg, color-mix(in srgb, var(--accent) 14%, transparent) 25%, transparent 25%);
+    background-size: 22px 22px; }
+</style>
+</head>
+<body>
+  <h1>Generative backgrounds</h1>
+  <p class="note">Token-driven atmosphere. Each surface retints from <code>--accent</code> / <code>--bg</code> / <code>--fg</code>, so it follows the direction and dark mode. Pick by direction (see <code>generative.md</code>); intensity is the boldness dial's job. One generative surface per view — behind the content, never competing with it.</p>
+  <div class="grid">
+    <div class="tile"><div class="surface gen-grain"></div><div class="label"><b>grain</b> — any direction, low intensity</div></div>
+    <div class="tile"><div class="surface gen-dots"></div><div class="label"><b>dot-grid</b> — technical-minimal</div></div>
+    <div class="tile"><div class="surface gen-mesh"></div><div class="label"><b>gradient mesh</b> — dark-premium / vibrant</div></div>
+    <div class="tile"><div class="surface gen-contour"></div><div class="label"><b>contour</b> — editorial / technical</div></div>
+    <div class="tile"><div class="surface gen-tile"></div><div class="label"><b>tiling</b> — brutalist / bold</div></div>
+  </div>
+</body>
+</html>
